@@ -17,4 +17,6 @@ Broader board/minigame/shader coverage, a completed current-build match, default
 
 The package excludes game images, personal profiles and private keys. Hosts supply their own game image. Guests receive game data into browser storage. The local browser-page launcher requires Node.js; use a current WebGPU-capable Edge/Chrome browser. Clean-machine prerequisites have not been verified.
 
+Additional current-build validation found a native startup stall before gameplay: the legacy five-turn harness did not receive its Host invitation, and isolated manual Host preparation also stalled. Live stacks place the main thread in rendering-buffer acquisition and a rendering worker in the native graphics/surface path. Keyboard and temporary display-hold comparisons did not resolve it; root cause is still unproven. The earlier automatic setup and replay passes remain scoped evidence, not proof of all native launch paths. The published package is unchanged.
+
 No overall completion percentage has been measured.
