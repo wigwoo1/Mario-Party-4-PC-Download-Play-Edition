@@ -15,8 +15,10 @@ Measured native/browser engine build: `ae3300c20ae7f2cfa451e7b0db6ac39945a25a182
 
 Broader board/minigame/shader coverage, a completed current-build match, default launcher and later save-related screens, physical controllers and audio, clean-machine installation, Android/iOS browsers and Internet hosting/connectivity remain open. Public hosting tests are deferred until the user returns home.
 
-The package excludes game images, personal profiles and private keys. Hosts supply their own game image. Guests receive game data into browser storage. The local browser-page launcher requires Node.js; use a current WebGPU-capable Edge/Chrome browser. Clean-machine prerequisites have not been verified.
+The package excludes game images, personal profiles and private keys. Hosts supply their own game image. Guests receive game data into browser storage. Node.js is included for the local browser-page launcher; use a current WebGPU-capable Edge/Chrome browser. Clean-machine prerequisites have not been verified.
 
 Additional current-build validation found a native startup stall before gameplay: the legacy five-turn harness did not receive its Host invitation, and isolated manual Host preparation also stalled. Live stacks place the main thread in rendering-buffer acquisition and a rendering worker in the native graphics/surface path. Keyboard and temporary display-hold comparisons did not resolve it; root cause is still unproven. The earlier automatic setup and replay passes remain scoped evidence, not proof of all native launch paths. The published package is unchanged.
 
 No overall completion percentage has been measured.
+
+The actual packaged Browser Transfer launcher was also tested with Node absent from PATH and no Codex runtime cache: it used its bundled Node, served the exact page/runtime/shader files, rejected private configuration routes, and closed its owned listener afterward. This narrows the prerequisite uncertainty only; it is not a clean-machine installation, gameplay or Internet-hosting acceptance.

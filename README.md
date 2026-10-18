@@ -6,7 +6,7 @@ Development native Windows and browser port based on [Party Board](https://githu
 
 Get the current Windows/browser development archive from [Releases](https://github.com/wigwoo1/Mario-Party-4-PC-Download-Play-Edition/releases). Extract the complete archive before launching. A game disc image is not included; the host selects their own compatible Mario Party 4 image. Browser guests receive the required data from the host.
 
-The native application requires Windows x64 and the [Microsoft Visual C++ Redistributable](https://aka.ms/vc14/vc_redist.x64.exe). The archive includes the browser runtime and its local server. Read its bundled instructions before hosting; public Internet hosting and mobile compatibility remain under test.
+The native application requires Windows x64 and the [Microsoft Visual C++ Redistributable](https://aka.ms/vc14/vc_redist.x64.exe). The archive includes the browser runtime, its local server and Node.js; a separate Node.js installation is not required. Read its bundled instructions before hosting; public Internet hosting and mobile compatibility remain under test.
 
 ## Current state
 

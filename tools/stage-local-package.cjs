@@ -73,7 +73,7 @@ function stageLocalPackage(runtimeDirectory,destination,projectDirectory=path.re
   'Before native play, install the latest Microsoft Visual C++ Redistributable (x64): https://aka.ms/vc14/vc_redist.x64.exe',
   'Play Mario Party 4.cmd: choose your own game image when prompted.',
   'Play with Keyboard.cmd: launch with keyboard controls.',
-  'Browser Transfer.cmd: requires Node.js on PATH (or node.exe beside runtime/partyboard.exe). Open the printed URL in desktop Edge or Chrome.',
+  'Browser Transfer.cmd: uses the included Node.js runtime; no separate Node.js installation is needed. Open the printed URL in desktop Edge or Chrome.',
   'Automatic native Host uses the shared HTTPS website in lobby-service-url.txt beside these launchers. The example file is a template, not a working service.',
   'Without a saved website, native launch automatically tries a public-IP HTTPS address, then a free temporary tunnel. Initial setup downloads checksum-pinned Caddy and cloudflared tools from their official GitHub releases. No account or payment is needed.',
   'The hosting Node.js runtime is included. Use -LocalOnly to skip online startup. -LobbyWebsite https://your-domain/ selects an existing service for one native launch.',
