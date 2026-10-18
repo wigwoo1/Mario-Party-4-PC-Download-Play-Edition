@@ -2,7 +2,7 @@
   "version": 1,
   "repository": "https://github.com/wigwoo1/Mario-Party-4-PC-Download-Play-Edition",
   "buildId": "c508d4a20362b4a8e756cd32758928c0e423a39570a04ffa1ab26168e3eec50f",
-  "sourceSnapshotSha256": "6d6f28b4d133dc3ccf7dd56c8103c3bc653508a8e1c14cdf0d11efc9c23cc1ce",
+  "sourceSnapshotSha256": "cd097d9c4c3305c0ef823fb6776bd0ec3b3c3b851eae5bb8cc4ad3d207dfaf6b",
   "upstream": {
     "url": "https://github.com/mariopartyrd/partyboard.git",
     "baseCommit": "f38304ebd13b09a15a80db7d7d015bf3fc387c5d"
@@ -11950,8 +11950,8 @@
     },
     {
       "path": "STATUS.md",
-      "bytes": 2403,
-      "sha256": "eb02aa4f727ce921fa14229bc99373418baf421ded6c7f921cca97a44525e321"
+      "bytes": 2882,
+      "sha256": "91007644dc0bcb34fdc8460478dd870a81dc749e42f21287ac82b707187e55c8"
     },
     {
       "path": "tools/__init__.py",
@@ -14267,6 +14267,11 @@
       "path": "web/network-options.test.mjs",
       "bytes": 1049,
       "sha256": "b50e89e1f4c043fd5ff7b48b859fbee5a1f5927e1e184f553e5791725adbc75a"
+    },
+    {
+      "path": "web/normal-startup-browser-test.cjs",
+      "bytes": 7351,
+      "sha256": "adcaab78ddf0698598d891501f3d86a1fb0779954199c83ffd26257d3c51f11d"
     },
     {
       "path": "web/online-input-gate.mjs",
