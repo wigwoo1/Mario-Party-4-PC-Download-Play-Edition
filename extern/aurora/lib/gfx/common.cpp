@@ -112,6 +112,13 @@ namespace aurora::gfx {
 namespace {
 struct CachedBindGroup {
   wgpu::BindGroup bindGroup;
+  // The browser backend may recycle API handle addresses even though the JS
+  // bind group still retains the underlying GPU resources. Keep the handles
+  // used by the cache key alive for exactly as long as the cached group.
+  wgpu::BindGroupLayout layout;
+  std::vector<wgpu::Buffer> buffers;
+  std::vector<wgpu::Sampler> samplers;
+  std::vector<wgpu::TextureView> textureViews;
   uint32_t lastUsedFrame = 0;
 };
 
@@ -1676,11 +1683,17 @@ BindGroupRef bind_group_ref(const WGPUBindGroupDescriptor& descriptor) {
   std::lock_guard lock{g_bindGroupCacheMutex};
   const auto it = g_cachedBindGroups.find(id);
   if (it == g_cachedBindGroups.end()) {
-    auto bg = wgpu::BindGroup::Acquire(wgpuDeviceCreateBindGroup(g_device.Get(), &descriptor));
-    g_cachedBindGroups.emplace(id, CachedBindGroup{
-                                       .bindGroup = std::move(bg),
-                                       .lastUsedFrame = g_frameIndex,
-                                   });
+    CachedBindGroup cached;
+    cached.layout = wgpu::BindGroupLayout{descriptor.layout};
+    for (size_t i = 0; i < descriptor.entryCount; ++i) {
+      const auto& entry = descriptor.entries[i];
+      if (entry.buffer) cached.buffers.emplace_back(entry.buffer);
+      if (entry.sampler) cached.samplers.emplace_back(entry.sampler);
+      if (entry.textureView) cached.textureViews.emplace_back(entry.textureView);
+    }
+    cached.bindGroup = wgpu::BindGroup::Acquire(wgpuDeviceCreateBindGroup(g_device.Get(), &descriptor));
+    cached.lastUsedFrame = g_frameIndex;
+    g_cachedBindGroups.emplace(id, std::move(cached));
   } else {
     it->second.lastUsedFrame = g_frameIndex;
   }

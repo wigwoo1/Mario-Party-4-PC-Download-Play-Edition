@@ -109,6 +109,13 @@ target_sources(partyboard_browser_core PRIVATE "${AURORA_ROOT}/lib/dolphin/vi/vi
 target_sources(browser_imgui PRIVATE "${PARTYBOARD_DEPENDENCIES}/imgui-src/backends/imgui_impl_sdlrenderer3.cpp")
 target_compile_definitions(browser_aurora_contract PRIVATE AURORA TARGET_PC)
 
+add_executable(browser_bind_group_lifetime_contract "${PARTYBOARD_ROOT}/tools/test_wasm_bind_group_lifetime.cpp")
+target_include_directories(browser_bind_group_lifetime_contract PRIVATE ${RENDERER_INCLUDES})
+target_compile_definitions(browser_bind_group_lifetime_contract PRIVATE AURORA TARGET_PC)
+target_link_libraries(browser_bind_group_lifetime_contract PRIVATE "-Wl,--start-group" partyboard_browser_core partyboard_browser_renderer "-Wl,--end-group")
+target_link_options(browser_bind_group_lifetime_contract PRIVATE -sASYNCIFY -sASYNCIFY_STACK_SIZE=65536 -sASSERTIONS=2 -sALLOW_MEMORY_GROWTH=1 -sENVIRONMENT=web -sMODULARIZE -sEXPORT_ES6)
+set_target_properties(browser_bind_group_lifetime_contract PROPERTIES OUTPUT_NAME contract SUFFIX .mjs RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bind-group-lifetime-contract")
+
 # Build the shared game as Wasm objects, retaining unresolved platform references
 # until the browser bootstrap supplies real implementations.
 include("${PARTYBOARD_ROOT}/files.cmake")

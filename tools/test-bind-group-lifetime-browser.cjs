@@ -1,0 +1,20 @@
+'use strict';
+const fs=require('node:fs'),path=require('node:path'),http=require('node:http'),assert=require('node:assert/strict');
+const {chromium}=require(process.env.PLAYWRIGHT_MODULE||'playwright');
+const [input,output]=process.argv.slice(2);assert.ok(input&&output);
+assert.equal(fs.existsSync(output),false,'Preserve prior fixture evidence');fs.mkdirSync(output,{recursive:true});
+for(const name of ['contract.mjs','contract.wasm'])fs.copyFileSync(path.join(input,name),path.join(output,name),fs.constants.COPYFILE_EXCL);
+const logs=[],errors=[];let browser,server;
+(async()=>{
+ server=http.createServer((request,response)=>{const name=new URL(request.url,'http://localhost').pathname.slice(1);if(name===''){response.setHeader('Content-Type','text/html');response.end('<!doctype html><canvas id="canvas"></canvas>');return;}if(!['contract.mjs','contract.wasm'].includes(name)){response.writeHead(404).end();return;}response.setHeader('Content-Type',name.endsWith('.wasm')?'application/wasm':'text/javascript');fs.createReadStream(path.join(output,name)).pipe(response);});
+ await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));
+ browser=await chromium.launch({channel:'msedge',headless:true,args:['--mute-audio']});const page=await browser.newPage();
+ page.on('console',message=>logs.push(message.text()));page.on('pageerror',error=>errors.push(error.message));
+ await page.goto('http://127.0.0.1:'+server.address().port);
+ await page.evaluate(()=>{globalThis.fixtureObserved=false;globalThis.fixtureFailed=false;import('/contract.mjs').then(async({default:create})=>{try{await create({canvas:document.querySelector('#canvas'),print:text=>{console.log(text);if(text.startsWith('BIND_GROUP_LIFETIME '))globalThis.fixtureObserved=true;},printErr:text=>console.error(text),onAbort:()=>{globalThis.fixtureFailed=true;}});}catch(error){console.error(String(error));globalThis.fixtureFailed=true;}});});
+ await page.waitForFunction(()=>globalThis.fixtureObserved||globalThis.fixtureFailed,null,{timeout:60000});
+ const observation=logs.find(text=>text.startsWith('BIND_GROUP_LIFETIME '));assert.ok(observation,'Actual C++ production-cache fixture must execute');const result=JSON.parse(observation.slice('BIND_GROUP_LIFETIME '.length));
+ const passed=result.recycledLiveCacheViewHandles===0&&logs.includes('PASS production bind-group resource lifetime')&&errors.length===0;
+ fs.writeFileSync(path.join(output,'observation.json'),JSON.stringify({status:passed?'VERIFIED':'REPRODUCED FAILURE',scope:'Actual compiled production bind-group cache with real Edge WebGPU resource handles; not gameplay acceptance',result,logs,errors,at:new Date().toISOString()},null,2)+'\n');
+ console.log(JSON.stringify({status:passed?'VERIFIED':'REPRODUCED FAILURE',...result,evidence:path.join(output,'observation.json')}));if(!passed)process.exitCode=1;
+})().catch(error=>{fs.writeFileSync(path.join(output,'failure.json'),JSON.stringify({error:error.stack,logs,errors},null,2));console.error(error.message);process.exitCode=1;}).finally(async()=>{await browser?.close();await new Promise(resolve=>server?server.close(resolve):resolve());});

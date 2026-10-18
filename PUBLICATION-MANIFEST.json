@@ -1,8 +1,8 @@
 {
   "version": 1,
   "repository": "https://github.com/wigwoo1/Mario-Party-4-PC-Download-Play-Edition",
-  "buildId": "c508d4a20362b4a8e756cd32758928c0e423a39570a04ffa1ab26168e3eec50f",
-  "sourceSnapshotSha256": "c832c7e10089562dac3d4d4ad1113b735adb80ce805d34a9ade752f015f8457c",
+  "buildId": "ae3300c20ae7f2cfa451e7b0db6ac39945a25a182e9c759551eb725ec892b26a",
+  "sourceSnapshotSha256": "1b5486d9d7e96eeacc8ad50b232e3427f6e86556ffe7601b5625c5a0a6e2b132",
   "upstream": {
     "url": "https://github.com/mariopartyrd/partyboard.git",
     "baseCommit": "f38304ebd13b09a15a80db7d7d015bf3fc387c5d"
@@ -4085,8 +4085,8 @@
     },
     {
       "path": "extern/aurora/lib/gfx/common.cpp",
-      "bytes": 65009,
-      "sha256": "10dee125cb0ae8a9290380dac1909781e8a47b10931276ec94e2e7e47b22278a"
+      "bytes": 65685,
+      "sha256": "769460e910112ad6d23f1facf4d462900f9bbb0db00f5dab2bd87975ec574f6d"
     },
     {
       "path": "extern/aurora/lib/gfx/common.hpp",
@@ -11950,8 +11950,8 @@
     },
     {
       "path": "STATUS.md",
-      "bytes": 4319,
-      "sha256": "12d8f799a62e97010f9b570b947b3d2a30bc51f92e45f711543d4bf6a567a37d"
+      "bytes": 3255,
+      "sha256": "4699f63d68bed5f89ba771cb352436eede77704412e600473f3922112167ab78"
     },
     {
       "path": "tools/__init__.py",
@@ -12030,8 +12030,8 @@
     },
     {
       "path": "tools/browser-renderer/CMakeLists.txt",
-      "bytes": 50027,
-      "sha256": "51b41472c2ceab6c209bfc43c9639453b262e469b929725e346e3f9067c5d210"
+      "bytes": 50859,
+      "sha256": "4a2552dc35fea9f743b20b2fcab3956594cb4a9daba0eaf512b70774e6cc1a73"
     },
     {
       "path": "tools/browser-renderer/README.md",
@@ -12487,6 +12487,11 @@
       "path": "tools/native-rtc-probe/error-evidence.cjs",
       "bytes": 673,
       "sha256": "a03da549f9b92cc5bc6a9cc859744bb823ebcc945f9ef6196170c00747edd0d4"
+    },
+    {
+      "path": "tools/native-rtc-probe/extra-room-medic-replay.cjs",
+      "bytes": 3195,
+      "sha256": "2cce897654532d46c914c770995e4f1d996119ecef1b2209ccce70cc4bb612df"
     },
     {
       "path": "tools/native-rtc-probe/guest-invitation-test.cpp",
@@ -13464,6 +13469,11 @@
       "sha256": "dcccaddd48c376988f23d96855e40871ebd324d0d15a86954f97c80326aae440"
     },
     {
+      "path": "tools/test_wasm_bind_group_lifetime.cpp",
+      "bytes": 2611,
+      "sha256": "f6a638cda9ce1360b1529e97bd37da87c4e740098687c678e1f03fc01b0b2ef7"
+    },
+    {
       "path": "tools/test_wasm_boot_link.c",
       "bytes": 1014,
       "sha256": "3a12dc0f0fa36c86353c90240a178ca7646e76c2934ed6be71972dfb7b5e1c6f"
@@ -13542,6 +13552,11 @@
       "path": "tools/test_wasm_webgpu.cpp",
       "bytes": 6517,
       "sha256": "1c54c046df5cb0ec5922cf8ee02b3590e00dd8305660a4cfbeb2c0e2981d6800"
+    },
+    {
+      "path": "tools/test-bind-group-lifetime-browser.cjs",
+      "bytes": 3135,
+      "sha256": "4a686143d49fa8fe07c828b6595901b31908242abe01d683d151d4efb2d38093"
     },
     {
       "path": "tools/test-board-camera-init.py",
