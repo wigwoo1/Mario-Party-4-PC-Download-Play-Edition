@@ -13,6 +13,7 @@
 #endif
 #include "pipeline_cache.hpp"
 #include "render_worker.hpp"
+#include "native_wait.hpp"
 #include "tex_copy_conv.hpp"
 #include "tex_palette_conv.hpp"
 #include "texture_replacement.hpp"
@@ -1050,6 +1051,7 @@ static bool wait_for_staging_buffer(size_t slot) {
 #ifdef __EMSCRIPTEN__
     emscripten_sleep(1); // Let browser GPU mapping callbacks complete.
 #else
+    service_native_render_wait();
     if (render_worker::is_idle()) {
       g_instance.ProcessEvents();
     } else {
@@ -1068,6 +1070,7 @@ static size_t acquire_frame_slot() {
 #ifdef __EMSCRIPTEN__
     emscripten_sleep(1); // Let browser GPU mapping callbacks complete.
 #else
+    service_native_render_wait();
     if (render_worker::is_idle()) {
       g_instance.ProcessEvents();
     } else {
@@ -1092,6 +1095,7 @@ static std::optional<size_t> acquire_mapped_staging_buffer() {
 #ifdef __EMSCRIPTEN__
     emscripten_sleep(1); // Let browser GPU mapping callbacks complete.
 #else
+    service_native_render_wait();
     if (render_worker::is_idle()) {
       g_instance.ProcessEvents();
     } else {

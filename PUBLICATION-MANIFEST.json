@@ -1,8 +1,8 @@
 {
   "version": 1,
   "repository": "https://github.com/wigwoo1/Mario-Party-4-PC-Download-Play-Edition",
-  "buildId": "ae3300c20ae7f2cfa451e7b0db6ac39945a25a182e9c759551eb725ec892b26a",
-  "sourceSnapshotSha256": "230810a8153d904a4a6b618cf7156639ee4f18e66a59c0df9b4e5e1aad31cdb6",
+  "buildId": "06a2e57534b266ac9dd2b94e8d3ecd8cea6e647ca0f1955cb5457adf12bb0977",
+  "sourceSnapshotSha256": "bbc4d1f6c6deca6743669f37a1c7251497a75b8734b5037e1680225749f8e6da",
   "upstream": {
     "url": "https://github.com/mariopartyrd/partyboard.git",
     "baseCommit": "f38304ebd13b09a15a80db7d7d015bf3fc387c5d"
@@ -4085,8 +4085,8 @@
     },
     {
       "path": "extern/aurora/lib/gfx/common.cpp",
-      "bytes": 65685,
-      "sha256": "769460e910112ad6d23f1facf4d462900f9bbb0db00f5dab2bd87975ec574f6d"
+      "bytes": 65814,
+      "sha256": "e29b2f8b10ab19c02a506bc88a8ed70f1f18df8a37c5500fd100fe358e181121"
     },
     {
       "path": "extern/aurora/lib/gfx/common.hpp",
@@ -4114,6 +4114,11 @@
       "sha256": "48d6dd08812f20655b3d03330d0f2ae615f0bafc281253fbbaaebbad7b484788"
     },
     {
+      "path": "extern/aurora/lib/gfx/native_wait.hpp",
+      "bytes": 1137,
+      "sha256": "8b8c3ed7ac0ea71809c9578861d3c7b81364ec1394dac9373cfae319b8345763"
+    },
+    {
       "path": "extern/aurora/lib/gfx/pipeline_cache.cpp",
       "bytes": 38667,
       "sha256": "02264e9e68c90844073149b393c759a86c2c7f9214caa10e6ec36cf81b4ffe0e"
@@ -4135,8 +4140,8 @@
     },
     {
       "path": "extern/aurora/lib/gfx/render_worker.cpp",
-      "bytes": 6719,
-      "sha256": "0d8adc30ed36f8318320e3caa5a36ada31ce30acdedbabb69fec7d0ff469d500"
+      "bytes": 6981,
+      "sha256": "68602b920548cd0e531719ee3b6093d687515c525c8f1354dbec92aa78232037"
     },
     {
       "path": "extern/aurora/lib/gfx/render_worker.hpp",
@@ -4445,8 +4450,8 @@
     },
     {
       "path": "extern/aurora/tests/CMakeLists.txt",
-      "bytes": 3146,
-      "sha256": "31156b87f2bb6df10877853c547d3b5fb9b731995f60d9ae4e255f97519a4d4c"
+      "bytes": 3755,
+      "sha256": "32968181e1509e668845cc69951f97fc1af24172bc3c111742b7ddbde3e72843"
     },
     {
       "path": "extern/aurora/tests/gx_fifo_test.cpp",
@@ -4472,6 +4477,11 @@
       "path": "extern/aurora/tests/os_test_globals.cpp",
       "bytes": 79,
       "sha256": "7bdc7ddd4028f204b4d0e5333c694d6bad08bd4438a76d634b067f0f45a9434d"
+    },
+    {
+      "path": "extern/aurora/tests/render_message_wait_test.cpp",
+      "bytes": 2534,
+      "sha256": "a3e444d69843ddab3e6d271d62dc505b3589b0dac2c3caa7344d9415fe379e26"
     },
     {
       "path": "extern/aurora/tests/render_worker_test.cpp",
@@ -5615,13 +5625,13 @@
     },
     {
       "path": "include/port/native_host_lobby_control.hpp",
-      "bytes": 4643,
-      "sha256": "789ed747ebbfc85df18a29b1377f2b2e5eb2850efe64b168a76262825f2eb919"
+      "bytes": 4923,
+      "sha256": "3da902b1af51254617200dfa3d8e521d45e4641f82050c955018ecbbcdf9abe1"
     },
     {
       "path": "include/port/native_host_lobby_session.hpp",
-      "bytes": 25599,
-      "sha256": "7c0ca003e78cbe8f53c0ef6523fb6763fb0183cda4e567fe33aab21e05f2a5b4"
+      "bytes": 25661,
+      "sha256": "75a9d3bfd2aa84ff3f958f0c5a52a6ded7b5955d445d1b137d57ea51884201a7"
     },
     {
       "path": "include/port/native_host_replacement.hpp",
@@ -11950,8 +11960,8 @@
     },
     {
       "path": "STATUS.md",
-      "bytes": 4598,
-      "sha256": "1d4378d9f5589614bc423d4ca0dc195b9db4bdf7c457f0073f830446e84aa28d"
+      "bytes": 3287,
+      "sha256": "e138748b8e8376473318a4eb88146acdaffb85f3f078a2d24bc738d7c9d2ad8e"
     },
     {
       "path": "tools/__init__.py",
@@ -12460,8 +12470,8 @@
     },
     {
       "path": "tools/native-rtc-probe/control-channel-test.cpp",
-      "bytes": 20269,
-      "sha256": "98da3a721a9fda2593efb310654c72bcbb5f5ea14663519b583696569c76ce2b"
+      "bytes": 20428,
+      "sha256": "0282aeab920e85045c91f5e4d21f697a9f297dd448310b1c9144b1fc4716d76e"
     },
     {
       "path": "tools/native-rtc-probe/control-mailbox-test.cpp",

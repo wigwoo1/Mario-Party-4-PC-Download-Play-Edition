@@ -78,6 +78,19 @@ if (AURORA_ENABLE_GX)
     gtest_main
     TracyClient
   )
+  if (WIN32)
+    target_link_libraries(render_worker_tests PRIVATE user32)
+    add_executable(render_message_wait_tests
+      render_message_wait_test.cpp
+      ../lib/gfx/render_worker.cpp
+    )
+    target_compile_features(render_message_wait_tests PRIVATE cxx_std_20)
+    target_link_libraries(render_message_wait_tests PRIVATE TracyClient user32)
+    foreach (mode sync queue shutdown slot staging)
+      add_test(NAME RenderMessageWait.${mode} COMMAND render_message_wait_tests ${mode})
+      set_tests_properties(RenderMessageWait.${mode} PROPERTIES TIMEOUT 10)
+    endforeach ()
+  endif ()
   gtest_discover_tests(render_worker_tests)
 endif () # AURORA_ENABLE_GX
 

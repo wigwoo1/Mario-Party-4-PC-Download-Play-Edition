@@ -100,7 +100,7 @@ public:
                     throw std::runtime_error("Native guest preparation differs from host");
                 guestReceipts_[peer]=receipt;
             }
-            if(lobby_&&!lobby_->pump())throw std::runtime_error("Native lobby connection or report failed");
+            if(lobby_&&!lobby_->pump())throw std::runtime_error(lobby_->error().empty()?"Native lobby connection or report failed":lobby_->error());
             if(startControl_&&!startControl_->pumpAcknowledgments())throw std::runtime_error("Native start acknowledgment rejected");
             for(const auto& [peer,guest]:guests_)if(controls_.connected(peer)&&announced_.insert(peer).second)
                 if(!lobby_->broadcast())throw std::runtime_error("Native lobby initial snapshot failed");
@@ -273,7 +273,7 @@ public:
     bool routerEnabled()const{return bool(router_);}
     const char* routerPreparation(const std::string& peer)const{return guests_.at(peer)->routerPreparation();}
     nlohmann::ordered_json snapshot()const{
-        if(!prepared())throw std::runtime_error("Native lobby unavailable");
+        if(!prepared())throw std::runtime_error(error_.empty()?"Native lobby unavailable":error_);
         return state_->snapshot();
     }
     // Retain exactly the owned membership/revision for the start coordinator.

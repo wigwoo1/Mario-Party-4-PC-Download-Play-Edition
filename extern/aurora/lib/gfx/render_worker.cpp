@@ -1,4 +1,5 @@
 #include "render_worker.hpp"
+#include "native_wait.hpp"
 #ifdef __EMSCRIPTEN__
 #include <emscripten.h>
 #endif
@@ -92,7 +93,7 @@ BoundedQueue::BoundedQueue(size_t capacity) : m_capacity(capacity) {}
 bool BoundedQueue::push(QueueItem item) {
   ZoneScoped;
   std::unique_lock lock{m_mutex};
-  m_notFull.wait(lock, [&] { return m_closed || m_items.size() < m_capacity; });
+  wait_for_render_condition(m_notFull, lock, [&] { return m_closed || m_items.size() < m_capacity; });
   if (m_closed) {
     return false;
   }
@@ -149,7 +150,7 @@ size_t FrameSlotPool::acquire() {
   }
 #else
   std::unique_lock lock{m_mutex};
-  m_cv.wait(lock, [&] {
+  wait_for_render_condition(m_cv, lock, [&] {
     for (const bool free : m_freeSlots) {
       if (free) {
         return true;
@@ -224,9 +225,12 @@ void shutdown() {
   if (!g_running.load(std::memory_order_acquire)) {
     return;
   }
-  enqueue({
-      .type = ItemType::Shutdown,
-  });
+  auto sync = std::make_shared<SyncState>();
+  enqueue({.type = ItemType::Shutdown, .sync = sync});
+  {
+    std::unique_lock lock{sync->mutex};
+    wait_for_render_condition(sync->cv, lock, [&] { return sync->complete; });
+  }
   if (g_thread.joinable()) {
     g_thread.join();
   }
@@ -281,7 +285,7 @@ void synchronize() {
       .sync = sync,
   });
   std::unique_lock lock{sync->mutex};
-  sync->cv.wait(lock, [&] { return sync->complete; });
+  wait_for_render_condition(sync->cv, lock, [&] { return sync->complete; });
 }
 
 bool is_worker_thread() noexcept { return g_workerThreadId == std::this_thread::get_id(); }

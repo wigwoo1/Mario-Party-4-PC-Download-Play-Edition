@@ -13,9 +13,11 @@ class NativeHostLobbyControl {
     std::set<std::string> peers_;
     std::set<std::string> connected_;
     bool frozen_=false,failed_=false;
+    std::string error_;
     std::function<bool(const std::string&)> preparationGate_;
     std::map<std::string,nlohmann::ordered_json> deferred_;
 public:
+    const std::string& error()const{return error_;}
     NativeHostLobbyControl(NativeLobbyState& state,NativeRtcSessionControl& transport):state_(state),transport_(transport){}
     void setPreparationGate(std::function<bool(const std::string&)> gate){
         if(frozen_||failed_)throw std::runtime_error("Native readiness gate unavailable");
@@ -28,7 +30,7 @@ public:
     bool broadcast(){
         if(failed_)return false;
         const auto packet=nlohmann::ordered_json{{"type","lobby-snapshot"},{"version",1},{"snapshot",state_.snapshot()}}.dump();
-        for(const auto& peer:peers_)if(transport_.connected(peer)&&!transport_.send(peer,NativeRtcControlChannel::Purpose::Lobby,packet)){failed_=true;return false;}
+        for(const auto& peer:peers_)if(transport_.connected(peer)&&!transport_.send(peer,NativeRtcControlChannel::Purpose::Lobby,packet)){error_="Native lobby snapshot delivery failed for "+peer;failed_=true;return false;}
         return true;
     }
     bool pump(){
@@ -37,7 +39,7 @@ public:
         try{
             for(const auto& peer:peers_){
                 if(transport_.connected(peer))connected_.insert(peer);
-                else if(connected_.contains(peer))throw std::runtime_error("Native lobby control connection lost");
+                else if(connected_.contains(peer))throw std::runtime_error("Native lobby control connection lost for "+peer);
             }
             while(auto message=transport_.take(NativeRtcControlChannel::Purpose::Lobby)){
                 const auto& peer=message->route.peer;
@@ -62,7 +64,8 @@ public:
                 if(!broadcast())return false;
             }
             return true;
-        }catch(...){failed_=true;return false;} // Runtime cancels/tears down on false.
+        }catch(const std::exception& error){error_=error.what();failed_=true;return false;}
+        catch(...){error_="Unknown native lobby control failure";failed_=true;return false;} // Runtime cancels/tears down on false.
     }
     bool reportLocal(const std::string& peer,const nlohmann::ordered_json& report){
         if(frozen_||failed_)throw std::runtime_error("Native lobby reports unavailable");

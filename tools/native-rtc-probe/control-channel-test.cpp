@@ -75,6 +75,7 @@ static void negotiatedSessionChannels(){
   assert(guestOwner.send("host",Purpose::Lobby,"{\"type\":\"lobby-report\",\"version\":2}"));
   while(invalidSignaling.pump())pause();
   assert(!invalidSignaling.pump()&&!invalidSignaling.broadcast());
+  assert(invalidSignaling.error()=="Invalid native lobby report envelope");
   bool failedFreeze=false;try{invalidSignaling.freezeMembership();}catch(const std::runtime_error&){failedFreeze=true;}assert(failedFreeze);
  }
  const auto configuration=nativeSessionConfiguration(std::string(32,'1'),7,asset,build);
@@ -108,6 +109,7 @@ static void negotiatedSessionChannels(){
  while(hostOwner.connected("guest1"))pause();
  assert(!startControl.sendCommit("guest1",commit->text));
  assert(!lossSignaling.pump()&&!lossSignaling.broadcast());
+ assert(lossSignaling.error()=="Native lobby control connection lost for guest1");
  bool lossFreeze=false;try{lossSignaling.freezeMembership();}catch(const std::runtime_error&){lossFreeze=true;}assert(lossFreeze);
  guestOwner.retireAuthenticated("host");assert(!guestOwner.connected("host"));
  for(auto purpose:purposes){assert(!guestOwner.take(purpose));assert(!guestOwner.send("host",purpose,"late"));}
