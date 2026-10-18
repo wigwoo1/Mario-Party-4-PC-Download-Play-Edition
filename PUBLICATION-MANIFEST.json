@@ -2,7 +2,7 @@
   "version": 1,
   "repository": "https://github.com/wigwoo1/Mario-Party-4-PC-Download-Play-Edition",
   "buildId": "c508d4a20362b4a8e756cd32758928c0e423a39570a04ffa1ab26168e3eec50f",
-  "sourceSnapshotSha256": "5b4d36942218427fb8601dde74dadb296e3e7178970a908e2d73c07121906347",
+  "sourceSnapshotSha256": "c832c7e10089562dac3d4d4ad1113b735adb80ce805d34a9ade752f015f8457c",
   "upstream": {
     "url": "https://github.com/mariopartyrd/partyboard.git",
     "baseCommit": "f38304ebd13b09a15a80db7d7d015bf3fc387c5d"
@@ -11950,8 +11950,8 @@
     },
     {
       "path": "STATUS.md",
-      "bytes": 3549,
-      "sha256": "a04206f0d03cbd1fd4dd77f1c4c67968478ba9494a353a9b3c46cd81cd129b1b"
+      "bytes": 4319,
+      "sha256": "12d8f799a62e97010f9b570b947b3d2a30bc51f92e45f711543d4bf6a567a37d"
     },
     {
       "path": "tools/__init__.py",
@@ -12467,6 +12467,11 @@
       "path": "tools/native-rtc-probe/control-mailbox-test.cpp",
       "bytes": 1590,
       "sha256": "82c3f55fc300c53421410092c6163733f9c9dc00906cabd802017d2d44e81914"
+    },
+    {
+      "path": "tools/native-rtc-probe/drive-extra-room.cjs",
+      "bytes": 7485,
+      "sha256": "3e37d3e5feb242cc2a8f56604f12bfb1802f6f13df96fa9a1d7ee1ebf2299cad"
     },
     {
       "path": "tools/native-rtc-probe/drive-focused-freeplay.cjs",
@@ -14255,8 +14260,8 @@
     },
     {
       "path": "web/native-automatic-lobby-browser-test.cjs",
-      "bytes": 14557,
-      "sha256": "9a0818211af853947e018302bc9bf7bf3a081d2253b7f676fd36a5387c8a5c87"
+      "bytes": 15611,
+      "sha256": "3fc83371f7c2f3ec25ec70a4a199fcfc9ec6f961552a22bf612a570d7883c8ae"
     },
     {
       "path": "web/native-gameplay-recovery-test-support.mjs",

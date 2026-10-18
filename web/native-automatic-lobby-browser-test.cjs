@@ -10,13 +10,16 @@ const descriptor=path.resolve(process.env.PARTYBOARD_RUNTIME_PACKAGE||path.join(
 const disc=process.env.PARTYBOARD_LOCAL_CISO||'D:/Desktop/Games/Mario Party 4/Mario Party 4 (USA) (Rev 1).ciso';
 const guestCount=Number(process.env.PARTYBOARD_AUTOMATIC_BROWSER_GUESTS||1);assert.ok([1,3].includes(guestCount)&& (nativeHost||guestCount===1));
 const testRejoin=process.env.PARTYBOARD_TEST_AUTOMATIC_REJOIN==='1';assert.ok(!testRejoin||(nativeHost&&guestCount===1));
+const testExtraRoom=process.env.PARTYBOARD_TEST_EXTRA_ROOM==='1';assert.ok(!testExtraRoom||(!nativeHost&&guestCount===1));
+const extraRoomOverlay=Number(process.env.PARTYBOARD_TEST_EXTRA_ROOM_OVERLAY||67);assert.ok([65,67].includes(extraRoomOverlay));
+const extraRoomBudget=testExtraRoom?Number(process.env.PARTYBOARD_TEST_EXTRA_ROOM_TIMEOUT_MS||1200000):0;assert.ok(Number.isInteger(extraRoomBudget)&&extraRoomBudget>=(testExtraRoom?60000:0)&&extraRoomBudget<=1800000);
 const output=path.resolve(process.env.PARTYBOARD_TEST_OUTPUT_DIRECTORY||path.join(__dirname,'../../validation/native-automatic-'+mode+'-'+Date.now()+'-'+process.pid));
 assert.equal(fs.existsSync(output),false,'Automatic lobby test requires a fresh output directory; preserve existing evidence');
 function normalized(row){return {frame:String(row.frame),checkpoint:row.checkpoint,frand:row.frand,rand8:row.rand8,pads:row.pads};}
 (async()=>{
  fs.mkdirSync(output,{recursive:true});const profile=path.join(output,'native-profile');fs.mkdirSync(profile,{recursive:true});
  const sourceHashes=Object.fromEntries(['app.mjs','runtime-asset.mjs'].map(name=>[name,require('node:crypto').createHash('sha256').update(fs.readFileSync(path.join(__dirname,name))).digest('hex')]));
- fs.writeFileSync(path.join(output,'test-configuration.json'),JSON.stringify({browserProfile,mode,guestCount,preparationTimeout,sourceHashes,muted:true,at:new Date().toISOString()},null,2));
+ fs.writeFileSync(path.join(output,'test-configuration.json'),JSON.stringify({browserProfile,mode,guestCount,preparationTimeout,testExtraRoom,extraRoomBudget,extraRoomOverlay,sourceHashes,muted:true,at:new Date().toISOString()},null,2));
  fs.writeFileSync(path.join(profile,'config.json'),JSON.stringify({'audio.muted':true,'audio.masterVolume':0,'audio.mainMusicVolume':0,'audio.menuSounds':false}));
  const port=8954,base='http://127.0.0.1:'+port+'/',events=[],errors=[],statuses=[],pages=[],contexts=[];let native,server,browser,page,exit,nativeText='',stopping=false;
  const createContext=async()=>{const args=['--mute-audio','--disable-features=WebRtcHideLocalIpsWithMdns'];const context=browserProfile==='persistent'
@@ -25,8 +28,8 @@ function normalized(row){return {frame:String(row.frame),checkpoint:row.checkpoi
  const write=command=>native.stdin.write((typeof command==='string'?command:JSON.stringify(command))+'\n');
  const wait=async(check,limit=60000)=>{const until=Date.now()+limit;while(true){const result=await check();if(result)return result;if(exit!==undefined&&!stopping)throw Error('Native frontend exited '+exit);if(Date.now()>until)throw Error('Automatic native '+mode+' observation timed out');await pause(100);}};
  const waitEvent=async(predicate,limit)=>wait(()=>events.find(predicate),limit);
- const observe=async()=>{const before=events.length;write('observe');await wait(()=>events.slice(before).some(e=>e.type==='automatic-game-observation'));return events.slice(before).find(e=>e.type==='automatic-game-observation');};
- const nativeLog=fs.createWriteStream(path.join(output,'native.log'));const watchdog=setTimeout(()=>{native?.kill();server?.kill();void browser?.close();for(const context of contexts)void context.close();},preparationTimeout+180000);
+ const observe=async()=>{const before=events.length;write('observe');await wait(()=>events.slice(before).some(e=>e.type==='automatic-game-observation'));const result=events.slice(before).find(e=>e.type==='automatic-game-observation');if(testExtraRoom)events.splice(events.indexOf(result),1);return result;};
+ const nativeLog=fs.createWriteStream(path.join(output,'native.log'));const watchdog=setTimeout(()=>{native?.kill();server?.kill();void browser?.close();for(const context of contexts)void context.close();},preparationTimeout+extraRoomBudget+180000);
  try{
   const env={...process.env,PARTYBOARD_PORT:String(port),PARTYBOARD_RUNTIME_PACKAGE:descriptor};for(const name of ['PARTYBOARD_RUNTIME_DIRECTORY','PARTYBOARD_TEST_RUNTIME_DIRECTORY','PARTYBOARD_TLS_CERTIFICATE','PARTYBOARD_TLS_KEY','PARTYBOARD_LISTEN_ADDRESS'])delete env[name];
   server=spawn(process.execPath,[path.join(__dirname,'serve.cjs')],{env,windowsHide:true,stdio:['ignore','pipe','pipe']});await new Promise((r,j)=>{server.stdout.once('data',r);server.once('error',j);server.once('exit',c=>j(Error('Service exited '+c)));});
@@ -35,6 +38,7 @@ function normalized(row){return {frame:String(row.frame),checkpoint:row.checkpoi
   page=await context.newPage();pages.push(page);page.on('pageerror',e=>errors.push(e.message));page.on('console',m=>{if(['error','warning'].includes(m.type()))fs.appendFileSync(path.join(output,'browser.log'),m.type()+': '+m.text()+'\n');});
   await page.goto(base);await page.evaluate(async()=>{globalThis.app=await import('/app.mjs');});
   const nativeEnv={...process.env,PARTYBOARD_AUTOMATIC_LOBBY_TEST:'1',PARTYBOARD_LOBBY_URL:base,SDL_AUDIODRIVER:'dummy'};
+  const nativeCaptureRequest=path.join(output,'extra-room-native.request');if(testExtraRoom)nativeEnv.PARTYBOARD_FRAME_CAPTURE_REQUEST=nativeCaptureRequest;
   for(const key of ['PARTYBOARD_NATIVE_HOST_RETURN_ACCEPTANCE','PARTYBOARD_NATIVE_JOIN_RETURN_ACCEPTANCE','PARTYBOARD_NATIVE_FULL_MATCH','PARTYBOARD_NATIVE_DIAGNOSTIC_FINISH_ACK','PARTYBOARD_PROBE_DESCRIPTOR_SEED'])delete nativeEnv[key];
   native=spawn(path.join(runtime,'partyboard.exe'),['--user-dir',profile,'--keyboard','--disc',disc,'--native-session-package',descriptor,nativeHost?'--probe-host-gameplay':'--probe-join-menu'],{cwd:runtime,env:nativeEnv,windowsHide:true,stdio:['pipe','pipe','pipe']});
   native.stderr.on('data',b=>nativeLog.write(b));native.stdout.on('data',b=>{
@@ -78,6 +82,7 @@ function normalized(row){return {frame:String(row.frame),checkpoint:row.checkpoi
    matched=n.records.filter(row=>BigInt(row.frame)>=BigInt(since)&&maps.every(map=>map.has(String(row.frame)))).map(normalized);for(const row of matched)for(const map of maps)assert.deepEqual(row,map.get(row.frame));if(matched.length>=30)return {count:matched.length,first:matched[0].frame,last:matched.at(-1).frame,native:n};await pause(100);
   }throw Error('Insufficient matching completed input/checkpoint/RNG polls');};
   const initial=await compare(0);console.log('PASS automatic '+mode+' menu start; matching mixed-runtime polls: '+initial.count);
+  let extraRoom;if(testExtraRoom)extraRoom=await require('../tools/native-rtc-probe/drive-extra-room.cjs').driveExtraRoom({page,outputDirectory:output,nativeCaptureRequest,observeNative:observe,normalize:normalized,budgetMs:extraRoomBudget,requiredOverlay:extraRoomOverlay});
   let recovery;
   if(process.env.PARTYBOARD_TEST_AUTOMATIC_RECOVERY!=='0'){
    if(nativeHost)await page.evaluate(()=>{const connection=testConnections.find(c=>c.connectionState==='connected');if(!connection)throw Error('Connected game transport required');connection.close();});else write('disconnect');
@@ -86,7 +91,7 @@ function normalized(row){return {frame:String(row.frame),checkpoint:row.checkpoi
    recovery=await compare(paused.input.frame);console.log('PASS automatic '+mode+' signed recovery; matching recovered polls: '+recovery.count);
   }
   assert.deepEqual(errors,[]);const guestReports=await Promise.all(pages.map(p=>p.evaluate(()=>app.lobbyPreparedReports())));const final=await observe();stopping=true;write('stop');await wait(()=>exit!==undefined,30000);assert.equal(exit,0,'Native frontend and stopped-input cleanup must succeed');
-  fs.writeFileSync(path.join(output,'acceptance.json'),JSON.stringify({status:'passed',scope:'one real native '+mode+' frontend with '+guestCount+' actual muted Edge peer(s) on the same PC; automatic room signaling, verified assets/known shaders/readiness, Start UI action, synchronized input and signed recovery',runtimeDescriptor:descriptor,browserProfile,sourceHashes,preparation,muted:true,knownPipelineCount:618,players:guestCount+1,reports,guestReports,nativePreparedReceipt:actual.receipt,actualReceiptsCompared:compared,rejoin,initial:{count:initial.count,first:initial.first,last:initial.last},recovery:recovery?{count:recovery.count,first:recovery.first,last:recovery.last}:null,nativeAccepted:final.accepted,nativeExit:exit,errors,at:new Date().toISOString()},null,2));
+  fs.writeFileSync(path.join(output,'acceptance.json'),JSON.stringify({status:'passed',scope:'one real native '+mode+' frontend with '+guestCount+' actual muted Edge peer(s) on the same PC; automatic room signaling, verified assets/known shaders/readiness, Start UI action, synchronized input and signed recovery',runtimeDescriptor:descriptor,browserProfile,sourceHashes,preparation,extraRoom,muted:true,knownPipelineCount:618,players:guestCount+1,reports,guestReports,nativePreparedReceipt:actual.receipt,actualReceiptsCompared:compared,rejoin,initial:{count:initial.count,first:initial.first,last:initial.last},recovery:recovery?{count:recovery.count,first:recovery.first,last:recovery.last}:null,nativeAccepted:final.accepted,nativeExit:exit,errors,at:new Date().toISOString()},null,2));
  }catch(error){const storage=await Promise.allSettled(pages.map(p=>browserStorageObservation(p,{files:true})));fs.writeFileSync(path.join(output,'failure.json'),JSON.stringify({error:error.stack,errors,statuses,browserProfile,storage,nativeExit:exit,latestEvents:events.filter(e=>e.type!=='automatic-lobby-link').slice(-12)},null,2));throw error;}
  finally{clearTimeout(watchdog);if(native&&exit===undefined){try{write('stop');await pause(500);}catch{}if(exit===undefined)native.kill();}for(const guest of pages)await guest.locator('#stop').click({timeout:3000}).catch(()=>{});await Promise.allSettled(contexts.map(context=>context.close()));await browser?.close();server?.kill();nativeLog.end();}
 })().catch(e=>{console.error(e);process.exitCode=1;});
