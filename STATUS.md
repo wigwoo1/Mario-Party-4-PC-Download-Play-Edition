@@ -11,8 +11,10 @@ Measured Windows/browser engine build: `c508d4a20362b4a8e756cd32758928c0e423a395
 - The earlier intermittent private-browser quota failure is preserved. This run passed, but its original intermittent cause is not conclusively established.
 - Native/WebAssembly callback, character-selection and result-text regression checks pass. Actual local Edge Bob-omb X-ing round/results/ranking/menu/clean-stop acceptance remains scoped separately from multiplayer Extra Room gameplay.
 - A previous engine build completed a local 20-turn mixed native/browser match with two reconnect recoveries. That does not establish a completed current-build match or cross-device/Internet acceptance.
-- Broader minigame/board/shader coverage, native ordinary startup and later save-related screens, clean-machine packaging, physical controllers/audio, mobile browsers and Internet hosting still need validation.
+- Broader minigame/board/shader coverage, default native launcher, physical input and later save-related screens, clean-machine packaging, physical controllers/audio, mobile browsers and Internet hosting still need validation.
 
 - A fresh ordinary Edge profile also passed normal Play local game startup: title screen, memory-card bypass after exactly one Start and before any Confirm, responsive Party-to-Story-to-Party arrow navigation and clean Stop. Five captured screens were visually reviewed. No production code changed for this check; the existing development archive remains the same tested product revision. Native startup and later save-related screens remain open.
+
+- The native game_main startup route also passed with a fresh muted owned profile, the existing skip-launcher preference (boot sequence retained), and 3400 seeded logical controller samples. Actual captures show title, mode cards before Confirm, Party-to-Story-to-Party main-stick navigation; no save/card image was created; the process exited zero. All consumed PAD fields matched the intended stimulus, and the runtime stayed unchanged. Five resolved native frames were visually reviewed. This does not verify the default launcher or physical keyboard/controller input. Only test code was added; the existing development archive remains unchanged.
 
 No overall completion percentage has been measured.

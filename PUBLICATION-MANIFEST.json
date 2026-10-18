@@ -2,7 +2,7 @@
   "version": 1,
   "repository": "https://github.com/wigwoo1/Mario-Party-4-PC-Download-Play-Edition",
   "buildId": "c508d4a20362b4a8e756cd32758928c0e423a39570a04ffa1ab26168e3eec50f",
-  "sourceSnapshotSha256": "cd097d9c4c3305c0ef823fb6776bd0ec3b3c3b851eae5bb8cc4ad3d207dfaf6b",
+  "sourceSnapshotSha256": "5b4d36942218427fb8601dde74dadb296e3e7178970a908e2d73c07121906347",
   "upstream": {
     "url": "https://github.com/mariopartyrd/partyboard.git",
     "baseCommit": "f38304ebd13b09a15a80db7d7d015bf3fc387c5d"
@@ -11950,8 +11950,8 @@
     },
     {
       "path": "STATUS.md",
-      "bytes": 2882,
-      "sha256": "91007644dc0bcb34fdc8460478dd870a81dc749e42f21287ac82b707187e55c8"
+      "bytes": 3549,
+      "sha256": "a04206f0d03cbd1fd4dd77f1c4c67968478ba9494a353a9b3c46cd81cd129b1b"
     },
     {
       "path": "tools/__init__.py",
@@ -12792,6 +12792,11 @@
       "path": "tools/nod-dol-bounds.patch",
       "bytes": 1446,
       "sha256": "1bc8f3ca64121e36a5923cde4fd972aff60e13a3dfe50fe89d5acfddd20af1b4"
+    },
+    {
+      "path": "tools/normal-startup-native-test.cjs",
+      "bytes": 7163,
+      "sha256": "3777f651fccc4b69ccf270a2cecf269e1082157152fda4febefabf017e31f930"
     },
     {
       "path": "tools/party-turn-setup.cjs",
