@@ -1,0 +1,26 @@
+import {test} from 'node:test';
+import assert from 'node:assert/strict';
+import {attachInputGlyphs} from './browser-input-glyphs.mjs';
+test('canvas events, polling, remaps, focus isolation and teardown',()=>{
+  const target=new EventTarget();let callback,pads=[],cancelled=false;
+  const environment={document:{hidden:false,activeElement:target},navigator:{getGamepads:()=>pads},requestAnimationFrame:cb=>(callback=cb,1),cancelAnimationFrame:()=>{cancelled=true;}};
+  const updates=[];let key='Enter';
+  const adapter=attachInputGlyphs({target,environment,bindings:()=>({keyboard:{confirm:{kind:'key',label:key}},gamepad:{confirm:{kind:'button',button:'south'}}}),onChange:s=>updates.push(s)});
+  const press=()=>target.dispatchEvent(new Event('keydown'));
+  press();assert.equal(updates.at(-1).glyphs.confirm.label,'Enter');
+  key='Space';adapter.refresh();assert.equal(updates.at(-1).glyphs.confirm.label,'Space');
+  const getPads=environment.navigator.getGamepads;
+  environment.navigator.getGamepads=()=>{throw new DOMException('Gamepad denied','SecurityError');};
+  callback();assert.equal(updates.at(-1).glyphs.confirm.label,'Space');
+  environment.navigator.getGamepads=getPads;
+  const pad={index:0,id:'DualSense',buttons:[{pressed:false,value:0}],axes:[]};
+  pads=[pad];callback();pad.buttons[0].pressed=true;callback();
+  assert.equal(updates.at(-1).glyphs.confirm.label,'Cross');
+  adapter.setStyle('xbox');assert.equal(updates.at(-1).glyphs.confirm.label,'A');
+  const count=updates.length;callback();assert.equal(updates.length,count);
+  environment.document.activeElement=null;callback();
+  environment.document.activeElement=target;callback();
+  assert.equal(updates.at(-1).active,null);
+  adapter.close();adapter.close();const finalCount=updates.length;
+  press();callback();adapter.refresh();assert.equal(updates.length,finalCount);assert.ok(cancelled);
+});

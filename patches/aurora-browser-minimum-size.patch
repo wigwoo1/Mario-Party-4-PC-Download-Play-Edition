@@ -1,0 +1,30 @@
+diff --git a/lib/window.cpp b/lib/window.cpp
+index 0d1a5c2..419ccb9 100644
+--- a/lib/window.cpp
++++ b/lib/window.cpp
+@@ -289,8 +289,14 @@ bool create_window(AuroraBackend backend) {
+   if (width < 640) {
+     width = 640;
+   }
+-  if (height < 480) {
+-    height = 480;
++#ifdef __EMSCRIPTEN__
++  // Browser output presets include 640x360 and 640x274 widescreen canvases.
++  constexpr Sint32 minimumHeight = 240;
++#else
++  constexpr Sint32 minimumHeight = 480;
++#endif
++  if (height < minimumHeight) {
++    height = minimumHeight;
+   }
+ 
+   Sint32 posX = g_config.windowPosX;
+@@ -318,7 +324,7 @@ bool create_window(AuroraBackend backend) {
+     Log.error("Failed to create window: {}", SDL_GetError());
+     return false;
+   }
+-  SDL_SetWindowMinimumSize(g_window, 640, 480);
++  SDL_SetWindowMinimumSize(g_window, 640, minimumHeight);
+   set_window_icon();
+   return true;
+ }

@@ -1,0 +1,1257 @@
+{
+  "version": 1,
+  "scope": "Verbatim notices from configured native dependency sources; not a complete redistribution audit.",
+  "notices": [
+    {
+      "component": "opus",
+      "file": "opus-LICENSE",
+      "origin": "Configured opus source: COPYING",
+      "sha256": "01e1167d54a096d123cf6dfbbeb19587278845c6481d2d66d545669846079551"
+    },
+    {
+      "component": "ogg",
+      "file": "ogg-LICENSE",
+      "origin": "Configured ogg source: COPYING",
+      "sha256": "d2ab5758336489da61c12cc5bb757da5339c4ae9001f9bb0562b4370249af814"
+    },
+    {
+      "component": "opusfile",
+      "file": "opusfile-LICENSE",
+      "origin": "Configured opusfile source: COPYING",
+      "sha256": "0267ae795ab744c4e0f9c45e249440fdf2e75dac8c804f36066b28649bf74aaf"
+    },
+    {
+      "component": "SDL3",
+      "file": "sdl3-LICENSE",
+      "origin": "Configured SDL3 source: licenses/SDL3/LICENSE.txt",
+      "sha256": "1c040b8271b37e5076359f8fd54240e371114112924d2df81ef87c7d6a1dfdfd"
+    },
+    {
+      "component": "fmt",
+      "file": "fmt-LICENSE",
+      "origin": "Configured fmt source: LICENSE",
+      "sha256": "07580f2a3b35709ce703d523f447b242f6dfec7582a8c0df102c7fa2849375f8"
+    },
+    {
+      "component": "RmlUi",
+      "file": "rmlui-LICENSE",
+      "origin": "Configured RmlUi source: LICENSE.txt",
+      "sha256": "64c049f65ec810b805457dc1f24745002203f919ea5a16b6fcd7ca5f45ea298e"
+    },
+    {
+      "component": "RmlUi debugger",
+      "file": "rmlui-debugger-LICENSE",
+      "origin": "Configured RmlUi debugger source: Source/Debugger/LICENSE.txt",
+      "sha256": "8d5167099532ac2f0cf25a95e9d70572837d6fd22f47718206ca147915945f49"
+    },
+    {
+      "component": "RmlUi containers",
+      "file": "rmlui-containers-LICENSE",
+      "origin": "Configured RmlUi containers source: Include/RmlUi/Core/Containers/LICENSE.txt",
+      "sha256": "f8314901f32a5e132372f2568c77d5482d226582bbc92456d9d4d486029835a6"
+    },
+    {
+      "component": "FreeType",
+      "file": "freetype-LICENSE",
+      "origin": "Configured FreeType source: LICENSE.TXT",
+      "sha256": "bd36c8b474855fa294c2ec5c184544478ef3720aad37d65a6296a4f264fd2d3b"
+    },
+    {
+      "component": "FreeType FTL",
+      "file": "freetype-ftl-LICENSE",
+      "origin": "Configured FreeType FTL source: docs/FTL.TXT",
+      "sha256": "5a5ee54c5001bbad1cdc1a57cc3dd4c42199b2da09d39c7ee41fab002d02967f"
+    },
+    {
+      "component": "Abseil",
+      "file": "abseil-LICENSE",
+      "origin": "Configured Abseil source: LICENSE",
+      "sha256": "c79a7fea0e3cac04cd43f20e7b648e5a0ff8fa5344e644b0ee09ca1162b62747"
+    },
+    {
+      "component": "nlohmann JSON",
+      "file": "nlohmann-json-LICENSE",
+      "origin": "Configured nlohmann JSON source: LICENSE.MIT",
+      "sha256": "46a65cffd1ea955132d95a8dd921640714a8d6b537d2e4e482d31145ae95b603"
+    },
+    {
+      "component": "Tracy",
+      "file": "tracy-LICENSE",
+      "origin": "Configured Tracy source: LICENSE",
+      "sha256": "27ab6b51e57f7e263a6e953d9c8984cd26e69d2f7606bde81e4b3048acf30732"
+    },
+    {
+      "component": "Tracy libbacktrace",
+      "file": "tracy-libbacktrace-LICENSE",
+      "origin": "Configured Tracy libbacktrace source: public/libbacktrace/LICENSE",
+      "sha256": "ef8a9b3247488f8901ca60de9b17b745d7bd67e5ec1e622f80d62364572200d8"
+    },
+    {
+      "component": "zlib",
+      "file": "zlib-LICENSE",
+      "origin": "Configured zlib source: LICENSE.md",
+      "sha256": "6c9f0d975b41afaa34d22f55bb8986ce69e5cb7ad327cb2b28820cd425edf5ee"
+    },
+    {
+      "component": "libpng",
+      "file": "libpng-LICENSE",
+      "origin": "Configured libpng source: LICENSE",
+      "sha256": "bdb0a645ea18c60507d0368379b1ac5474b92255fcc2d115e07486a7672ba526"
+    },
+    {
+      "component": "zstd",
+      "file": "zstd-LICENSE",
+      "origin": "Configured zstd source: LICENSE",
+      "sha256": "7055266497633c9025b777c78eb7235af13922117480ed5c674677adc381c9d8"
+    },
+    {
+      "component": "xxHash",
+      "file": "xxhash-LICENSE",
+      "origin": "Configured xxHash source: LICENSE",
+      "sha256": "6ffedbc0f7878612d2b23589f1ff2ab15633e1df7963a5d9fc750ec5500c7e7a"
+    },
+    {
+      "component": "libdatachannel",
+      "file": "libdatachannel-LICENSE",
+      "origin": "Configured libdatachannel source: LICENSE",
+      "sha256": "cde215e5b42363eb28ca2462c4558ff4807b38f383c537624c31e44657ac58f4"
+    },
+    {
+      "component": "libjuice",
+      "file": "libjuice-LICENSE",
+      "origin": "Configured libjuice source: deps/libjuice/LICENSE",
+      "sha256": "cde215e5b42363eb28ca2462c4558ff4807b38f383c537624c31e44657ac58f4"
+    },
+    {
+      "component": "usrsctp",
+      "file": "usrsctp-LICENSE",
+      "origin": "Configured usrsctp source: deps/usrsctp/LICENSE.md",
+      "sha256": "654779a3c456296fe43d4f452a441a257f0afb2f3a7495cde5d35d02f08e916d"
+    },
+    {
+      "component": "plog",
+      "file": "plog-LICENSE",
+      "origin": "Configured plog source: deps/plog/LICENSE",
+      "sha256": "b88260cd359627f608e831653db4e23e639a6c044cb4e4babdff51898c7bc7e5"
+    },
+    {
+      "component": "MbedTLS",
+      "file": "mbedtls-LICENSE",
+      "origin": "Configured MbedTLS source: LICENSE",
+      "sha256": "f8582e76de1b7dd1caa680ab9a82cf2455b4392f00613b68a63df88121909175"
+    },
+    {
+      "component": "Dawn and Tint",
+      "file": "dawn-LICENSE",
+      "sha256": "e2908f7576fb12be5bdb8480cddb0be62badb498cadb821d043aeaf01b0b0899",
+      "origin": "https://raw.githubusercontent.com/google/dawn/13abc3bc8ea2d3c2050f9e77a12d012108ceee24/LICENSE"
+    },
+    {
+      "component": "nod",
+      "file": "nod-LICENSE-MIT",
+      "sha256": "544ffe9befaefa6b59ab1fdde58789069ba7c1b65432bdea273a16b2117909b7",
+      "origin": "https://raw.githubusercontent.com/encounter/nod/v2.0.0-alpha.10/LICENSE-MIT"
+    },
+    {
+      "component": "nod",
+      "file": "nod-LICENSE-APACHE",
+      "sha256": "fd363f1eb5135402a2e66f4a6173e6eff06daabe79d150acd7c669d33b985b4e",
+      "origin": "https://raw.githubusercontent.com/encounter/nod/v2.0.0-alpha.10/LICENSE-APACHE"
+    },
+    {
+      "component": "DirectX Shader Compiler",
+      "file": "dxc-LICENSE.TXT",
+      "sha256": "27a49e35d1da96eba18fba54bc882667ff0ff8c0254f16f2b6e165d605ba7df8",
+      "origin": "https://raw.githubusercontent.com/microsoft/DirectXShaderCompiler/517dd5eb5d8cbb46c15fc1230acac1d2f4779092/LICENSE.TXT"
+    },
+    {
+      "component": "DirectX Shader Compiler",
+      "file": "dxc-ThirdPartyNotices.txt",
+      "sha256": "19512a5d0a015ef16d167272c164da49a604614a786206212a80ad486ed0be6d",
+      "origin": "https://raw.githubusercontent.com/microsoft/DirectXShaderCompiler/517dd5eb5d8cbb46c15fc1230acac1d2f4779092/ThirdPartyNotices.txt"
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-898b1ae9821e98daf8964c8d-NOTICE",
+      "sha256": "898b1ae9821e98daf8964c8d6c7f61641f5f5aa78ad500020771c0939ee0dea1",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/tracing-core/LICENSE",
+        "vendor/tracing-log/LICENSE",
+        "vendor/tracing/LICENSE",
+        "vendor/tracing-attributes/LICENSE",
+        "vendor/tracing-subscriber/LICENSE"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-58545fed1565e42d687aecec-NOTICE",
+      "sha256": "58545fed1565e42d687aecec6897d35c6d37ccb71479a137c0deb2203e125c79",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/tracing-core/src/spin/LICENSE"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-a60eea817514531668d7e007-NOTICE",
+      "sha256": "a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/equivalent/LICENSE-APACHE",
+        "vendor/lazy_static/LICENSE-APACHE",
+        "vendor/liblzma-sys/LICENSE-APACHE",
+        "vendor/libz-sys/LICENSE-APACHE",
+        "vendor/crossbeam-channel/LICENSE-APACHE",
+        "vendor/thread_local/LICENSE-APACHE",
+        "vendor/pkg-config/LICENSE-APACHE",
+        "vendor/log/LICENSE-APACHE",
+        "vendor/autocfg/LICENSE-APACHE",
+        "vendor/bzip2-sys/LICENSE-APACHE",
+        "vendor/unicase/LICENSE-APACHE",
+        "vendor/num-traits/LICENSE-APACHE",
+        "vendor/cfg-if/LICENSE-APACHE",
+        "vendor/bitflags/LICENSE-APACHE",
+        "vendor/once_cell/LICENSE-APACHE",
+        "vendor/either/LICENSE-APACHE",
+        "vendor/itertools/LICENSE-APACHE",
+        "vendor/getopts/LICENSE-APACHE",
+        "vendor/jobserver/LICENSE-APACHE",
+        "vendor/regex-automata/LICENSE-APACHE",
+        "vendor/unicode-width/LICENSE-APACHE",
+        "vendor/cc/LICENSE-APACHE",
+        "vendor/smallvec/LICENSE-APACHE",
+        "vendor/hashbrown/LICENSE-APACHE",
+        "vendor/find-msvc-tools/LICENSE-APACHE",
+        "vendor/num_cpus/LICENSE-APACHE",
+        "vendor/crossbeam-utils/LICENSE-APACHE",
+        "vendor/regex-syntax/LICENSE-APACHE"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-7365cc8878a1d7ce155a58c4-NOTICE",
+      "sha256": "7365cc8878a1d7ce155a58c4ca09c3d7a6be413efa5334a80ea842912b669349",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/equivalent/LICENSE-MIT"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-5b2c207dcf571267ebe0bbdd-NOTICE",
+      "sha256": "5b2c207dcf571267ebe0bbdd5bf321f561ddc22ff597e7b363e96f4539507a29",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/quick-xml/LICENSE-MIT.md",
+        "vendor/quick-xml-0.38.4/LICENSE-MIT.md"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-62c7a1e35f56406896d7aa7c-NOTICE",
+      "sha256": "62c7a1e35f56406896d7aa7ca52d0cc0d272ac022b5d2796e7d6905db8a3636a",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/thiserror-impl/LICENSE-APACHE",
+        "vendor/quote/LICENSE-APACHE",
+        "vendor/serde_core/LICENSE-APACHE",
+        "vendor/serde_derive/LICENSE-APACHE",
+        "vendor/unicode-ident/LICENSE-APACHE",
+        "vendor/libc/LICENSE-APACHE",
+        "vendor/serde/LICENSE-APACHE",
+        "vendor/dyn-clone/LICENSE-APACHE",
+        "vendor/proc-macro2/LICENSE-APACHE",
+        "vendor/paste/LICENSE-APACHE",
+        "vendor/syn/LICENSE-APACHE",
+        "vendor/thiserror/LICENSE-APACHE"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-23f18e03dc49df91622fe2a7-NOTICE",
+      "sha256": "23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/thiserror-impl/LICENSE-MIT",
+        "vendor/quote/LICENSE-MIT",
+        "vendor/serde_core/LICENSE-MIT",
+        "vendor/serde_derive/LICENSE-MIT",
+        "vendor/unicode-ident/LICENSE-MIT",
+        "vendor/serde/LICENSE-MIT",
+        "vendor/portable-atomic/LICENSE-MIT",
+        "vendor/once_cell/LICENSE-MIT",
+        "vendor/dyn-clone/LICENSE-MIT",
+        "vendor/adler2/LICENSE-MIT",
+        "vendor/proc-macro2/LICENSE-MIT",
+        "vendor/pin-project-lite/LICENSE-MIT",
+        "vendor/enable-ansi-support/LICENSE",
+        "vendor/paste/LICENSE-MIT",
+        "vendor/syn/LICENSE-MIT",
+        "vendor/thiserror/LICENSE-MIT"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-110b4baa18ab01a5f51a87a9-NOTICE",
+      "sha256": "110b4baa18ab01a5f51a87a9120d3109af2078971f6f14a62cbcb57f78c5775c",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/simple_moving_average/LICENSE"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-1c41c0e19caa2c20b0adfeb8-NOTICE",
+      "sha256": "1c41c0e19caa2c20b0adfeb8219b606b21b7c63914aa3ae74ae3e091d7ce09ca",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/macro_rules_attribute/LICENSE-ZLIB",
+        "vendor/macro_rules_attribute-proc_macro/LICENSE-ZLIB"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-388e98b08de12ba8a9d45758-NOTICE",
+      "sha256": "388e98b08de12ba8a9d4575883c8b0386c747cea188ed459380fc58d60da15c9",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/macro_rules_attribute/LICENSE-APACHE",
+        "vendor/macro_rules_attribute-proc_macro/LICENSE-APACHE"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-603fb27ef3266ea516872eef-NOTICE",
+      "sha256": "603fb27ef3266ea516872eefd9ae587746b8c34614a35c0fb24e4e9e0c17e137",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/macro_rules_attribute/LICENSE-MIT",
+        "vendor/macro_rules_attribute-proc_macro/LICENSE-MIT"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-4962951e3ed83ec3ce7f36ec-NOTICE",
+      "sha256": "4962951e3ed83ec3ce7f36ec004147579d82d502098590c0ba153c5b24663152",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/argp/LICENSE",
+        "vendor/argp_derive/LICENSE"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-a9040321c3712d8fd0b09cf5-NOTICE",
+      "sha256": "a9040321c3712d8fd0b09cf52b17445de04a23a10165049ae187cd39e5c86be5",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/base16ct/LICENSE-APACHE",
+        "vendor/crypto-common/LICENSE-APACHE",
+        "vendor/block-buffer/LICENSE-APACHE",
+        "vendor/cpubits/LICENSE-APACHE",
+        "vendor/cpufeatures/LICENSE-APACHE",
+        "vendor/md-5/LICENSE-APACHE",
+        "vendor/inout/LICENSE-APACHE",
+        "vendor/aes/LICENSE-APACHE",
+        "vendor/digest/LICENSE-APACHE",
+        "vendor/hybrid-array/LICENSE-APACHE",
+        "vendor/block-padding/LICENSE-APACHE",
+        "vendor/cipher/LICENSE-APACHE",
+        "vendor/sha1/LICENSE-APACHE",
+        "vendor/cbc/LICENSE-APACHE"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-54fb6dfe99a6906f862aa402-NOTICE",
+      "sha256": "54fb6dfe99a6906f862aa40282f0e8e9d9d0f22d57d99ab8acbaf4c8ceaa70e0",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/base16ct/LICENSE-MIT"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-23232f634e079478f8969da5-NOTICE",
+      "sha256": "23232f634e079478f8969da5dfcba06c0838c8dfe3151b444f5cecb37a55bf96",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/is_ci/LICENSE"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-eafbfa606bc005ed7fd2f623-NOTICE",
+      "sha256": "eafbfa606bc005ed7fd2f623d65af17ffe4ef7c017221ac14405bf4140771ea9",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/sharded-slab/LICENSE"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-9d185ac6703c4b0453974c0d-NOTICE",
+      "sha256": "9d185ac6703c4b0453974c0d85e9eee43e6941009296bb1f5eb0b54e2329e9f3",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/zerocopy-derive/LICENSE-APACHE",
+        "vendor/zerocopy/LICENSE-APACHE"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-1a2f5c12ddc934d58956aa5d-NOTICE",
+      "sha256": "1a2f5c12ddc934d58956aa5dbdd3255fe55fd957633ab7d0d39e4f0daa73f7df",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/zerocopy-derive/LICENSE-MIT",
+        "vendor/zerocopy/LICENSE-MIT"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-83c1763356e822adde0a2cae-NOTICE",
+      "sha256": "83c1763356e822adde0a2cae748d938a73fdc263849ccff6b27776dff213bd32",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/zerocopy-derive/LICENSE-BSD",
+        "vendor/zerocopy/LICENSE-BSD"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-0621878e61f0d0fda054bcbe-NOTICE",
+      "sha256": "0621878e61f0d0fda054bcbe02df75192c28bde1ecc8289cbd86aeba2dd72720",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/lazy_static/LICENSE-MIT"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-01e6df90d71d591f4307db3f-NOTICE",
+      "sha256": "01e6df90d71d591f4307db3f397a5a4fac93b18533f5a3862156f1a0a7dc8610",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/liblzma-sys/xz/AUTHORS"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-2b3fa1d23cb2ab084f3d9199-NOTICE",
+      "sha256": "2b3fa1d23cb2ab084f3d919908159473cc0e1eed059d106e2a2857c0ec8af98a",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/liblzma-sys/xz/build-aux/license-check.sh"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-edaef632cbb643e4e7a22171-NOTICE",
+      "sha256": "edaef632cbb643e4e7a221717a6c441a4c1a7c918e6e4d56debc3d8739b233f6",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/liblzma-sys/xz/COPYING.GPLv2"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-0b01625d853911cd0e2e088d-NOTICE",
+      "sha256": "0b01625d853911cd0e2e088dcfb743261034a091bb379246cb25a14cc4c74bf1",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/liblzma-sys/xz/COPYING.0BSD"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-20e50fe7aae3e56378ebf041-NOTICE",
+      "sha256": "20e50fe7aae3e56378ebf0417d9de904f55a0e61e4df315333e632a4d3555d95",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/liblzma-sys/xz/COPYING.LGPLv2.1"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-3972dc9744f6499f0f9b2dbf-NOTICE",
+      "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/liblzma-sys/xz/COPYING.GPLv3"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-616a3ad264ce29b8f1cb97e5-NOTICE",
+      "sha256": "616a3ad264ce29b8f1cb97e53037b139d406899ca8d1f799651e17bfa09830b8",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/liblzma-sys/xz/COPYING"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-a90e2da47bdc152cfb89e1fb-NOTICE",
+      "sha256": "a90e2da47bdc152cfb89e1fb09972143056c417ddbf86122babc83d0a8ad81d1",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/liblzma-sys/LICENSE-MIT"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-a47129d738752a6ae52247fe-NOTICE",
+      "sha256": "a47129d738752a6ae52247fea645b42cb320d19e9327f1eb2d1a7f99d9455ad3",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/matchers/LICENSE"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-d2e7ec5355c96eeade56b091-NOTICE",
+      "sha256": "d2e7ec5355c96eeade56b09187ceb48a6a30299da3ce7531a66d3d11405ab963",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/crypto-common/LICENSE-MIT"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-e32ff4e00d9d949305376352-NOTICE",
+      "sha256": "e32ff4e00d9d94930537635291da39e7e612703334bf6fde8c7f1686fe8a45a2",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/libz-sys/src/zlib/LICENSE"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-fc686023047ce5ce3a18a9b8-NOTICE",
+      "sha256": "fc686023047ce5ce3a18a9b8a777156f0e475929d3de06bac279f3c025d2b2ca",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/libz-sys/src/zlib/contrib/minizip/LICENSE.Info-Zip"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-36266a8fd073568394cb81cd-NOTICE",
+      "sha256": "36266a8fd073568394cb81cdb2b124f7fdae2c64c1a7ed09db34b4d22efa2951",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/libz-sys/src/zlib/contrib/dotzlib/LICENSE_1_0.txt"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-6c9f0d975b41afaa34d22f55-NOTICE",
+      "sha256": "6c9f0d975b41afaa34d22f55bb8986ce69e5cb7ad327cb2b28820cd425edf5ee",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/libz-sys/src/zlib-ng/LICENSE.md"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-34c467b6945a22696d060b8f-NOTICE",
+      "sha256": "34c467b6945a22696d060b8fdd2379d464acb3408d4c599d3dc5fe4fa1b4c84f",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/libz-sys/LICENSE-MIT"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-484f7e56d0e3178613b2f12d-NOTICE",
+      "sha256": "484f7e56d0e3178613b2f12d478a46fc2f2a6646c7ea14a7329bb805ccc2a82b",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/never-say-never/LICENSE-ZLIB"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-082d31fbdecbda9720686a2b-NOTICE",
+      "sha256": "082d31fbdecbda9720686a2b76cee810dcd2630f2d16bc4cc9accd411b6a76fd",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/never-say-never/LICENSE-APACHE"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-e8d3901c2874430495743540-NOTICE",
+      "sha256": "e8d3901c28744304957435401f88b9114a73ad95f35bf569e20c4feeb7e2db35",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/never-say-never/LICENSE-MIT"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-98181e7249d0c01737645ec9-NOTICE",
+      "sha256": "98181e7249d0c01737645ec982499ce99a0f07eb8f7d625b8840d799d10dbc01",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/block-buffer/LICENSE-MIT",
+        "vendor/block-padding/LICENSE-MIT"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-cfc7749b96f63bd31c3c42b5-NOTICE",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/encoding_rs/LICENSE-APACHE"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-838118388fe5c2e7f1dbbaee-NOTICE",
+      "sha256": "838118388fe5c2e7f1dbbaeed13e1c7f3ebf88be91319c7c1d77c18e987d1a50",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/encoding_rs/LICENSE-WHATWG"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-3fa4ca83dcc9237839b1bdeb-NOTICE",
+      "sha256": "3fa4ca83dcc9237839b1bdeb2e6d16bdfb5ec0c5ce42b24694d8bbf0dcbef72c",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/encoding_rs/LICENSE-MIT"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-11789f45bb180841cd362a5e-NOTICE",
+      "sha256": "11789f45bb180841cd362a5eee6789c68ddb573a11105e30768c308a6add0190",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/encoding_rs/COPYRIGHT"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-5734ed989dfca1f625b40281-NOTICE",
+      "sha256": "5734ed989dfca1f625b40281ee9f4530f91b2411ec01cb748223e7eb87e201ab",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/crossbeam-channel/LICENSE-MIT",
+        "vendor/crossbeam-utils/LICENSE-MIT"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-b16db96b93b1d7cf7bea533f-NOTICE",
+      "sha256": "b16db96b93b1d7cf7bea533f572091ec6bca3234fbe0a83038be772ff391a44c",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/crossbeam-channel/LICENSE-THIRD-PARTY"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-003736bc98408b53511b9cc8-NOTICE",
+      "sha256": "003736bc98408b53511b9cc8ff5d1af3bf0a8f17d53841cc39d8ab1b96a195b0",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/cpubits/LICENSE-MIT"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-c9a75f18b9ab2927829a208f-NOTICE",
+      "sha256": "c9a75f18b9ab2927829a208fc6aa2cf4e63b8420887ba29cdb265d6619ae82d5",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/thread_local/LICENSE-MIT"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-ae9baa7beea910273c2f384c-NOTICE",
+      "sha256": "ae9baa7beea910273c2f384c2a6b721fb7bd02bda3436074a1072e4ee689f985",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/cpufeatures/LICENSE-MIT"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-60c93a31f490375aadf64098-NOTICE",
+      "sha256": "60c93a31f490375aadf64098b75f10715010379541021e00261045d7800611d3",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/vcpkg/LICENSE-APACHE"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-016d20f335060a70e79d9fcf-NOTICE",
+      "sha256": "016d20f335060a70e79d9fcf8dfaa6201114d65d592211f4bdfb8ae9ca2bc1dc",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/vcpkg/LICENSE-MIT"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-2022c11b24fc1e50fa06a595-NOTICE",
+      "sha256": "2022c11b24fc1e50fa06a5959e40198a3464f560729ad3d00139abb8a328362d",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/indicatif/LICENSE",
+        "vendor/console/LICENSE"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-831e0f43ad0bf014c1c4fec5-NOTICE",
+      "sha256": "831e0f43ad0bf014c1c4fec5767aae470434c1d66d6e671be2d823e729063e25",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/md-5/LICENSE-MIT",
+        "vendor/sha1/LICENSE-MIT"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-378f5840b258e2779c39418f-NOTICE",
+      "sha256": "378f5840b258e2779c39418f3f2d7b2ba96f1c7917dd6be0713f88305dbda397",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/pkg-config/LICENSE-MIT",
+        "vendor/cfg-if/LICENSE-MIT",
+        "vendor/jobserver/LICENSE-MIT",
+        "vendor/cc/LICENSE-MIT",
+        "vendor/find-msvc-tools/LICENSE-MIT"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-a07fcacc3c60de4dc0fab10a-NOTICE",
+      "sha256": "a07fcacc3c60de4dc0fab10ac9d6aaba7379974e28451c99da7f7df09c25b28c",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/inout/LICENSE-MIT"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-25f77efa393854f7c15eaf6a-NOTICE",
+      "sha256": "25f77efa393854f7c15eaf6a2589a2071db2d7337642742763adb12bdecf0445",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/aes/LICENSE-MIT"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-f7db81051789b729fea528a6-NOTICE",
+      "sha256": "f7db81051789b729fea528a63ec4c938fdcb93d9d61d97dc8cc2e9df6d47f2a1",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/unicode-ident/LICENSE-UNICODE"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-af59cea35d7f5e2777a713b8-NOTICE",
+      "sha256": "af59cea35d7f5e2777a713b8d155d65efa2c339eb43f3c14e868c6ac8506edad",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/digest/LICENSE-MIT"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-c9bff75738922193e67fa726-NOTICE",
+      "sha256": "c9bff75738922193e67fa726fa225535870d2aa1059f91452c411736284ad566",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/xxhash-rust/LICENSE"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-123a331b5dbf04c30097fa43-NOTICE",
+      "sha256": "123a331b5dbf04c30097fa43b8f858bc85df671fe776de498d01f3d6b7c1f69e",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/libc/LICENSE-MIT"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-70c9d40f1f9545c3f133b8a6-NOTICE",
+      "sha256": "70c9d40f1f9545c3f133b8a67206e89da850f6468eed072281bb3701514114a9",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/hybrid-array/LICENSE-MIT"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-129e8edef29e9abcd2ebabe2-NOTICE",
+      "sha256": "129e8edef29e9abcd2ebabe252f4ef1b1289cdca356bf0040284a2fbccfb96c8",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/zstd/LICENSE",
+        "vendor/zstd-safe/LICENSE.Mit",
+        "vendor/zstd-sys/LICENSE.Mit"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-6485b8ed310d3f0340bf1ad1-NOTICE",
+      "sha256": "6485b8ed310d3f0340bf1ad1f47645069ce4069dcc6bb46c7d5c6faf41de1fdb",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/log/LICENSE-MIT",
+        "vendor/num-traits/LICENSE-MIT",
+        "vendor/bitflags/LICENSE-MIT",
+        "vendor/getopts/LICENSE-MIT",
+        "vendor/regex-automata/LICENSE-MIT",
+        "vendor/regex-syntax/LICENSE-MIT"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-a86a6d5deb8f48a007008297-NOTICE",
+      "sha256": "a86a6d5deb8f48a007008297b763adb89d48df32d295ed16fdb282fb52246d84",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/polonius-the-crab/LICENSE-ZLIB"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-f0f2b1f498ed9a6af37f46b3-NOTICE",
+      "sha256": "f0f2b1f498ed9a6af37f46b3b2cf656f08b6067bc79ce1e52ce97531a5b77672",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/polonius-the-crab/LICENSE-APACHE"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-3ffde8c8cdebf3c361b971be-NOTICE",
+      "sha256": "3ffde8c8cdebf3c361b971bed7476006ede9c5ec8a6250137c7dc55383ed9e5b",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/polonius-the-crab/LICENSE-MIT"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-27995d58ad5c1145c1a8cd86-NOTICE",
+      "sha256": "27995d58ad5c1145c1a8cd86244ce844886958a35eb2b78c6b772748669999ac",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/autocfg/LICENSE-MIT"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-c8c6324cf2f0f076e3ed5dea-NOTICE",
+      "sha256": "c8c6324cf2f0f076e3ed5dea4a21f00bd4dd6fce44f72b110bc52e7fe06f6e1e",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/bzip2-sys/LICENSE-MIT"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-c6dbbf828498be844a89eaa3-NOTICE",
+      "sha256": "c6dbbf828498be844a89eaa3b84adbab3199e342eb5cb2ed2f0d4ba7ec0f38a3",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/bzip2-sys/bzip2-1.0.8/LICENSE"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-4f6bd11a0f17fe5b085ace1d-NOTICE",
+      "sha256": "4f6bd11a0f17fe5b085ace1daaedb7b002a08316850dd9577c246c6a68a68e8c",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/unicase/LICENSE-MIT"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-0d542e0c8804e39aa7f37eb0-NOTICE",
+      "sha256": "0d542e0c8804e39aa7f37eb00da5a762149dc682d7829451287e11b938e94594",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/portable-atomic/LICENSE-APACHE",
+        "vendor/zstd-safe/LICENSE.Apache-2.0",
+        "vendor/pin-project-lite/LICENSE-APACHE",
+        "vendor/zstd-sys/LICENSE.Apache-2.0"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-553fffcd9b1cb158bc3e9edc-NOTICE",
+      "sha256": "553fffcd9b1cb158bc3e9edc35da85ca5c3b3d7d2e61c883ebcfa8a65814b583",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/shlex/LICENSE-APACHE"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-4455bf75a91154108304cb28-NOTICE",
+      "sha256": "4455bf75a91154108304cb283e0fea9948c14f13e20d60887cf2552449dea3b1",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/shlex/LICENSE-MIT"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-20fe7b00e904ed690e3b9fd6-NOTICE",
+      "sha256": "20fe7b00e904ed690e3b9fd6073784d3fc428141dbd10b81c01fd143d0797f58",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/allocator-api2/LICENSE-APACHE"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-36516aefdc84c5d5a1e74854-NOTICE",
+      "sha256": "36516aefdc84c5d5a1e7485425913a22dbda69eb1930c5e84d6ae4972b5194b9",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/allocator-api2/LICENSE-MIT"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-45f522cacecb1023856e46df-NOTICE",
+      "sha256": "45f522cacecb1023856e46df79ca625dfc550c94910078bd8aec6e02880b3d42",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/bytes/LICENSE"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-950d712c518a02fcb7cff969-NOTICE",
+      "sha256": "950d712c518a02fcb7cff96950aee304a1cc5283361712c980ea21e8d6d669a5",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/cipher/LICENSE-MIT"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-a77b7cfeaf911ed410ffbe76-NOTICE",
+      "sha256": "a77b7cfeaf911ed410ffbe76f0cb2b24ad8a4d94e7ead5727e914425c416cc63",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/zstd-safe/LICENSE",
+        "vendor/zstd-sys/LICENSE"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-061dc50af2cd9340703daf61-NOTICE",
+      "sha256": "061dc50af2cd9340703daf61978af3200cf681b12ea67a323c33ba109a23a45e",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/lru/LICENSE"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-7576269ea71f767b99297934-NOTICE",
+      "sha256": "7576269ea71f767b99297934c0b2367532690f8c4badc695edf8e04ab6a1e545",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/either/LICENSE-MIT",
+        "vendor/itertools/LICENSE-MIT"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-8ada45cd9f843acf64e4722a-NOTICE",
+      "sha256": "8ada45cd9f843acf64e4722ae262c622a2b3b3007c7310ef36ac1061a30f6adb",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/adler2/LICENSE-APACHE"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-861399f8c21c042b110517e7-NOTICE",
+      "sha256": "861399f8c21c042b110517e76dc6b63a2b334276c8cf17412fc3c8908ca8dc17",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/adler2/LICENSE-0BSD"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-b39b7556926992260c18201e-NOTICE",
+      "sha256": "b39b7556926992260c18201e59f9478217ed593602099546581b4092a4b9e10e",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/unit-prefix/LICENSE"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-db11fec9946737df39ca3898-NOTICE",
+      "sha256": "db11fec9946737df39ca3898d9cd8c10ec6f6c3a884a6802b0ad0b81b4e8f23a",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/typenum/LICENSE"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-516b24e051bf5630880ebbd5-NOTICE",
+      "sha256": "516b24e051bf5630880ebbd55c40a25ce9552ebaf8970a53e8976eb70e522406",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/typenum/LICENSE-APACHE"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-a825bd853ab71619a4923d7b-NOTICE",
+      "sha256": "a825bd853ab71619a4923d7b4311221427848070ff44d990da39b0b274c1683f",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/typenum/LICENSE-MIT"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-7b63ecd5f1902af1b6372994-NOTICE",
+      "sha256": "7b63ecd5f1902af1b63729947373683c32745c16a10e8e6292e2e2dcd7e90ae0",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/unicode-width/LICENSE-MIT"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-23860c2a7b5d96b21569afed-NOTICE",
+      "sha256": "23860c2a7b5d96b21569afedf033469bab9fe14a1b24a35068b8641c578ce24d",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/unicode-width/COPYRIGHT"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-b1181a40b2a7b25cf66fd014-NOTICE",
+      "sha256": "b1181a40b2a7b25cf66fd01481713bc1005df082c53ef73e851e55071b102744",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/foldhash/LICENSE"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-c4f10f55904bdb9f27d3fbf9-NOTICE",
+      "sha256": "c4f10f55904bdb9f27d3fbf94c354926d6cfe8b982276e556238c258941b243b",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/pulldown-cmark/LICENSE"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-c6596eb7be8581c18be736c8-NOTICE",
+      "sha256": "c6596eb7be8581c18be736c846fb9173b69eccf6ef94c5135893ec56bd92ba08",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/hex/LICENSE-APACHE",
+        "vendor/crc32fast/LICENSE-APACHE"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-f7bdb3426d045cd50efd4953-NOTICE",
+      "sha256": "f7bdb3426d045cd50efd4953026e3eb5a83d0199f458a075602611b9344da5b9",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/hex/LICENSE-MIT"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-0b28172679e0009b655da427-NOTICE",
+      "sha256": "0b28172679e0009b655da42797c03fd163a3379d5cfa67ba1f1655e974a2a1a9",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/smallvec/LICENSE-MIT"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-f565f87412ac2c1ade8726bd-NOTICE",
+      "sha256": "f565f87412ac2c1ade8726bd2a13d9ee69a5aed4dc2ed5d2f367bea41a8e979c",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/size/LICENSE"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-0f96a83840e146e43c0ec96a-NOTICE",
+      "sha256": "0f96a83840e146e43c0ec96a22ec1f392e0680e6c1226e6f3ba87e0740af850f",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/aho-corasick/LICENSE-MIT",
+        "vendor/memchr/LICENSE-MIT"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-01c266bced4a434da0051174-NOTICE",
+      "sha256": "01c266bced4a434da0051174d6bee16a4c82cf634e2679b6155d40d75012390f",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/aho-corasick/COPYING",
+        "vendor/memchr/COPYING"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-7055266497633c9025b777c7-NOTICE",
+      "sha256": "7055266497633c9025b777c78eb7235af13922117480ed5c674677adc381c9d8",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/zstd-sys/zstd/LICENSE"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-f9c375a1be4a41f7b70301dd-NOTICE",
+      "sha256": "f9c375a1be4a41f7b70301dd83c91cb89e41567478859b77eef375a52d782505",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/zstd-sys/zstd/COPYING"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-48341f685c87304089aa099b-NOTICE",
+      "sha256": "48341f685c87304089aa099b23c386f8bacc519ef555aa7a13e239908907b3fd",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/zstd-sys/LICENSE.BSD-3-Clause"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-02872c3ff23e11da5a9b3289-NOTICE",
+      "sha256": "02872c3ff23e11da5a9b3289df11b581be36b4956bfb7cfdc3d8043f92d64794",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/supports-color/LICENSE"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-63af4bea227c94d021e99427-NOTICE",
+      "sha256": "63af4bea227c94d021e99427f6ca3a4b8efddadcca93ab6130f708cf6138cf68",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/cbc/LICENSE-MIT"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-ff8f68cb076caf8cefe7a643-NOTICE",
+      "sha256": "ff8f68cb076caf8cefe7a6430d4ac086ce6af2ca8ce2c4e5a2004d4552ef52a2",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/hashbrown/LICENSE-MIT"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-61d383b05b87d78f94d2937e-NOTICE",
+      "sha256": "61d383b05b87d78f94d2937e2580cce47226d17823c0430fbcad09596537efcf",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/crc32fast/LICENSE-MIT"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-391a5396cec6230bfabd4ef4-NOTICE",
+      "sha256": "391a5396cec6230bfabd4ef4eb2350eb895bc5efce377a2218f5702ed020d3e3",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/num_cpus/LICENSE-MIT"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-74db5baf44a41b1000312c67-NOTICE",
+      "sha256": "74db5baf44a41b1000312c673544b3374e4198af5605c7f9080a402cec42cfa3",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/regex-syntax/src/unicode_tables/LICENSE-UNICODE"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-284465860407420254e39be4-NOTICE",
+      "sha256": "284465860407420254e39be4e1bdcaaf2e7f2d18e06f9bab75bc75341a5d8501",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/nu-ansi-term/LICENSE"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-3c638385e6deedebff9a9bb1-NOTICE",
+      "sha256": "3c638385e6deedebff9a9bb15111cb0855159873c8981bd7e71d2b9dfdccf535",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/higher-kinded-types/LICENSE-ZLIB"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-8927279141619056b903290b-NOTICE",
+      "sha256": "8927279141619056b903290bbd478e49bc98e337640bb9e75eb4ed329bff81de",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/higher-kinded-types/LICENSE-APACHE"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-f0bae5fa40b0f188fbcfdf3e-NOTICE",
+      "sha256": "f0bae5fa40b0f188fbcfdf3e7fd1ffdefb2f9770c97f10c8e552c072ee41b279",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/higher-kinded-types/LICENSE-MIT"
+      ]
+    },
+    {
+      "component": "nod vendored dependency notice index",
+      "file": "nod-vendored-notice-index.json",
+      "sha256": "b7ddf27825c4ac0462d10bfd03368dd9f6acaa7978a085a89f4d083eb665abf4",
+      "origin": "https://github.com/encounter/nod/releases/download/v2.0.0-alpha.10/vendored-crates-v2.0.0-alpha.10.tar.zst"
+    }
+  ],
+  "unresolved": [
+    "Dawn/Tint transitive dependency notices and build-feature selection still require review.",
+    "Complete browser static dependency, fonts/resources, platform prerequisites and source-availability requirements remain under review."
+  ]
+}

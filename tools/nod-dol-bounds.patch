@@ -1,0 +1,30 @@
+diff --git a/nod/src/disc/gcn.rs b/nod/src/disc/gcn.rs
+index 6f76d35..98147d8 100644
+--- a/nod/src/disc/gcn.rs
++++ b/nod/src/disc/gcn.rs
+@@ -8,7 +8,7 @@ use std::{
+ use zerocopy::{FromBytes, FromZeros, IntoBytes};
+ 
+ use crate::{
+-    Result, ResultContext,
++    Error, Result, ResultContext,
+     disc::{
+         ApploaderHeader, BB2_OFFSET, BI2_SIZE, BOOT_SIZE, BootHeader, DolHeader, SECTOR_GROUP_SIZE,
+         SECTOR_SIZE,
+@@ -127,9 +127,13 @@ pub(crate) fn read_dol(
+     let dol_header: DolHeader = read_from(reader).context("Reading DOL header")?;
+     let dol_size = (dol_header.text_offs.iter().zip(&dol_header.text_sizes))
+         .chain(dol_header.data_offs.iter().zip(&dol_header.data_sizes))
+-        .map(|(offs, size)| offs.get() + size.get())
+-        .max()
+-        .unwrap_or(size_of::<DolHeader>() as u32);
++        .try_fold(0u32, |end, (offs, size)| {
++            offs.get().checked_add(size.get()).map(|next| end.max(next))
++                .ok_or_else(|| Error::DiscFormat("DOL section extent overflows".into()))
++        })?;
++    if dol_size < size_of::<DolHeader>() as u32 {
++        return Err(Error::DiscFormat("DOL extent is smaller than its header".into()));
++    }
+     let mut raw_dol = <[u8]>::new_box_zeroed_with_elems(dol_size as usize)?;
+     raw_dol[..size_of::<DolHeader>()].copy_from_slice(dol_header.as_bytes());
+     reader.read_exact(&mut raw_dol[size_of::<DolHeader>()..]).context("Reading DOL")?;

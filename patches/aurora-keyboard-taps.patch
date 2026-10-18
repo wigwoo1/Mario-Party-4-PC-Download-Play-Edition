@@ -1,0 +1,88 @@
+diff --git a/lib/dolphin/pad/pad.cpp b/lib/dolphin/pad/pad.cpp
+index 2d7f795..37b9ca2 100644
+--- a/lib/dolphin/pad/pad.cpp
++++ b/lib/dolphin/pad/pad.cpp
+@@ -2,15 +2,25 @@
+ #include "../../device.hpp"
+ #include "../../internal.hpp"
+ #include "../../fs_helper.hpp"
++#include "../../key_latch.hpp"
+ #include <dolphin/pad.h>
+ #include <dolphin/si.h>
+ #include <SDL3/SDL_mouse.h>
++#include <SDL3/SDL_events.h>
+ 
+ #include <array>
+ #include <sys/stat.h>
+ #include <ranges>
+ 
+ namespace {
++aurora::input::KeyLatch<SDL_SCANCODE_COUNT> g_keyLatch;
++bool SDLCALL watch_keyboard_taps(void*, SDL_Event* event) {
++  if (event->type == SDL_EVENT_KEY_DOWN && !event->key.repeat)
++    g_keyLatch.press(static_cast<size_t>(event->key.scancode));
++  else if (event->type == SDL_EVENT_WINDOW_FOCUS_LOST)
++    g_keyLatch.clear();
++  return true;
++}
+ constexpr int32_t k_mappingsFileVersion = 4;
+ constexpr int32_t k_minMappingsFileVersion = 3;
+ 
+@@ -367,6 +377,7 @@ BOOL PADInit() {
+     return true;
+   }
+   g_initialized = true;
++  SDL_AddEventWatch(watch_keyboard_taps, nullptr);
+ 
+   std::ranges::for_each(g_keyboardBindings, [](auto& state) {
+     state.m_buttonMapping = g_defaultKeys;
+@@ -679,7 +690,11 @@ u32 PADRead(PADStatus* status) {
+   }
+ 
+   int numKeys = 0;
+-  const bool* kbState = SDL_GetKeyboardState(&numKeys);
++  const bool* physicalKeys = SDL_GetKeyboardState(&numKeys);
++  std::array<bool, SDL_SCANCODE_COUNT> kbState{};
++  numKeys = std::min(numKeys, static_cast<int>(kbState.size()));
++  for (int key = 0; key < numKeys; ++key)
++    kbState[key] = g_keyLatch.sample(key, physicalKeys[key]);
+   const bool captureHeldInput = g_suppressHeldOnRead && !g_blockPAD;
+   g_suppressHeldOnRead = false;
+ 
+@@ -702,8 +717,8 @@ u32 PADRead(PADStatus* status) {
+     status[i].err = PAD_ERR_NONE;
+     if (g_keyboardBindings[i].m_mappingsSet) {
+       std::ranges::for_each(
+-          g_keyboardBindings[i].m_buttonMapping, [&kbState, &i, &status](const PADKeyButtonBinding& mapping) {
+-            if (mapping.scancode > PAD_KEY_INVALID && kbState[mapping.scancode]) {
++          g_keyboardBindings[i].m_buttonMapping, [&kbState, &i, &status, numKeys](const PADKeyButtonBinding& mapping) {
++            if (mapping.scancode > PAD_KEY_INVALID && mapping.scancode < numKeys && kbState[mapping.scancode]) {
+               status[i].button |= mapping.padButton;
+             } else if (is_mouse_scancode(mapping.scancode) && is_mouse_button_pressed(mapping.scancode)) {
+               status[i].button |= mapping.padButton;
+diff --git a/lib/key_latch.hpp b/lib/key_latch.hpp
+new file mode 100644
+index 0000000..6ad0004
+--- /dev/null
++++ b/lib/key_latch.hpp
+@@ -0,0 +1,20 @@
++#pragma once
++#include <array>
++#include <atomic>
++#include <cstddef>
++
++namespace aurora::input {
++// SDL event watchers can run on other threads. Each press survives until one
++// input sample, even when key-up was already processed in the same event pump.
++template<std::size_t Count> class KeyLatch {
++  std::array<std::atomic<bool>, Count> pressed{};
++public:
++  void press(std::size_t key) { if (key < Count) pressed[key].store(true); }
++  void clear() { for (auto& key : pressed) key.store(false); }
++  bool sample(std::size_t key, bool held) {
++    if (key >= Count) return false;
++    const bool tap = pressed[key].exchange(false);
++    return held || tap;
++  }
++};
++}

@@ -1,0 +1,117 @@
+#include <assert.h>
+#include <string.h>
+#include <stdio.h>
+#include "../src/port/msm_container.h"
+static void word(uint8_t *p, uint32_t v) {
+    p[0]=(uint8_t)(v>>24); p[1]=(uint8_t)(v>>16); p[2]=(uint8_t)(v>>8); p[3]=(uint8_t)v;
+}
+int main(void) {
+    uint8_t raw[256] = {0};
+    PartyboardMsmContainer container = {0}, saved;
+    PartyboardMsmContainerGroup group = {0}, saved_group;
+    PartyboardMsmContainerInfo info = {0}, saved_info;
+    PartyboardMsmContainerAux aux = {0}, saved_aux;
+    PartyboardMsmContainerEffect effect = {0}, saved_effect;
+    PartyboardMsmContainerSong song = {0}, saved_song;
+    const uint8_t *sequence = NULL;
+    size_t sequence_bytes = 0;
+    word(raw+4,2); word(raw+16,96); word(raw+20,64);
+    word(raw+32,160); word(raw+36,32);
+    word(raw+56,192); word(raw+60,32);
+    word(raw+64,224); word(raw+68,32);
+    raw[161]=7; raw[162]=255; raw[163]=254;
+    word(raw+164,4); word(raw+168,16); word(raw+172,2); word(raw+176,8);
+    assert(PartyboardMsmContainerOpen(&container,raw,sizeof(raw)));
+    raw[96]=50; raw[97]=32; raw[98]=18; raw[99]=1;
+    raw[100]=1; raw[101]=2; raw[102]=3; raw[103]=4;
+    word(raw+112,0x12345678); word(raw+116,0x23456789);
+    raw[136]=1; raw[137]=0;
+    raw[110]=255; raw[111]=128;
+    assert(PartyboardMsmContainerGetInfo(&info,&container));
+    assert(info.voices==50 && info.music==32 && info.effects==18);
+    assert(info.songs==258 && info.sound_effects==772);
+    assert(info.minimum_memory==0x12345678 && info.sample_memory==0x23456789);
+    assert(info.base_count==1 && info.base_groups[0]==0);
+    assert(info.aux_a==-1 && info.aux_b==-128);
+    saved_info=info;
+    raw[136]=24;
+    assert(!PartyboardMsmContainerGetInfo(&info,&container));
+    raw[136]=1; raw[137]=1;
+    assert(!PartyboardMsmContainerGetInfo(&info,&container));
+    raw[136]=2; raw[137]=0; raw[138]=0;
+    assert(!PartyboardMsmContainerGetInfo(&info,&container));
+    raw[136]=0; raw[99]=2;
+    assert(!PartyboardMsmContainerGetInfo(&info,&container));
+    assert(memcmp(&info,&saved_info,sizeof(info))==0);
+    raw[99]=1;
+    assert(PartyboardMsmContainerGetInfo(&info,&container) && info.base_count==0);
+    assert(PartyboardMsmContainerGetGroup(&group,&container,0));
+    assert(group.id==7 && group.stack==-1 && group.subgroup==-2);
+    assert(group.data==raw+196 && group.samples==raw+226);
+    saved=container; saved_group=group;
+    assert(!PartyboardMsmContainerGetGroup(&group,&container,1));
+    word(raw+168,33);
+    assert(!PartyboardMsmContainerGetGroup(&group,&container,0));
+    assert(memcmp(&group,&saved_group,sizeof(group))==0);
+    word(raw+68,33);
+    assert(!PartyboardMsmContainerOpen(&container,raw,sizeof(raw)));
+    assert(memcmp(&container,&saved,sizeof(container))==0);
+    /* Separate bounded auxiliary section, reusing fixture storage after group checks. */
+    container.section[PARTYBOARD_MSM_AUX].offset=96;
+    container.section[PARTYBOARD_MSM_AUX].bytes=40;
+    raw[96]=0; word(raw+100,1); word(raw+104,0x3f800000);
+    assert(PartyboardMsmContainerGetAux(&aux,&container,0));
+    assert(aux.type==0 && aux.parameter[0]==1 && aux.parameter[1]==0x3f800000);
+    saved_aux=aux;
+    raw[96]=4;
+    assert(!PartyboardMsmContainerGetAux(&aux,&container,0));
+    assert(memcmp(&aux,&saved_aux,sizeof(aux))==0);
+    raw[96]=3; word(raw+132,1234);
+    assert(PartyboardMsmContainerGetAux(&aux,&container,0) && aux.parameter[8]==1234);
+    assert(!PartyboardMsmContainerGetAux(&aux,&container,1));
+    container.section[PARTYBOARD_MSM_AUX].bytes=39;
+    assert(!PartyboardMsmContainerGetAux(&aux,&container,0));
+    puts("Bounded MSM container metadata PASS");
+    container.section[PARTYBOARD_MSM_EFFECTS].offset=96;
+    container.section[PARTYBOARD_MSM_EFFECTS].bytes=16;
+    memset(raw+96,0,16);
+    raw[96]=0x12; raw[97]=0x34; raw[98]=0x56; raw[99]=0x78;
+    raw[100]=127; raw[101]=255; raw[102]=128; raw[103]=1;
+    raw[104]=64; raw[105]=32; raw[106]=16; raw[107]=255; raw[108]=128;
+    assert(PartyboardMsmContainerGetEffect(&effect,&container,0));
+    assert(effect.group==0x1234 && effect.effect==0x5678 && effect.pitch_bend==-32767);
+    assert(effect.volume==127 && effect.pan==-1 && effect.emitter==-1 && effect.emitter_component==-128);
+    assert(effect.span==64 && effect.reverb==32 && effect.chorus==16);
+    saved_effect=effect;
+    assert(!PartyboardMsmContainerGetEffect(&effect,&container,1));
+    container.section[PARTYBOARD_MSM_EFFECTS].bytes=15;
+    assert(!PartyboardMsmContainerGetEffect(&effect,&container,0));
+    assert(memcmp(&effect,&saved_effect,sizeof(effect))==0);
+    container.section[PARTYBOARD_MSM_SONGS].offset=96;
+    container.section[PARTYBOARD_MSM_SONGS].bytes=16;
+    word(raw+100,0x12345678); word(raw+104,0x23456789);
+    raw[108]=255; raw[109]=127;
+    assert(PartyboardMsmContainerGetSong(&song,&container,0));
+    assert(song.group==0x1234 && song.song==0x5678 && song.offset==0x12345678);
+    assert(song.bytes==0x23456789 && song.song_group==-1 && song.volume==127);
+    saved_song=song;
+    assert(!PartyboardMsmContainerGetSong(&song,&container,1));
+    container.section[PARTYBOARD_MSM_SONGS].bytes=15;
+    assert(!PartyboardMsmContainerGetSong(&song,&container,0));
+    assert(memcmp(&song,&saved_song,sizeof(song))==0);
+    container.section[8].offset=224; container.section[8].bytes=32;
+    song=saved_song; song.offset=4; song.bytes=8;
+    assert(PartyboardMsmContainerResolveSong(&sequence,&sequence_bytes,&container,&song));
+    assert(sequence==raw+228 && sequence_bytes==8);
+    song.offset=30;
+    assert(!PartyboardMsmContainerResolveSong(&sequence,&sequence_bytes,&container,&song));
+    assert(sequence==raw+228 && sequence_bytes==8);
+    /* Restore group descriptor altered by earlier malformed span test. */
+    word(raw+168,16); word(raw+208,4);
+    song.song_group=0; song.offset=2; song.bytes=6;
+    assert(PartyboardMsmContainerResolveSong(&sequence,&sequence_bytes,&container,&song));
+    assert(sequence==raw+202 && sequence_bytes==6);
+    word(raw+208,17);
+    assert(!PartyboardMsmContainerResolveSong(&sequence,&sequence_bytes,&container,&song));
+    return 0;
+}

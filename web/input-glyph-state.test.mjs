@@ -1,0 +1,38 @@
+import {test} from 'node:test';
+import assert from 'node:assert/strict';
+import {InputGlyphState,controllerFamily} from './input-glyph-state.mjs';
+const bindings={keyboard:{confirm:{kind:'key',label:'Enter'}},gamepad:{confirm:{kind:'button',button:'south'}}};
+const pad=(pressed=false,axis=0)=>({index:0,id:'DualSense',mapping:'standard',connected:true,buttons:[{pressed,value:pressed?1:0}],axes:[axis]});
+test('local activity selects glyphs without held inputs stealing focus',()=>{
+  const state=new InputGlyphState();
+  state.sampleGamepads([pad()]);
+  assert.equal(state.glyph('confirm',bindings),null);
+  state.keyboardActivity();
+  state.sampleGamepads([pad(false,0.1)]);
+  assert.equal(state.glyph('confirm',bindings).label,'Enter');
+  state.sampleGamepads([pad(true)]);
+  assert.equal(state.glyph('confirm',bindings).label,'Cross');
+  state.keyboardActivity();
+  state.sampleGamepads([pad(true)]);
+  assert.equal(state.glyph('confirm',bindings).label,'Enter');
+  state.sampleGamepads([pad(false)]);
+  state.sampleGamepads([pad(false,0.8)]);
+  assert.equal(state.glyph('confirm',bindings).label,'Cross');
+  state.setStyle('switch');
+  assert.equal(state.glyph('confirm',bindings).label,'B');
+  state.sampleGamepads([]);
+  assert.equal(state.active,null);
+});
+test('initial held controls, identity replacement, and unknown devices are conservative',()=>{
+  const state=new InputGlyphState();
+  state.keyboardActivity();
+  state.sampleGamepads([pad(true)]);
+  assert.equal(state.active.kind,'keyboard');
+  state.sampleGamepads([{...pad(true),id:'Unknown USB pad'}]);
+  assert.equal(state.active.kind,'keyboard');
+  assert.equal(controllerFamily('Unknown USB pad'),'generic');
+  assert.equal(controllerFamily('Vendor: 054c'),'playstation');
+  assert.equal(controllerFamily('Nintendo Switch Pro Controller'),'switch');
+  assert.equal(controllerFamily('Xbox Controller'),'xbox');
+  assert.throws(()=>state.setStyle('invalid'));
+});

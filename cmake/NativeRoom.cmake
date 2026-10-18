@@ -1,0 +1,11 @@
+include_guard(GLOBAL)
+if(WIN32)
+    add_library(partyboard_room_http STATIC "${CMAKE_CURRENT_LIST_DIR}/../src/port/native_room_http_win.cpp")
+    target_compile_features(partyboard_room_http PUBLIC cxx_std_20)
+    target_include_directories(partyboard_room_http PUBLIC "${CMAKE_CURRENT_LIST_DIR}/../include")
+    target_link_libraries(partyboard_room_http PUBLIC winhttp)
+    if(MSVC)
+        # Cancellation uses exceptions; request guards must always unwind.
+        target_compile_options(partyboard_room_http PUBLIC /EHsc)
+    endif()
+endif()

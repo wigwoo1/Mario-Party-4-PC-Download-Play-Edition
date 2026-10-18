@@ -1,0 +1,25 @@
+--- a/lib/gfx/tex_copy_conv.cpp
++++ b/lib/gfx/tex_copy_conv.cpp
+@@ -249,6 +249,14 @@
+   wgpu::TextureFormat outputFormat;
+   const char* label;
+ };
++
++// GX_TF_Z24X8 stores the 24 depth bits in RGB; the unused byte is opaque.
++static constexpr std::string_view FragZ24X8 = R"(
++@fragment fn fs_main(in: VertexOutput) -> @location(0) vec4f {
++    let z = gx_z24(in.uv);
++    return vec4f(f32((z >> 16u) & 255u), f32((z >> 8u) & 255u), f32(z & 255u), 255.0) / 255.0;
++}
++)"sv;
+ 
+ static constexpr std::array ConvPipelines{
+     ConvPipeline{GX_TF_I4, FragI4, wgpu::TextureFormat::RGBA8Unorm, "TexCopyConv I4"},
+@@ -269,6 +277,7 @@
+ 
+ static constexpr std::array DepthConvPipelines{
+     ConvPipeline{GX_TF_Z16, FragZ16, wgpu::TextureFormat::RGBA8Unorm, "TexCopyConv Z16"},
++    ConvPipeline{GX_TF_Z24X8, FragZ24X8, wgpu::TextureFormat::RGBA8Unorm, "TexCopyConv Z24X8"},
+ };
+ 
+ static wgpu::BindGroupLayout g_bindGroupLayout;

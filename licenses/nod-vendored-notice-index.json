@@ -1,0 +1,2481 @@
+{
+  "version": 1,
+  "component": "nod v2.0.0-alpha.10 vendored dependencies",
+  "archiveUrl": "https://github.com/encounter/nod/releases/download/v2.0.0-alpha.10/vendored-crates-v2.0.0-alpha.10.tar.zst",
+  "archiveSha256": "e482b6733351add58e711af9880a3ccd066a0eaaac17bf7ffb07306a6925a995",
+  "packageMetadataMatchesPinnedLock": true,
+  "declaredFilesHashVerified": 5357,
+  "packages": [
+    {
+      "directory": "vendor/tracing-core",
+      "name": "tracing-core",
+      "version": "0.1.36",
+      "declaredLicense": "MIT",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/equivalent",
+      "name": "equivalent",
+      "version": "1.0.2",
+      "declaredLicense": "Apache-2.0 OR MIT",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/tracing-log",
+      "name": "tracing-log",
+      "version": "0.2.0",
+      "declaredLicense": "MIT",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/quick-xml",
+      "name": "quick-xml",
+      "version": "0.39.4",
+      "declaredLicense": "MIT",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/valuable",
+      "name": "valuable",
+      "version": "0.1.1",
+      "declaredLicense": "MIT",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/windows_x86_64_msvc",
+      "name": "windows_x86_64_msvc",
+      "version": "0.52.6",
+      "declaredLicense": "MIT OR Apache-2.0",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/thiserror-impl",
+      "name": "thiserror-impl",
+      "version": "2.0.18",
+      "declaredLicense": "MIT OR Apache-2.0",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/simple_moving_average",
+      "name": "simple_moving_average",
+      "version": "1.0.2",
+      "declaredLicense": "MIT",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/wasip2",
+      "name": "wasip2",
+      "version": "1.0.1+wasi-0.2.4",
+      "declaredLicense": "Apache-2.0 WITH LLVM-exception OR Apache-2.0 OR MIT",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/windows_x86_64_gnullvm",
+      "name": "windows_x86_64_gnullvm",
+      "version": "0.52.6",
+      "declaredLicense": "MIT OR Apache-2.0",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/macro_rules_attribute",
+      "name": "macro_rules_attribute",
+      "version": "0.2.2",
+      "declaredLicense": "Apache-2.0 OR MIT OR Zlib",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/openssl",
+      "name": "openssl",
+      "version": "0.10.80",
+      "declaredLicense": "Apache-2.0",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/argp",
+      "name": "argp",
+      "version": "0.4.1",
+      "declaredLicense": "BSD-3-Clause",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/openssl-macros",
+      "name": "openssl-macros",
+      "version": "0.1.1",
+      "declaredLicense": "MIT/Apache-2.0",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/base16ct",
+      "name": "base16ct",
+      "version": "1.0.0",
+      "declaredLicense": "Apache-2.0 OR MIT",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/is_ci",
+      "name": "is_ci",
+      "version": "1.2.0",
+      "declaredLicense": "ISC",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/quote",
+      "name": "quote",
+      "version": "1.0.45",
+      "declaredLicense": "MIT OR Apache-2.0",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/web-time",
+      "name": "web-time",
+      "version": "1.1.0",
+      "declaredLicense": "MIT OR Apache-2.0",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/sharded-slab",
+      "name": "sharded-slab",
+      "version": "0.1.7",
+      "declaredLicense": "MIT",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/windows_aarch64_gnullvm",
+      "name": "windows_aarch64_gnullvm",
+      "version": "0.52.6",
+      "declaredLicense": "MIT OR Apache-2.0",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/windows_x86_64_gnu",
+      "name": "windows_x86_64_gnu",
+      "version": "0.52.6",
+      "declaredLicense": "MIT OR Apache-2.0",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/zerocopy-derive",
+      "name": "zerocopy-derive",
+      "version": "0.8.48",
+      "declaredLicense": "BSD-2-Clause OR Apache-2.0 OR MIT",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/lazy_static",
+      "name": "lazy_static",
+      "version": "1.5.0",
+      "declaredLicense": "MIT OR Apache-2.0",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/liblzma-sys",
+      "name": "liblzma-sys",
+      "version": "0.4.6",
+      "declaredLicense": "MIT OR Apache-2.0",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/matchers",
+      "name": "matchers",
+      "version": "0.2.0",
+      "declaredLicense": "MIT",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/crypto-common",
+      "name": "crypto-common",
+      "version": "0.2.2",
+      "declaredLicense": "MIT OR Apache-2.0",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/foreign-types",
+      "name": "foreign-types",
+      "version": "0.3.2",
+      "declaredLicense": "MIT/Apache-2.0",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/slab",
+      "name": "slab",
+      "version": "0.4.12",
+      "declaredLicense": "MIT",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/windows_i686_gnullvm",
+      "name": "windows_i686_gnullvm",
+      "version": "0.52.6",
+      "declaredLicense": "MIT OR Apache-2.0",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/libz-sys",
+      "name": "libz-sys",
+      "version": "1.1.28",
+      "declaredLicense": "MIT OR Apache-2.0",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/never-say-never",
+      "name": "never-say-never",
+      "version": "6.6.666",
+      "declaredLicense": "Zlib OR MIT OR Apache-2.0",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/tracy-client-sys",
+      "name": "tracy-client-sys",
+      "version": "0.28.0",
+      "declaredLicense": "(MIT OR Apache-2.0) AND BSD-3-Clause",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/wasm-bindgen",
+      "name": "wasm-bindgen",
+      "version": "0.2.122",
+      "declaredLicense": "MIT OR Apache-2.0",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/block-buffer",
+      "name": "block-buffer",
+      "version": "0.12.0",
+      "declaredLicense": "MIT OR Apache-2.0",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/encoding_rs",
+      "name": "encoding_rs",
+      "version": "0.8.35",
+      "declaredLicense": "(Apache-2.0 OR MIT) AND BSD-3-Clause",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/crossbeam-channel",
+      "name": "crossbeam-channel",
+      "version": "0.5.15",
+      "declaredLicense": "MIT OR Apache-2.0",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/cpubits",
+      "name": "cpubits",
+      "version": "0.1.1",
+      "declaredLicense": "MIT OR Apache-2.0",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/thread_local",
+      "name": "thread_local",
+      "version": "1.1.9",
+      "declaredLicense": "MIT OR Apache-2.0",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/cpufeatures",
+      "name": "cpufeatures",
+      "version": "0.3.0",
+      "declaredLicense": "MIT OR Apache-2.0",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/vcpkg",
+      "name": "vcpkg",
+      "version": "0.2.15",
+      "declaredLicense": "MIT/Apache-2.0",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/mimalloc",
+      "name": "mimalloc",
+      "version": "0.1.52",
+      "declaredLicense": "MIT",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/indicatif",
+      "name": "indicatif",
+      "version": "0.18.4",
+      "declaredLicense": "MIT",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/getrandom",
+      "name": "getrandom",
+      "version": "0.3.4",
+      "declaredLicense": "MIT OR Apache-2.0",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/wit-bindgen",
+      "name": "wit-bindgen",
+      "version": "0.46.0",
+      "declaredLicense": "Apache-2.0 WITH LLVM-exception OR Apache-2.0 OR MIT",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/r-efi",
+      "name": "r-efi",
+      "version": "5.3.0",
+      "declaredLicense": "MIT OR Apache-2.0 OR LGPL-2.1-or-later",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/md-5",
+      "name": "md-5",
+      "version": "0.11.0",
+      "declaredLicense": "MIT OR Apache-2.0",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/serde_core",
+      "name": "serde_core",
+      "version": "1.0.228",
+      "declaredLicense": "MIT OR Apache-2.0",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/pkg-config",
+      "name": "pkg-config",
+      "version": "0.3.33",
+      "declaredLicense": "MIT OR Apache-2.0",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/inout",
+      "name": "inout",
+      "version": "0.2.2",
+      "declaredLicense": "MIT OR Apache-2.0",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/wasm-bindgen-macro",
+      "name": "wasm-bindgen-macro",
+      "version": "0.2.122",
+      "declaredLicense": "MIT OR Apache-2.0",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/aes",
+      "name": "aes",
+      "version": "0.9.0",
+      "declaredLicense": "MIT OR Apache-2.0",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/serde_derive",
+      "name": "serde_derive",
+      "version": "1.0.228",
+      "declaredLicense": "MIT OR Apache-2.0",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/unicode-ident",
+      "name": "unicode-ident",
+      "version": "1.0.24",
+      "declaredLicense": "(MIT OR Apache-2.0) AND Unicode-3.0",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/digest",
+      "name": "digest",
+      "version": "0.11.3",
+      "declaredLicense": "MIT OR Apache-2.0",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/xxhash-rust",
+      "name": "xxhash-rust",
+      "version": "0.8.15",
+      "declaredLicense": "BSL-1.0",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/foreign-types-shared",
+      "name": "foreign-types-shared",
+      "version": "0.1.1",
+      "declaredLicense": "MIT/Apache-2.0",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/libc",
+      "name": "libc",
+      "version": "0.2.186",
+      "declaredLicense": "MIT OR Apache-2.0",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/hybrid-array",
+      "name": "hybrid-array",
+      "version": "0.4.12",
+      "declaredLicense": "MIT OR Apache-2.0",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/zstd",
+      "name": "zstd",
+      "version": "0.13.3",
+      "declaredLicense": "MIT",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/log",
+      "name": "log",
+      "version": "0.4.30",
+      "declaredLicense": "MIT OR Apache-2.0",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/tracing",
+      "name": "tracing",
+      "version": "0.1.44",
+      "declaredLicense": "MIT",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/polonius-the-crab",
+      "name": "polonius-the-crab",
+      "version": "0.5.0",
+      "declaredLicense": "Zlib OR MIT OR Apache-2.0",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/block-padding",
+      "name": "block-padding",
+      "version": "0.4.2",
+      "declaredLicense": "MIT OR Apache-2.0",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/serde",
+      "name": "serde",
+      "version": "1.0.228",
+      "declaredLicense": "MIT OR Apache-2.0",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/autocfg",
+      "name": "autocfg",
+      "version": "1.5.1",
+      "declaredLicense": "Apache-2.0 OR MIT",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/bzip2-sys",
+      "name": "bzip2-sys",
+      "version": "0.1.13+1.0.8",
+      "declaredLicense": "MIT/Apache-2.0",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/unicase",
+      "name": "unicase",
+      "version": "2.9.0",
+      "declaredLicense": "MIT OR Apache-2.0",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/windows-link",
+      "name": "windows-link",
+      "version": "0.2.1",
+      "declaredLicense": "MIT OR Apache-2.0",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/portable-atomic",
+      "name": "portable-atomic",
+      "version": "1.13.1",
+      "declaredLicense": "Apache-2.0 OR MIT",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/js-sys",
+      "name": "js-sys",
+      "version": "0.3.99",
+      "declaredLicense": "MIT OR Apache-2.0",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/tracing-attributes",
+      "name": "tracing-attributes",
+      "version": "0.1.31",
+      "declaredLicense": "MIT",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/num-traits",
+      "name": "num-traits",
+      "version": "0.2.19",
+      "declaredLicense": "MIT OR Apache-2.0",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/futures-task",
+      "name": "futures-task",
+      "version": "0.3.32",
+      "declaredLicense": "MIT OR Apache-2.0",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/shlex",
+      "name": "shlex",
+      "version": "1.3.0",
+      "declaredLicense": "MIT OR Apache-2.0",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/encode_unicode",
+      "name": "encode_unicode",
+      "version": "1.0.0",
+      "declaredLicense": "Apache-2.0 OR MIT",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/cfg-if",
+      "name": "cfg-if",
+      "version": "1.0.4",
+      "declaredLicense": "MIT OR Apache-2.0",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/bitflags",
+      "name": "bitflags",
+      "version": "2.11.1",
+      "declaredLicense": "MIT OR Apache-2.0",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/loom",
+      "name": "loom",
+      "version": "0.7.2",
+      "declaredLicense": "MIT",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/allocator-api2",
+      "name": "allocator-api2",
+      "version": "0.2.21",
+      "declaredLicense": "MIT OR Apache-2.0",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/bytes",
+      "name": "bytes",
+      "version": "1.11.1",
+      "declaredLicense": "MIT",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/once_cell",
+      "name": "once_cell",
+      "version": "1.21.4",
+      "declaredLicense": "MIT OR Apache-2.0",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/windows-sys",
+      "name": "windows-sys",
+      "version": "0.61.2",
+      "declaredLicense": "MIT OR Apache-2.0",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/tracing-tracy",
+      "name": "tracing-tracy",
+      "version": "0.11.4",
+      "declaredLicense": "MIT/Apache-2.0",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/quick-xml-0.38.4",
+      "name": "quick-xml",
+      "version": "0.38.4",
+      "declaredLicense": "MIT",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/cipher",
+      "name": "cipher",
+      "version": "0.5.2",
+      "declaredLicense": "MIT OR Apache-2.0",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/windows_i686_gnu",
+      "name": "windows_i686_gnu",
+      "version": "0.52.6",
+      "declaredLicense": "MIT OR Apache-2.0",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/zstd-safe",
+      "name": "zstd-safe",
+      "version": "7.2.4",
+      "declaredLicense": "MIT OR Apache-2.0",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/libmimalloc-sys",
+      "name": "libmimalloc-sys",
+      "version": "0.1.49",
+      "declaredLicense": "MIT",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/lru",
+      "name": "lru",
+      "version": "0.16.4",
+      "declaredLicense": "MIT",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/wasm-bindgen-macro-support",
+      "name": "wasm-bindgen-macro-support",
+      "version": "0.2.122",
+      "declaredLicense": "MIT OR Apache-2.0",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/dyn-clone",
+      "name": "dyn-clone",
+      "version": "1.0.20",
+      "declaredLicense": "MIT OR Apache-2.0",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/openssl-sys",
+      "name": "openssl-sys",
+      "version": "0.9.116",
+      "declaredLicense": "MIT",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/either",
+      "name": "either",
+      "version": "1.16.0",
+      "declaredLicense": "MIT OR Apache-2.0",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/adler2",
+      "name": "adler2",
+      "version": "2.0.1",
+      "declaredLicense": "0BSD OR MIT OR Apache-2.0",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/sha1",
+      "name": "sha1",
+      "version": "0.11.0",
+      "declaredLicense": "MIT OR Apache-2.0",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/unit-prefix",
+      "name": "unit-prefix",
+      "version": "0.5.2",
+      "declaredLicense": "MIT",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/futures-core",
+      "name": "futures-core",
+      "version": "0.3.32",
+      "declaredLicense": "MIT OR Apache-2.0",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/bumpalo",
+      "name": "bumpalo",
+      "version": "3.20.3",
+      "declaredLicense": "MIT OR Apache-2.0",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/typenum",
+      "name": "typenum",
+      "version": "1.20.0",
+      "declaredLicense": "MIT OR Apache-2.0",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/proc-macro2",
+      "name": "proc-macro2",
+      "version": "1.0.106",
+      "declaredLicense": "MIT OR Apache-2.0",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/itertools",
+      "name": "itertools",
+      "version": "0.14.0",
+      "declaredLicense": "MIT OR Apache-2.0",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/getopts",
+      "name": "getopts",
+      "version": "0.2.24",
+      "declaredLicense": "MIT OR Apache-2.0",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/jobserver",
+      "name": "jobserver",
+      "version": "0.1.34",
+      "declaredLicense": "MIT OR Apache-2.0",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/pin-project-lite",
+      "name": "pin-project-lite",
+      "version": "0.2.17",
+      "declaredLicense": "Apache-2.0 OR MIT",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/regex-automata",
+      "name": "regex-automata",
+      "version": "0.4.14",
+      "declaredLicense": "MIT OR Apache-2.0",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/unicode-width",
+      "name": "unicode-width",
+      "version": "0.2.2",
+      "declaredLicense": "MIT OR Apache-2.0",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/foldhash",
+      "name": "foldhash",
+      "version": "0.2.0",
+      "declaredLicense": "Zlib",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/tracy-client",
+      "name": "tracy-client",
+      "version": "0.18.4",
+      "declaredLicense": "MIT/Apache-2.0",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/windows_aarch64_msvc",
+      "name": "windows_aarch64_msvc",
+      "version": "0.52.6",
+      "declaredLicense": "MIT OR Apache-2.0",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/cc",
+      "name": "cc",
+      "version": "1.2.62",
+      "declaredLicense": "MIT OR Apache-2.0",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/pulldown-cmark",
+      "name": "pulldown-cmark",
+      "version": "0.9.6",
+      "declaredLicense": "MIT",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/hex",
+      "name": "hex",
+      "version": "0.4.3",
+      "declaredLicense": "MIT OR Apache-2.0",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/smallvec",
+      "name": "smallvec",
+      "version": "1.15.1",
+      "declaredLicense": "MIT OR Apache-2.0",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/enable-ansi-support",
+      "name": "enable-ansi-support",
+      "version": "0.3.1",
+      "declaredLicense": "MIT",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/macro_rules_attribute-proc_macro",
+      "name": "macro_rules_attribute-proc_macro",
+      "version": "0.2.2",
+      "declaredLicense": "Apache-2.0 OR MIT OR Zlib",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/size",
+      "name": "size",
+      "version": "0.5.0",
+      "declaredLicense": "MIT",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/aho-corasick",
+      "name": "aho-corasick",
+      "version": "1.1.4",
+      "declaredLicense": "Unlicense OR MIT",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/zstd-sys",
+      "name": "zstd-sys",
+      "version": "2.0.16+zstd.1.5.7",
+      "declaredLicense": "MIT/Apache-2.0",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/paste",
+      "name": "paste",
+      "version": "1.0.15",
+      "declaredLicense": "MIT OR Apache-2.0",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/wasm-bindgen-shared",
+      "name": "wasm-bindgen-shared",
+      "version": "0.2.122",
+      "declaredLicense": "MIT OR Apache-2.0",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/supports-color",
+      "name": "supports-color",
+      "version": "3.0.2",
+      "declaredLicense": "Apache-2.0",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/cbc",
+      "name": "cbc",
+      "version": "0.2.1",
+      "declaredLicense": "MIT OR Apache-2.0",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/rustversion",
+      "name": "rustversion",
+      "version": "1.0.22",
+      "declaredLicense": "MIT OR Apache-2.0",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/argp_derive",
+      "name": "argp_derive",
+      "version": "0.4.1",
+      "declaredLicense": "BSD-3-Clause",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/hashbrown",
+      "name": "hashbrown",
+      "version": "0.16.1",
+      "declaredLicense": "MIT OR Apache-2.0",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/hermit-abi",
+      "name": "hermit-abi",
+      "version": "0.5.2",
+      "declaredLicense": "MIT OR Apache-2.0",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/crc32fast",
+      "name": "crc32fast",
+      "version": "1.5.0",
+      "declaredLicense": "MIT OR Apache-2.0",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/find-msvc-tools",
+      "name": "find-msvc-tools",
+      "version": "0.1.9",
+      "declaredLicense": "MIT OR Apache-2.0",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/syn",
+      "name": "syn",
+      "version": "2.0.117",
+      "declaredLicense": "MIT OR Apache-2.0",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/num_cpus",
+      "name": "num_cpus",
+      "version": "1.17.0",
+      "declaredLicense": "MIT OR Apache-2.0",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/openssl-src",
+      "name": "openssl-src",
+      "version": "300.6.0+3.6.2",
+      "declaredLicense": "MIT/Apache-2.0",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/windows-result",
+      "name": "windows-result",
+      "version": "0.4.1",
+      "declaredLicense": "MIT OR Apache-2.0",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/generator",
+      "name": "generator",
+      "version": "0.8.8",
+      "declaredLicense": "MIT/Apache-2.0",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/crossbeam-utils",
+      "name": "crossbeam-utils",
+      "version": "0.8.21",
+      "declaredLicense": "MIT OR Apache-2.0",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/regex-syntax",
+      "name": "regex-syntax",
+      "version": "0.8.10",
+      "declaredLicense": "MIT OR Apache-2.0",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/memchr",
+      "name": "memchr",
+      "version": "2.8.0",
+      "declaredLicense": "Unlicense OR MIT",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/futures-util",
+      "name": "futures-util",
+      "version": "0.3.32",
+      "declaredLicense": "MIT OR Apache-2.0",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/windows-targets",
+      "name": "windows-targets",
+      "version": "0.52.6",
+      "declaredLicense": "MIT OR Apache-2.0",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/console",
+      "name": "console",
+      "version": "0.16.3",
+      "declaredLicense": "MIT",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/scoped-tls",
+      "name": "scoped-tls",
+      "version": "1.0.1",
+      "declaredLicense": "MIT/Apache-2.0",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/nu-ansi-term",
+      "name": "nu-ansi-term",
+      "version": "0.50.3",
+      "declaredLicense": "MIT",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/higher-kinded-types",
+      "name": "higher-kinded-types",
+      "version": "0.2.1",
+      "declaredLicense": "Zlib OR MIT OR Apache-2.0",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/tracing-subscriber",
+      "name": "tracing-subscriber",
+      "version": "0.3.23",
+      "declaredLicense": "MIT",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/thiserror",
+      "name": "thiserror",
+      "version": "2.0.18",
+      "declaredLicense": "MIT OR Apache-2.0",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/windows_i686_msvc",
+      "name": "windows_i686_msvc",
+      "version": "0.52.6",
+      "declaredLicense": "MIT OR Apache-2.0",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    },
+    {
+      "directory": "vendor/zerocopy",
+      "name": "zerocopy",
+      "version": "0.8.48",
+      "declaredLicense": "BSD-2-Clause OR Apache-2.0 OR MIT",
+      "declaredLicenseFile": null,
+      "checksumMatchesLock": true
+    }
+  ],
+  "notices": [
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-898b1ae9821e98daf8964c8d-NOTICE",
+      "sha256": "898b1ae9821e98daf8964c8d6c7f61641f5f5aa78ad500020771c0939ee0dea1",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/tracing-core/LICENSE",
+        "vendor/tracing-log/LICENSE",
+        "vendor/tracing/LICENSE",
+        "vendor/tracing-attributes/LICENSE",
+        "vendor/tracing-subscriber/LICENSE"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-58545fed1565e42d687aecec-NOTICE",
+      "sha256": "58545fed1565e42d687aecec6897d35c6d37ccb71479a137c0deb2203e125c79",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/tracing-core/src/spin/LICENSE"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-a60eea817514531668d7e007-NOTICE",
+      "sha256": "a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/equivalent/LICENSE-APACHE",
+        "vendor/lazy_static/LICENSE-APACHE",
+        "vendor/liblzma-sys/LICENSE-APACHE",
+        "vendor/libz-sys/LICENSE-APACHE",
+        "vendor/crossbeam-channel/LICENSE-APACHE",
+        "vendor/thread_local/LICENSE-APACHE",
+        "vendor/pkg-config/LICENSE-APACHE",
+        "vendor/log/LICENSE-APACHE",
+        "vendor/autocfg/LICENSE-APACHE",
+        "vendor/bzip2-sys/LICENSE-APACHE",
+        "vendor/unicase/LICENSE-APACHE",
+        "vendor/num-traits/LICENSE-APACHE",
+        "vendor/cfg-if/LICENSE-APACHE",
+        "vendor/bitflags/LICENSE-APACHE",
+        "vendor/once_cell/LICENSE-APACHE",
+        "vendor/either/LICENSE-APACHE",
+        "vendor/itertools/LICENSE-APACHE",
+        "vendor/getopts/LICENSE-APACHE",
+        "vendor/jobserver/LICENSE-APACHE",
+        "vendor/regex-automata/LICENSE-APACHE",
+        "vendor/unicode-width/LICENSE-APACHE",
+        "vendor/cc/LICENSE-APACHE",
+        "vendor/smallvec/LICENSE-APACHE",
+        "vendor/hashbrown/LICENSE-APACHE",
+        "vendor/find-msvc-tools/LICENSE-APACHE",
+        "vendor/num_cpus/LICENSE-APACHE",
+        "vendor/crossbeam-utils/LICENSE-APACHE",
+        "vendor/regex-syntax/LICENSE-APACHE"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-7365cc8878a1d7ce155a58c4-NOTICE",
+      "sha256": "7365cc8878a1d7ce155a58c4ca09c3d7a6be413efa5334a80ea842912b669349",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/equivalent/LICENSE-MIT"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-5b2c207dcf571267ebe0bbdd-NOTICE",
+      "sha256": "5b2c207dcf571267ebe0bbdd5bf321f561ddc22ff597e7b363e96f4539507a29",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/quick-xml/LICENSE-MIT.md",
+        "vendor/quick-xml-0.38.4/LICENSE-MIT.md"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-62c7a1e35f56406896d7aa7c-NOTICE",
+      "sha256": "62c7a1e35f56406896d7aa7ca52d0cc0d272ac022b5d2796e7d6905db8a3636a",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/thiserror-impl/LICENSE-APACHE",
+        "vendor/quote/LICENSE-APACHE",
+        "vendor/serde_core/LICENSE-APACHE",
+        "vendor/serde_derive/LICENSE-APACHE",
+        "vendor/unicode-ident/LICENSE-APACHE",
+        "vendor/libc/LICENSE-APACHE",
+        "vendor/serde/LICENSE-APACHE",
+        "vendor/dyn-clone/LICENSE-APACHE",
+        "vendor/proc-macro2/LICENSE-APACHE",
+        "vendor/paste/LICENSE-APACHE",
+        "vendor/syn/LICENSE-APACHE",
+        "vendor/thiserror/LICENSE-APACHE"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-23f18e03dc49df91622fe2a7-NOTICE",
+      "sha256": "23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/thiserror-impl/LICENSE-MIT",
+        "vendor/quote/LICENSE-MIT",
+        "vendor/serde_core/LICENSE-MIT",
+        "vendor/serde_derive/LICENSE-MIT",
+        "vendor/unicode-ident/LICENSE-MIT",
+        "vendor/serde/LICENSE-MIT",
+        "vendor/portable-atomic/LICENSE-MIT",
+        "vendor/once_cell/LICENSE-MIT",
+        "vendor/dyn-clone/LICENSE-MIT",
+        "vendor/adler2/LICENSE-MIT",
+        "vendor/proc-macro2/LICENSE-MIT",
+        "vendor/pin-project-lite/LICENSE-MIT",
+        "vendor/enable-ansi-support/LICENSE",
+        "vendor/paste/LICENSE-MIT",
+        "vendor/syn/LICENSE-MIT",
+        "vendor/thiserror/LICENSE-MIT"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-110b4baa18ab01a5f51a87a9-NOTICE",
+      "sha256": "110b4baa18ab01a5f51a87a9120d3109af2078971f6f14a62cbcb57f78c5775c",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/simple_moving_average/LICENSE"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-1c41c0e19caa2c20b0adfeb8-NOTICE",
+      "sha256": "1c41c0e19caa2c20b0adfeb8219b606b21b7c63914aa3ae74ae3e091d7ce09ca",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/macro_rules_attribute/LICENSE-ZLIB",
+        "vendor/macro_rules_attribute-proc_macro/LICENSE-ZLIB"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-388e98b08de12ba8a9d45758-NOTICE",
+      "sha256": "388e98b08de12ba8a9d4575883c8b0386c747cea188ed459380fc58d60da15c9",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/macro_rules_attribute/LICENSE-APACHE",
+        "vendor/macro_rules_attribute-proc_macro/LICENSE-APACHE"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-603fb27ef3266ea516872eef-NOTICE",
+      "sha256": "603fb27ef3266ea516872eefd9ae587746b8c34614a35c0fb24e4e9e0c17e137",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/macro_rules_attribute/LICENSE-MIT",
+        "vendor/macro_rules_attribute-proc_macro/LICENSE-MIT"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-4962951e3ed83ec3ce7f36ec-NOTICE",
+      "sha256": "4962951e3ed83ec3ce7f36ec004147579d82d502098590c0ba153c5b24663152",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/argp/LICENSE",
+        "vendor/argp_derive/LICENSE"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-a9040321c3712d8fd0b09cf5-NOTICE",
+      "sha256": "a9040321c3712d8fd0b09cf52b17445de04a23a10165049ae187cd39e5c86be5",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/base16ct/LICENSE-APACHE",
+        "vendor/crypto-common/LICENSE-APACHE",
+        "vendor/block-buffer/LICENSE-APACHE",
+        "vendor/cpubits/LICENSE-APACHE",
+        "vendor/cpufeatures/LICENSE-APACHE",
+        "vendor/md-5/LICENSE-APACHE",
+        "vendor/inout/LICENSE-APACHE",
+        "vendor/aes/LICENSE-APACHE",
+        "vendor/digest/LICENSE-APACHE",
+        "vendor/hybrid-array/LICENSE-APACHE",
+        "vendor/block-padding/LICENSE-APACHE",
+        "vendor/cipher/LICENSE-APACHE",
+        "vendor/sha1/LICENSE-APACHE",
+        "vendor/cbc/LICENSE-APACHE"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-54fb6dfe99a6906f862aa402-NOTICE",
+      "sha256": "54fb6dfe99a6906f862aa40282f0e8e9d9d0f22d57d99ab8acbaf4c8ceaa70e0",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/base16ct/LICENSE-MIT"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-23232f634e079478f8969da5-NOTICE",
+      "sha256": "23232f634e079478f8969da5dfcba06c0838c8dfe3151b444f5cecb37a55bf96",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/is_ci/LICENSE"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-eafbfa606bc005ed7fd2f623-NOTICE",
+      "sha256": "eafbfa606bc005ed7fd2f623d65af17ffe4ef7c017221ac14405bf4140771ea9",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/sharded-slab/LICENSE"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-9d185ac6703c4b0453974c0d-NOTICE",
+      "sha256": "9d185ac6703c4b0453974c0d85e9eee43e6941009296bb1f5eb0b54e2329e9f3",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/zerocopy-derive/LICENSE-APACHE",
+        "vendor/zerocopy/LICENSE-APACHE"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-1a2f5c12ddc934d58956aa5d-NOTICE",
+      "sha256": "1a2f5c12ddc934d58956aa5dbdd3255fe55fd957633ab7d0d39e4f0daa73f7df",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/zerocopy-derive/LICENSE-MIT",
+        "vendor/zerocopy/LICENSE-MIT"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-83c1763356e822adde0a2cae-NOTICE",
+      "sha256": "83c1763356e822adde0a2cae748d938a73fdc263849ccff6b27776dff213bd32",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/zerocopy-derive/LICENSE-BSD",
+        "vendor/zerocopy/LICENSE-BSD"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-0621878e61f0d0fda054bcbe-NOTICE",
+      "sha256": "0621878e61f0d0fda054bcbe02df75192c28bde1ecc8289cbd86aeba2dd72720",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/lazy_static/LICENSE-MIT"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-01e6df90d71d591f4307db3f-NOTICE",
+      "sha256": "01e6df90d71d591f4307db3f397a5a4fac93b18533f5a3862156f1a0a7dc8610",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/liblzma-sys/xz/AUTHORS"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-2b3fa1d23cb2ab084f3d9199-NOTICE",
+      "sha256": "2b3fa1d23cb2ab084f3d919908159473cc0e1eed059d106e2a2857c0ec8af98a",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/liblzma-sys/xz/build-aux/license-check.sh"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-edaef632cbb643e4e7a22171-NOTICE",
+      "sha256": "edaef632cbb643e4e7a221717a6c441a4c1a7c918e6e4d56debc3d8739b233f6",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/liblzma-sys/xz/COPYING.GPLv2"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-0b01625d853911cd0e2e088d-NOTICE",
+      "sha256": "0b01625d853911cd0e2e088dcfb743261034a091bb379246cb25a14cc4c74bf1",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/liblzma-sys/xz/COPYING.0BSD"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-20e50fe7aae3e56378ebf041-NOTICE",
+      "sha256": "20e50fe7aae3e56378ebf0417d9de904f55a0e61e4df315333e632a4d3555d95",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/liblzma-sys/xz/COPYING.LGPLv2.1"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-3972dc9744f6499f0f9b2dbf-NOTICE",
+      "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/liblzma-sys/xz/COPYING.GPLv3"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-616a3ad264ce29b8f1cb97e5-NOTICE",
+      "sha256": "616a3ad264ce29b8f1cb97e53037b139d406899ca8d1f799651e17bfa09830b8",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/liblzma-sys/xz/COPYING"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-a90e2da47bdc152cfb89e1fb-NOTICE",
+      "sha256": "a90e2da47bdc152cfb89e1fb09972143056c417ddbf86122babc83d0a8ad81d1",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/liblzma-sys/LICENSE-MIT"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-a47129d738752a6ae52247fe-NOTICE",
+      "sha256": "a47129d738752a6ae52247fea645b42cb320d19e9327f1eb2d1a7f99d9455ad3",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/matchers/LICENSE"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-d2e7ec5355c96eeade56b091-NOTICE",
+      "sha256": "d2e7ec5355c96eeade56b09187ceb48a6a30299da3ce7531a66d3d11405ab963",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/crypto-common/LICENSE-MIT"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-e32ff4e00d9d949305376352-NOTICE",
+      "sha256": "e32ff4e00d9d94930537635291da39e7e612703334bf6fde8c7f1686fe8a45a2",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/libz-sys/src/zlib/LICENSE"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-fc686023047ce5ce3a18a9b8-NOTICE",
+      "sha256": "fc686023047ce5ce3a18a9b8a777156f0e475929d3de06bac279f3c025d2b2ca",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/libz-sys/src/zlib/contrib/minizip/LICENSE.Info-Zip"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-36266a8fd073568394cb81cd-NOTICE",
+      "sha256": "36266a8fd073568394cb81cdb2b124f7fdae2c64c1a7ed09db34b4d22efa2951",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/libz-sys/src/zlib/contrib/dotzlib/LICENSE_1_0.txt"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-6c9f0d975b41afaa34d22f55-NOTICE",
+      "sha256": "6c9f0d975b41afaa34d22f55bb8986ce69e5cb7ad327cb2b28820cd425edf5ee",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/libz-sys/src/zlib-ng/LICENSE.md"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-34c467b6945a22696d060b8f-NOTICE",
+      "sha256": "34c467b6945a22696d060b8fdd2379d464acb3408d4c599d3dc5fe4fa1b4c84f",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/libz-sys/LICENSE-MIT"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-484f7e56d0e3178613b2f12d-NOTICE",
+      "sha256": "484f7e56d0e3178613b2f12d478a46fc2f2a6646c7ea14a7329bb805ccc2a82b",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/never-say-never/LICENSE-ZLIB"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-082d31fbdecbda9720686a2b-NOTICE",
+      "sha256": "082d31fbdecbda9720686a2b76cee810dcd2630f2d16bc4cc9accd411b6a76fd",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/never-say-never/LICENSE-APACHE"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-e8d3901c2874430495743540-NOTICE",
+      "sha256": "e8d3901c28744304957435401f88b9114a73ad95f35bf569e20c4feeb7e2db35",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/never-say-never/LICENSE-MIT"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-98181e7249d0c01737645ec9-NOTICE",
+      "sha256": "98181e7249d0c01737645ec982499ce99a0f07eb8f7d625b8840d799d10dbc01",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/block-buffer/LICENSE-MIT",
+        "vendor/block-padding/LICENSE-MIT"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-cfc7749b96f63bd31c3c42b5-NOTICE",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/encoding_rs/LICENSE-APACHE"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-838118388fe5c2e7f1dbbaee-NOTICE",
+      "sha256": "838118388fe5c2e7f1dbbaeed13e1c7f3ebf88be91319c7c1d77c18e987d1a50",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/encoding_rs/LICENSE-WHATWG"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-3fa4ca83dcc9237839b1bdeb-NOTICE",
+      "sha256": "3fa4ca83dcc9237839b1bdeb2e6d16bdfb5ec0c5ce42b24694d8bbf0dcbef72c",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/encoding_rs/LICENSE-MIT"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-11789f45bb180841cd362a5e-NOTICE",
+      "sha256": "11789f45bb180841cd362a5eee6789c68ddb573a11105e30768c308a6add0190",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/encoding_rs/COPYRIGHT"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-5734ed989dfca1f625b40281-NOTICE",
+      "sha256": "5734ed989dfca1f625b40281ee9f4530f91b2411ec01cb748223e7eb87e201ab",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/crossbeam-channel/LICENSE-MIT",
+        "vendor/crossbeam-utils/LICENSE-MIT"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-b16db96b93b1d7cf7bea533f-NOTICE",
+      "sha256": "b16db96b93b1d7cf7bea533f572091ec6bca3234fbe0a83038be772ff391a44c",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/crossbeam-channel/LICENSE-THIRD-PARTY"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-003736bc98408b53511b9cc8-NOTICE",
+      "sha256": "003736bc98408b53511b9cc8ff5d1af3bf0a8f17d53841cc39d8ab1b96a195b0",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/cpubits/LICENSE-MIT"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-c9a75f18b9ab2927829a208f-NOTICE",
+      "sha256": "c9a75f18b9ab2927829a208fc6aa2cf4e63b8420887ba29cdb265d6619ae82d5",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/thread_local/LICENSE-MIT"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-ae9baa7beea910273c2f384c-NOTICE",
+      "sha256": "ae9baa7beea910273c2f384c2a6b721fb7bd02bda3436074a1072e4ee689f985",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/cpufeatures/LICENSE-MIT"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-60c93a31f490375aadf64098-NOTICE",
+      "sha256": "60c93a31f490375aadf64098b75f10715010379541021e00261045d7800611d3",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/vcpkg/LICENSE-APACHE"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-016d20f335060a70e79d9fcf-NOTICE",
+      "sha256": "016d20f335060a70e79d9fcf8dfaa6201114d65d592211f4bdfb8ae9ca2bc1dc",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/vcpkg/LICENSE-MIT"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-2022c11b24fc1e50fa06a595-NOTICE",
+      "sha256": "2022c11b24fc1e50fa06a5959e40198a3464f560729ad3d00139abb8a328362d",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/indicatif/LICENSE",
+        "vendor/console/LICENSE"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-831e0f43ad0bf014c1c4fec5-NOTICE",
+      "sha256": "831e0f43ad0bf014c1c4fec5767aae470434c1d66d6e671be2d823e729063e25",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/md-5/LICENSE-MIT",
+        "vendor/sha1/LICENSE-MIT"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-378f5840b258e2779c39418f-NOTICE",
+      "sha256": "378f5840b258e2779c39418f3f2d7b2ba96f1c7917dd6be0713f88305dbda397",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/pkg-config/LICENSE-MIT",
+        "vendor/cfg-if/LICENSE-MIT",
+        "vendor/jobserver/LICENSE-MIT",
+        "vendor/cc/LICENSE-MIT",
+        "vendor/find-msvc-tools/LICENSE-MIT"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-a07fcacc3c60de4dc0fab10a-NOTICE",
+      "sha256": "a07fcacc3c60de4dc0fab10ac9d6aaba7379974e28451c99da7f7df09c25b28c",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/inout/LICENSE-MIT"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-25f77efa393854f7c15eaf6a-NOTICE",
+      "sha256": "25f77efa393854f7c15eaf6a2589a2071db2d7337642742763adb12bdecf0445",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/aes/LICENSE-MIT"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-f7db81051789b729fea528a6-NOTICE",
+      "sha256": "f7db81051789b729fea528a63ec4c938fdcb93d9d61d97dc8cc2e9df6d47f2a1",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/unicode-ident/LICENSE-UNICODE"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-af59cea35d7f5e2777a713b8-NOTICE",
+      "sha256": "af59cea35d7f5e2777a713b8d155d65efa2c339eb43f3c14e868c6ac8506edad",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/digest/LICENSE-MIT"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-c9bff75738922193e67fa726-NOTICE",
+      "sha256": "c9bff75738922193e67fa726fa225535870d2aa1059f91452c411736284ad566",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/xxhash-rust/LICENSE"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-123a331b5dbf04c30097fa43-NOTICE",
+      "sha256": "123a331b5dbf04c30097fa43b8f858bc85df671fe776de498d01f3d6b7c1f69e",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/libc/LICENSE-MIT"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-70c9d40f1f9545c3f133b8a6-NOTICE",
+      "sha256": "70c9d40f1f9545c3f133b8a67206e89da850f6468eed072281bb3701514114a9",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/hybrid-array/LICENSE-MIT"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-129e8edef29e9abcd2ebabe2-NOTICE",
+      "sha256": "129e8edef29e9abcd2ebabe252f4ef1b1289cdca356bf0040284a2fbccfb96c8",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/zstd/LICENSE",
+        "vendor/zstd-safe/LICENSE.Mit",
+        "vendor/zstd-sys/LICENSE.Mit"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-6485b8ed310d3f0340bf1ad1-NOTICE",
+      "sha256": "6485b8ed310d3f0340bf1ad1f47645069ce4069dcc6bb46c7d5c6faf41de1fdb",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/log/LICENSE-MIT",
+        "vendor/num-traits/LICENSE-MIT",
+        "vendor/bitflags/LICENSE-MIT",
+        "vendor/getopts/LICENSE-MIT",
+        "vendor/regex-automata/LICENSE-MIT",
+        "vendor/regex-syntax/LICENSE-MIT"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-a86a6d5deb8f48a007008297-NOTICE",
+      "sha256": "a86a6d5deb8f48a007008297b763adb89d48df32d295ed16fdb282fb52246d84",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/polonius-the-crab/LICENSE-ZLIB"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-f0f2b1f498ed9a6af37f46b3-NOTICE",
+      "sha256": "f0f2b1f498ed9a6af37f46b3b2cf656f08b6067bc79ce1e52ce97531a5b77672",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/polonius-the-crab/LICENSE-APACHE"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-3ffde8c8cdebf3c361b971be-NOTICE",
+      "sha256": "3ffde8c8cdebf3c361b971bed7476006ede9c5ec8a6250137c7dc55383ed9e5b",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/polonius-the-crab/LICENSE-MIT"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-27995d58ad5c1145c1a8cd86-NOTICE",
+      "sha256": "27995d58ad5c1145c1a8cd86244ce844886958a35eb2b78c6b772748669999ac",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/autocfg/LICENSE-MIT"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-c8c6324cf2f0f076e3ed5dea-NOTICE",
+      "sha256": "c8c6324cf2f0f076e3ed5dea4a21f00bd4dd6fce44f72b110bc52e7fe06f6e1e",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/bzip2-sys/LICENSE-MIT"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-c6dbbf828498be844a89eaa3-NOTICE",
+      "sha256": "c6dbbf828498be844a89eaa3b84adbab3199e342eb5cb2ed2f0d4ba7ec0f38a3",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/bzip2-sys/bzip2-1.0.8/LICENSE"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-4f6bd11a0f17fe5b085ace1d-NOTICE",
+      "sha256": "4f6bd11a0f17fe5b085ace1daaedb7b002a08316850dd9577c246c6a68a68e8c",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/unicase/LICENSE-MIT"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-0d542e0c8804e39aa7f37eb0-NOTICE",
+      "sha256": "0d542e0c8804e39aa7f37eb00da5a762149dc682d7829451287e11b938e94594",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/portable-atomic/LICENSE-APACHE",
+        "vendor/zstd-safe/LICENSE.Apache-2.0",
+        "vendor/pin-project-lite/LICENSE-APACHE",
+        "vendor/zstd-sys/LICENSE.Apache-2.0"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-553fffcd9b1cb158bc3e9edc-NOTICE",
+      "sha256": "553fffcd9b1cb158bc3e9edc35da85ca5c3b3d7d2e61c883ebcfa8a65814b583",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/shlex/LICENSE-APACHE"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-4455bf75a91154108304cb28-NOTICE",
+      "sha256": "4455bf75a91154108304cb283e0fea9948c14f13e20d60887cf2552449dea3b1",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/shlex/LICENSE-MIT"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-20fe7b00e904ed690e3b9fd6-NOTICE",
+      "sha256": "20fe7b00e904ed690e3b9fd6073784d3fc428141dbd10b81c01fd143d0797f58",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/allocator-api2/LICENSE-APACHE"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-36516aefdc84c5d5a1e74854-NOTICE",
+      "sha256": "36516aefdc84c5d5a1e7485425913a22dbda69eb1930c5e84d6ae4972b5194b9",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/allocator-api2/LICENSE-MIT"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-45f522cacecb1023856e46df-NOTICE",
+      "sha256": "45f522cacecb1023856e46df79ca625dfc550c94910078bd8aec6e02880b3d42",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/bytes/LICENSE"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-950d712c518a02fcb7cff969-NOTICE",
+      "sha256": "950d712c518a02fcb7cff96950aee304a1cc5283361712c980ea21e8d6d669a5",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/cipher/LICENSE-MIT"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-a77b7cfeaf911ed410ffbe76-NOTICE",
+      "sha256": "a77b7cfeaf911ed410ffbe76f0cb2b24ad8a4d94e7ead5727e914425c416cc63",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/zstd-safe/LICENSE",
+        "vendor/zstd-sys/LICENSE"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-061dc50af2cd9340703daf61-NOTICE",
+      "sha256": "061dc50af2cd9340703daf61978af3200cf681b12ea67a323c33ba109a23a45e",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/lru/LICENSE"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-7576269ea71f767b99297934-NOTICE",
+      "sha256": "7576269ea71f767b99297934c0b2367532690f8c4badc695edf8e04ab6a1e545",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/either/LICENSE-MIT",
+        "vendor/itertools/LICENSE-MIT"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-8ada45cd9f843acf64e4722a-NOTICE",
+      "sha256": "8ada45cd9f843acf64e4722ae262c622a2b3b3007c7310ef36ac1061a30f6adb",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/adler2/LICENSE-APACHE"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-861399f8c21c042b110517e7-NOTICE",
+      "sha256": "861399f8c21c042b110517e76dc6b63a2b334276c8cf17412fc3c8908ca8dc17",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/adler2/LICENSE-0BSD"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-b39b7556926992260c18201e-NOTICE",
+      "sha256": "b39b7556926992260c18201e59f9478217ed593602099546581b4092a4b9e10e",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/unit-prefix/LICENSE"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-db11fec9946737df39ca3898-NOTICE",
+      "sha256": "db11fec9946737df39ca3898d9cd8c10ec6f6c3a884a6802b0ad0b81b4e8f23a",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/typenum/LICENSE"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-516b24e051bf5630880ebbd5-NOTICE",
+      "sha256": "516b24e051bf5630880ebbd55c40a25ce9552ebaf8970a53e8976eb70e522406",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/typenum/LICENSE-APACHE"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-a825bd853ab71619a4923d7b-NOTICE",
+      "sha256": "a825bd853ab71619a4923d7b4311221427848070ff44d990da39b0b274c1683f",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/typenum/LICENSE-MIT"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-7b63ecd5f1902af1b6372994-NOTICE",
+      "sha256": "7b63ecd5f1902af1b63729947373683c32745c16a10e8e6292e2e2dcd7e90ae0",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/unicode-width/LICENSE-MIT"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-23860c2a7b5d96b21569afed-NOTICE",
+      "sha256": "23860c2a7b5d96b21569afedf033469bab9fe14a1b24a35068b8641c578ce24d",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/unicode-width/COPYRIGHT"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-b1181a40b2a7b25cf66fd014-NOTICE",
+      "sha256": "b1181a40b2a7b25cf66fd01481713bc1005df082c53ef73e851e55071b102744",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/foldhash/LICENSE"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-c4f10f55904bdb9f27d3fbf9-NOTICE",
+      "sha256": "c4f10f55904bdb9f27d3fbf94c354926d6cfe8b982276e556238c258941b243b",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/pulldown-cmark/LICENSE"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-c6596eb7be8581c18be736c8-NOTICE",
+      "sha256": "c6596eb7be8581c18be736c846fb9173b69eccf6ef94c5135893ec56bd92ba08",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/hex/LICENSE-APACHE",
+        "vendor/crc32fast/LICENSE-APACHE"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-f7bdb3426d045cd50efd4953-NOTICE",
+      "sha256": "f7bdb3426d045cd50efd4953026e3eb5a83d0199f458a075602611b9344da5b9",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/hex/LICENSE-MIT"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-0b28172679e0009b655da427-NOTICE",
+      "sha256": "0b28172679e0009b655da42797c03fd163a3379d5cfa67ba1f1655e974a2a1a9",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/smallvec/LICENSE-MIT"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-f565f87412ac2c1ade8726bd-NOTICE",
+      "sha256": "f565f87412ac2c1ade8726bd2a13d9ee69a5aed4dc2ed5d2f367bea41a8e979c",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/size/LICENSE"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-0f96a83840e146e43c0ec96a-NOTICE",
+      "sha256": "0f96a83840e146e43c0ec96a22ec1f392e0680e6c1226e6f3ba87e0740af850f",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/aho-corasick/LICENSE-MIT",
+        "vendor/memchr/LICENSE-MIT"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-01c266bced4a434da0051174-NOTICE",
+      "sha256": "01c266bced4a434da0051174d6bee16a4c82cf634e2679b6155d40d75012390f",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/aho-corasick/COPYING",
+        "vendor/memchr/COPYING"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-7055266497633c9025b777c7-NOTICE",
+      "sha256": "7055266497633c9025b777c78eb7235af13922117480ed5c674677adc381c9d8",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/zstd-sys/zstd/LICENSE"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-f9c375a1be4a41f7b70301dd-NOTICE",
+      "sha256": "f9c375a1be4a41f7b70301dd83c91cb89e41567478859b77eef375a52d782505",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/zstd-sys/zstd/COPYING"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-48341f685c87304089aa099b-NOTICE",
+      "sha256": "48341f685c87304089aa099b23c386f8bacc519ef555aa7a13e239908907b3fd",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/zstd-sys/LICENSE.BSD-3-Clause"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-02872c3ff23e11da5a9b3289-NOTICE",
+      "sha256": "02872c3ff23e11da5a9b3289df11b581be36b4956bfb7cfdc3d8043f92d64794",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/supports-color/LICENSE"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-63af4bea227c94d021e99427-NOTICE",
+      "sha256": "63af4bea227c94d021e99427f6ca3a4b8efddadcca93ab6130f708cf6138cf68",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/cbc/LICENSE-MIT"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-ff8f68cb076caf8cefe7a643-NOTICE",
+      "sha256": "ff8f68cb076caf8cefe7a6430d4ac086ce6af2ca8ce2c4e5a2004d4552ef52a2",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/hashbrown/LICENSE-MIT"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-61d383b05b87d78f94d2937e-NOTICE",
+      "sha256": "61d383b05b87d78f94d2937e2580cce47226d17823c0430fbcad09596537efcf",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/crc32fast/LICENSE-MIT"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-391a5396cec6230bfabd4ef4-NOTICE",
+      "sha256": "391a5396cec6230bfabd4ef4eb2350eb895bc5efce377a2218f5702ed020d3e3",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/num_cpus/LICENSE-MIT"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-74db5baf44a41b1000312c67-NOTICE",
+      "sha256": "74db5baf44a41b1000312c673544b3374e4198af5605c7f9080a402cec42cfa3",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/regex-syntax/src/unicode_tables/LICENSE-UNICODE"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-284465860407420254e39be4-NOTICE",
+      "sha256": "284465860407420254e39be4e1bdcaaf2e7f2d18e06f9bab75bc75341a5d8501",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/nu-ansi-term/LICENSE"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-3c638385e6deedebff9a9bb1-NOTICE",
+      "sha256": "3c638385e6deedebff9a9bb15111cb0855159873c8981bd7e71d2b9dfdccf535",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/higher-kinded-types/LICENSE-ZLIB"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-8927279141619056b903290b-NOTICE",
+      "sha256": "8927279141619056b903290bbd478e49bc98e337640bb9e75eb4ed329bff81de",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/higher-kinded-types/LICENSE-APACHE"
+      ]
+    },
+    {
+      "component": "nod vendored dependencies",
+      "file": "nod-vendored-f0bae5fa40b0f188fbcfdf3e-NOTICE",
+      "sha256": "f0bae5fa40b0f188fbcfdf3e7fd1ffdefb2f9770c97f10c8e552c072ee41b279",
+      "origin": "Checksum-verified nod v2.0.0-alpha.10 vendored source archive",
+      "archivePaths": [
+        "vendor/higher-kinded-types/LICENSE-MIT"
+      ]
+    }
+  ],
+  "emptySourceStubsWithoutStandaloneNotices": [
+    {
+      "name": "valuable",
+      "version": "0.1.1",
+      "emptySource": true
+    },
+    {
+      "name": "windows_x86_64_msvc",
+      "version": "0.52.6",
+      "emptySource": true
+    },
+    {
+      "name": "wasip2",
+      "version": "1.0.1+wasi-0.2.4",
+      "emptySource": true
+    },
+    {
+      "name": "windows_x86_64_gnullvm",
+      "version": "0.52.6",
+      "emptySource": true
+    },
+    {
+      "name": "openssl",
+      "version": "0.10.80",
+      "emptySource": true
+    },
+    {
+      "name": "openssl-macros",
+      "version": "0.1.1",
+      "emptySource": true
+    },
+    {
+      "name": "web-time",
+      "version": "1.1.0",
+      "emptySource": true
+    },
+    {
+      "name": "windows_aarch64_gnullvm",
+      "version": "0.52.6",
+      "emptySource": true
+    },
+    {
+      "name": "windows_x86_64_gnu",
+      "version": "0.52.6",
+      "emptySource": true
+    },
+    {
+      "name": "foreign-types",
+      "version": "0.3.2",
+      "emptySource": true
+    },
+    {
+      "name": "slab",
+      "version": "0.4.12",
+      "emptySource": true
+    },
+    {
+      "name": "windows_i686_gnullvm",
+      "version": "0.52.6",
+      "emptySource": true
+    },
+    {
+      "name": "tracy-client-sys",
+      "version": "0.28.0",
+      "emptySource": true
+    },
+    {
+      "name": "wasm-bindgen",
+      "version": "0.2.122",
+      "emptySource": true
+    },
+    {
+      "name": "mimalloc",
+      "version": "0.1.52",
+      "emptySource": true
+    },
+    {
+      "name": "getrandom",
+      "version": "0.3.4",
+      "emptySource": true
+    },
+    {
+      "name": "wit-bindgen",
+      "version": "0.46.0",
+      "emptySource": true
+    },
+    {
+      "name": "r-efi",
+      "version": "5.3.0",
+      "emptySource": true
+    },
+    {
+      "name": "wasm-bindgen-macro",
+      "version": "0.2.122",
+      "emptySource": true
+    },
+    {
+      "name": "foreign-types-shared",
+      "version": "0.1.1",
+      "emptySource": true
+    },
+    {
+      "name": "windows-link",
+      "version": "0.2.1",
+      "emptySource": true
+    },
+    {
+      "name": "js-sys",
+      "version": "0.3.99",
+      "emptySource": true
+    },
+    {
+      "name": "futures-task",
+      "version": "0.3.32",
+      "emptySource": true
+    },
+    {
+      "name": "encode_unicode",
+      "version": "1.0.0",
+      "emptySource": true
+    },
+    {
+      "name": "loom",
+      "version": "0.7.2",
+      "emptySource": true
+    },
+    {
+      "name": "windows-sys",
+      "version": "0.61.2",
+      "emptySource": true
+    },
+    {
+      "name": "tracing-tracy",
+      "version": "0.11.4",
+      "emptySource": true
+    },
+    {
+      "name": "windows_i686_gnu",
+      "version": "0.52.6",
+      "emptySource": true
+    },
+    {
+      "name": "libmimalloc-sys",
+      "version": "0.1.49",
+      "emptySource": true
+    },
+    {
+      "name": "wasm-bindgen-macro-support",
+      "version": "0.2.122",
+      "emptySource": true
+    },
+    {
+      "name": "openssl-sys",
+      "version": "0.9.116",
+      "emptySource": true
+    },
+    {
+      "name": "futures-core",
+      "version": "0.3.32",
+      "emptySource": true
+    },
+    {
+      "name": "bumpalo",
+      "version": "3.20.3",
+      "emptySource": true
+    },
+    {
+      "name": "tracy-client",
+      "version": "0.18.4",
+      "emptySource": true
+    },
+    {
+      "name": "windows_aarch64_msvc",
+      "version": "0.52.6",
+      "emptySource": true
+    },
+    {
+      "name": "wasm-bindgen-shared",
+      "version": "0.2.122",
+      "emptySource": true
+    },
+    {
+      "name": "rustversion",
+      "version": "1.0.22",
+      "emptySource": true
+    },
+    {
+      "name": "hermit-abi",
+      "version": "0.5.2",
+      "emptySource": true
+    },
+    {
+      "name": "openssl-src",
+      "version": "300.6.0+3.6.2",
+      "emptySource": true
+    },
+    {
+      "name": "windows-result",
+      "version": "0.4.1",
+      "emptySource": true
+    },
+    {
+      "name": "generator",
+      "version": "0.8.8",
+      "emptySource": true
+    },
+    {
+      "name": "futures-util",
+      "version": "0.3.32",
+      "emptySource": true
+    },
+    {
+      "name": "windows-targets",
+      "version": "0.52.6",
+      "emptySource": true
+    },
+    {
+      "name": "scoped-tls",
+      "version": "1.0.1",
+      "emptySource": true
+    },
+    {
+      "name": "windows_i686_msvc",
+      "version": "0.52.6",
+      "emptySource": true
+    }
+  ],
+  "scope": "Conservative notice inventory of the pinned vendor bundle, including optional/noncurrent-platform dependencies. Does not prove complete redistribution compliance."
+}

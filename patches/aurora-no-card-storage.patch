@@ -1,0 +1,36 @@
+--- a/include/dolphin/card.h
++++ b/include/dolphin/card.h
+@@ -250,6 +250,7 @@
+ // pass -1 to set both
+ void CARDSetBasePath(const char*, s32 chan);
+ void CARDSetLoadType(CARDFileType type);
++void CARDSetPersistentStorage(BOOL enabled);
+ 
+ #else
+ void CARDInit(void);
+--- a/lib/dolphin/card.cpp
++++ b/lib/dolphin/card.cpp
+@@ -154,6 +154,13 @@
+   SelectedFileType = type;
+ }
+ 
++static bool PersistentStorage = true;
++
++void CARDSetPersistentStorage(BOOL enabled) {
++  if (Initialized) Log.fatal("Card storage policy must be set before CARDInit");
++  PersistentStorage = enabled;
++}
++
+ void CARDInit(const char* game, const char* maker) {
+   if (Initialized) {
+     return;
+@@ -173,6 +180,9 @@
+     CardChannels[i]->InitCard(game, maker);
+   }
+ 
++  // Keep initialized, empty card channels without reading or creating files.
++  if (!PersistentStorage) return;
++
+   std::filesystem::path cardWorkingDir;
+   if (aurora::g_config.userPath != nullptr)
+     cardWorkingDir = reinterpret_cast<const char8_t*>(aurora::g_config.userPath);

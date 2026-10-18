@@ -1,0 +1,143 @@
+diff --git a/lib/webgpu/gpu.cpp b/lib/webgpu/gpu.cpp
+index a969465..0cb4cdc 100644
+--- a/lib/webgpu/gpu.cpp
++++ b/lib/webgpu/gpu.cpp
+@@ -1,4 +1,7 @@
+ #include "gpu.hpp"
++#ifdef __EMSCRIPTEN__
++#include "browser_request.hpp"
++#endif
+ 
+ #include <algorithm>
+ #include <array>
+@@ -670,6 +673,14 @@ static bool create_surface() {
+     Log.error("Failed to create surface: no window");
+     return false;
+   }
++#ifdef __EMSCRIPTEN__
++  wgpu::EmscriptenSurfaceSourceCanvasHTMLSelector canvasDescriptor;
++  canvasDescriptor.selector = "#canvas";
++  const wgpu::SurfaceDescriptor surfaceDescriptor{
++      .nextInChain = &canvasDescriptor,
++      .label = "Surface",
++  };
++#else
+   const auto chainedDescriptor = utils::SetupWindowAndGetSurfaceDescriptor(window);
+   if (!chainedDescriptor) {
+     Log.error("Failed to create surface descriptor for current window");
+@@ -679,6 +690,7 @@ static bool create_surface() {
+       .nextInChain = chainedDescriptor.get(),
+       .label = "Surface",
+   };
++#endif
+   release_surface();
+   g_surface = g_instance.CreateSurface(&surfaceDescriptor);
+   if (!g_surface) {
+@@ -691,6 +703,9 @@ static bool create_surface() {
+ bool initialize(AuroraBackend auroraBackend, bool allowCpu) {
+   if (!g_instance) {
+     Log.info("Creating WebGPU instance");
++#ifdef __EMSCRIPTEN__
++    wgpu::InstanceDescriptor instanceDescriptor{};
++#else
+     const std::array requiredInstanceFeatures{
+         wgpu::InstanceFeatureName::TimedWaitAny,
+     };
+@@ -698,6 +713,7 @@ bool initialize(AuroraBackend auroraBackend, bool allowCpu) {
+         .requiredFeatureCount = requiredInstanceFeatures.size(),
+         .requiredFeatures = requiredInstanceFeatures.data(),
+     };
++#endif
+ #ifdef WEBGPU_DAWN
+     dawn::native::DawnInstanceDescriptor dawnInstanceDescriptor;
+     dawnInstanceDescriptor.backendValidationLevel = dawn::native::BackendValidationLevel::Disabled;
+@@ -709,7 +725,11 @@ bool initialize(AuroraBackend auroraBackend, bool allowCpu) {
+       return false;
+     }
+   }
++#ifdef __EMSCRIPTEN__
++  const wgpu::BackendType backend = wgpu::BackendType::Undefined;
++#else
+   const wgpu::BackendType backend = to_wgpu_backend(auroraBackend);
++#endif
+   Log.info("Attempting to initialize {}", magic_enum::enum_name(backend));
+ #if 0
+   // D3D12's debug layer is very slow
+@@ -728,6 +748,11 @@ bool initialize(AuroraBackend auroraBackend, bool allowCpu) {
+         .backendType = backend,
+         .compatibleSurface = g_surface,
+     };
++#ifdef __EMSCRIPTEN__
++    g_adapter = browser_request<wgpu::Adapter>([&](auto callback) {
++      g_instance.RequestAdapter(&options, wgpu::CallbackMode::AllowSpontaneous, callback);
++    });
++#else
+     const auto future = g_instance.RequestAdapter(
+         &options, wgpu::CallbackMode::WaitAnyOnly,
+         [](wgpu::RequestAdapterStatus status, wgpu::Adapter adapter, wgpu::StringView message) {
+@@ -742,6 +767,7 @@ bool initialize(AuroraBackend auroraBackend, bool allowCpu) {
+       Log.error("Failed to create adapter: {}", magic_enum::enum_name(status));
+       return false;
+     }
++#endif
+     if (!g_adapter) {
+       Log.error("Failed to create adapter");
+       return false;
+@@ -879,6 +905,11 @@ bool initialize(AuroraBackend auroraBackend, bool allowCpu) {
+             FATAL("Device lost: {}", message);
+           }
+         });
++#ifdef __EMSCRIPTEN__
++    g_device = browser_request<wgpu::Device>([&](auto callback) {
++      g_adapter.RequestDevice(&deviceDescriptor, wgpu::CallbackMode::AllowSpontaneous, callback);
++    });
++#else
+     const auto future =
+         g_adapter.RequestDevice(&deviceDescriptor, wgpu::CallbackMode::WaitAnyOnly,
+                                 [](wgpu::RequestDeviceStatus status, wgpu::Device device, wgpu::StringView message) {
+@@ -893,9 +924,11 @@ bool initialize(AuroraBackend auroraBackend, bool allowCpu) {
+       Log.error("Failed to create device: {}", magic_enum::enum_name(status));
+       return false;
+     }
++#endif
+     if (!g_device) {
+       return false;
+     }
++#ifdef WEBGPU_DAWN
+     g_device.SetLoggingCallback([](wgpu::LoggingType type, wgpu::StringView message) {
+       AuroraLogLevel level = LOG_FATAL;
+       switch (type) {
+@@ -916,6 +949,7 @@ bool initialize(AuroraBackend auroraBackend, bool allowCpu) {
+       }
+       Log.report(level, "WebGPU message: {}", message);
+     });
++#endif
+   }
+   g_queue = g_device.GetQueue();
+ 
+diff --git a/lib/webgpu/browser_request.hpp b/lib/webgpu/browser_request.hpp
+new file mode 100644
+--- /dev/null
++++ b/lib/webgpu/browser_request.hpp
+@@ -0,0 +1,21 @@
++#pragma once
++// Browser-only startup wait. Requires Asyncify; yields to browser callbacks.
++#include <emscripten.h>
++#include <memory>
++#include <utility>
++#include <webgpu/webgpu_cpp.h>
++namespace aurora::webgpu {
++template<class T, class Start>
++T browser_request(Start start) {
++  struct State { bool done=false; T value{}; };
++  auto state=std::make_shared<State>();
++  start([state](auto, T value, wgpu::StringView) {
++    state->value=std::move(value);
++    state->done=true;
++  });
++  const double deadline=emscripten_get_now()+15000;
++  while(!state->done && emscripten_get_now()<deadline) emscripten_sleep(10);
++  // Late callbacks retain only this request's state, never renderer globals.
++  return state->done ? std::move(state->value) : T{};
++}
++}

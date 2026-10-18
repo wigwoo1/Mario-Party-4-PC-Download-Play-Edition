@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "platform": "win32-x64",
+  "node": {
+    "version": "24.19.0",
+    "sha256": "3602f2bb1a10f2cbab4c36886218a33c1ab3db87290e73b033c46c77147d0237"
+  },
+  "cloudflared": {
+    "version": "2026.10.1",
+    "url": "https://github.com/cloudflare/cloudflared/releases/download/2026.10.1/cloudflared-windows-amd64.exe",
+    "sha256": "4d2490e74082c5d48dbfedaf92576fa5bd1702379ab88eb7faa0cfbe8dc891b6",
+    "size": 55325120,
+    "license": "https://raw.githubusercontent.com/cloudflare/cloudflared/2026.10.1/LICENSE"
+  },
+  "caddy": {
+    "version": "2.11.7",
+    "url": "https://github.com/caddyserver/caddy/releases/download/v2.11.7/caddy_2.11.7_windows_amd64.zip",
+    "sha256": "0a1edc0b799512051c57071ce0e798d3f2cf67dc98171366f1d2b326072e3b06",
+    "executableSha256": "5f93a9bd555f3aac9d33af2756ba14b3519d8cca4ffd55256bdaeab444c9db2a",
+    "size": 18479498,
+    "license": "https://raw.githubusercontent.com/caddyserver/caddy/v2.11.7/LICENSE"
+  }
+}
