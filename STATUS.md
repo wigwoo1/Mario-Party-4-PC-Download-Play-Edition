@@ -22,3 +22,5 @@ Additional current-build validation found a native startup stall before gameplay
 No overall completion percentage has been measured.
 
 The actual packaged Browser Transfer launcher was also tested with Node absent from PATH and no Codex runtime cache: it used its bundled Node, served the exact page/runtime/shader files, rejected private configuration routes, and closed its owned listener afterward. This narrows the prerequisite uncertainty only; it is not a clean-machine installation, gameplay or Internet-hosting acceptance.
+
+A fresh browser Host/native Join positive-score attempt also stopped before gameplay: browser image integrity verification completed, but the native guest did not finish connecting or emit a prepared receipt before the lobby connection timeout. No new score/gameplay acceptance is claimed, and the cause has not been proven to be the same graphics wait described above.
