@@ -2,7 +2,7 @@
   "version": 1,
   "repository": "https://github.com/wigwoo1/Mario-Party-4-PC-Download-Play-Edition",
   "buildId": "c508d4a20362b4a8e756cd32758928c0e423a39570a04ffa1ab26168e3eec50f",
-  "sourceSnapshotSha256": "b454904e7044812d166fc1c6133a6f9f040ab89d3698550b5ad87fd7b894266c",
+  "sourceSnapshotSha256": "6d6f28b4d133dc3ccf7dd56c8103c3bc653508a8e1c14cdf0d11efc9c23cc1ce",
   "upstream": {
     "url": "https://github.com/mariopartyrd/partyboard.git",
     "baseCommit": "f38304ebd13b09a15a80db7d7d015bf3fc387c5d"
@@ -11950,8 +11950,8 @@
     },
     {
       "path": "STATUS.md",
-      "bytes": 1010,
-      "sha256": "722adfd1dbc7886993b34a0171311f115e3b1763ba1762851748485cc6679636"
+      "bytes": 2403,
+      "sha256": "eb02aa4f727ce921fa14229bc99373418baf421ded6c7f921cca97a44525e321"
     },
     {
       "path": "tools/__init__.py",
@@ -12432,6 +12432,11 @@
       "path": "tools/native-rtc-probe/bound-match-keyboard.test.cjs",
       "bytes": 1564,
       "sha256": "c6b8fc5ff53523c31c3e1ba751a863d013c5f18562b6258be113f89c12256ddb"
+    },
+    {
+      "path": "tools/native-rtc-probe/browser-storage-observation.cjs",
+      "bytes": 893,
+      "sha256": "c8b74df64e023719b4b8f2c4dd9ea0e8b1f8ac01afaac6b3fcfa1ee1d2bdf290"
     },
     {
       "path": "tools/native-rtc-probe/browser-test.cjs",
@@ -13790,8 +13795,8 @@
     },
     {
       "path": "web/app.mjs",
-      "bytes": 86199,
-      "sha256": "5071c783b99c1c36ebad1582157d2a14926d31a202e1fc7165addf6ef4fbaac2"
+      "bytes": 86144,
+      "sha256": "16157b05bd828039d098d7c341c1343108e0f0d73b2ed7357f844d70fbf43ff6"
     },
     {
       "path": "web/async-blob-fs.mjs",
@@ -14245,8 +14250,8 @@
     },
     {
       "path": "web/native-automatic-lobby-browser-test.cjs",
-      "bytes": 12553,
-      "sha256": "b44842a258bdf7de67856f195b484dc60009c9b4165aba3fdd2584a1d3bb042e"
+      "bytes": 14557,
+      "sha256": "9a0818211af853947e018302bc9bf7bf3a081d2253b7f676fd36a5387c8a5c87"
     },
     {
       "path": "web/native-gameplay-recovery-test-support.mjs",
@@ -14469,14 +14474,19 @@
       "sha256": "f88a93d1752300f61af1239af44f6b299935132fec14c0140663483695be6857"
     },
     {
+      "path": "web/runtime-asset-storage-browser-test.cjs",
+      "bytes": 5458,
+      "sha256": "afdecaa082747730e3765cd60a05c88265fa09a0c69007e5f43d0abd11ea512c"
+    },
+    {
       "path": "web/runtime-asset.mjs",
-      "bytes": 3449,
-      "sha256": "1effb9fd7fe01de8c62876008680cc3d2caf20ff14b3cfe740bca01f6052ade7"
+      "bytes": 4055,
+      "sha256": "8a22e8009e42066c765c8a2424e37554e275529e2d90d5d836556cc9c30943f5"
     },
     {
       "path": "web/runtime-asset.test.mjs",
-      "bytes": 3094,
-      "sha256": "31f2a86d90dba9b55cbab42ea04b58af1d327d44bcfada6efbdd39cdd1d07097"
+      "bytes": 4078,
+      "sha256": "5170e0ef7870a7f3f6ad9e19a19a0d02e3f2bdaaddebad2f4f99d7cb9cac52fd"
     },
     {
       "path": "web/runtime-build.mjs",

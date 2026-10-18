@@ -4,6 +4,17 @@ import {createVerifiedAssetFile} from './verified-asset-file.mjs';
 // Explicit pre-mount boundary. A completed transfer marker is necessary but
 // never sufficient: storage may have changed since transfer verification.
 export async function verifiedAssetBlob(store, id, {signal, progress = () => {}, createFile=createVerifiedAssetFile} = {}) {
+  return verifyAsset(store, id, {signal, progress, createFile, materialize:true});
+}
+
+// Readiness needs integrity, not a mountable copy. Keep this pass bounded to
+// four chunks; the later runtime mount still verifies its own fresh snapshot.
+export async function verifyStoredAsset(store, id, {signal, progress = () => {}} = {}) {
+  const {manifest}=await verifyAsset(store, id, {signal, progress, materialize:false});
+  return manifest;
+}
+
+async function verifyAsset(store, id, {signal, progress, createFile, materialize}) {
   signal?.throwIfAborted();
   if (typeof id !== 'string' || !/^[a-f0-9]{64}$/.test(id)) throw Error('Invalid asset identity.');
   const saved = await store.manifest(id);
@@ -17,7 +28,7 @@ export async function verifiedAssetBlob(store, id, {signal, progress = () => {},
   if (snapshot !== undefined && (!(snapshot instanceof Blob) || snapshot.size !== manifest.size))
     throw Error('Matching immutable asset snapshot required.');
   const hashes = new Uint8Array(manifest.count * 32), parts = [];
-  const file=!snapshot&&manifest.size>=32*1024*1024 ? await createFile() : undefined;
+  const file=materialize&&!snapshot&&manifest.size>=32*1024*1024 ? await createFile() : undefined;
   try {
   signal?.throwIfAborted();
   let bytesRead = 0;
@@ -37,7 +48,7 @@ export async function verifiedAssetBlob(store, id, {signal, progress = () => {},
       const bytes = chunk.bytes.slice(0);
       batch.push({index, bytes});
       // Keep immutable Blob parts, rather than a whole asset of raw buffers.
-      if (!snapshot && !file) parts.push(new Blob([bytes]));
+      if (materialize && !snapshot && !file) parts.push(new Blob([bytes]));
     }
     const digests = await Promise.all(batch.map(chunk => digest(chunk.bytes)));
     signal?.throwIfAborted();
@@ -53,6 +64,7 @@ export async function verifiedAssetBlob(store, id, {signal, progress = () => {},
   const actual = Array.from(await digest(hashes), b => b.toString(16).padStart(2, '0')).join('');
   signal?.throwIfAborted();
   if (actual !== id) throw Error('Stored asset integrity check failed.');
+  if (!materialize) return {manifest};
   const blob=snapshot || (file ? await file.finish() : new Blob(parts, {type:'application/octet-stream'}));
   signal?.throwIfAborted();
   return {manifest, blob, ...(file ? {dispose:file.dispose} : {})};

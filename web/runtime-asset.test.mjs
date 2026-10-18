@@ -1,7 +1,7 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {prepare, CHUNK} from './transfer.mjs';
-import {verifiedAssetBlob} from './runtime-asset.mjs';
+import {verifiedAssetBlob, verifyStoredAsset} from './runtime-asset.mjs';
 
 async function fixture() {
   const bytes = Uint8Array.from({length:CHUNK*5+7}, (_,i)=>i%251);
@@ -58,4 +58,20 @@ test('leaving while storage is pending does not read chunks or publish stale pro
     assert.equal(reads,boundary==='manifest'?0:1);
     assert.equal(progress,0);
   }
+});
+
+test('readiness verification does not authorize changed bytes at the later mount',async()=>{
+  const f=await fixture(), progress=[];
+  assert.deepEqual(await verifyStoredAsset(f.store,f.asset.manifest.id,{progress:(a,b)=>progress.push([a,b])}),f.asset.manifest);
+  assert.deepEqual(progress.at(-1),[f.bytes.length,f.bytes.length]);
+  new Uint8Array(f.chunks[4].bytes)[0]^=1;
+  await assert.rejects(verifiedAssetBlob(f.store,f.asset.manifest.id),/integrity/);
+  await assert.rejects(verifyStoredAsset(f.store,f.asset.manifest.id),/integrity/);
+});
+
+test('readiness verification rejects missing chunks and cancellation',async()=>{
+  const f=await fixture(), controller=new AbortController();
+  await assert.rejects(verifyStoredAsset(f.store,f.asset.manifest.id,{signal:controller.signal,progress:()=>controller.abort()}),{name:'AbortError'});
+  f.chunks.pop();
+  await assert.rejects(verifyStoredAsset(f.store,f.asset.manifest.id),/incomplete/);
 });

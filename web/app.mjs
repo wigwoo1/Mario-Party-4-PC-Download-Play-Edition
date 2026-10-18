@@ -38,7 +38,7 @@ import {cachedDownloadControls} from './cached-download-controls.mjs';
 import {downloadProgressReporter} from './download-progress-reporter.mjs';
 import {monitorConnectionRoutes,connectionRouteLabel} from './connection-route.mjs';
 import {renderLobby} from './lobby-view.mjs';
-import {verifiedAssetBlob} from './runtime-asset.mjs';
+import {verifyStoredAsset} from './runtime-asset.mjs';
 import {createSessionConfiguration,receiveSessionConfiguration,validateSessionConfiguration} from './session-config.mjs';
 let downloadCacheControls;
 const $=id=>document.getElementById(id);
@@ -954,16 +954,15 @@ async function joinLobbyInvitation(invitationCode){
           const signal=aborter.signal;
           try {
             status('Checking cached assets before runtime loading…');
-            const checked=await verifiedAssetBlob(store,m.id,{signal,progress:(bytes,total)=>{
+            const manifest=await verifyStoredAsset(store,m.id,{signal,progress:(bytes,total)=>{
               if(current===generation)status(`Checking cached assets: ${Math.floor(bytes/total*100)}%`);
             }});
-            // This preflight only marks readiness. Runtime preparation verifies
-            // its own fresh mount and owns that mount's temporary file.
-            await checked.dispose?.();
+            // Preflight does not allocate a gameplay copy. Runtime preparation
+            // verifies its own fresh mount and owns that mount's temporary file.
             if(current!==generation)return;
-            runtimeAsset={manifest:checked.manifest};
+            runtimeAsset={manifest};
             reportDownload(m.size,true);
-            status(manualLobby?`Assets checked and prepared. Asset ID: ${checked.manifest.id}\nChoose Prepare lobby game, then mark ready to join the agreed start. Additional shader scene coverage remains under development.`:'Game assets verified. Preparing the runtime and known shader pipelines…');
+            status(manualLobby?`Assets checked and prepared. Asset ID: ${manifest.id}\nChoose Prepare lobby game, then mark ready to join the agreed start. Additional shader scene coverage remains under development.`:'Game assets verified. Preparing the runtime and known shader pipelines…');
         }catch(error){if(current===generation&&!signal.aborted)fail(error);}
         }),error:guard(fail),
       });
