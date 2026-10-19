@@ -1,23 +1,29 @@
-# Development status
+# Development status — 2026-10-19 UTC
 
-Updated 2026-10-19 (UTC). This project is incomplete.
+Measured runtime: `90a83351248fb1589211b0f0e88da11731284bf29f2c47ba0e3f8e1616c5d54a`.
 
-Current measured development runtime: `90a83351248fb1589211b0f0e88da11731284bf29f2c47ba0e3f8e1616c5d54a` (212 artifacts; independent JavaScript/C++ identities agree). This source update does not replace the downloadable ae33 development archive.
+This is an unfinished Windows/native and browser development build. Guests receive game data into browser storage from the host; no game image is distributed here. The host must supply a compatible game image.
 
-## Changes and verification
+## Binary publication blocked
 
-- Windows graphics waits now service synchronous window messages without consuming queued game input. The previous worker failed four bounded deadlock regressions; the fix passes five new and five existing worker tests. Native compilation and the actual Edge 300-frame worker test pass. The original intermittent GPU wait is not conclusively explained, because the unchanged older build also passed a fresh baseline.
-- Build 06a2 preserves detailed lobby failures through closed-session access. It passed three fresh native Host preparations (37–39 seconds), Ready/Unready and clean exits. A five-turn same-PC match with two native and two actual Edge peers completed, including native reconnect. Retained input/checkpoint/RNG windows agreed at every turn and final standings; all four rendered standings were reviewed. This used diagnostic setup controls and is not acceptance of the complete automatic setup flow on separate devices.
-- Browser pipeline readiness now completes a requested queued shader pipeline before drawing with it. An actual Edge GPU fixture reproduced seven unavailable pipelines out of eight before the fix and zero afterward. The browser game builds successfully; all 91 embedded modules verify. Native executable is unchanged from 06a2.
-- Current build 90a833 passed actual same-PC automatic Edge Host/native Join asset verification, 618 known shader pipelines, readiness and Start. A normal-keyboard Mushroom Medic test played three rounds, saved one patient, showed matching readable score/results/ranking, and returned to a responsive menu. All 25,303 consecutive archived input/checkpoint/RNG records agreed, followed by 90 matching signed-recovery polls. Driver and native exits were zero and owned resources closed. An earlier zero-score replay also passed with 38,494 consecutive matching records.
-- A turn-four capture on 06a2 showed dark browser portraits that were normal again on turn five. Its exact cause remains unresolved; the pipeline fixture does not prove that it caused this visual issue. A five-turn four-peer regression on 90a833 is in progress with additional timed turn-four captures. No result is claimed for this ongoing match. Eight existing match-harness tests pass.
+The fresh release candidate passed all 472 staged file hashes, all ten packaging/publication checks, three launcher inspections and its loopback four-player lobby checks. Its browser launcher also served the measured runtime using bundled Node with no installed Node on PATH, then closed its listener.
 
-## Available release
+The subsequent native preparation test failed with exit code 2 after Windows Defender quarantined the candidate's `runtime/dol.dll`. Defender reported `Trojan:Win32/Bearfoos.A!ml` (threat ID 2147731250). Independent native artifact verification confirmed that the DLL was then missing. This detection has not been established as a false positive. No antivirus exclusion, restoration or protection change was made. This update publishes source/status only; no new binary archive is released. Earlier release assets remain unchanged and have not been cleared by this test.
 
-The ae33 development prerelease remains unchanged and does not contain these newer source fixes. Its earlier native startup and Join failures remain limitations of that archive. Earlier c508 and afaa results apply only to those builds. No new binary release is published by this update.
+## Verified scope
 
-## Still open
+- Windows graphics waits now service synchronous window messages. Ten native regression checks passed, and three fresh native preparation/ready-toggle launches on the same native executable completed in approximately 38 seconds each. The original intermittent startup failure is not conclusively explained.
+- Browser shader readiness completes a requested queued pipeline before drawing with it. An actual Edge GPU fixture reproduced seven unavailable pipelines out of eight before the fix and zero afterward. Native and browser builds passed; all 91 embedded game modules were verified.
+- This exact runtime completed a muted, same-PC five-turn Party match using two native and two actual Edge peers. All five retained input/checkpoint/RNG windows (255–256 records each) and the final 256 records matched. A signed native reconnect on turn one passed. All four rendered final standings agreed. This was diagnostic-driven setup and does not prove the entire automatic setup flow on separate devices. It was not a continuous full-match record archive.
+- Eight timed turn-four browser captures showed colored HUD portraits. The earlier intermittent dark-portrait defect was not reproduced; its cause and complete elimination remain unproven.
+- Actual same-PC automatic Edge Host/native Join verified assets, 618 known shader pipelines, readiness and Start. Normal keyboard play in Mushroom Medic saved one patient, showed readable matching scores/results/rankings and returned to a responsive menu. All 25,303 consecutive recorded input/checkpoint/RNG observations matched, followed by 90 matching signed-recovery polls. An earlier zero-score replay also passed.
 
-Current-build four-peer completed-match acceptance and intermittent portrait/startup reliability; broader board/minigame/shader coverage; default launcher and later save-screen coverage; physical controller/audio, separate-device refresh, clean-machine installation and mobile checks. Internet/public-hosting tests remain deferred until the user is home. No overall completion percentage is measured.
+## Open validation
 
-Game images, credentials, private keys, personal profiles and local test logs/screenshots are excluded from publication. The host supplies a compatible game image; guests receive game data into browser storage. Release archives bundle Node.js for the local page, but clean-machine prerequisites remain unverified.
+Original intermittent startup/portrait reliability; normal post-Party-ranking return and later save-related screens; broader boards, minigames and shader coverage; default native launcher game-selection flow; physical controllers and audible surround sound; refreshed separate-device multiplayer; clean-machine installation; Android/iOS and cellular/WAN testing. Public hosting tests remain deferred until the user is home. No whole-project completion percentage is measured.
+
+## Running the package
+
+Extract the entire archive. Native play requires Windows x64 and the Microsoft Visual C++ x64 Redistributable. Use `Play Mario Party 4.cmd` or `Play with Keyboard.cmd`; choose your own game image. `Browser Transfer.cmd` uses bundled Node.js and prints the local browser address. Desktop Edge has been tested. Use `-LocalOnly` to skip automatic public hosting. Automatic hosting may download checksum-pinned helper tools; Internet connectivity remains unverified.
+
+Known shader preparation covers 618 discovered pipelines; additional scenes may compile during play. Same-PC tests do not establish physical-device or Internet reliability. The package contains no game disc, credentials, personal profiles, private keys or local test logs/screenshots. Prior development releases remain available for rollback.
