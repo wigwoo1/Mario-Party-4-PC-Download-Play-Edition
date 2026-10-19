@@ -3,14 +3,17 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
 (async()=>{
  const output=path.resolve(process.env.PARTYBOARD_TEST_OUTPUT_DIRECTORY||'work/automatic-lobby-validation');fs.mkdirSync(output,{recursive:true});
  assert.ok(process.env.PARTYBOARD_RUNTIME_PACKAGE&&process.env.PARTYBOARD_LOCAL_CISO,'Measured runtime package and private local game required');
+ const count=Number(process.env.PARTYBOARD_AUTOMATIC_BROWSER_PEERS||2);assert.ok(count===2||count===4,'Two or four actual browser peers required');
+ const preparationTimeout=Number(process.env.PARTYBOARD_TEST_PREPARATION_TIMEOUT_MS||(count===4?900000:270000));
+ assert.ok(Number.isSafeInteger(preparationTimeout)&&preparationTimeout>=30000&&preparationTimeout<=900000,'Bounded browser preparation timeout required');
  const port=Number(process.env.PARTYBOARD_TEST_PORT||8951),base='http://127.0.0.1:'+port+'/',errors=[],warnings=[],snapshots=[];
  let browser;const pages=[];
  const server=spawn(process.execPath,[path.join(__dirname,'serve.cjs')],{env:{...process.env,PARTYBOARD_PORT:String(port)},stdio:['ignore','pipe','pipe']});
- const deadline=setTimeout(()=>{server.kill();void browser?.close();},360000);
+ const deadline=setTimeout(()=>{server.kill();void browser?.close();},preparationTimeout+90000);
  try{
   await new Promise((resolve,reject)=>{server.stdout.once('data',resolve);server.once('error',reject);server.once('exit',code=>reject(Error('Server exited: '+code)));});
   browser=await chromium.launch({channel:'msedge',headless:true,args:['--mute-audio','--disable-features=WebRtcHideLocalIpsWithMdns']});
-  for(let i=0;i<2;i++){
+  for(let i=0;i<count;i++){
    const context=await browser.newContext();await context.addInitScript(()=>{const Original=RTCPeerConnection;globalThis.testConnections=[];globalThis.RTCPeerConnection=class extends Original{constructor(...args){super(...args);testConnections.push(this);}};});
    const page=await context.newPage();pages.push(page);
    page.on('pageerror',e=>errors.push({peer:i,message:e.message}));page.on('console',m=>{if(['error','warning'].includes(m.type())){warnings.push({peer:i,text:m.text()});if(warnings.length>1000)warnings.shift();}});
@@ -21,20 +24,38 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
   await pages[0].locator('#host-game').click();
   await pages[0].waitForFunction(()=>document.querySelector('#lobby-link').value.includes('#room='),null,{timeout:30000});
   const link=await pages[0].locator('#lobby-link').inputValue();
-  await pages[1].goto(link);await pages[1].evaluate(async()=>{globalThis.app=await import('/app.mjs');});
-  assert.equal(await pages[1].locator('#join-link').inputValue(),link);
-  await pages[1].locator('#join-game').click();
-  const until=Date.now()+270000;let ready=false,last=0;
+  for(let i=1;i<count;i++){
+   await pages[i].goto(link);await pages[i].evaluate(async()=>{globalThis.app=await import('/app.mjs');});
+   assert.equal(await pages[i].locator('#join-link').inputValue(),link);
+   await pages[i].locator('#join-game').click();
+  }
+  const until=Date.now()+preparationTimeout;let ready=false,last=0;
   while(Date.now()<until){
    const state=await Promise.all(pages.map(p=>p.evaluate(()=>({status:document.querySelector('#status').textContent,ready:app.lobbyReadyState(),runtime:app.lobbyRuntimeState()}))));
    if(Date.now()-last>15000){snapshots.push(state);console.log(state.map((s,i)=>'Peer '+i+': '+s.status).join('\n'));last=Date.now();}
    if(state.some(s=>/failed:|Lobby setup:|Connection failed|preparation failed/i.test(s.status)))throw Error(JSON.stringify(state));
-   if(state.every(s=>s.ready?.canStart)){ready=true;break;}
+   if(state.every(s=>s.ready?.canStart&&s.ready.players.length===count)){ready=true;break;}
    await new Promise(r=>setTimeout(r,500));
   }
-  assert.ok(ready,'Both peers automatically ready');
+  assert.ok(ready,'All requested peers automatically ready');
   const reports=await Promise.all(pages.map(p=>p.evaluate(()=>app.lobbyPreparedReports())));
-  assert.deepEqual(reports[0].host,reports[0].guest1);assert.deepEqual(reports[1].guest1,reports[0].host);
+  const descriptor=JSON.parse(fs.readFileSync(process.env.PARTYBOARD_RUNTIME_PACKAGE,'utf8'));
+  const seed=JSON.parse(fs.readFileSync(path.join(path.dirname(process.env.PARTYBOARD_RUNTIME_PACKAGE),'initial_pipeline_cache.json'),'utf8'));
+  assert.equal(reports[0].host?.buildId,descriptor.configuration.buildId,'Actual prepared runtime must match the measured bundle');
+  assert.equal(reports[0].host?.pipelineSeed,seed.sha256,'Actual prepared runtime must use the configured shader seed');
+  assert.equal(reports[0].host?.frame,0,'Automatic start must agree at frame zero');
+  const inputPlans=await Promise.all(pages.map(p=>p.evaluate(()=>app.lobbyInputPlan())));
+  assert.equal(inputPlans[0]?.peer,'host');
+  assert.equal(new Set(inputPlans.map(plan=>plan?.peer)).size,count,'Each browser must have its own assigned peer');
+  assert.equal(new Set(inputPlans.map(plan=>plan?.owner)).size,count,'Each browser must own a separate logical controller');
+  assert.equal(Object.keys(reports[0]).length,count,'Host must retain each actual prepared receipt');
+  for(let i=1;i<count;i++){
+   const peer=inputPlans[i].peer;
+   assert.deepEqual(inputPlans[i].bindings,inputPlans[0].bindings,'All browsers must agree on port assignments');
+   assert.deepEqual(reports[0][peer],reports[0].host);
+   assert.deepEqual(reports[i][peer],reports[0].host);
+   assert.deepEqual(reports[i].host,reports[0].host);
+  }
   await pages[0].locator('#automatic-start').click();
   for(const p of pages)await p.waitForFunction(()=>app.lobbyGameState()?.frame>=120,null,{timeout:60000});
   const running=await Promise.all(pages.map(p=>p.evaluate(()=>app.lobbyGameState())));let recovery;
@@ -53,8 +74,8 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
    console.log('PASS automatic signed replacement and agreed resume within the original recovery deadline; matching completed polls: '+common.length);
   }
   assert.deepEqual(errors,[]);
-  fs.writeFileSync(path.join(output,'acceptance.json'),JSON.stringify({status:'passed',scope:'two isolated Edge contexts on one PC using real P2P assets, production runtime and UI-only automatic join/preparation/start',reports,running,recovery,errors,warnings,at:new Date().toISOString()},null,2));
-  console.log('PASS automatic Host/link Join, asset transfer, shader preparation, readiness and one-click synchronized start; both peers ran at least 120 frames.');
+  fs.writeFileSync(path.join(output,'acceptance.json'),JSON.stringify({status:'passed',peerCount:count,scope:count+' isolated Edge contexts on one PC using real P2P assets, production runtime and UI-only automatic join/preparation/start',reports,inputPlans,running,recovery,errors,warnings,at:new Date().toISOString()},null,2));
+  console.log('PASS automatic Host/link Join, asset transfer, shader preparation, readiness and one-click synchronized start; all '+count+' peers ran at least 120 frames.');
  }catch(e){const finalStatus=await Promise.all(pages.map(p=>p.locator('#status').textContent().catch(()=> 'unavailable')));fs.writeFileSync(path.join(output,'failure.json'),JSON.stringify({message:e.stack,finalStatus,errors,warnings,snapshots},null,2));throw e;}
  finally{
   clearTimeout(deadline);for(const page of pages)try{await page.locator('#stop').click({timeout:5000});}catch{}
