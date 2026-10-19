@@ -523,8 +523,12 @@ void Hu3DMotionNext(s16 arg0)
     u32 temp_r28;
     s16 i;
 
+#ifndef TARGET_PC
+    /* Keep the console source layout; these reads are unused below. The port
+       also advances shape/cluster-only models whose base motId is -1. */
     temp_r27 = &Hu3DMotion[temp_r31->motId];
     temp_r29 = temp_r27->hsf->motion;
+#endif
     temp_r28 = temp_r31->motAttr;
     if (temp_r31->motId != -1) {
         temp_r27 = &Hu3DMotion[temp_r31->motId];

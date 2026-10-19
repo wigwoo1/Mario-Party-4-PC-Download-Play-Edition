@@ -216,6 +216,21 @@ void fn_1_2930(omObjData *arg0)
             temp_r28->unk_04 = 0;
         }
         arg0->model[0] = lbl_1_bss_1E98[((temp_r31->unk_00 % 80))][0];
+#ifdef TARGET_PC
+        /* A logical row borrows both the model and its shared motions. The
+           previous owner may have left it paused or in a different animation.
+           Off-screen opening/growth transitions finish logically below, so a
+           newly visible row starts in its idle pose (paused if already fallen). */
+        for (i = 0; i < 6; i++) {
+            arg0->motion[i] = lbl_1_bss_68[temp_r31->unk_00 % 80][i];
+        }
+        Hu3DMotionSet(arg0->model[0], arg0->motion[5]);
+        Hu3DModelAttrReset(arg0->model[0], HU3D_MOTATTR_PAUSE | HU3D_MOTATTR_REV);
+        Hu3DModelAttrSet(arg0->model[0], HU3D_MOTATTR_LOOP);
+        if (temp_r31->unk_24 == 3 || temp_r31->unk_14.x < 0.0f) {
+            Hu3DModelAttrSet(arg0->model[0], HU3D_MOTATTR_PAUSE);
+        }
+#endif
 
         if (temp_r31->unk_08.y < 0.0f) {
             Hu3DModelShadowDispOff(arg0->model[0]);
@@ -227,12 +242,20 @@ void fn_1_2930(omObjData *arg0)
         temp_r31->unk_04 = 1;
     }
 
+#ifdef TARGET_PC
+    /* Only 80 Whomps have resident models; the other logical rows retain -1
+       until they enter the camera window and take over a resident model. */
+    if (arg0->model[0] != -1) {
+#endif
     if ((temp_r31->unk_08.y < 0.0f) || (temp_r31->unk_08.z < (Center.z - 2000.0f))) {
         Hu3DModelAttrSet(arg0->model[0], HU3D_ATTR_DISPOFF);
     }
     else {
         Hu3DModelAttrReset(arg0->model[0], HU3D_ATTR_DISPOFF);
     }
+#ifdef TARGET_PC
+    }
+#endif
 
     omSetTra(arg0, temp_r31->unk_08.x, temp_r31->unk_08.y, temp_r31->unk_08.z);
     omSetRot(arg0, temp_r31->unk_14.x, temp_r31->unk_14.y, temp_r31->unk_14.z);
@@ -379,6 +402,22 @@ void fn_1_3364(omObjData *arg0)
     unkDominationData7 *temp_r31;
 
     temp_r31 = arg0->data;
+#ifdef TARGET_PC
+    /* The opening transition also visits logical rows with no model or
+       motion. Keep their effect/state updates without indexing Hu3DData[-1]. */
+    if (arg0->model[0] == -1) {
+        if (temp_r31->unk_2C == 0) {
+            if (temp_r31->unk_28 == 0) {
+                fn_1_4544(0, 0, temp_r31->unk_08.x, 0.0f, temp_r31->unk_08.z);
+            } else if (temp_r31->unk_28 == 1) {
+                fn_1_4544(1, 0, temp_r31->unk_08.x, 0.0f, temp_r31->unk_08.z);
+            }
+        }
+        temp_r31->unk_08.y = -300.0f;
+        fn_1_290C(arg0, 0);
+        return;
+    }
+#endif
     if (temp_r31->unk_2C == 0) {
         Hu3DMotionSet(arg0->model[0], arg0->motion[4]);
         Hu3DModelAttrReset(arg0->model[0], HU3D_MOTATTR_LOOP);
@@ -411,6 +450,20 @@ void fn_1_34A4(omObjData *arg0)
     unkDominationData7 *temp_r30;
 
     temp_r30 = arg0->data;
+#ifdef TARGET_PC
+    /* Scoring and effects also visit rows outside the 80-model window. These
+       rows have no animation to wait for; keep their logical growth/effects,
+       then let the residency handoff above restore an idle model when visible. */
+    if (arg0->model[0] == -1) {
+        if (temp_r30->unk_2C == 0) {
+            fn_1_4544(0, 0, temp_r30->unk_08.x, 0.0f, temp_r30->unk_08.z);
+            HuAudFXPlay(0x543);
+            temp_r30->unk_08.y = 0.0f;
+        }
+        fn_1_290C(arg0, 0);
+        return;
+    }
+#endif
     if (temp_r30->unk_2C == 0) {
         if (temp_r30->unk_28 == 1) {
             Hu3DModelAttrReset(arg0->model[0], HU3D_ATTR_DISPOFF);
@@ -478,7 +531,15 @@ void fn_1_37B0(omObjData *arg0)
     if (temp_r31->unk_2C == 0) {
         temp_r31->unk_14.x = 0.0f;
         temp_r31->unk_08.y = 0.0f;
+#ifdef TARGET_PC
+        /* Every logical row must propagate the final domino chain, including
+           those with no resident model. Only the graphics call needs a model. */
+        if (arg0->model[0] != -1) {
+#endif
         Hu3DModelAttrSet(arg0->model[0], HU3D_MOTATTR_PAUSE);
+#ifdef TARGET_PC
+        }
+#endif
         temp_r31->unk_2C++;
     }
     temp_r31->unk_14.x -= 4.0f;

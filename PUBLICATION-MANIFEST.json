@@ -1,8 +1,8 @@
 {
   "version": 1,
   "repository": "https://github.com/wigwoo1/Mario-Party-4-PC-Download-Play-Edition",
-  "buildId": "f6f03c7e462bb95b15a3bcb793c79a7c4cfe45f64c402508d2cad9a4dc166e41",
-  "sourceSnapshotSha256": "51d01c7c7eaac34bad44a95d3776b55123f974b5dec55587a517af75118901c7",
+  "buildId": "2a0bd2729dc7f0af7693408f3e3873444a345b903bc783a9ac2042865c281375",
+  "sourceSnapshotSha256": "1735bcb000abe3dc916575e8a4d70897bc9dcdfbcb6cff91d5a173ff345190d8",
   "upstream": {
     "url": "https://github.com/mariopartyrd/partyboard.git",
     "baseCommit": "f38304ebd13b09a15a80db7d7d015bf3fc387c5d"
@@ -9350,8 +9350,8 @@
     },
     {
       "path": "src/game/hsfmotion.c",
-      "bytes": 48825,
-      "sha256": "8c3a92315fec8b4dbb3a10cb9e2d821d6a4a3a743c9e6d09c1c2bf983694aec2"
+      "bytes": 49006,
+      "sha256": "1f9b294ae1fe5791c50fe44f4fc64b82fe04d07fe11268729810d4ff02acb620"
     },
     {
       "path": "src/game/init.c",
@@ -10650,8 +10650,8 @@
     },
     {
       "path": "src/REL/m407dll/whomp.c",
-      "bytes": 15673,
-      "sha256": "8e5572a66128b9abdad46e90182a1c1a5eb0a72441eb002dcd6c1b8911c0288e"
+      "bytes": 18168,
+      "sha256": "5344de92af75f239a662be11e843e631ff0cea448083e2d3a48d11b48667c84f"
     },
     {
       "path": "src/REL/m408Dll/camera.c",
@@ -11965,8 +11965,8 @@
     },
     {
       "path": "STATUS.md",
-      "bytes": 5848,
-      "sha256": "44014a2e64223f301d8f03aba406fa4962cd1099a89f7e6c34bf62db7ae22305"
+      "bytes": 5688,
+      "sha256": "fcc2aa215ecaa16b520bc068874f1f22b57823e8f959d9c10be10184272db88b"
     },
     {
       "path": "tools/__init__.py",
@@ -12852,6 +12852,16 @@
       "path": "tools/pipeline-scene-validation.test.cjs",
       "bytes": 789,
       "sha256": "41208ceefb350c475b4734c485e27a6e407dd1c2ea871116e9ffd070e4e1a5d3"
+    },
+    {
+      "path": "tools/prepare-domination-lifecycle-regression.cjs",
+      "bytes": 10925,
+      "sha256": "6f2a7b6f04c424ed2c5a90f9a98489e6d83370b1e7101b756263a81777f91078"
+    },
+    {
+      "path": "tools/prepare-domination-virtual-regression.cjs",
+      "bytes": 5655,
+      "sha256": "30ba756d0af925ff78836cea2ad3ebf020947f333ff0d47dfe34fb19e8a2a172"
     },
     {
       "path": "tools/prepare-lobby-hosting.cjs",
