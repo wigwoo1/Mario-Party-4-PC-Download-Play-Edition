@@ -1,8 +1,8 @@
 {
   "version": 1,
   "repository": "https://github.com/wigwoo1/Mario-Party-4-PC-Download-Play-Edition",
-  "buildId": "06a2e57534b266ac9dd2b94e8d3ecd8cea6e647ca0f1955cb5457adf12bb0977",
-  "sourceSnapshotSha256": "bbc4d1f6c6deca6743669f37a1c7251497a75b8734b5037e1680225749f8e6da",
+  "buildId": "90a83351248fb1589211b0f0e88da11731284bf29f2c47ba0e3f8e1616c5d54a",
+  "sourceSnapshotSha256": "9152a9adc79c55ec6b11d6653bf5fc551f62d28fbe4ac4cdb5792ab950c81e65",
   "upstream": {
     "url": "https://github.com/mariopartyrd/partyboard.git",
     "baseCommit": "f38304ebd13b09a15a80db7d7d015bf3fc387c5d"
@@ -4120,8 +4120,8 @@
     },
     {
       "path": "extern/aurora/lib/gfx/pipeline_cache.cpp",
-      "bytes": 38667,
-      "sha256": "02264e9e68c90844073149b393c759a86c2c7f9214caa10e6ec36cf81b4ffe0e"
+      "bytes": 40105,
+      "sha256": "fca69186d19ac5f0ab5e41da052982c37f279eee840b731ac9c3ad9ee8896543"
     },
     {
       "path": "extern/aurora/lib/gfx/pipeline_cache.hpp",
@@ -11960,8 +11960,8 @@
     },
     {
       "path": "STATUS.md",
-      "bytes": 3287,
-      "sha256": "e138748b8e8376473318a4eb88146acdaffb85f3f078a2d24bc738d7c9d2ad8e"
+      "bytes": 3618,
+      "sha256": "25d06480ce94aa9866feb9b28805dfccfadfc20a83b24dd6a08f17ce5a61a5be"
     },
     {
       "path": "tools/__init__.py",
@@ -12040,8 +12040,8 @@
     },
     {
       "path": "tools/browser-renderer/CMakeLists.txt",
-      "bytes": 50859,
-      "sha256": "4a2552dc35fea9f743b20b2fcab3956594cb4a9daba0eaf512b70774e6cc1a73"
+      "bytes": 51683,
+      "sha256": "6608cd96a13bba47a61d278750a6ba9ac697024dc056277d8d09b4394baf2e55"
     },
     {
       "path": "tools/browser-renderer/README.md",
@@ -12490,8 +12490,8 @@
     },
     {
       "path": "tools/native-rtc-probe/drive-mixed-full-match.cjs",
-      "bytes": 20730,
-      "sha256": "e35c84cba3e0067a2fbd19e338dcd181a94a4201f357be6b507b035940adee49"
+      "bytes": 21918,
+      "sha256": "b17d35f2cf94a155736afc1ea9bec22397c1bb0b3cc12581e3f29741a1963b54"
     },
     {
       "path": "tools/native-rtc-probe/error-evidence.cjs",
@@ -13549,6 +13549,11 @@
       "sha256": "7197419eb7b33726ab83d8204f2178cfd77a4b80444049630a667f1adbabff2a"
     },
     {
+      "path": "tools/test_wasm_pipeline_readiness.cpp",
+      "bytes": 3655,
+      "sha256": "c5cecf38e591c4ebfed4cbd11b2fc89eb54e974797cf91ffbd1b20711804ca38"
+    },
+    {
       "path": "tools/test_wasm_render_worker.cpp",
       "bytes": 1561,
       "sha256": "5ff52575a3b0f0e61e4b3a98da8703f3369549fe46dded2ed92db09b27e0ae5d"
@@ -13657,6 +13662,11 @@
       "path": "tools/test-pinball-velocity.py",
       "bytes": 1521,
       "sha256": "c513bcbaad09493053b1744458172c6409e4c2004f4a2de7dba45730ae7a72b2"
+    },
+    {
+      "path": "tools/test-pipeline-readiness-browser.cjs",
+      "bytes": 3216,
+      "sha256": "427830e36340ca6e654c1dcb22e3e138166f13e75dead58502360286dde7c358"
     },
     {
       "path": "tools/test-recovery-wall-clock.mjs",

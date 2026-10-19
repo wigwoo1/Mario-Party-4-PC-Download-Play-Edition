@@ -231,6 +231,21 @@ async function driveMixedFullMatch({peers,inventory,outputDirectory,board=0,maxT
       peer:index,available:typeof peers[index].capture==='function',captured:typeof peers[index].capture==='function'&&result.status==='fulfilled',
       error:result.status==='rejected'?String(result.reason):null
      })),null,2)+'\n');
+     if(turn===4&&process.env.PARTYBOARD_TEST_TURN4_VISUAL_BURST==='1'){
+      // Observe transient graphics after the original turn snapshot without
+      // pausing simulation or injecting game state. Captures are asynchronous.
+      for(let sample=1;sample<=3;sample++){
+       await sleep(1000);
+       const before=await snapshots();
+       const results=await Promise.allSettled(peers.map((peer,index)=>peer.capture?
+        Promise.resolve().then(()=>peer.capture(path.join(outputDirectory,'mixed-turn-4-burst-'+sample+'-peer-'+index+'.png'))):Promise.resolve(null)));
+       const after=await snapshots();
+       fs.writeFileSync(path.join(outputDirectory,'mixed-turn-4-burst-'+sample+'.json'),JSON.stringify({
+        sample,asynchronous:true,before:before.map(s=>({frame:s.frame,progress:s.progress})),after:after.map(s=>({frame:s.frame,progress:s.progress})),
+        captures:results.map((result,index)=>({peer:index,available:typeof peers[index].capture==='function',captured:typeof peers[index].capture==='function'&&result.status==='fulfilled',error:result.status==='rejected'?String(result.reason):null}))
+       },null,2)+'\n',{flag:'wx'});
+      }
+     }
     }
    }
    if(complete.every(Boolean)){

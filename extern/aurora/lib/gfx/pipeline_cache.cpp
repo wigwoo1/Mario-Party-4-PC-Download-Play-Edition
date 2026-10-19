@@ -1114,10 +1114,40 @@ void end_pipeline_frame() {
 }
 
 bool get_pipeline(PipelineRef ref, wgpu::RenderPipeline& pipeline) {
-  std::lock_guard guard{g_pipelineMutex};
+  std::unique_lock guard{g_pipelineMutex};
   const auto it = g_pipelines.find(ref);
   if (it == g_pipelines.end()) {
+#if defined(__EMSCRIPTEN__) && !defined(__EMSCRIPTEN_PTHREADS__)
+    // The browser has no compiler thread. A frame-budgeted queue must not
+    // omit a draw that is already being rendered (including EFB texture copies).
+    // Keep background preparation budgeted, but finish this demanded pipeline.
+    std::optional<PendingPipeline> demanded;
+    auto take = [&](auto& queue) {
+      auto pending = find_pending_pipeline(queue, ref);
+      if (pending == queue.end()) return false;
+      demanded.emplace(std::move(*pending));
+      queue.erase(pending);
+      return true;
+    };
+    if (!take(g_priorityPipelines) && !take(g_backgroundPipelines)) return false;
+    guard.unlock();
+    auto result = demanded->create();
+    guard.lock();
+    const auto inserted = g_pipelines.try_emplace(ref, CachedPipeline{
+        .pipeline = std::move(result), .firstFrameUsed = demanded->firstFrameUsed});
+    g_pendingPipelines.erase(ref);
+    g_residentPipelineCount.store(g_pipelines.size(), std::memory_order_relaxed);
+    g_pendingPipelineCount.store(g_pendingPipelines.size(), std::memory_order_relaxed);
+    pipeline = inserted.first->second.pipeline;
+    ++g_pipelinesPerFrame;
+    ++createdPipelines;
+    const bool prune = --queuedPipelines == 0 && g_gpuCachePrunePending.exchange(false, std::memory_order_acq_rel);
+    guard.unlock();
+    if (prune) webgpu::cache_prune();
+    return true;
+#else
     return false;
+#endif
   }
   pipeline = it->second.pipeline;
   return true;

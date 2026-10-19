@@ -1,23 +1,23 @@
 # Development status
 
-Updated 2026-10-18 (UTC). This project is incomplete.
+Updated 2026-10-19 (UTC). This project is incomplete.
 
-Current measured development runtime: `06a2e57534b266ac9dd2b94e8d3ecd8cea6e647ca0f1955cb5457adf12bb0977` (212 artifacts, independent JavaScript/C++ identities agree).
+Current measured development runtime: `90a83351248fb1589211b0f0e88da11731284bf29f2c47ba0e3f8e1616c5d54a` (212 artifacts; independent JavaScript/C++ identities agree). This source update does not replace the downloadable ae33 development archive.
 
 ## Changes and verification
 
-- Fixed a reproducible Windows render-worker deadlock: graphics waits now service synchronous Windows messages without consuming queued game input. The unchanged worker failed four bounded cross-thread message regressions; the fixed implementation passes all five new cases and all five existing worker tests. Native build and the real Edge 300-frame render-worker contract pass.
-- On candidate `7d5138feeed4f3e2aa7b8b157cdb5a75747e369f040fdbfb7f32f0f43e1b503b`, isolated native Host preparation completed in 30.5 seconds. Actual same-PC native Host plus three Edge guests passed automatic full-asset transfer, 618 known shader pipelines, readiness, Start and signed reconnect recovery (129 matching startup records, 91 recovered records). Reverse native Join/Edge Host passed with 126 startup and 90 recovery records. Native and test drivers exited successfully.
-- The older unchanged ae33 build also passed a fresh startup baseline that day. The original intermittent GPU wait is therefore not conclusively explained by the Windows-message fix.
-- A subsequent two-native/two-Edge five-turn attempt on 7d5138fe failed before gameplay: preparation and all three invitations completed, then the host lobby closed during connection setup. A later diagnostic snapshot masked the original error as "Native lobby unavailable". No completed match is claimed for that candidate.
-- Current build 06a2e575 preserves the specific lobby failure through closed-session access. Actual RTC tests verify invalid-report and connection-loss errors while preserving rejection and teardown. Native build passes. A fresh muted five-turn retry is in progress; asset transfer completed, but gameplay and completion are not yet accepted.
+- Windows graphics waits now service synchronous window messages without consuming queued game input. The previous worker failed four bounded deadlock regressions; the fix passes five new and five existing worker tests. Native compilation and the actual Edge 300-frame worker test pass. The original intermittent GPU wait is not conclusively explained, because the unchanged older build also passed a fresh baseline.
+- Build 06a2 preserves detailed lobby failures through closed-session access. It passed three fresh native Host preparations (37–39 seconds), Ready/Unready and clean exits. A five-turn same-PC match with two native and two actual Edge peers completed, including native reconnect. Retained input/checkpoint/RNG windows agreed at every turn and final standings; all four rendered standings were reviewed. This used diagnostic setup controls and is not acceptance of the complete automatic setup flow on separate devices.
+- Browser pipeline readiness now completes a requested queued shader pipeline before drawing with it. An actual Edge GPU fixture reproduced seven unavailable pipelines out of eight before the fix and zero afterward. The browser game builds successfully; all 91 embedded modules verify. Native executable is unchanged from 06a2.
+- Current build 90a833 passed actual same-PC automatic Edge Host/native Join asset verification, 618 known shader pipelines, readiness and Start. A normal-keyboard Mushroom Medic test played three rounds, saved one patient, showed matching readable score/results/ranking, and returned to a responsive menu. All 25,303 consecutive archived input/checkpoint/RNG records agreed, followed by 90 matching signed-recovery polls. Driver and native exits were zero and owned resources closed. An earlier zero-score replay also passed with 38,494 consecutive matching records.
+- A turn-four capture on 06a2 showed dark browser portraits that were normal again on turn five. Its exact cause remains unresolved; the pipeline fixture does not prove that it caused this visual issue. A five-turn four-peer regression on 90a833 is in progress with additional timed turn-four captures. No result is claimed for this ongoing match. Eight existing match-harness tests pass.
 
-## Available release and retained evidence
+## Available release
 
-The downloadable ae33 development prerelease remains unchanged. The newer source fixes above are not in that archive yet. Earlier ae33 acceptance includes Mushroom Medic replay rendering/results/return and same-PC automatic native Host plus three Edge setup/recovery. Earlier native startup and Join failures remain valid limitations of that release. Prior c508 Extra Room and afaa 20-turn results apply to those earlier builds, not to the current candidate.
+The ae33 development prerelease remains unchanged and does not contain these newer source fixes. Its earlier native startup and Join failures remain limitations of that archive. Earlier c508 and afaa results apply only to those builds. No new binary release is published by this update.
 
 ## Still open
 
-A completed current-build match and intermittent startup/connection reliability; positive-score Mushroom Medic acceptance; broader board/minigame/shader coverage; default launcher and later save-screen coverage; physical controller/audio, separate-device refresh, clean-machine installation and mobile checks. Internet/public-hosting tests remain deferred until the user is home. No overall completion percentage is measured.
+Current-build four-peer completed-match acceptance and intermittent portrait/startup reliability; broader board/minigame/shader coverage; default launcher and later save-screen coverage; physical controller/audio, separate-device refresh, clean-machine installation and mobile checks. Internet/public-hosting tests remain deferred until the user is home. No overall completion percentage is measured.
 
-Game images, private keys, credentials, personal profiles and local test logs/screenshots are excluded. The host supplies their own game image. Browser guests receive game data into browser storage. Release archives include Node.js for the local browser page; no separate Node installation is required. Clean-machine prerequisites remain unverified.
+Game images, credentials, private keys, personal profiles and local test logs/screenshots are excluded from publication. The host supplies a compatible game image; guests receive game data into browser storage. Release archives bundle Node.js for the local page, but clean-machine prerequisites remain unverified.
