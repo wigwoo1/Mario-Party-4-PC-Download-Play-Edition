@@ -556,7 +556,7 @@ async function observe(page,evaluate){
             }finally{clearTimeout(matchTimer);}
             completedFullMatchProgress=true;
             if(process.env.PARTYBOARD_TEST_POST_RANKING_RETURN==='1'){
-              await require('../tools/drive-browser-post-ranking.cjs').driveBrowserPostRanking({pages,inventory,outputDirectory});
+              await require('../tools/drive-browser-post-ranking.cjs').driveBrowserPostRanking({pages,inventory,outputDirectory,verifyInteractiveMenu:process.env.PARTYBOARD_TEST_POST_RANKING_INTERACTIVE==='1'});
             }
           }
           if(process.env.PARTYBOARD_TEST_GAME_PARTY_MINIGAME==='1'&&process.env.PARTYBOARD_TEST_GAME_FULL_MATCH!=='1'){

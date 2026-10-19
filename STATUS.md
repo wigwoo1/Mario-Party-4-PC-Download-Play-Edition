@@ -18,7 +18,7 @@ A fresh two-Edge browser-only five-turn match using the90a833 browser artifacts 
 
 ## Start glyph coverage
 
-Window icon bank12 (Start) was omitted from both browser and native prompt replacement. It now follows the real Start binding, including keyboard Enter, PlayStation Options and user remaps. Seventeen focused tests and four actual Edge production texture/active-device cases pass, including remapped Space/Share. Generated glyph previews were reviewed at the authored20x24 size and64x64. The browser runtime compiles and all91embedded modules verify. Affected native source objects compile, including the results-menu fix, without linking or executing any native game DLL. In-game glyph appearance and physical-controller validation remain open; the new Start-glyph candidate has not yet passed a gameplay run. An initial native object attempt used a stale build cache with a missing dependency path; the current configured build compiled the objects successfully.
+Window icon bank12 (Start) was omitted from both browser and native prompt replacement. It now follows the real Start binding, including keyboard Enter, PlayStation Options and user remaps. Seventeen focused tests and four actual Edge production texture/active-device cases pass, including remapped Space/Share. Generated glyph previews were reviewed at the authored20x24 size and64x64. The browser runtime compiles and all91embedded modules verify. Affected native source objects compile, including the results-menu fix, without linking or executing any native game DLL. Candidate682e260a subsequently completed a normal five-turn board1 match on two actual Edge peers. All five30-record transition samples and256settled final records match; both rendered standings agree. The keyboard Enter glyph appears beside Skip on both standings. Both peers returned through the normal intro to an interactive menu, moved Party-to-Story-to-Party using ordinary ArrowRight/ArrowLeft inputs, and showed matching navigation captures. Driver exit0 and owned cleanup are verified. Physical-controller, native integration and all-content validation remain open. An initial native object attempt used a stale build cache with a missing dependency path; the current configured build compiled the objects successfully.
 
 ## Verified scope
 
@@ -30,9 +30,13 @@ Window icon bank12 (Start) was omitted from both browser and native prompt repla
 
 - Four later save callbacks (Story results, Minigame mode and Extra Room) passed scoped C fixtures executing their exact production bodies and production save-flag getter/setter. UI calls were trapped; four deliberately disabled guards all triggered the trap. These checks establish callback branches, not visual post-match gameplay or the entire memory-card-free experience. No native game DLL was executed.
 
+## Expanded shader observations
+
+The completed board1 run retained653observed pipeline definitions, including35beyond the existing618-entry seed. Both original and captured databases pass integrity checks, and a conflict-checked merged seed is preserved privately. A fresh four-Edge preparation/start/signed-recovery test is running on that proposed seed. It has not been promoted as the default, and no complete scene/shader coverage is claimed.
+
 ## Open validation
 
-Original intermittent startup/portrait reliability; normal post-Party-ranking return and later save-related screens; broader boards, minigames and shader coverage; default native launcher game-selection flow; physical controllers and audible surround sound; refreshed separate-device multiplayer; clean-machine installation; Android/iOS and cellular/WAN testing. Public hosting tests remain deferred until the user is home. No whole-project completion percentage is measured.
+Original intermittent startup/portrait reliability; native post-Party-ranking return and other later save-related screens; broader boards, minigames and shader coverage; default native launcher game-selection flow; physical controllers and audible surround sound; refreshed separate-device multiplayer; clean-machine installation; Android/iOS and cellular/WAN testing. Public hosting tests remain deferred until the user is home. No whole-project completion percentage is measured.
 
 ## Running the package
 
