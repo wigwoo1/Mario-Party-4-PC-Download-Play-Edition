@@ -18,6 +18,8 @@ The subsequent native preparation test failed with exit code 2 after Windows Def
 - Eight timed turn-four browser captures showed colored HUD portraits. The earlier intermittent dark-portrait defect was not reproduced; its cause and complete elimination remain unproven.
 - Actual same-PC automatic Edge Host/native Join verified assets, 618 known shader pipelines, readiness and Start. Normal keyboard play in Mushroom Medic saved one patient, showed readable matching scores/results/rankings and returned to a responsive menu. All 25,303 consecutive recorded input/checkpoint/RNG observations matched, followed by 90 matching signed-recovery polls. An earlier zero-score replay also passed.
 
+- Four later save callbacks (Story results, Minigame mode and Extra Room) passed scoped C fixtures executing their exact production bodies and production save-flag getter/setter. UI calls were trapped; four deliberately disabled guards all triggered the trap. These checks establish callback branches, not visual post-match gameplay or the entire memory-card-free experience. No native game DLL was executed.
+
 ## Open validation
 
 Original intermittent startup/portrait reliability; normal post-Party-ranking return and later save-related screens; broader boards, minigames and shader coverage; default native launcher game-selection flow; physical controllers and audible surround sound; refreshed separate-device multiplayer; clean-machine installation; Android/iOS and cellular/WAN testing. Public hosting tests remain deferred until the user is home. No whole-project completion percentage is measured.
