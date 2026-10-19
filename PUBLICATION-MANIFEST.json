@@ -2,7 +2,7 @@
   "version": 1,
   "repository": "https://github.com/wigwoo1/Mario-Party-4-PC-Download-Play-Edition",
   "buildId": "2a0bd2729dc7f0af7693408f3e3873444a345b903bc783a9ac2042865c281375",
-  "sourceSnapshotSha256": "1735bcb000abe3dc916575e8a4d70897bc9dcdfbcb6cff91d5a173ff345190d8",
+  "sourceSnapshotSha256": "38f1bdb3a8e3f63541fa32ce1889c88fd8f8d94fac5ffc7a1973e0efa3cae923",
   "upstream": {
     "url": "https://github.com/mariopartyrd/partyboard.git",
     "baseCommit": "f38304ebd13b09a15a80db7d7d015bf3fc387c5d"
@@ -11965,8 +11965,8 @@
     },
     {
       "path": "STATUS.md",
-      "bytes": 5688,
-      "sha256": "fcc2aa215ecaa16b520bc068874f1f22b57823e8f959d9c10be10184272db88b"
+      "bytes": 7141,
+      "sha256": "a504b0d95896f8342b15e2cfbd75cf95ada12f996dde01f2d2fec17356ea4c06"
     },
     {
       "path": "tools/__init__.py",
