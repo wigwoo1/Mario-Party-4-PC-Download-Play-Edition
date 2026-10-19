@@ -190,7 +190,7 @@ static ANIMDATA* NativeKeyboardGlyphForPort(s16 entry, s16 port) {
         case 2:action=PAD_BUTTON_A;break; case 3:action=PAD_BUTTON_B;break;
         case 4:action=PAD_BUTTON_X;break; case 5:action=PAD_BUTTON_Y;break;
         case 6:action=PAD_TRIGGER_R;break; case 8:action=PAD_TRIGGER_L;break;
-        case 11:action=PAD_TRIGGER_Z;break; default:return nullptr;
+        case 11:action=PAD_TRIGGER_Z;break; case 12:action=PAD_BUTTON_MENU;break; default:return nullptr;
     }
     u32 count=0;
     auto* bindings=PADGetKeyButtonBindings(port,&count);

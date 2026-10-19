@@ -3,9 +3,9 @@ import {attachInputGlyphs} from './browser-input-glyphs.mjs';
 import {controllerFamily} from './input-glyph-state.mjs';
 import {controlGlyph} from './control-glyphs.mjs';
 
-const keys={2:'Z',3:'X',4:'C',5:'V',6:'E',8:'Q',11:'R'};
+const keys={2:'Z',3:'X',4:'C',5:'V',6:'E',8:'Q',11:'R',12:'Enter'};
 // Matches Aurora's standard SDL mapping, including analog L/R triggers.
-const buttons={2:'south',3:'east',4:'west',5:'north',6:'r2',8:'l2',11:'r1'};
+const buttons={2:'south',3:'east',4:'west',5:'north',6:'r2',8:'l2',11:'r1',12:'start'};
 export async function prepareRuntimeGlyphs({signal,render=glyphTexture,bindings={}}={}) {
   // These are physical labels indexed by authored window prompt entry. Session
   // ownership and normalized game action numbers are unaffected.

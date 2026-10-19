@@ -998,7 +998,7 @@ static s16 HuWinSpcFontEntry(WindowData *window, s16 entry, s16 x, s16 y)
             anim = *spcFontTbl[entry].anim;
 #ifdef TARGET_PC
             ANIMDATA *glyph = NULL;
-            if (entry == 2 || entry == 3 || entry == 4 || entry == 5 || entry == 6 || entry == 8 || entry == 11) {
+            if (entry == 2 || entry == 3 || entry == 4 || entry == 5 || entry == 6 || entry == 8 || entry == 11 || entry == 12) {
                 glyph = HuWinControlGlyphForMask(entry, window->active_pad & ~window->player_disable);
             }
             if (glyph && (glyph->bankNum != 1 || glyph->patNum != 1 ||

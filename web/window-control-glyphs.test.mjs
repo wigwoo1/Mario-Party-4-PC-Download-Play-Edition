@@ -16,7 +16,7 @@ test('trigger animation phase survives while decorations and sentinels remain un
   assert.equal(windowControlGlyph(7,1,resolve).pressed,true);
   assert.equal(windowControlGlyph(9,1,resolve).action,'PAD_TRIGGER_L');
   assert.equal(windowControlGlyph(7,2,resolve),null);
-  for(const bank of [0,1,10,12,13,14,15,16,17,18,19,-1,2.5]) {
+  for(const bank of [0,1,10,13,14,15,16,17,18,19,-1,2.5]) {
     assert.equal(windowControlGlyph(bank,0,()=>{throw Error('Unexpected replacement');}),null);
   }
 });

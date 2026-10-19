@@ -1,8 +1,8 @@
 {
   "version": 1,
   "repository": "https://github.com/wigwoo1/Mario-Party-4-PC-Download-Play-Edition",
-  "buildId": "52578893ab4a35e0eae3d2ab6010d641d28f317c8fd10ec8920aa14a4f0b24ec",
-  "sourceSnapshotSha256": "5852f52692bcb81b3197e26d70c154d6a0ed4ba7adfb7f89dd3167a397f90b90",
+  "buildId": "682e260a928eea42df80c5c6d8ac51d9888bdf68512ae8f475ca68e8c01abe30",
+  "sourceSnapshotSha256": "0977dbd065aa55e3352ffd1b9a6f3325afe9c87f752a550eb370cd11c9daacb5",
   "upstream": {
     "url": "https://github.com/mariopartyrd/partyboard.git",
     "baseCommit": "f38304ebd13b09a15a80db7d7d015bf3fc387c5d"
@@ -9490,8 +9490,8 @@
     },
     {
       "path": "src/game/window.c",
-      "bytes": 77690,
-      "sha256": "5952d4f91baa7da5fd6576b5bab56174fb85963b271946776b372b3664693326"
+      "bytes": 77706,
+      "sha256": "37371f100f15f472f1101abf1a3c8d7bf6879b2db52dda162bf2f6760aa8d9e3"
     },
     {
       "path": "src/game/wipe.c",
@@ -10155,8 +10155,8 @@
     },
     {
       "path": "src/port/portmain.cpp",
-      "bytes": 142003,
-      "sha256": "7a399c9627cd5d777aeaf7482b02ad81e5ebe21306bba0012de735bd63c8fca2"
+      "bytes": 142041,
+      "sha256": "80feed4fd4cb49bf8d2a74fd3428bef9388f6a60396e0973b9e2d7a3a62b400b"
     },
     {
       "path": "src/port/settings.cpp",
@@ -11960,8 +11960,8 @@
     },
     {
       "path": "STATUS.md",
-      "bytes": 6234,
-      "sha256": "156103f998dbe6e83a80dddc005c217516a980e957d2597931618c5b53de994d"
+      "bytes": 7242,
+      "sha256": "6b236ca98d748c7bfeb3b60587a9a03d13322d5bc041df3c04e7aa4bfb8fcb4e"
     },
     {
       "path": "tools/__init__.py",
@@ -14020,8 +14020,8 @@
     },
     {
       "path": "web/control-bindings.mjs",
-      "bytes": 5661,
-      "sha256": "f558307ef5f3852ce0b1173577c81df44e5c79eefa03bc86fd97bf9a0690f1a1"
+      "bytes": 5672,
+      "sha256": "59316c37f7785d09da7bcd60b83ad122204b588dd5bd652cc8b31e0233dd6050"
     },
     {
       "path": "web/control-bindings.test.mjs",
@@ -14580,8 +14580,8 @@
     },
     {
       "path": "web/runtime-glyphs.mjs",
-      "bytes": 2204,
-      "sha256": "9997c90a2ed38e6ab831fbad2605d456ef79da9d0a79895a8b776cc8736cc256"
+      "bytes": 2226,
+      "sha256": "415107e98bcee3d4cd6262e289d6e86a02299af73144e94b3d4c95f84f3e109e"
     },
     {
       "path": "web/runtime-glyphs.test.mjs",
@@ -14789,6 +14789,16 @@
       "sha256": "f6e886012ba665d58e35250d829ca85c05e8ce983cef620d022b7230501024bf"
     },
     {
+      "path": "web/start-glyphs-browser-test.cjs",
+      "bytes": 4612,
+      "sha256": "ec08f0a2f4b955a766d50136ce4e671de62e44ebbac0a002e0cf8cb1de73b959"
+    },
+    {
+      "path": "web/start-glyphs.test.mjs",
+      "bytes": 2385,
+      "sha256": "c7119676e4fa6c4d1392f37c81ab3a7c27db3587eaab3cf9c863627a2b88ebac"
+    },
+    {
       "path": "web/start-host.mjs",
       "bytes": 1784,
       "sha256": "984889c566d775a8cbbe659213ed488202cc3a590c71153a7ee8ead8b9f735de"
@@ -14880,13 +14890,13 @@
     },
     {
       "path": "web/window-control-glyphs.mjs",
-      "bytes": 944,
-      "sha256": "07bb92ab0ba1432f786ce02c1db3b916f2bf127e200ee4507a540f0462e19018"
+      "bytes": 967,
+      "sha256": "a70206d5fc82d620b12acb99d6f68c0cc8ee5aa069fa161f4db497e647f52500"
     },
     {
       "path": "web/window-control-glyphs.test.mjs",
-      "bytes": 1167,
-      "sha256": "fbca1ab41d534799b61993a463d23a061b5389cddab87649deb440968cba68be"
+      "bytes": 1164,
+      "sha256": "f6ffe4e35ef2b92ee43e296cb76ea06bdc25b16ac67a6cf78852be278d3946b5"
     }
   ],
   "excluded": [

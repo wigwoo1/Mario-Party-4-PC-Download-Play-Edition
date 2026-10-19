@@ -2,7 +2,7 @@
 // These names denote emulated game actions, never physical button positions.
 const actions=new Map([[2,'PAD_BUTTON_A'],[3,'PAD_BUTTON_B'],
   [4,'PAD_BUTTON_X'],[5,'PAD_BUTTON_Y'],[6,'PAD_TRIGGER_R'],
-  [7,'PAD_TRIGGER_R'],[8,'PAD_TRIGGER_L'],[9,'PAD_TRIGGER_L'],[11,'PAD_TRIGGER_Z']]);
+  [7,'PAD_TRIGGER_R'],[8,'PAD_TRIGGER_L'],[9,'PAD_TRIGGER_L'],[11,'PAD_TRIGGER_Z'],[12,'PAD_BUTTON_MENU']]);
 
 // Call only for the window icon animation, not an arbitrary sprite bank.
 // The renderer retains the original whenever this returns null.

@@ -39,7 +39,7 @@ export function compileControllerBindings(value){
 }
 export function controlBindingGlyphs(value){
  const profile=validateControlBindings(value);
- const entries={2:'a',3:'b',4:'x',5:'y',6:'r',8:'l',11:'z'};
+ const entries={2:'a',3:'b',4:'x',5:'y',6:'r',8:'l',11:'z',12:'start'};
  const names={0:'south',1:'east',2:'west',3:'north',4:'l1',5:'r1',6:'l2',7:'r2',8:'select',9:'start'};
  const keyboard={},gamepad={};
  for(const [entry,action] of Object.entries(entries)){
