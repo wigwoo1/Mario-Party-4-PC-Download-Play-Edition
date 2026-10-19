@@ -1,8 +1,8 @@
 {
   "version": 1,
   "repository": "https://github.com/wigwoo1/Mario-Party-4-PC-Download-Play-Edition",
-  "buildId": "90a83351248fb1589211b0f0e88da11731284bf29f2c47ba0e3f8e1616c5d54a",
-  "sourceSnapshotSha256": "2834e0987c506a1fbb2de8b059d91d8900798c453d6b82ade4572a4194e40163",
+  "buildId": "52578893ab4a35e0eae3d2ab6010d641d28f317c8fd10ec8920aa14a4f0b24ec",
+  "sourceSnapshotSha256": "2876bff7b8e81d07092456bddc96112658cfabccc8830f486607979c0a312e9b",
   "upstream": {
     "url": "https://github.com/mariopartyrd/partyboard.git",
     "baseCommit": "f38304ebd13b09a15a80db7d7d015bf3fc387c5d"
@@ -11415,8 +11415,8 @@
     },
     {
       "path": "src/REL/mstory3Dll/result.c",
-      "bytes": 59288,
-      "sha256": "70af45655f42f5ef1170a686c9965699026f1157dc46ee082afef84408ce98f1"
+      "bytes": 59280,
+      "sha256": "a04a1539803b6f642248dbdc0f416c64af98ffa8a616fe9a9a52b0115a51217a"
     },
     {
       "path": "src/REL/mstory3Dll/win_effect.c",
@@ -11960,8 +11960,8 @@
     },
     {
       "path": "STATUS.md",
-      "bytes": 4666,
-      "sha256": "5496a9ebb162b57dda9ae64d63c0a85d23c9bb9327d99810d67568c4b5dc464d"
+      "bytes": 5749,
+      "sha256": "cd08936cd37fc66d6ace3bef6928c4873e29567ae8f6f6fba9f7363e8084e84e"
     },
     {
       "path": "tools/__init__.py",
@@ -12177,6 +12177,11 @@
       "path": "tools/download_tool.py",
       "bytes": 4936,
       "sha256": "23b49a110c7e0960d55c5a7e8bd9f5cec063cc3e60f5cde70a3eded90f5a49e8"
+    },
+    {
+      "path": "tools/drive-browser-post-ranking.cjs",
+      "bytes": 3163,
+      "sha256": "6d26a6bb458f67cc4fc1b067c1fa11d40a16362655a9f43a4b186a7be3d0b02c"
     },
     {
       "path": "tools/drive-production-full-match-mario-medley.test.cjs",
@@ -13689,6 +13694,11 @@
       "sha256": "4e671d5b271b90258950a701ccdfca89c11fa5f38f1e4cd30c2ec6bd6242bf07"
     },
     {
+      "path": "tools/test-result-menu-return.py",
+      "bytes": 3885,
+      "sha256": "cf0bf7410ab85a715ae55fc2f987d03f0704275a5a5a4cd7897a2c38e3c2b8b3"
+    },
+    {
       "path": "tools/test-wasm-browser.cjs",
       "bytes": 111738,
       "sha256": "55de1cd3b02115294301a348a22455cd16f4f802e0082bead1c7a9a17aa3dca3"
@@ -14250,8 +14260,8 @@
     },
     {
       "path": "web/lobby-runtime-peers-browser-test.cjs",
-      "bytes": 74313,
-      "sha256": "915a0f56e44fa47df41b2c98fa604e0a6f117c3f25ab201231644f334e7147b1"
+      "bytes": 74529,
+      "sha256": "a2794824da1791f6e8b3951b9655f0f1c8f60e41baa096b857004afd649bff85"
     },
     {
       "path": "web/lobby-state.mjs",

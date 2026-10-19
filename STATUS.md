@@ -1,6 +1,8 @@
 # Development status — 2026-10-19 UTC
 
-Measured runtime: `90a83351248fb1589211b0f0e88da11731284bf29f2c47ba0e3f8e1616c5d54a`.
+Last mixed native/browser runtime: `90a83351248fb1589211b0f0e88da11731284bf29f2c47ba0e3f8e1616c5d54a`.
+
+New measured browser-only candidate: `52578893ab4a35e0eae3d2ab6010d641d28f317c8fd10ec8920aa14a4f0b24ec`. Native source rebuild and cross-platform compatibility for the new change remain unverified.
 
 This is an unfinished Windows/native and browser development build. Guests receive game data into browser storage from the host; no game image is distributed here. The host must supply a compatible game image.
 
@@ -9,6 +11,10 @@ This is an unfinished Windows/native and browser development build. Guests recei
 The fresh release candidate passed all 472 staged file hashes, all ten packaging/publication checks, three launcher inspections and its loopback four-player lobby checks. Its browser launcher also served the measured runtime using bundled Node with no installed Node on PATH, then closed its listener.
 
 The subsequent native preparation test failed with exit code 2 after Windows Defender quarantined the candidate's `runtime/dol.dll`. Defender reported `Trojan:Win32/Bearfoos.A!ml` (threat ID 2147731250). Independent native artifact verification confirmed that the DLL was then missing. This detection has not been established as a false positive. No antivirus exclusion, restoration or protection change was made. This update publishes source/status only; no new binary archive is released. Earlier release assets remain unchanged and have not been cleared by this test.
+
+## New results-menu defect and pending gameplay retest
+
+A fresh two-Edge browser-only five-turn match using the90a833 browser artifacts reached matching final standings (five30-record transition samples and256settled final records). The added normal post-ranking return check then failed: Start/Skip opened detailed results instead of leaving. The existing results function `fn_1_16924` calculated its action but omitted its return value. Source now returns the existing action. Baseline MSVC and Wasm return-type checks fail on the old function; four corrected return cases pass in both. The rebuilt module preserves201imports/264exports, and all91embedded modules verify in the rebuilt browser runtime. A new full-match/normal-return gameplay test is running. No successful fixed gameplay return, native production rebuild or new binary-release claim is made yet.
 
 ## Verified scope
 

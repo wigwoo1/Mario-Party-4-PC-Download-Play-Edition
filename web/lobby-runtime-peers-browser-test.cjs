@@ -555,6 +555,9 @@ async function observe(page,evaluate){
               ]);
             }finally{clearTimeout(matchTimer);}
             completedFullMatchProgress=true;
+            if(process.env.PARTYBOARD_TEST_POST_RANKING_RETURN==='1'){
+              await require('../tools/drive-browser-post-ranking.cjs').driveBrowserPostRanking({pages,inventory,outputDirectory});
+            }
           }
           if(process.env.PARTYBOARD_TEST_GAME_PARTY_MINIGAME==='1'&&process.env.PARTYBOARD_TEST_GAME_FULL_MATCH!=='1'){
             const inventory=JSON.parse(fs.readFileSync(require('node:path').resolve(__dirname,'../../../outputs/validation/browser-usa-scene-inventory.json'),'utf8'));
