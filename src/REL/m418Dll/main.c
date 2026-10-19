@@ -337,6 +337,10 @@ void fn_1_E74(omObjData *object)
 {
     Mtx sp18;
     f32 var_f31;
+#ifdef TARGET_PC
+    static const char *labelNames[4] = { "s3B", "s3A", "s3Y", "s3X" };
+    static const s16 labelEntries[4] = { 3, 2, 5, 4 };
+#endif
 
     M418DllUnkStruct4 *temp_r30;
     M418DllUnkStruct4 *temp_r29;
@@ -348,6 +352,12 @@ void fn_1_E74(omObjData *object)
 
     temp_r26 = &lbl_1_bss_3EC;
     temp_r28 = &lbl_1_bss_26C[temp_r26->unk0];
+#ifdef TARGET_PC
+    if (object->work[0] >= 0 && object->work[0] < 4) {
+        Hu3DModelControlGlyphSet(object->model[1], labelNames[object->work[0]],
+            labelEntries[object->work[0]], temp_r28->unkC ? -1 : temp_r28->unk18);
+    }
+#endif
     temp_r30 = &lbl_1_bss_170[object->work[0]];
     if (object->work[1] == 0) {
         fn_1_ABC4(object, 2, 2, 0, 2);

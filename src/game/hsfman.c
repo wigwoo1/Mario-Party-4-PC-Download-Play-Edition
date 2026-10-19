@@ -9,6 +9,11 @@
 #include "game/ShapeExec.h"
 #include "game/sprite.h"
 #include "game/disp.h"
+#ifdef TARGET_PC
+#include "game/window.h"
+#include <string.h>
+#include "model_control_glyph.h"
+#endif
 
 #include "dolphin/gx/GXVert.h"
 
@@ -645,6 +650,9 @@ void Hu3DModelKill(s16 arg0) {
     s16 var_r27;
     s16 i;
 
+#ifdef TARGET_PC
+    ModelControlGlyphKill(arg0);
+#endif
     temp_r31 = &Hu3DData[arg0];
     var_r28 = temp_r31->hsf;
     if (var_r28 != 0) {

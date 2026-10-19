@@ -505,6 +505,9 @@ s16 Hu3DModelCreate(void *);
 s16 Hu3DModelLink(s16);
 s16 Hu3DHookFuncCreate(HU3DMODELHOOK);
 void Hu3DModelKill(s16);
+#ifdef TARGET_PC
+BOOL Hu3DModelControlGlyphSet(s16 model, const char *bitmapName, s16 entry, s16 port);
+#endif
 void Hu3DModelAllKill(void);
 void Hu3DModelPosSet(s16, float, float, float);
 void Hu3DModelPosSetV(s16, HuVecF *);

@@ -1,8 +1,8 @@
 {
   "version": 1,
   "repository": "https://github.com/wigwoo1/Mario-Party-4-PC-Download-Play-Edition",
-  "buildId": "682e260a928eea42df80c5c6d8ac51d9888bdf68512ae8f475ca68e8c01abe30",
-  "sourceSnapshotSha256": "6a33808d6e4d2536586e2741d4e100193b25535a839f293f076ebaa901296525",
+  "buildId": "f6f03c7e462bb95b15a3bcb793c79a7c4cfe45f64c402508d2cad9a4dc166e41",
+  "sourceSnapshotSha256": "373e5de1cd2bc6d8b1f93254933a5ebdcfc737002800e0493aca01a2fcd53da6",
   "upstream": {
     "url": "https://github.com/mariopartyrd/partyboard.git",
     "baseCommit": "f38304ebd13b09a15a80db7d7d015bf3fc387c5d"
@@ -5215,8 +5215,8 @@
     },
     {
       "path": "include/game/hu3d.h",
-      "bytes": 25549,
-      "sha256": "ac58c7aec2b8d51fb0040618259c9245e05ef6024ddb21850bc82d447cb26ef7"
+      "bytes": 25663,
+      "sha256": "3e26f412c4744732e8867826e90fd45f1b324b7987aee448a45faed48e9cfb5a"
     },
     {
       "path": "include/game/humath.h",
@@ -9345,8 +9345,8 @@
     },
     {
       "path": "src/game/hsfman.c",
-      "bytes": 74142,
-      "sha256": "d7dd35707f35632ea20705f1d8cc316c20e53422ede8902aa5ba5d24351d6d8c"
+      "bytes": 74309,
+      "sha256": "5017e716fa52e9d8f3c31b32719648b3001468ffb9af7956b6a45d0b79fb6eab"
     },
     {
       "path": "src/game/hsfmotion.c",
@@ -9397,6 +9397,11 @@
       "path": "src/game/minigame_seq.c",
       "bytes": 130138,
       "sha256": "86b444604b06fe6cff1463c9f290b50a37c9773ea55a956833d800a9d6feb273"
+    },
+    {
+      "path": "src/game/model_control_glyph.h",
+      "bytes": 3955,
+      "sha256": "daa83787c61a433611e983cac8828c1e901be424b5830885990a082cb9f24b43"
     },
     {
       "path": "src/game/objdll.c",
@@ -10765,8 +10770,8 @@
     },
     {
       "path": "src/REL/m418Dll/main.c",
-      "bytes": 87707,
-      "sha256": "59dd1f52ec486ef98cdb58bfe04bd077d8bd974748ea3837dd7c99cebf152f84"
+      "bytes": 88115,
+      "sha256": "bf4e16bd45e7f7e03690644b1e5b52453cc63e5f708007929853363c4cfd08ec"
     },
     {
       "path": "src/REL/m418Dll/sequence.c",
@@ -11960,8 +11965,8 @@
     },
     {
       "path": "STATUS.md",
-      "bytes": 8133,
-      "sha256": "4c62261ad5fc378f67c35aa99ab99b669644477307486f13ebea710b98c312ab"
+      "bytes": 4392,
+      "sha256": "80e8cb830b2b83cc3fbb7eb94c6054c82aea04ec411d5d72aeeeb5262189f379"
     },
     {
       "path": "tools/__init__.py",
