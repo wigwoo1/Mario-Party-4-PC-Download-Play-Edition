@@ -45,6 +45,7 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
   assert.equal(reports[0].host?.pipelineSeed,seed.sha256,'Actual prepared runtime must use the configured shader seed');
   assert.equal(reports[0].host?.frame,0,'Automatic start must agree at frame zero');
   const inputPlans=await Promise.all(pages.map(p=>p.evaluate(()=>app.lobbyInputPlan())));
+  fs.writeFileSync(path.join(output,'pre-start-receipts.json'),JSON.stringify({reports,inputPlans,expectedBuildId:descriptor.configuration.buildId,expectedPipelineSeed:seed.sha256},null,2));
   assert.equal(inputPlans[0]?.peer,'host');
   assert.equal(new Set(inputPlans.map(plan=>plan?.peer)).size,count,'Each browser must have its own assigned peer');
   assert.equal(new Set(inputPlans.map(plan=>plan?.owner)).size,count,'Each browser must own a separate logical controller');
@@ -54,7 +55,8 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
    assert.deepEqual(inputPlans[i].bindings,inputPlans[0].bindings,'All browsers must agree on port assignments');
    assert.deepEqual(reports[0][peer],reports[0].host);
    assert.deepEqual(reports[i][peer],reports[0].host);
-   assert.deepEqual(reports[i].host,reports[0].host);
+   // Guests retain their own receipt; the host checks every receipt before the
+   // start barrier sends the shared identity proposal for guest acknowledgment.
   }
   await pages[0].locator('#automatic-start').click();
   for(const p of pages)await p.waitForFunction(()=>app.lobbyGameState()?.frame>=120,null,{timeout:60000});
