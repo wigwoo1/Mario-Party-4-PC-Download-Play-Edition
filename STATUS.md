@@ -1,5 +1,20 @@
 # Development status — 2026-10-20 UTC
 
+## Content validation update — October 20, 2026
+
+No new downloadable binary is published in this update. The browser candidate remains `8d1cd6979b21b4843c46916e70a78e095197bc4272b3dd3da018bb47d885c5b1`; the existing ae3300c2 development download remains unchanged.
+
+Four local Edge engines completed Team Treasure Trek with both keys, the winning meeting sequence and normal return (3,125 consecutive matching records), and Order Up with a 3–1 win and normal return (5,040 consecutive matching records). These runs used separately fingerprinted read-only diagnostic JavaScript wrappers around the unchanged candidate game WebAssembly, with simulated controllers. They do not establish exact uninstrumented-build, physical-device, native or Internet acceptance.
+
+On the uninstrumented candidate, all four engines prepared 977 known pipelines before readiness. An actual transport closure and automatic recovery completed in 4,422 ms, with 256 matching startup and 151 recovered records; twelve altered comparison controls were rejected.
+
+The later diagnostic Dungeon Duos run prepared 981 known pipelines on each of four engines at frame zero. It retained 19,129 consecutive matching records, rejected twelve altered comparison controls, and reached the original five-minute draw and normal return on all four browsers. Closed shader databases passed integrity checks. A complete winning course, doors and balloon-pump section remain unverified: the automated controller could not complete the cooperative platform section. Input-timing differences were identified in the private tester, but a game-engine defect has not been established. No physics, original timer, scoring or RNG change is claimed. Recovery has not been retested with the 981 seed. The download still contains 618 pipelines; full shader coverage is unproven.
+
+Coverage review currently lists 63 entries: eight with focused round-and-return evidence across different builds/scopes, 26 observed in matches needing individual review, two partially covered, and 27 with no gameplay evidence located. Thus 55 entries need review or further testing; this is not a count of required new runs or a project-completion percentage. Embedded Dungeon Duos Y artwork and Free Play A/B artwork remain glyph-coverage gaps.
+
+Gameplay work is paused awaiting the recommended deeper-debugging model switch. At the last Microsoft review check, final determination remained Pending despite cloud/client scans reporting No malware detected. No new native DLL execution or binary publication is claimed. Separate-device, physical hardware, mobile, WAN and clean-machine acceptance remain open.
+
+
 This project is unfinished. The latest measured private browser candidate is `8d1cd6979b21b4843c46916e70a78e095197bc4272b3dd3da018bb47d885c5b1`. This is a source/status update; no new downloadable binary is provided. The current download remains the older ae3300c2 development release, with its original build-specific limitations.
 
 ## Keyboard input with a connected controller — 8d1cd697
@@ -18,7 +33,7 @@ Four actual muted Edge engines on one PC completed an ordinary five-turn Party m
 
 On the same measured candidate, a separate normal automatic Host/link/Join test prepared all four engines at frame zero and verified 256 matching startup records. Closing the actual host peer connection paused all four players; automatic replacement and at least 150 resumed frames completed in 3,990 ms, within the 60-second requirement. The 151 common recovered records matched, immutable configuration remained unchanged, and twelve altered comparison controls were rejected. Normal shutdown and all four closed-cache integrity checks passed. This was actual local browser networking, not a physical-device or Internet test.
 
-Eighteen additional Node component checks passed for saved bindings, runtime binding serialization, fullscreen/aspect/resolution persistence and locking, touch press/release and fullscreen-loss cleanup, physical-key/touch coexistence, and controller-button hiding with idle/manual restoration. These fixtures do not verify Android or Bluetooth hardware. Broader content work continues; Team Treasure Trek gameplay acceptance remains pending.
+Eighteen additional Node component checks passed for saved bindings, runtime binding serialization, fullscreen/aspect/resolution persistence and locking, touch press/release and fullscreen-loss cleanup, physical-key/touch coexistence, and controller-button hiding with idle/manual restoration. These fixtures do not verify Android or Bluetooth hardware. Subsequent scoped content results are recorded in the October 20 update above.
 
 Microsoft's existing file-review page still shows a final determination of Pending, while its cloud/client scans say No malware detected. This is not final clearance. No fresh native DLL was linked or executed and no new binary was uploaded. The published download remains the older ae3300c2 release. Physical controllers, separate Windows/Android devices, WAN hosting, clean-machine acceptance, current native integration, complete content/shader coverage, and the original intermittent browser quota issue remain open. No overall project-completion percentage has been measured.
 
