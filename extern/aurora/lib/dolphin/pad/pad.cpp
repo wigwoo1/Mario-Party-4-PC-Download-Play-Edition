@@ -779,6 +779,7 @@ u32 PADRead(PADStatus* status) {
       status[i].triggerRight = static_cast<u8>(std::min(static_cast<int>(status[i].triggerRight) + tr, 255));
     }
 
+    const PADStatus keyboardStatus = status[i];
     if (controller) {
       EnsureMappingLoaded(controller);
       bool leftTriggerSet = false;
@@ -913,6 +914,10 @@ u32 PADRead(PADStatus* status) {
                           controller->m_ledBlue);
         controller->m_isColorDirty = false;
       }
+
+      // Reading an idle controller must not erase keyboard axes or triggers.
+      // Use the same strongest-axis rule as the virtual/touch input path.
+      merge_virtual_status(status[i], keyboardStatus);
     }
 
     if (g_blockPAD) {

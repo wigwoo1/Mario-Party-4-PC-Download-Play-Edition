@@ -1,8 +1,8 @@
 {
   "version": 1,
   "repository": "https://github.com/wigwoo1/Mario-Party-4-PC-Download-Play-Edition",
-  "buildId": "c0d8eb8db6460837c45dd8dd34b71bcf4ed09f5a033c3353700815f7500acb0a",
-  "sourceSnapshotSha256": "d2deeb52f1c282561ded376b3227953aee629ab1ff45702cd9d261dd2fb51541",
+  "buildId": "8d1cd6979b21b4843c46916e70a78e095197bc4272b3dd3da018bb47d885c5b1",
+  "sourceSnapshotSha256": "2625fd68926b3f6e05a37ef6264b6b837465f8b9feae706e53a897002b7d4e83",
   "upstream": {
     "url": "https://github.com/mariopartyrd/partyboard.git",
     "baseCommit": "f38304ebd13b09a15a80db7d7d015bf3fc387c5d"
@@ -2985,8 +2985,8 @@
     },
     {
       "path": "CONTROLLERS.md",
-      "bytes": 6460,
-      "sha256": "731bc1f42068757f0c4eb1b6af29ab4fcc54a89c73e1a09ac85c4ab7c39f45c9"
+      "bytes": 6804,
+      "sha256": "338de11d76c208c07aa3829c2f37ef2cb5c36259d0376d0389e221f95c9b46e8"
     },
     {
       "path": "dol.def",
@@ -4050,8 +4050,8 @@
     },
     {
       "path": "extern/aurora/lib/dolphin/pad/pad.cpp",
-      "bytes": 64502,
-      "sha256": "e456def818de7eb79aef63efa1898d0cb4dbe2d5face9b048972c94acc743a2c"
+      "bytes": 64764,
+      "sha256": "52b3b8974b503a67a30e13b105e6351508f22f11400deb4b6b949e998b1a1a96"
     },
     {
       "path": "extern/aurora/lib/dolphin/si/si.cpp",
@@ -11965,8 +11965,8 @@
     },
     {
       "path": "STATUS.md",
-      "bytes": 12918,
-      "sha256": "46589bb89f993fad0dfac2e157ac6593c66944a5a87d677129f46322a0cfc0ea"
+      "bytes": 16593,
+      "sha256": "dcac0a3b8f9667e170fb5cf2dce728fe415ef6534a10616d4b5f2fd5a3b84d0c"
     },
     {
       "path": "tools/__init__.py",

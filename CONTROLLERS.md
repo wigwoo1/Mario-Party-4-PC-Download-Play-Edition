@@ -12,6 +12,12 @@ press/release between frames is not lost. Keyboard Start and A were verified in
 the running game through title-screen navigation. The current session profile
 bypasses the memory-card selection flow; older save-slot tests are historical.
 
+When the keyboard preset and a controller share a local port, an idle controller
+does not cancel keyboard stick or C-stick movement. Each axis uses the input with
+the larger magnitude; the controller wins an equal-magnitude tie. Buttons remain
+combined. Keyboard input still passes through the normal menu input-blocking and
+release handling.
+
 ## Gamepads
 
 The native application enables SDL's PlayStation 4/5 and Nintendo Switch HID
