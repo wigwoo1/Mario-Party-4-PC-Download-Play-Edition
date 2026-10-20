@@ -2,7 +2,7 @@
   "version": 1,
   "repository": "https://github.com/wigwoo1/Mario-Party-4-PC-Download-Play-Edition",
   "buildId": "c0d8eb8db6460837c45dd8dd34b71bcf4ed09f5a033c3353700815f7500acb0a",
-  "sourceSnapshotSha256": "f70e1816c83485f9de22e41043ed849118b46dbf4ecbb51c304d528ebe10c2e2",
+  "sourceSnapshotSha256": "111a12d243967acd121252d08a1246f55cd6c5cba2fa0f863c2935ec3b04a846",
   "upstream": {
     "url": "https://github.com/mariopartyrd/partyboard.git",
     "baseCommit": "f38304ebd13b09a15a80db7d7d015bf3fc387c5d"
@@ -11965,8 +11965,8 @@
     },
     {
       "path": "STATUS.md",
-      "bytes": 6325,
-      "sha256": "cf464b0349dcdf737eaaf637db94e18c6ab023e427f2c67dfb9908daf67580f3"
+      "bytes": 8343,
+      "sha256": "24b009503c3162baea3a034daf80a2fc57771a8d0d93ba89f87bae81f2f63fd3"
     },
     {
       "path": "tools/__init__.py",
@@ -13875,8 +13875,8 @@
     },
     {
       "path": "web/app.mjs",
-      "bytes": 86305,
-      "sha256": "6224b6c2a281a4d7c1695b8d1aa1b97ad51e040896f1358479a789378c2a8ea1"
+      "bytes": 86425,
+      "sha256": "9ec1c7b0c9de5759f94484a8b81fbbebb959b1692e6142ed4d427fce09957b51"
     },
     {
       "path": "web/async-blob-fs.mjs",
@@ -14424,6 +14424,16 @@
       "sha256": "f67aecf2f4868c738d9f0523520011753e0956d6d5314d6e52a336c1601d6859"
     },
     {
+      "path": "web/preparation-error.mjs",
+      "bytes": 1024,
+      "sha256": "a65b5df8a27bb7a525e4bfd356e3100dde77d2ef4dbe86d5c337c465835b64d5"
+    },
+    {
+      "path": "web/preparation-error.test.mjs",
+      "bytes": 1435,
+      "sha256": "e5146b3224e0591b790df61e508356a04c14f7a37110d8b3b22d13947751372d"
+    },
+    {
       "path": "web/prepared-runtime-report.mjs",
       "bytes": 2540,
       "sha256": "7f9cb0c6925da7d45dbf85963b9d34b06c6758d58c0b817e52a84d0f50b66fdd"
@@ -14560,8 +14570,8 @@
     },
     {
       "path": "web/runtime-asset-storage-browser-test.cjs",
-      "bytes": 5458,
-      "sha256": "afdecaa082747730e3765cd60a05c88265fa09a0c69007e5f43d0abd11ea512c"
+      "bytes": 6312,
+      "sha256": "8960624c78eb2d6ebef364f4ed34772cf2014c52f8ef75677d02b495913f6b61"
     },
     {
       "path": "web/runtime-asset.mjs",
@@ -14655,8 +14665,8 @@
     },
     {
       "path": "web/serve.cjs",
-      "bytes": 9984,
-      "sha256": "53466fbeaec2f2e8adf6d918437bc2f4e2e9cefdbfe9301d6be9b39e2957999b"
+      "bytes": 10008,
+      "sha256": "6250d43aade5f7dc674d168ed1689e51aeacd35927b0020e7c9660e4b5aca5b6"
     },
     {
       "path": "web/server-listen.cjs",

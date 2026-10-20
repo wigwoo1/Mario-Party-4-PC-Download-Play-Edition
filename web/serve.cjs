@@ -35,7 +35,7 @@ files.set('/connection-route.mjs','connection-route.mjs');
 files.set('/prepared-runtime-report.mjs','prepared-runtime-report.mjs');
 files.set('/shader-readiness.mjs','shader-readiness.mjs');
 files.set('/room-client.mjs','room-client.mjs');
-for(const name of ['automatic-room.mjs','automatic-preparation.mjs','bundled-pipeline-seed.mjs'])files.set('/'+name,name);
+for(const name of ['automatic-room.mjs','automatic-preparation.mjs','preparation-error.mjs','bundled-pipeline-seed.mjs'])files.set('/'+name,name);
 files.set('/lobby-input-ownership.mjs','lobby-input-ownership.mjs');
 files.set('/lobby-input-router.mjs','lobby-input-router.mjs');
 for(const name of ['realtime-input-recovery.mjs','suspended-input-recovery.mjs'])files.set('/'+name,name);

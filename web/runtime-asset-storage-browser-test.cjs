@@ -33,14 +33,26 @@ const {browserStorageObservation}=require('../tools/native-rtc-probe/browser-sto
   const limited=await page.evaluate(async id=>{
    const {browserStore}=await import('/transfer.mjs');
    const {verifiedAssetBlob,verifyStoredAsset}=await import('/runtime-asset.mjs');const store=await browserStore();
+   const {automaticPreparation}=await import('/automatic-preparation.mjs');
+   const {preparationFailureMessage}=await import('/preparation-error.mjs');
    try{
-    let failure;try{const result=await verifiedAssetBlob(store,id);await result.dispose?.();}catch(error){failure={name:error.name,message:error.message};}
+    let failure,ready=false,attempts=0;
+    const preparation=automaticPreparation({
+     state:()=>({assetsVerified:true,configuration:true,seedVerified:true,prepared:false,assignedVerified:true}),
+     accept:()=>{throw Error('Completed download must not be accepted again');},
+     prepare:async()=>{attempts++;const result=await verifiedAssetBlob(store,id);await result.dispose?.();},
+     ready:()=>{ready=true;},
+     error:error=>{failure={name:error.name,message:error.message,guidance:preparationFailureMessage(error,{automatic:true})};},
+    });
+    await preparation.refresh();await preparation.refresh();preparation.close();
     if(!failure)throw Error('The limited quota must reject a full gameplay copy');
     const progress=[],manifest=await verifyStoredAsset(store,id,{progress:(bytes,total)=>progress.push([bytes,total])});
-    return {copyFailure:failure,manifest,progress:progress.at(-1)};
+    return {copyFailure:failure,manifest,progress:progress.at(-1),ready,attempts};
    }finally{store.close();}
   },asset.id);
   assert.equal(limited.copyFailure.name,'QuotaExceededError');assert.deepEqual(limited.manifest,asset);assert.deepEqual(limited.progress,[asset.size,asset.size]);
+  assert.equal(limited.ready,false);assert.equal(limited.attempts,1);
+  assert.match(limited.copyFailure.guidance,/free space for this site/);assert.doesNotMatch(limited.copyFailure.guidance,/try again/);
   const afterPreflight=await browserStorageObservation(page,{files:true});
   assert.deepEqual(afterPreflight.temporaryFiles,[]);assert.equal(afterPreflight.estimate.usageDetails.fileSystem||0,0);
   await session.send('Storage.overrideQuotaForOrigin',{origin});

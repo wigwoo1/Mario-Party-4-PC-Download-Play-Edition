@@ -1,5 +1,6 @@
 import {automaticRoom} from './automatic-room.mjs';
 import {automaticPreparation} from './automatic-preparation.mjs';
+import {preparationFailureMessage} from './preparation-error.mjs';
 import {loadBundledPipelineSeed} from './bundled-pipeline-seed.mjs';
 import {sendPipelineSeed,receivePipelineSeed} from './pipeline-seed-channel.mjs';
 import {captureClosedPipelineSeed} from './pipeline-seed.mjs';
@@ -547,11 +548,12 @@ async function prepareLobbyGame(){
     status(manualLobby?'Lobby game initialized and paused at frame zero. Mark ready after the known shader pipelines finish preparing. Additional scene coverage remains under development.':'Game initialized. Completing automatic readiness checks…');
   })();
   try{await lobbyPreparing;}catch(error){if(current===generation&&!signal.aborted){
-    const diagnostic=(cause,depth=0)=>({message:String(cause?.message??cause),stack:cause?.stack,
-      ...(depth<4&&Array.isArray(cause?.errors)?{errors:cause.errors.map(child=>diagnostic(child,depth+1))}:{})});
+    const diagnostic=(cause,depth=0)=>({name:cause?.name,message:String(cause?.message??cause),stack:cause?.stack,
+      ...(depth<4&&cause?.cause?{cause:diagnostic(cause.cause,depth+1)}:{}),
+      ...(depth<4&&Array.isArray(cause?.errors)?{errors:cause.errors.slice(0,32).map(child=>diagnostic(child,depth+1))}:{})});
     console.error('Lobby preparation diagnostic: '+JSON.stringify(diagnostic(error)));
     if(lobbyRuntime){lobbyGlyphs?.close();lobbyGlyphs=undefined;const failed=lobbyRuntime;lobbyRuntime=undefined;preparedReports.delete(lobbyHost?'host':localPeer);try{await failed.dispose();}catch(cleanup){console.error(cleanup);}}
-    status('Lobby game preparation failed: '+error.message);throw error;}} 
+    status(preparationFailureMessage(error));throw error;}}
   finally{lobbyPreparing=undefined;$('prepare-game').disabled=false;display.setLocked(Boolean(lobbyRuntime));controlEditor.setLocked(Boolean(lobbyRuntime));}
 }
 $('prepare-game').onclick=()=>prepareLobbyGame().catch(()=>{});
@@ -1085,7 +1087,7 @@ async function openAutomaticLobby(mode){
           assetsVerified:!!lobbyHost||!!runtimeAsset,configuration:!!sessionConfiguration,seedVerified:!!lobbyPipelineSeed,
           prepared:!!lobbyRuntime&&!lobbyPreparing,assignedVerified:!!player?.verified,ready:!!player?.ready,membership:currentLobbySnapshot?.membership};
       },accept:acceptLobbyAsset,prepare:prepareLobbyGame,ready:()=>{const receipt=markLobbyReady();status('Ready: '+receipt.created+' known shader pipelines prepared. Waiting for the host to start.');},
-      error:cause=>status('Automatic game preparation failed: '+cause.message+' Stop the session and try again.'),
+      error:cause=>status(preparationFailureMessage(cause,{automatic:true})),
     });
     if(mode==='host'){await owner.host();if(automaticLobby===owner)$('file').disabled=true;}else await owner.join(joinLink);
     if(automaticLobby===owner)automaticTimer=setInterval(()=>{void automaticRefresh(owner).catch(cause=>status(cause.message));},250);
