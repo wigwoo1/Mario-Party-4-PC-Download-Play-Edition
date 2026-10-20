@@ -45,6 +45,13 @@ artwork; these replacements do not cover every button drawn into arbitrary game
 assets. Browser glyphs also follow the saved bindings and active input family.
 Source support is not physical-controller or complete visual acceptance.
 
+Supported inline window prompts also refresh while the window is already open.
+A muted actual Edge test verified the same Party player-count window changing
+from keyboard Z/X to PlayStation Cross/Circle and back, including eight repeated
+cycles, using a simulated standard DualSense. This verifies browser presentation
+and resource handling; physical controllers and the updated native runtime still
+need their own acceptance checks.
+
 Hardware acceptance checks still required: each controller family over USB,
 hotplug and reconnect, trigger thresholds, rumble, four mixed controllers, player
 assignment, and saved remappings. Software configuration alone is not a hardware

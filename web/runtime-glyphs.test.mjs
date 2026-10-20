@@ -39,16 +39,22 @@ test('production glyph bridge follows standard PlayStation activity then keyboar
   assert.ok(requests.some(r=>r.family==='playstation'&&r.binding.button==='r1'));
   assert.ok(requests.some(r=>r.family==='playstation'&&r.binding.button==='r2'));
   assert.ok(requests.some(r=>r.binding.label==='Z'));
-  const target=new EventTarget(),module={},pad={index:0,id:'DualSense',mapping:'standard',connected:true,buttons:[{pressed:false,value:0}],axes:[]};
+  const target=new EventTarget(),module={partyBoardGlyphTextures:glyphs.initial},pad={index:0,id:'DualSense',mapping:'standard',connected:true,buttons:[{pressed:false,value:0}],axes:[]};
   let poll,cancelled=false;
   const environment={document:{hidden:false,activeElement:target},navigator:{getGamepads:()=>[pad]},
     requestAnimationFrame:callback=>(poll=callback,1),cancelAnimationFrame:()=>cancelled=true};
   const attached=glyphs.attach(module,target,{environment});
   poll();assert.equal(module.partyBoardGlyphTextures,glyphs.initial);
+  assert.equal(module.partyBoardGlyphRevision||0,0);
   pad.buttons[0].pressed=true;poll();assert.equal(module.partyBoardGlyphTextures[2][0],91);
+  assert.equal(module.partyBoardGlyphRevision,1);
+  poll();assert.equal(module.partyBoardGlyphRevision,1,'Held input must not churn visible glyphs');
   target.dispatchEvent(new Event('keydown'));assert.equal(module.partyBoardGlyphTextures,glyphs.initial);
+  assert.equal(module.partyBoardGlyphRevision,2);
+  target.dispatchEvent(new Event('keydown'));assert.equal(module.partyBoardGlyphRevision,2);
   pad.mapping='';pad.buttons[0].pressed=false;poll();pad.buttons[0].pressed=true;poll();
   assert.deepEqual(module.partyBoardGlyphTextures,{});
+  assert.equal(module.partyBoardGlyphRevision,3);
   attached.close();assert.equal(cancelled,true);
   module.partyBoardGlyphTextures=null;target.dispatchEvent(new Event('keydown'));assert.equal(module.partyBoardGlyphTextures,null);
 });

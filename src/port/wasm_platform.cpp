@@ -50,6 +50,17 @@ ANIMDATA* browserPortGlyph(s16 entry, s16 port) {
     // must keep authored labels until their physical mappings are exchanged.
     return local?browserWindowGlyph(entry):nullptr;
 }
+u32 browserGlyphRevision() {
+    return EM_ASM_INT({
+        const lanes=Module.partyBoardGlyphLocalPadSlots;
+        let local=1;
+        if(Array.isArray(lanes)) {
+            local=0;
+            for(let port=0;port<4;port++)if(lanes[port]===0)local|=1<<port;
+        }
+        return (((Module.partyBoardGlyphRevision||0)<<4)|local)>>>0;
+    });
+}
 void* overlayHandles[DLL_MAX]{};
 const char* overlayPath(s16 overlay) {
     switch(overlay) {
@@ -202,7 +213,8 @@ extern "C" EMSCRIPTEN_KEEPALIVE int PartyBoardBrowserPreparePlatform(void) {
     if(!aurora_dvd_open("/assets/verified-disc.ciso")){aurora_shutdown();platformPhase=3;return -3;}
     partyboard::version::init();PartyBoardBrowserLanguageInit();InitializeDol();
     omDLLBrowserSetBackend(overlayBackend);HuWinControlGlyphResolverSet(browserWindowGlyph);
-    HuWinControlGlyphPortResolverSet(browserPortGlyph);platformPhase=2;return 0;
+    HuWinControlGlyphPortResolverSet(browserPortGlyph);
+    HuWinControlGlyphRevisionResolverSet(browserGlyphRevision);platformPhase=2;return 0;
 }
 extern "C" EMSCRIPTEN_KEEPALIVE int PartyBoardBrowserSetAudioChannels(int channels) {
     if(platformPhase!=2 || (channels!=2 && channels!=6)) return -1;
@@ -322,5 +334,6 @@ extern "C" EMSCRIPTEN_KEEPALIVE int PartyBoardBrowserShutdownPlatform(void) {
         omOvlKill(1);if(loaded)omDLLEnd(loadedDll,1);
     }
     HuAudPortStreamShutdown();HuWinControlGlyphResolverSet(nullptr);HuWinControlGlyphPortResolverSet(nullptr);
+    HuWinControlGlyphRevisionResolverSet(nullptr);
     omDLLBrowserSetBackend(nullptr);aurora_dvd_close();aurora_shutdown();platformPhase=3;return 0;
 }

@@ -33,7 +33,11 @@ export async function prepareRuntimeGlyphs({signal,render=glyphTexture,bindings=
     return attachInputGlyphs({target,environment,bindings:()=>({}),onChange:({active})=>{
       // Unknown physical mappings keep the original emulated-action icon.
       const family=active?.kind==='gamepad'?(active.mapping==='standard'?controllerFamily(active.id):null):'keyboard';
-      module.partyBoardGlyphTextures=family?textures[family]:{};
+      const next=family?textures[family]:{};
+      if(module.partyBoardGlyphTextures!==next) {
+        module.partyBoardGlyphTextures=next;
+        module.partyBoardGlyphRevision=((module.partyBoardGlyphRevision||0)+1)>>>0;
+      }
     }});
   }};
 }

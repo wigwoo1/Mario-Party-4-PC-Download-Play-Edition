@@ -147,6 +147,8 @@ void *MessData_MesPtrGet(void *data, u32 index);
 // the transferred reference on success, invalid dimensions, or sprite exhaustion.
 void HuWinControlGlyphResolverSet(ANIMDATA *(*resolver)(s16 entry));
 void HuWinControlGlyphPortResolverSet(ANIMDATA *(*resolver)(s16 entry, s16 port));
+/* Optional presentation revision; changes refresh already-visible icons. */
+void HuWinControlGlyphRevisionResolverSet(u32 (*resolver)(void));
 /* Returns an owned animation reference; callers release with HuSprAnimKill. */
 ANIMDATA *HuWinControlGlyphForPort(s16 entry, s16 port);
 ANIMDATA *HuWinControlGlyphForMask(s16 entry, u8 activePorts);

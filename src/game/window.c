@@ -151,6 +151,88 @@ static s16 winPrio = 1000;
 #ifdef TARGET_PC
 static ANIMDATA *(*controlGlyphResolver)(s16 entry);
 static ANIMDATA *(*controlGlyphPortResolver)(s16 entry, s16 port);
+static u32 (*controlGlyphRevisionResolver)(void);
+typedef struct WindowControlGlyph_s {
+    ANIMDATA *displayed;
+    HuVec2f layoutScale;
+    s16 sprite, entry;
+    u8 activePorts;
+    u16 ticks;
+    u32 revision;
+} WindowControlGlyph;
+/* Presentation-only sidecar; keep the original WindowData layout unchanged. */
+static WindowControlGlyph windowControlGlyphs[32][20];
+void HuWinControlGlyphRevisionResolverSet(u32 (*resolver)(void))
+{
+    controlGlyphRevisionResolver = resolver;
+}
+static BOOL HuWinControlGlyphValid(ANIMDATA *glyph)
+{
+    return glyph && glyph->bankNum == 1 && glyph->patNum == 1 && glyph->pat &&
+        glyph->pat[0].sizeX > 0 && glyph->pat[0].sizeY > 0 &&
+        glyph->pat[0].sizeX <= 256 && glyph->pat[0].sizeY <= 256;
+}
+static void HuWinControlGlyphTrack(WindowData *window, s16 index, s16 entry)
+{
+    WindowControlGlyph *state = &windowControlGlyphs[window - winData][index - 10];
+    s16 sprite = window->sprite_id[index];
+    memset(state, 0, sizeof(*state));
+    if (sprite <= 0 || sprite >= HUSPR_MAX || !HuSprData[sprite].data ||
+        !(entry == 2 || entry == 3 || entry == 4 || entry == 5 ||
+          entry == 6 || entry == 8 || entry == 11 || entry == 12)) return;
+    state->sprite = sprite;
+    state->entry = entry;
+    state->displayed = HuSprData[sprite].data;
+    state->layoutScale = HuSprData[sprite].scale;
+    state->activePorts = window->active_pad & ~window->player_disable & 0xF;
+    state->revision = controlGlyphRevisionResolver ? controlGlyphRevisionResolver() : 0;
+}
+static void HuWinControlGlyphRefresh(WindowData *window, u32 revision)
+{
+    WindowControlGlyph *state = windowControlGlyphs[window - winData];
+    u8 activePorts = window->active_pad & ~window->player_disable & 0xF;
+    s16 index;
+    for (index = 10; index < 30; index++, state++) {
+        HUSPRITE *target;
+        ANIMDATA *glyph, *next;
+        float scaleX = 1.0f, scaleY = 1.0f;
+        s16 bank;
+        if (!state->entry) continue;
+        if (window->sprite_id[index] != state->sprite || state->sprite <= 0 ||
+            state->sprite >= HUSPR_MAX ||
+            !HuSprData[state->sprite].data || HuSprData[state->sprite].data != state->displayed ||
+            (HuSprData[state->sprite].attr & HUSPR_ATTR_FUNC)) {
+            memset(state, 0, sizeof(*state));
+            continue;
+        }
+        if (state->activePorts == activePorts && state->revision == revision &&
+            (controlGlyphRevisionResolver || ++state->ticks < 120)) continue;
+        state->ticks = 0;
+        state->activePorts = activePorts;
+        state->revision = revision;
+        glyph = HuWinControlGlyphForMask(state->entry, activePorts);
+        if (glyph && !HuWinControlGlyphValid(glyph)) {
+            HuSprAnimKill(glyph);
+            glyph = NULL;
+        }
+        /* iconAnim retains its authored reference until all windows are killed. */
+        next = glyph ? glyph : *spcFontTbl[state->entry].anim;
+        bank = glyph ? 0 : spcFontTbl[state->entry].bank;
+        if (glyph) {
+            scaleX = (float)spcFontTbl[state->entry].w / glyph->pat[0].sizeX;
+            scaleY = (float)spcFontTbl[state->entry].h / glyph->pat[0].sizeY;
+        }
+        target = &HuSprData[state->sprite];
+        if (HuSprAnimationReplace(state->sprite, next, bank)) {
+            target->scale.x = target->scale.x / state->layoutScale.x * scaleX;
+            target->scale.y = target->scale.y / state->layoutScale.y * scaleY;
+            state->layoutScale.x = scaleX;
+            state->layoutScale.y = scaleY;
+            state->displayed = target->data;
+        }
+        if (glyph) HuSprAnimKill(glyph);
+    }
+}
 void HuWinControlGlyphPortResolverSet(ANIMDATA *(*resolver)(s16 entry, s16 port))
 {
     controlGlyphPortResolver = resolver;
@@ -262,6 +344,9 @@ s16 HuWinCreate(float x, float y, s16 w, s16 h, s16 frame)
         return -1;
     }
     window = &winData[window_id];
+#ifdef TARGET_PC
+    memset(windowControlGlyphs[window_id], 0, sizeof(windowControlGlyphs[window_id]));
+#endif
     window->group = group = HuSprGrpCreate(30);
     if (frame < 0 || frame >= 4) {
         frame = 0;
@@ -359,6 +444,10 @@ void HuWinKill(s16 window)
 {
     WindowData *window_ptr = &winData[window];
     s16 i;
+
+#ifdef TARGET_PC
+    memset(windowControlGlyphs[window], 0, sizeof(windowControlGlyphs[window]));
+#endif
 
     if (window_ptr->group != -1) {
         HuMemDirectFree(window_ptr->char_data);
@@ -604,9 +693,15 @@ static void HuWinProc(void)
 
     while (1) {
         HuPrcVSleep();
+#ifdef TARGET_PC
+        u32 glyphRevision = controlGlyphRevisionResolver ? controlGlyphRevisionResolver() : 0;
+#endif
         window = winData;
         for (i = 0; i < 32; i++, window++) {
             if (window->group != -1 && !(window->attr & 8)) {
+#ifdef TARGET_PC
+                HuWinControlGlyphRefresh(window, glyphRevision);
+#endif
                 switch (window->stat) {
                     case 0:
                         break;
@@ -1001,9 +1096,7 @@ static s16 HuWinSpcFontEntry(WindowData *window, s16 entry, s16 x, s16 y)
             if (entry == 2 || entry == 3 || entry == 4 || entry == 5 || entry == 6 || entry == 8 || entry == 11 || entry == 12) {
                 glyph = HuWinControlGlyphForMask(entry, window->active_pad & ~window->player_disable);
             }
-            if (glyph && (glyph->bankNum != 1 || glyph->patNum != 1 ||
-                glyph->pat[0].sizeX <= 0 || glyph->pat[0].sizeY <= 0 ||
-                glyph->pat[0].sizeX > 256 || glyph->pat[0].sizeY > 256)) {
+            if (glyph && !HuWinControlGlyphValid(glyph)) {
                 HuSprAnimKill(glyph);
                 glyph = NULL;
             }
@@ -1020,6 +1113,9 @@ static s16 HuWinSpcFontEntry(WindowData *window, s16 entry, s16 x, s16 y)
             if (sprite == HUSPR_NONE) return i;
             HuSprGrpMemberSet(window->group, i, sprite);
             HuSprPosSet(window->group, i, x + spcFontTbl[entry].center_x - window->w / 2, y + spcFontTbl[entry].center_y - window->h / 2);
+#ifdef TARGET_PC
+            HuWinControlGlyphTrack(window, i, entry);
+#endif
             break;
         }
     }
@@ -1036,6 +1132,10 @@ static void HuWinSpcFontPosSet(WindowData *window, s16 index, s16 x, s16 y)
 static void HuWinSpcFontClear(WindowData *window)
 {
     s16 i;
+
+#ifdef TARGET_PC
+    memset(windowControlGlyphs[window - winData], 0, sizeof(windowControlGlyphs[0]));
+#endif
 
     for (i = 10; i < 30; i++) {
         if (window->sprite_id[i] != -1) {
@@ -1635,6 +1735,10 @@ void HuWinSprKill(s16 window, s16 index)
 
     HuSprGrpMemberKill(window_ptr->group, index);
     window_ptr->sprite_id[index] = -1;
+#ifdef TARGET_PC
+    if (index >= 10 && index < 30)
+        memset(&windowControlGlyphs[window][index - 10], 0, sizeof(WindowControlGlyph));
+#endif
 }
 
 void HuWinDispOff(s16 window)

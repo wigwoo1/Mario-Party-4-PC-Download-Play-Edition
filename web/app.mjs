@@ -63,7 +63,7 @@ let sessionConfiguration;
 const recoveryCredentials=new Map();
 export function lobbyRecoveryCredentialState(){return [...recoveryCredentials.values()].map(({session,peer})=>({session,peer,available:true}));}
 export function lobbySessionConfiguration(){return sessionConfiguration?{...sessionConfiguration}:null;}
-let lobbyRuntime,lobbyPreparing,lobbyCleanup=Promise.resolve();
+let lobbyRuntime,lobbyPreparing,lobbyGlyphs,lobbyCleanup=Promise.resolve();
 let lobbyPipelineSeed,guestPipelineChannel;
 export function setLobbyPipelineSeed(seed){
   if(lobbyRuntime||lobbyPreparing)throw Error('Pipeline seed must precede runtime preparation.');
@@ -487,6 +487,7 @@ export function lobbyRuntimeState(){return lobbyRuntime?{phase:lobbyRuntime.engi
   audio:{sourceChannels:lobbyRuntime.module._PartyBoardBrowserAudioSourceChannels?.(),synthGainPermille:lobbyRuntime.module._PartyBoardBrowserAudioSynthMetric?.(14),streamGainPermille:lobbyRuntime.module._PartyBoardBrowserAudioSynthMetric?.(15)},
   pipelineSeed:lobbyRuntime.pipelineSeed,inputExchangeInstalled:!!lobbyGameInput,rendererPreparation:lobbyRuntime.rendererPreparation}:null;}
 function releaseLobbyRuntime(){
+  lobbyGlyphs?.close();lobbyGlyphs=undefined;
   lobbyStartBarrier=undefined;$('start-game').disabled=$('start-agreement').disabled=true;
   resetRecoveryControls();
   lobbyRecoveryRound?.barrier?.cancel();lobbyRecoveryRound=undefined;
@@ -536,6 +537,7 @@ async function prepareLobbyGame(){
     if(typeof prepared.module._PartyBoardBrowserHeapFailureAddress==='function')
       prepared.module.partyBoardHeapFailureAddress=prepared.module._PartyBoardBrowserHeapFailureAddress()>>>0;
     speakers.bind(prepared.module);
+    lobbyGlyphs=glyphs.attach(prepared.module,$('canvas'));
     const report=preparedRuntimeReport(prepared,configuration);
     if(lobbyHost){preparedReports.set('host',report);checkPreparedAgreement();}
     else {
@@ -548,7 +550,7 @@ async function prepareLobbyGame(){
     const diagnostic=(cause,depth=0)=>({message:String(cause?.message??cause),stack:cause?.stack,
       ...(depth<4&&Array.isArray(cause?.errors)?{errors:cause.errors.map(child=>diagnostic(child,depth+1))}:{})});
     console.error('Lobby preparation diagnostic: '+JSON.stringify(diagnostic(error)));
-    if(lobbyRuntime){const failed=lobbyRuntime;lobbyRuntime=undefined;preparedReports.delete(lobbyHost?'host':localPeer);try{await failed.dispose();}catch(cleanup){console.error(cleanup);}}
+    if(lobbyRuntime){lobbyGlyphs?.close();lobbyGlyphs=undefined;const failed=lobbyRuntime;lobbyRuntime=undefined;preparedReports.delete(lobbyHost?'host':localPeer);try{await failed.dispose();}catch(cleanup){console.error(cleanup);}}
     status('Lobby game preparation failed: '+error.message);throw error;}} 
   finally{lobbyPreparing=undefined;$('prepare-game').disabled=false;display.setLocked(Boolean(lobbyRuntime));controlEditor.setLocked(Boolean(lobbyRuntime));}
 }
