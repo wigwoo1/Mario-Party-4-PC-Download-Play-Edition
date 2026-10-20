@@ -2,7 +2,7 @@
   "version": 1,
   "repository": "https://github.com/wigwoo1/Mario-Party-4-PC-Download-Play-Edition",
   "buildId": "c0d8eb8db6460837c45dd8dd34b71bcf4ed09f5a033c3353700815f7500acb0a",
-  "sourceSnapshotSha256": "111a12d243967acd121252d08a1246f55cd6c5cba2fa0f863c2935ec3b04a846",
+  "sourceSnapshotSha256": "28deb5f9936b9b5d92441bec10cd3ade3e180cce7b5e4ee24067652391307217",
   "upstream": {
     "url": "https://github.com/mariopartyrd/partyboard.git",
     "baseCommit": "f38304ebd13b09a15a80db7d7d015bf3fc387c5d"
@@ -11965,8 +11965,8 @@
     },
     {
       "path": "STATUS.md",
-      "bytes": 8343,
-      "sha256": "24b009503c3162baea3a034daf80a2fc57771a8d0d93ba89f87bae81f2f63fd3"
+      "bytes": 10494,
+      "sha256": "03249f8ed4608937e3918ddc4dc3f5a96f6b390a7c4f77528b7376364cb3a37f"
     },
     {
       "path": "tools/__init__.py",
@@ -14565,8 +14565,8 @@
     },
     {
       "path": "web/runtime-asset-file.test.mjs",
-      "bytes": 2454,
-      "sha256": "f88a93d1752300f61af1239af44f6b299935132fec14c0140663483695be6857"
+      "bytes": 3456,
+      "sha256": "652e411c045827771eb2762d77b8579e97bff01af581c7e0113488cdc63d04e0"
     },
     {
       "path": "web/runtime-asset-storage-browser-test.cjs",
@@ -14575,8 +14575,8 @@
     },
     {
       "path": "web/runtime-asset.mjs",
-      "bytes": 4055,
-      "sha256": "8a22e8009e42066c765c8a2424e37554e275529e2d90d5d836556cc9c30943f5"
+      "bytes": 4521,
+      "sha256": "8395fc937fa2beba1414ddbdf1d6f9cca2d840070a27b0e3590afee1ed44a696"
     },
     {
       "path": "web/runtime-asset.test.mjs",

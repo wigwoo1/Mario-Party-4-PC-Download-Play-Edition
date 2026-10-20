@@ -52,9 +52,20 @@ async function verifyAsset(store, id, {signal, progress, createFile, materialize
     }
     const digests = await Promise.all(batch.map(chunk => digest(chunk.bytes)));
     signal?.throwIfAborted();
+    if (file) {
+      // Use one file operation for the already bounded four-chunk batch. Do
+      // not read ahead or retain a whole asset while reducing browser IPC.
+      const bytes = new Uint8Array(batch.reduce((size, chunk) => size + chunk.bytes.byteLength, 0));
+      let position = 0;
+      for (const chunk of batch) {
+        bytes.set(new Uint8Array(chunk.bytes), position);
+        position += chunk.bytes.byteLength;
+      }
+      await file.write(bytes);
+      signal?.throwIfAborted();
+    }
     for (let offset = 0; offset < batch.length; ++offset) {
       hashes.set(digests[offset], batch[offset].index * 32);
-      if(file)await file.write(batch[offset].bytes);
       signal?.throwIfAborted();
       bytesRead += batch[offset].bytes.byteLength;
       progress(bytesRead, manifest.size);
