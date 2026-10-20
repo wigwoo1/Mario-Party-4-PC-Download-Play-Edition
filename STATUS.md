@@ -14,6 +14,12 @@ Online play now attaches the same active-input listener as local play and closes
 
 A fresh four-Edge test on this exact candidate passed automatic Host/private-link/Join, direct assets, all 936 known shader pipelines before readiness, agreed frame-zero receipts and one-click Start. It reached the normal game menu with different local keyboard/PlayStation banks and 204 matching common input/checkpoint/RNG/PAD records. Closing an actual game transport paused all peers; automatic signed replacement resumed within the original recovery deadline with 91 matching recovered records. All four peers owned separate logical controllers. This was a short same-PC browser regression, not a full match, native interoperability, physical hardware, WAN or mobile acceptance. The shader seed remains private; the existing download still contains 618 known pipelines. Complete scene/shader coverage is unproven.
 
+## Completed current-build four-browser match
+
+The current browser-only glyph candidate completed a fresh muted five-turn Toad's Midway Madness match with four actual Edge engines on one PC. All 71,501 consecutive common input/checkpoint/RNG/PAD records from frame zero matched without gaps or mismatches. The common archive covers final standings and the ordinary return-menu inputs. All five saved turn-transition windows and the final standings window matched. All four standings and the Party/Story/Party returned-menu sequence were directly reviewed. The test and read-only observer exited successfully; owned localhost resources closed.
+
+All four closed shader caches passed SQLite integrity checks and retained the 936 validated seed definitions unchanged. Additional discovered definitions, if any, are not automatically preparation-validated or published. This is a same-PC browser match, not physical-controller, separate-device, native, Internet/mobile or all-content acceptance. It does not lift the native binary review hold.
+
 ## Earlier match and crash evidence
 
 The preceding browser candidate `2a0bd2729dc7f0af7693408f3e3873444a345b903bc783a9ac2042865c281375` completed a same-PC four-Edge five-turn Toad's Midway Madness match with 69,920 consecutive common matching records from frame zero, reviewed final standings and normal Party/Story/Party return navigation. Its two-Edge five-turn Bowser match had 70,104 consecutive matching common records. Those full-match results do not automatically apply to the new glyph candidate.
@@ -28,6 +34,6 @@ The existing development release and its assets are preserved. Extract its entir
 
 ## Remaining acceptance
 
-Current-build full matches and wider minigame/graphics coverage; native integration after the review hold clears; startup/portrait reliability; physical controllers, remappings and audible surround sound; refreshed separate-device multiplayer; clean-machine installation; Android/iOS and cellular/WAN tests. Public hosting tests remain deferred until the user is home. Whole-project completion remains unmeasured.
+Wider current-build minigame/graphics and mixed native/browser match coverage; native integration after the review hold clears; startup/portrait reliability; physical controllers, remappings and audible surround sound; refreshed separate-device multiplayer; clean-machine installation; Android/iOS and cellular/WAN tests. Public hosting tests remain deferred until the user is home. Whole-project completion remains unmeasured.
 
 No game images, credentials, personal settings, private keys, local screenshots or local test logs are included in this source update.
