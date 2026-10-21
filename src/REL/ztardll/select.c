@@ -12,7 +12,10 @@
 
 #include "REL/ztardll.h"
 
-typedef void (*ZtarUnkFunc)(omObjData *, ...);
+struct ZtarDllUnkStruct2;
+// All selection callbacks receive these two pointers directly. A variadic
+// declaration passes a packed argument area instead of the state on Wasm.
+typedef void (*ZtarUnkFunc)(omObjData *, struct ZtarDllUnkStruct2 *);
 
 typedef struct ZtarDllUnkStruct2 {
     /* 0x00 */ omObjData *unk_00;
@@ -166,7 +169,7 @@ s32 fn_1_7E0C(s32 arg0)
     fn_1_11264(MAKE_MESSID(0x1A, 0x05), -1, -1);
     fn_1_10FBC(1);
     fn_1_11708(MAKE_MESSID(0x33, 0x91));
-    lbl_1_bss_20C.unk_04 = (ZtarUnkFunc)fn_1_AEE4;
+    lbl_1_bss_20C.unk_04 = fn_1_AEE4;
     var_r29 = -1;
     while (TRUE) {
         fn_1_10FBC(1);
@@ -260,7 +263,7 @@ s32 fn_1_8030(s32 arg0, s32 arg1)
     fn_1_11708(MAKE_MESSID(0x33, 0x92));
     for (var_r31 = 0; var_r31 < var_r30; var_r31++) {
         if (lbl_1_bss_8C[var_r31].unk_50 == 0) {
-            lbl_1_bss_8C[var_r31].unk_04 = (ZtarUnkFunc)fn_1_D280;
+            lbl_1_bss_8C[var_r31].unk_04 = fn_1_D280;
         }
     }
     while (TRUE) {
@@ -365,7 +368,7 @@ s32 fn_1_8338(s32 arg0, s32 arg1)
                 var_r30 = var_r31;
                 lbl_1_bss_8C[var_r31].unk_0C = var_r27;
                 fn_1_DD8C(&lbl_1_bss_8C[var_r31]);
-                lbl_1_bss_8C[var_r31].unk_04 = (ZtarUnkFunc)fn_1_E548;
+                lbl_1_bss_8C[var_r31].unk_04 = fn_1_E548;
                 break;
             }
         }
@@ -472,7 +475,7 @@ s32 fn_1_88A4(void)
     fn_1_11264(MAKE_MESSID(0x1A, 0x05), -1, -1);
     fn_1_10FBC(1);
     fn_1_11708(MAKE_MESSID(0x33, 0x91));
-    lbl_1_bss_20C.unk_04 = (ZtarUnkFunc)fn_1_B468;
+    lbl_1_bss_20C.unk_04 = fn_1_B468;
     while (TRUE) {
         fn_1_10FBC(1);
         var_r30 = 0;
@@ -584,7 +587,7 @@ s32 fn_1_8B94(s32 arg0)
     fn_1_11708(MAKE_MESSID(0x33, 0x92));
     for (var_r31 = 0; var_r31 < var_r30; var_r31++) {
         if (lbl_1_bss_8C[var_r31].unk_50 == 0) {
-            lbl_1_bss_8C[var_r31].unk_04 = (ZtarUnkFunc)fn_1_D280;
+            lbl_1_bss_8C[var_r31].unk_04 = fn_1_D280;
         }
     }
     while (TRUE) {
@@ -681,7 +684,7 @@ s32 fn_1_8E50(s32 arg0)
                 var_r30 = var_r31;
                 lbl_1_bss_8C[var_r31].unk_0C = var_r27;
                 fn_1_DD8C(&lbl_1_bss_8C[var_r31]);
-                lbl_1_bss_8C[var_r31].unk_04 = (ZtarUnkFunc)fn_1_E548;
+                lbl_1_bss_8C[var_r31].unk_04 = fn_1_E548;
                 break;
             }
         }

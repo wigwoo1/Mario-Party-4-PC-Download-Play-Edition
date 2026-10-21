@@ -2930,6 +2930,9 @@ s32 fn_1_D930(void)
         var_r31->unk20 = 1;
         return fn_1_116C4(&lbl_1_bss_38);
     }
+#ifdef NON_MATCHING
+    return 0;
+#endif
 }
 
 void fn_1_DCEC(void)

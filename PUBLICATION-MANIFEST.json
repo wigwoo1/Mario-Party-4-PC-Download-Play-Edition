@@ -1,8 +1,8 @@
 {
   "version": 1,
   "repository": "https://github.com/wigwoo1/Mario-Party-4-PC-Download-Play-Edition",
-  "buildId": "8d1cd6979b21b4843c46916e70a78e095197bc4272b3dd3da018bb47d885c5b1",
-  "sourceSnapshotSha256": "ea0860787009f11dc2528b3ab39431b3eb015526d6361d7d3dc7383a71f77a2f",
+  "buildId": "2977f345e68d6791f5030b998dde117930226029fc398addb5a51fd287ac1928",
+  "sourceSnapshotSha256": "a5644c17879da8590b364b469ff7d4352cfbcff232c89f825121ab52ab084df7",
   "upstream": {
     "url": "https://github.com/mariopartyrd/partyboard.git",
     "baseCommit": "f38304ebd13b09a15a80db7d7d015bf3fc387c5d"
@@ -10990,8 +10990,8 @@
     },
     {
       "path": "src/REL/m437Dll/main.c",
-      "bytes": 99496,
-      "sha256": "fff6db50a1b57f5696a1b9f2893313fd2e320cd8d673bb5169b1eee4c716ed57"
+      "bytes": 99540,
+      "sha256": "085740996761dd0ed68f237a0be94a940bf15161edd78b9accbfccb7ee8ce5d4"
     },
     {
       "path": "src/REL/m437Dll/sequence.c",
@@ -11790,8 +11790,8 @@
     },
     {
       "path": "src/REL/ztardll/select.c",
-      "bytes": 103179,
-      "sha256": "2f7c92c1a4f05b5e943132b51609b021dd2bc3522e0db930aa34400cc99f49f4"
+      "bytes": 103303,
+      "sha256": "6ac1cf41855a838a0daffc22ff9416b48caf5c0cce150ad2de186098a6f43af9"
     },
     {
       "path": "src/Runtime.PPCEABI.H/__init_cpp_exceptions.cpp",
@@ -11965,8 +11965,8 @@
     },
     {
       "path": "STATUS.md",
-      "bytes": 21933,
-      "sha256": "f47822957279864316b901ab2ba922998fffa7f4471d8a57617f364357f65905"
+      "bytes": 8105,
+      "sha256": "d4d62befa0460910125746638c87747a786e5efc8271d749df6004953ea6a5c7"
     },
     {
       "path": "tools/__init__.py",
@@ -12045,8 +12045,8 @@
     },
     {
       "path": "tools/browser-renderer/CMakeLists.txt",
-      "bytes": 51683,
-      "sha256": "6608cd96a13bba47a61d278750a6ba9ac697024dc056277d8d09b4394baf2e55"
+      "bytes": 52507,
+      "sha256": "e935bace8936fd6c54ab1a3bdba509d5805bd31a2d8b2d1c4ea2fdd883f2dd94"
     },
     {
       "path": "tools/browser-renderer/README.md",
@@ -12297,6 +12297,11 @@
       "path": "tools/generate-m430-listener-fixture.cjs",
       "bytes": 1601,
       "sha256": "6b135fdce2fa5201e46722102f5cda7b33e9f5828448f6de08dc106ee5fa0488"
+    },
+    {
+      "path": "tools/guard-browser-gamepad-metadata.cjs",
+      "bytes": 1480,
+      "sha256": "09859bd73e8edb75671dc0e891a5962ad6c3f53b4c90f3d1c70a63948e13315e"
     },
     {
       "path": "tools/host-game.cjs",
@@ -13614,6 +13619,11 @@
       "sha256": "1f25302d23a77263a61712e4c912986bddad7c0e6a75330831dbef45f73affa8"
     },
     {
+      "path": "tools/test-browser-gamepad-metadata.cjs",
+      "bytes": 1925,
+      "sha256": "00d4ecb2e562037c5a3355cf1cb8002a8262264a6bbd5135c032401cb163aff4"
+    },
+    {
       "path": "tools/test-browser-save-store.cjs",
       "bytes": 8071,
       "sha256": "245a860122261bb3d3f04bbc925f993509a22ce1841a48f8ebcfa54a32f52e4c"
@@ -13875,8 +13885,8 @@
     },
     {
       "path": "web/app.mjs",
-      "bytes": 86425,
-      "sha256": "9ec1c7b0c9de5759f94484a8b81fbbebb959b1692e6142ed4d427fce09957b51"
+      "bytes": 86740,
+      "sha256": "c6342c4d78eb5fb6648597f8b1f8506905089fbc1643efe3b0dcc52230e95b21"
     },
     {
       "path": "web/async-blob-fs.mjs",

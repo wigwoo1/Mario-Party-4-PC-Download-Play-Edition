@@ -1022,7 +1022,12 @@ async function automaticRecoveryRefresh(){
   try{
     for(const [peer,connection] of guestConnections){
       if(connection.connectionState==='connected'&&lobbyInputChannels.get(peer)?.readyState==='open'&&lobbyStartChannels.get(peer)?.readyState==='open')continue;
-      if(automaticRecoveryAttempts.has(peer))continue;automaticRecoveryAttempts.add(peer);
+      if(automaticRecoveryAttempts.has(peer))continue;
+      // A transport can close before the PAD coroutine publishes its paused
+      // snapshot. Wait for that snapshot before consuming this peer's attempt.
+      const binding=lobbyRecoveryPlan?.bindings.find(binding=>binding.peer===peer);
+      if(!binding||!lobbyRecovery.attempt(binding.owner))continue;
+      automaticRecoveryAttempts.add(peer);
       await automaticLobby.recover(peer);
     }
     if(!automaticRecoveryOwners.size&&!automaticResumeAttempted&&[...guestConnections].every(([peer,connection])=>connection.connectionState==='connected'&&lobbyInputChannels.get(peer)?.readyState==='open'&&lobbyStartChannels.get(peer)?.readyState==='open')){

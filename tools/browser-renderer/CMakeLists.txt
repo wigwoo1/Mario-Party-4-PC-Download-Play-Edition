@@ -588,6 +588,16 @@ if(PARTYBOARD_NOD_WASM_LIBRARY)
       "Production runtime destination; select a separate directory while validating an existing package")
     set_target_properties(partyboard_browser_runtime PROPERTIES OUTPUT_NAME contract SUFFIX .mjs
       RUNTIME_OUTPUT_DIRECTORY "${PARTYBOARD_RUNTIME_OUTPUT_DIRECTORY}")
+    # SDL's browser metadata helpers can receive a connection event after the
+    # corresponding getGamepads slot has become empty. Keep its VID/PID parsing
+    # unchanged for present devices and return unknown metadata for absent ones.
+    # Apply at link output so a cached SDK port cannot silently omit the fix.
+    find_program(PARTYBOARD_NODE_EXECUTABLE node REQUIRED)
+    set(PARTYBOARD_GAMEPAD_METADATA_GUARD "${PARTYBOARD_ROOT}/tools/guard-browser-gamepad-metadata.cjs")
+    set_property(TARGET partyboard_browser_runtime APPEND PROPERTY LINK_DEPENDS "${PARTYBOARD_GAMEPAD_METADATA_GUARD}")
+    add_custom_command(TARGET partyboard_browser_runtime POST_BUILD
+      COMMAND "${PARTYBOARD_NODE_EXECUTABLE}" "${PARTYBOARD_GAMEPAD_METADATA_GUARD}" "$<TARGET_FILE:partyboard_browser_runtime>"
+      VERBATIM)
 
   endif()
 endif()
