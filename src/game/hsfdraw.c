@@ -2361,7 +2361,12 @@ void Hu3DDrawPost(void) {
                     dot = VECDotProduct(&dir, &axis);
                     dot *= 10000.0f;
                     OSf32tos16(&dot, &similar);
-                    if (similar == -10000) {
+                    if (similar == -10000
+#ifdef TARGET_PC
+                        // Point lights may have no direction: omit their undefined highlight.
+                        || VECDotProduct(&dir, &dir) == 0.0f
+#endif
+                    ) {
                         MTXScale(hiliteMtx, 0.0f, 0.0f, 0.0f);
                     } else {
                         C_VECHalfAngle(&dir, &axis, &halfAngle);
@@ -2501,7 +2506,12 @@ static void ObjDraw(HU3DDRAWOBJ *arg0)
         dot = VECDotProduct(&dir, &axis);
         dot *= 10000.0f;
         OSf32tos16(&dot, &similar);
-        if (similar == -10000) {
+        if (similar == -10000
+#ifdef TARGET_PC
+            // Point lights may have no direction: omit their undefined highlight.
+            || VECDotProduct(&dir, &dir) == 0.0f
+#endif
+        ) {
             MTXScale(hiliteMtx, 0.0f, 0.0f, 0.0f);
         } else {
             C_VECHalfAngle(&dir, &axis, &halfAngle);

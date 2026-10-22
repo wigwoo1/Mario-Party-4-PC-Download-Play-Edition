@@ -966,6 +966,10 @@ void fn_1_1C64(void)
         temp_r31->unk34 = 0;
         HuPrcVSleep();
     }
+#ifdef TARGET_PC
+    // The postgame break finishes this worker. libco entries cannot return.
+    HuPrcEnd();
+#endif
 }
 
 // identical to m411Dll/main.c::fn_1_5D58

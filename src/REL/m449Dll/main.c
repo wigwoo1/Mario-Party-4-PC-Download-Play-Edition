@@ -201,6 +201,18 @@ s32 lbl_1_bss_8;
 s32 lbl_1_bss_4;
 s32 lbl_1_bss_0;
 
+static omObjData **M449PlayerSlot(s32 slot)
+{
+#ifdef TARGET_PC
+    // Separate globals need not retain the original console's BSS adjacency.
+    return slot == 0 ? &lbl_1_bss_54 : &lbl_1_bss_58;
+#else
+    return &lbl_1_bss_54 + slot;
+#endif
+}
+
+#define M449_PLAYER(slot) (*M449PlayerSlot(slot))
+
 static const s32 lbl_1_rodata_10[4] = { 0x8C, 0x6E, 0x3C, 0 };
 
 void fn_1_A0(void)
@@ -446,7 +458,7 @@ void fn_1_758(omObjData *var_r29)
             },
         };
         var_r31 = var_r29->data;
-        sp238 = (&lbl_1_bss_54)[1 - var_r29->work[0]]->data;
+        sp238 = M449_PLAYER(1 - var_r29->work[0])->data;
         var_f29 = 0.0f;
         var_f28 = 0.0f;
         Hu3DModelObjPosGet(lbl_1_bss_50->model[1], lbl_1_data_E8[var_r31->unk_00], &sp2D8);
@@ -1332,7 +1344,7 @@ void fn_1_6850(omObjData *object)
     s32 var_r20;
 
     for (var_r31 = 0; var_r31 < 2; var_r31++) {
-        sp20[var_r31] = (&lbl_1_bss_54)[var_r31]->data;
+        sp20[var_r31] = M449_PLAYER(var_r31)->data;
     }
     lbl_1_bss_4++;
     if (lbl_1_bss_48 == 0x3EC) {
@@ -1445,7 +1457,7 @@ void fn_1_71A8(void)
 
     var_r29 = 0;
     for (var_r30 = 0; var_r30 < 2; var_r30++) {
-        sp8[var_r30] = (&lbl_1_bss_54)[var_r30]->data;
+        sp8[var_r30] = M449_PLAYER(var_r30)->data;
     }
     HuWinComKeyWait(0x100, 0x100, 0x100, 0x100, REFRESH_RATE);
     HuWinComKeyReset();
@@ -1519,7 +1531,7 @@ void fn_1_7544(omObjData *var_r29)
         }
     }
     for (var_r31 = 0; var_r31 < 2; var_r31++) {
-        spC[var_r31] = (&lbl_1_bss_54)[var_r31]->data;
+        spC[var_r31] = M449_PLAYER(var_r31)->data;
     }
     if ((omSysExitReq != 0) && (WipeStatGet() == 0)) {
         WipeCreate(WIPE_MODE_OUT, WIPE_TYPE_NORMAL, 60);
@@ -1745,7 +1757,7 @@ void fn_1_8538(omObjData *var_r30)
     var_r26 = -1;
     var_r24 = -1;
     var_r31 = var_r30->data;
-    sp48 = (&lbl_1_bss_54)[1 - var_r30->work[0]]->data;
+    sp48 = M449_PLAYER(1 - var_r30->work[0])->data;
     memset(var_r31, 0, sizeof(M449DllWork));
     var_r31->unk_00 = var_r30->work[0];
     if ((GWPlayerCfg->character == 0xC) || (GWPlayerCfg[1].character == 0xC) || (GWPlayerCfg[2].character == 0xC)
@@ -1891,7 +1903,7 @@ void fn_1_8538(omObjData *var_r30)
             s32 spD4[0x12] = { 0, 0, -14, 16, 46, -14, 16, 46, -50, 0, 0, -14, 16, 46, -14, 16, 46, -50 };
             s32 sp8C[0x12] = { 0, 0, -2, -2, -2, -2, -2, -2, 0, 0, 0, -2, -2, -2, -2, -2, -2, 0 };
             if ((lbl_1_data_0[var_r29] + 0xFF9F0000) == 0) {
-                var_r25 = (&lbl_1_bss_54)[var_r29 == 8 ? 0 : (var_r29 == 0x11 ? 1 : 0)]->data;
+                var_r25 = M449_PLAYER(var_r29 == 8 ? 0 : (var_r29 == 0x11 ? 1 : 0))->data;
                 lbl_1_data_48[var_r29] = espEntry(var_r25->unk_08 == -1 ? 0x500018 : (var_r25->unk_08 + lbl_1_data_0[var_r29]), 0, 0);
             }
             else {
@@ -1976,7 +1988,7 @@ void ObjectSetup(void)
     HuWinInit(1);
     lbl_1_bss_50 = omAddObjEx(lbl_1_bss_38, 0x64, 3, 0, 1, fn_1_7ECC);
     for (var_r31 = 0; var_r31 < 2; var_r31++) {
-        var_r30 = (&lbl_1_bss_54)[var_r31] = omAddObjEx(lbl_1_bss_38, 0x65, 0x14, 4, 0, fn_1_8538);
+        var_r30 = M449_PLAYER(var_r31) = omAddObjEx(lbl_1_bss_38, 0x65, 0x14, 4, 0, fn_1_8538);
         var_r30->data = HuMemDirectMallocNum(HEAP_SYSTEM, sizeof(M449DllWork), MEMORY_DEFAULT_NUM);
         var_r30->work[0] = var_r31;
     }
@@ -1991,7 +2003,7 @@ void fn_1_9A38(omObjData *arg0)
 
     if (WipeStatGet() == 0) {
         for (var_r31 = 0; var_r31 < 2; var_r31++) {
-            sp8 = (&lbl_1_bss_54)[var_r31]->data;
+            sp8 = M449_PLAYER(var_r31)->data;
         }
         if (lbl_1_data_228 >= 0) {
             MGSeqKill(lbl_1_data_228);
