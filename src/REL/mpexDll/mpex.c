@@ -2820,7 +2820,12 @@ void fn_1_ED78(s32 arg0, s32 arg1)
 
 void fn_1_F0C0(void)
 {
+#ifdef TARGET_PC
+    // The text-size helper accumulates maxima, so start from an empty extent.
+    float sp8[2] = { 0.0f, 0.0f };
+#else
     float sp8[2];
+#endif
     s32 var_r31;
     s32 var_r30;
     s32 var_r29;
@@ -3057,7 +3062,12 @@ void fn_1_10268(s32 arg0)
 
 void fn_1_1045C(void)
 {
+#ifdef TARGET_PC
+    // Match the zero-initialized accumulators used by the other menu paths.
+    float sp8[2] = { 0.0f, 0.0f };
+#else
     float sp8[2];
+#endif
     s32 var_r31;
     s32 var_r29;
 

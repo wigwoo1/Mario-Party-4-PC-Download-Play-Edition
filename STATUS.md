@@ -1,45 +1,38 @@
-# Development status — 2026-10-22 UTC
+# Development status — 2026-10-23
 
-This project is unfinished. This update publishes current source and validation status, not a new binary release. The latest measured private browser QA candidate is `26c17311145ea12083182393929172c8c16158f441bc8bac0463a3a7a6088ad1`. Its JavaScript contains private read-only test instrumentation; it is not the downloadable release. Whole-project completion has not been measured.
+This project is unfinished. This is a source/status update, not a new binary release. Whole-project completion is unmeasured. The latest measured private browser test wrapper is `82d2f45a75092f4ccf62b8df44891f8ef752eac61dd209226756ff24dd83a3af`; it includes private read-only test instrumentation and is not the downloadable release.
 
-## Source corrections since the previous update
+## Source corrections and checks
 
-- **Bowser Bop:** the postgame worker returned from a coroutine entry point. The PC path now terminates that worker with the existing process-end operation. The corrected source passed the actual coroutine fixtures and a normal four-Edge round: Mario won 13–11, 5,013 consecutive captured input/checkpoint/RNG records matched, and all four engines returned normally. This resolves the specific coroutine abort reported in the previous status, within this browser test's scope.
-- **Mystic Match 'Em:** a zero-direction light reached a vector-normalization assertion. Both PC renderer paths now use the existing collapsed highlight matrix for that light. Global vector assertions remain intact. The complete browser build and focused two-path fixtures passed, followed by a full winning round and return with 3,714 consecutive matching records.
-- **Kareening Koopas:** eight accesses assumed two separately declared actor globals were adjacent. In the compiled browser module, the second access instead overwrote the stage variable. The PC path now addresses each named actor explicitly; the original console fallback is preserved. Six actual-Wasm checks and an original-address overwrite control passed. A four-Edge run completed all three boards and docked the final four shells, with Mario winning, the original ten-coin result, normal return, and 2,531 consecutive matching records.
+Since the previous publication:
 
-The browser builds retained all 91 configured side modules. These corrections have not been validated by executing newly linked native game DLLs. Dice, scoring and RNG rules were not replaced or overridden.
+- Take a Breather: the PC zero-score draw path now clears the four winner slots within their bounds. The original console branch is retained. The compiled original branch reproduces the bounds failure; the corrected extracted function passes seven unchanged positive-score cases and the zero-score checks. Actual four-Edge winning and zero-score draw rounds returned normally.
+- Panel Panic / Extra Room: two menu-building functions now initialize their text-size accumulators on PC before calculating window dimensions. The original uninitialized values could produce an invalid zero-width GPU texture on return. Four compiled fixture variants cover 12 windows each, including the original poisoned-stack failure and corrected result. The corrected browser build passed normal return regression and a later human winning round with the original ten-coin reward and responsive menu return.
 
-## Scoped browser content results
+Previously published Bowser Bop coroutine termination, Mystic Match 'Em zero-direction highlight guards and Kareening Koopas explicit actor-slot corrections remain. Today's publication reran 24 stored coroutine cases, eight stored renderer cases, six actual-Wasm actor-slot checks, the menu-size and scoring fixtures, and four publication-boundary tests. Accepted source hashes were checked. This is not a new full build or a fresh gameplay run today. No native game DLL was executed.
 
-The checklist has 63 entries representing 61 distinct modules. **53 entries have scoped focused round/return evidence; two match observations require review and eight entries lack accepted individual evidence. Ten entries remain pending.** These counts combine explicitly identified builds and scopes; they are not a whole-project completion percentage or exactly ten new runs.
+## Content testing
 
-Later checks used four actual Edge engines on one PC, simulated ordinary controllers, muted audio and private local game data. Test observers exclude hidden targets, AI plans and RNG from controller decisions. Additional accepted results include:
+The checklist contains 63 entries across 61 distinct modules. **59 entries have scoped focused round/return evidence; four entries remain unresolved.** Those four include three Final Battle table entries and one board-event observation requiring review; they are not four distinct new minigames. This is content coverage, not a whole-project completion percentage. Evidence spans identified builds and test scopes.
 
-| Game | Actual outcome | Consecutive matching captured records |
-|---|---|---:|
-| Goomba's Chip Flip | Mario 50–20, original result and Free Play return | 5,421 |
-| Barrel Baron | Original single-player timer, score/new record 10, Extra Room results/menu return | 5,218 |
-| Jigsaw Jitters | All 20 pieces placed, new time record 45.03 seconds, results/menu return | 4,294 |
-| Goomba Stomp | Original timed round, score/new record 36, results/menu return | 3,045 |
-| Doors of Doom | Ordinary same-lobby rematch cleared one door before natural Bowser catch, score/new record 1, results/menu return | 1,921 |
+Additional accepted scoped browser results since the previous status include Take a Breather, Challenge Booksquirm, Panel Panic, Panels of Doom and Bowser Wrestling, plus reconciliation of historical Bob-omb X-ing evidence. These do not establish every difficulty, character, variant or hardware configuration.
 
-Doors of Doom's earlier natural zero-clear loss also returned normally with 1,373 matching records. Neither round manipulates the random danger decision. The original maximum-room outcome was not tested. Jigsaw's 30/40-piece difficulties and other image variants remain unverified. The checks reject altered comparison controls and preserve terminal results; they do not claim pixel-identical animated screenshots, physical input or complete visual coverage.
+The latest Final Battle controller run reached Bowser and dealt three hits, reducing his health from five to two, but the player lost after arena-travel/escape damage and a fall. **A full winning run and return remain unverified.** The failed winning attempt did return normally: 13,792 consecutive captured input/checkpoint/RNG records matched across four Edge engines; twelve altered comparisons were rejected; the return remained responsive through 600 frames and menu navigation. No engine crash occurred in this run. The test controller uses ordinary simulated inputs; game damage, scoring and RNG rules were not changed to force a win.
 
-## Shaders, recovery and build identities
+These are muted, same-PC browser tests, not new separate-device or Internet acceptance.
 
-The latest four-browser test independently prepared **1,268 known pipelines on every peer at frame zero, with zero queued**, before readiness and synchronized start. Its closed caches contain 1,285 observed definitions. The additional 17 definitions have been merged while retaining earlier definitions; their actual preparation is not yet verified. These caches cover observed scenes only and do not establish complete shader coverage. The downloadable release still has its older 618-definition seed.
+## Shaders and reconnect
 
-The last separately verified full recovery check prepared 1,215 known pipelines using private plain-browser candidate `a2397ba6a864396d659bcbc871fbdf7b172a5175b728f214e701be5ad570cbc0`. Actual transport closure paused all four engines, and automatic replacement through 150 resumed frames took 4,389 ms. The audit retained 256 startup and 151 recovered matching records and rejected twelve altered comparisons. Later m449 addressing changes and larger seeds have not received a fresh recovery or complete Party-match regression. The required 60-second recovery deadline is unchanged.
+Private plain-browser candidate `a545886dea0b868ecc70cd3351896034da571e092a0cd85a75568adcafef10e2` independently prepared **1,308 known pipelines on every peer before readiness**, started synchronously, and recovered automatically after actual transport closure. Closure through 150 resumed frames took **4,457 ms**, with 256 matching startup records, 151 matching recovered records and twelve rejected altered comparisons. This includes the Take a Breather and Extra Room corrections.
 
-The later private content wrappers share the corrected game WebAssembly, but have different measured JavaScript package identities. The uninstrumented 1,225-seed package `24a1969b8120bb3add88a52894350d717d1c5adad2e2af70c6938a2b4b6564c5` has not been separately launched. Do not treat private wrapper results as a new downloadable build or a fresh full-match acceptance.
+Later private Final Battle wrappers prepared that same 1,308-definition seed. Additional observed definitions are retained privately, but have not all received a fresh preparation acceptance. No complete shader coverage is claimed. These short recovery checks do not replace a current-build full Party-match regression or validate every subsequent instrumented wrapper. The required 60-second recovery deadline is unchanged.
 
-## Downloads, review hold and remaining gates
+## Downloads and remaining gates
 
-No archive or native/browser binary is uploaded in this update. The existing [ae3300c2 development prerelease](https://github.com/wigwoo1/Mario-Party-4-PC-Download-Play-Edition/releases/tag/dev-2026-10-18-ae3300c2-texture-lifetime), its source target and four assets remain preserved. It is an older snapshot with its documented limitations; current source and private browser results do not validate that download. The archive contains Node.js and its local server, requires the documented Windows prerequisites, and contains no game image.
+No new archive or binary is published. The existing [ae3300c2 development prerelease](https://github.com/wigwoo1/Mario-Party-4-PC-Download-Play-Edition/releases/tag/dev-2026-10-18-ae3300c2-texture-lifetime) and its four assets remain preserved. Its older 618-definition shader seed and documented limitations still apply. Current private tests do not validate that older download. No game image is included; the host supplies their own compatible image.
 
-Microsoft's submission portal was still **In progress**, with no final analyst determination, at the last verified check on October 22 at 01:43 UTC. The hold on native execution and new binary publication remains. No protection change, exclusion, new review clearance or new native execution is claimed here.
+The native antivirus review and new-binary publication hold remain unresolved in the recorded evidence. Microsoft's portal was last verified as In progress on October 22 at 01:43 UTC; it was not rechecked for this update. No false-positive determination is claimed and no protection setting was changed.
 
-Remaining gates include the ten content review/testing entries, full-match and reconnect regression after later corrections, native integration when the review hold permits, broader shader and scene coverage, intermittent synthetic Start and storage-quota findings, remaining embedded controller-glyph artwork, physical controllers/remapping and surround hardware, refreshed separate-device multiplayer, clean-machine installation, mobile/touch controls and cellular/WAN validation. Internet hosting tests remain deferred until the user is home. The gameplay goal is active.
+Remaining gates include the Final Battle winning run, the board-event review, current-build full-match/native regression, broader visual and shader coverage, remaining bitmap controller prompts, clean-machine packaging, physical-controller/device/mobile checks and cross-network hosting verification. Public hosting/WAN tests remain deferred until the user is home. A clean-machine reproducible build and project completion are not claimed.
 
-Browser guests receive required game data from the host into browser storage; this is not a zero-download streaming implementation. No game disc images, credentials, personal settings, private keys, local screenshots or private test logs are exported with this source snapshot. Upstream attribution, licenses and modified dependency provenance are preserved.
+Upstream attribution, licenses and modified dependency source are preserved. Private game images, credentials, personal profiles, local logs and screenshots are excluded from this publication.

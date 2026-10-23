@@ -396,7 +396,14 @@ s32 fn_1_D2C(void)
         }
     }
     if (var_r28 == 0) {
+#ifdef TARGET_PC
+        // The player loop leaves var_r31 at 4, past the winner array.
+        for (var_r31 = 0; var_r31 < 4; var_r31++) {
+            lbl_1_bss_70[var_r31] = -1;
+        }
+#else
         lbl_1_bss_70[var_r31] = -1;
+#endif
         return 0;
     }
     lbl_1_bss_14 = (var_r28 * REFRESH_RATE) / 5;

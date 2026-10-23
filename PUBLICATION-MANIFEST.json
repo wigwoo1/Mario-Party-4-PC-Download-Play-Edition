@@ -1,8 +1,8 @@
 {
   "version": 1,
   "repository": "https://github.com/wigwoo1/Mario-Party-4-PC-Download-Play-Edition",
-  "buildId": "26c17311145ea12083182393929172c8c16158f441bc8bac0463a3a7a6088ad1",
-  "sourceSnapshotSha256": "f272b1cacccbd08f0c1a75db71aeedbd7226f183f7a5d5463a797fad3f6d0626",
+  "buildId": "82d2f45a75092f4ccf62b8df44891f8ef752eac61dd209226756ff24dd83a3af",
+  "sourceSnapshotSha256": "d2666a2eafac0afefa21493b761402dc626f985b063d0e3cb66577a1bc3b2c0c",
   "upstream": {
     "url": "https://github.com/mariopartyrd/partyboard.git",
     "baseCommit": "f38304ebd13b09a15a80db7d7d015bf3fc387c5d"
@@ -11200,8 +11200,8 @@
     },
     {
       "path": "src/REL/m456Dll/main.c",
-      "bytes": 31050,
-      "sha256": "ba90e091c711041e555eb1cc773e0b46616ee03f3afb6f1b18009b68e6f58086"
+      "bytes": 31260,
+      "sha256": "ed3cfbb05c0c9236b77d133d205e43b93c12d04f84783ce6c8b195c2dc2cb940"
     },
     {
       "path": "src/REL/m456Dll/stage.c",
@@ -11365,8 +11365,8 @@
     },
     {
       "path": "src/REL/mpexDll/mpex.c",
-      "bytes": 111695,
-      "sha256": "4e43d3d3ef0aabad369fc162d7c8fc8a38e7a626a32228245f0c03388573ccae"
+      "bytes": 111991,
+      "sha256": "16d8e1143946cb4bb830cbdff2b4b0eac3430ea7032f3f2ea322d9ef9b98ba40"
     },
     {
       "path": "src/REL/mstory2Dll/board_clear.c",
@@ -11965,8 +11965,8 @@
     },
     {
       "path": "STATUS.md",
-      "bytes": 7139,
-      "sha256": "104a59068845d7b6dc0502924b4a7a06ce31cc521c4cf21683d102b37e5cffc6"
+      "bytes": 5702,
+      "sha256": "178b9607963ffa084b2fe9ea9b20b24b71470ce6e82748391dc8efbe47bc5333"
     },
     {
       "path": "tools/__init__.py",
