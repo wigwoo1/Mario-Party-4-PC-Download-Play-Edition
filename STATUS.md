@@ -13,3 +13,8 @@ The current public Windows/browser ZIP has not been rebuilt for this source-only
 ## Remaining checks
 
 The current-build physical two-PC gameplay/start/recovery path, an actual wall-clock 60-second network interruption, full shader scene coverage, hardware controller/audio, clean-machine reliability, and visual review of the final ranking screen remain open. WAN and Android cellular testing are deferred until the user is home. No overall project completion percentage is claimed.
+
+## 2026-10-24 d1e9 shader-readiness follow-up
+
+The private d1e9 runtime candidate with the 1,355-definition observed seed passed same-PC automatic Native Host plus three actual Edge guests: all 1,345 graphics pipelines prepared with zero queued, ten UI records matched in the seed receipt, 130 initial matching polls, and 90 recovery polls in 4.95 seconds. Native exited 0 with no errors. A test-only typed-count helper fixed a false assertion without changing game code. Local evidence is outputs/validation/shader-seed-d1e9-four-peer-20261024.json; no executable/archive was rebuilt. Physical two-PC and full scene coverage remain open.
+Exact runtime build ID for this follow-up: d1e9a1c0f511914a8dc50a18cbb49948dc15d1ae2025dce65b60db5fc45ff356.

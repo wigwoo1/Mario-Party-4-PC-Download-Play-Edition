@@ -1,6 +1,7 @@
 const fs=require('node:fs'),path=require('node:path'),assert=require('node:assert/strict'),{spawn}=require('node:child_process');
 const {chromium}=require(process.env.PLAYWRIGHT_MODULE||'playwright');
 const {browserStorageObservation}=require('../tools/native-rtc-probe/browser-storage-observation.cjs');
+const {countPipelineSeedDefinitions}=require('./pipeline-seed-counts.cjs');
 const browserProfile=process.env.PARTYBOARD_AUTOMATIC_BROWSER_PROFILE||'private';assert.ok(['private','persistent'].includes(browserProfile));
 const preparationTimeout=Number(process.env.PARTYBOARD_TEST_PREPARATION_TIMEOUT_MS||300000);assert.ok(Number.isInteger(preparationTimeout)&&preparationTimeout>=30000&&preparationTimeout<=900000);
 const pause=ms=>new Promise(r=>setTimeout(r,ms));
@@ -10,6 +11,9 @@ const descriptor=path.resolve(process.env.PARTYBOARD_RUNTIME_PACKAGE||path.join(
 const packageConfiguration=JSON.parse(fs.readFileSync(descriptor,'utf8')).configuration;
 const shaderSeed=JSON.parse(fs.readFileSync(path.join(path.dirname(descriptor),'initial_pipeline_cache.json'),'utf8'));
 assert.ok(Number.isSafeInteger(shaderSeed.pipelineCount)&&shaderSeed.pipelineCount>0);
+const shaderDefinitionCounts=countPipelineSeedDefinitions(path.join(path.dirname(descriptor),'initial_pipeline_cache.db'));
+assert.equal(shaderDefinitionCounts.total,shaderSeed.pipelineCount,'Seed metadata must count every supported graphics and UI definition');
+assert.ok(shaderDefinitionCounts.graphics>0,'Seed must contain graphics pipelines');
 const disc=process.env.PARTYBOARD_LOCAL_CISO||'D:/Desktop/Games/Mario Party 4/Mario Party 4 (USA) (Rev 1).ciso';
 const guestCount=Number(process.env.PARTYBOARD_AUTOMATIC_BROWSER_GUESTS||1);assert.ok([1,3].includes(guestCount));
 const testFullMatch=process.env.PARTYBOARD_TEST_AUTOMATIC_FULL_MATCH==='1';assert.ok(!testFullMatch||guestCount===3,'Full match requires four actual peers');
@@ -105,7 +109,7 @@ function normalized(row){return {frame:String(row.frame),checkpoint:row.checkpoi
   for(const prepared of browserPreparations){
    assert.equal(prepared.buildId,packageConfiguration.buildId);assert.equal(prepared.frame,0);
    assert.equal(prepared.pipelineSeed.sha256,shaderSeed.sha256);
-   assert.equal(prepared.rendererPreparation.created,shaderSeed.pipelineCount);assert.equal(prepared.rendererPreparation.queued,0);
+    assert.equal(prepared.rendererPreparation.created,shaderDefinitionCounts.graphics);assert.equal(prepared.rendererPreparation.queued,0);
   }
   const actualReceipts=await Promise.all(pages.map(p=>p.evaluate(()=>app.lobbyPreparedReports())));let compared=0;
   for(const group of actualReceipts)for(const receipt of Object.values(group)){assert.deepEqual(actual.receipt,receipt);compared++;}assert.ok(compared>=guestCount);
@@ -135,7 +139,7 @@ function normalized(row){return {frame:String(row.frame),checkpoint:row.checkpoi
   }
   let fullMatch;if(testFullMatch){phase('full-match');fullMatch=await require('../tools/native-rtc-probe/drive-automatic-full-match.cjs').driveAutomaticFullMatch({pages,nativeHost,nativeObserver,send:packet=>new Promise((resolve,reject)=>native.stdin.write(JSON.stringify(packet)+'\n',error=>error?reject(error):resolve())),outputDirectory:path.join(output,'full-match'),maxTurn:5});fs.writeFileSync(path.join(output,'full-match-result.json'),JSON.stringify(fullMatch,null,2));}
   assert.deepEqual(errors,[]);const guestReports=await Promise.all(pages.map(p=>p.evaluate(()=>app.lobbyPreparedReports())));const final=await observe();stopping=true;phase('stopping-native');write('stop');await wait(()=>exit!==undefined,30000);assert.equal(exit,0,'Native frontend and stopped-input cleanup must succeed');
-  fs.writeFileSync(path.join(output,'acceptance.json'),JSON.stringify({status:'passed',scope:'one real native '+mode+' frontend with '+guestCount+' actual muted Edge peer(s) on the same PC; automatic room signaling, verified assets/known shaders/readiness, Start UI action, synchronized input and signed recovery',runtimeDescriptor:descriptor,browserProfile,sourceHashes,preparation,extraRoom,muted:true,knownPipelineCount:shaderSeed.pipelineCount,players:guestCount+1,reports,guestReports,browserPreparations,nativePreparedReceipt:actual.receipt,actualReceiptsCompared:compared,rejoin,initial:{count:initial.count,first:initial.first,last:initial.last},recovery:recovery?{count:recovery.count,first:recovery.first,last:recovery.last,elapsedMs:recovery.elapsedMs}:null,nativeAccepted:final.accepted,nativeExit:exit,errors,at:new Date().toISOString()},null,2));
+  fs.writeFileSync(path.join(output,'acceptance.json'),JSON.stringify({status:'passed',scope:'one real native '+mode+' frontend with '+guestCount+' actual muted Edge peer(s) on the same PC; automatic room signaling, verified assets/known shaders/readiness, Start UI action, synchronized input and signed recovery',runtimeDescriptor:descriptor,browserProfile,sourceHashes,preparation,extraRoom,muted:true,knownPipelineCount:shaderSeed.pipelineCount,browserGraphicsPipelineCount:shaderDefinitionCounts.graphics,uiPipelineDefinitionCount:shaderDefinitionCounts.ui,players:guestCount+1,reports,guestReports,browserPreparations,nativePreparedReceipt:actual.receipt,actualReceiptsCompared:compared,rejoin,initial:{count:initial.count,first:initial.first,last:initial.last},recovery:recovery?{count:recovery.count,first:recovery.first,last:recovery.last,elapsedMs:recovery.elapsedMs}:null,nativeAccepted:final.accepted,nativeExit:exit,errors,at:new Date().toISOString()},null,2));
  }catch(error){const preparationDiagnostics=await Promise.allSettled(pages.map(p=>p.evaluate(()=>globalThis.app?.lobbyPreparationDiagnostics?.()??null)));const storage=await Promise.allSettled(pages.map(p=>browserStorageObservation(p,{files:true})));fs.writeFileSync(path.join(output,'failure.json'),JSON.stringify({error:error.stack,errors,statuses,browserProfile,preparationDiagnostics,storage,nativeExit:exit,latestEvents:events.filter(e=>e.type!=='automatic-lobby-link').slice(-12)},null,2));throw error;}
  finally{clearTimeout(watchdog);phase('stopping-browsers');if(native&&exit===undefined){try{write('stop');await pause(500);}catch{}if(exit===undefined)native.kill();}for(const guest of pages)await guest.locator('#stop').click({timeout:3000}).catch(()=>{});phase('closing-contexts');await Promise.allSettled(contexts.map(context=>context.close()));await Promise.allSettled([...responseTasks]);await browser?.close();server?.kill();nativeLog.end();trace('finished');}
 })().catch(e=>{console.error(e);process.exitCode=1;});

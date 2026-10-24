@@ -1,8 +1,8 @@
 {
   "version": 1,
   "repository": "https://github.com/wigwoo1/Mario-Party-4-PC-Download-Play-Edition",
-  "buildId": "d8edbd8bcbe74cf675d7cee2792290e592ec7a2876cb0b5339e27ed10bde5bf8",
-  "sourceSnapshotSha256": "b957376c42508d0eca977ee9fa9fe980420b17a3078a0a298cbf8bd36bcb2e24",
+  "buildId": "d1e9a1c0f511914a8dc50a18cbb49948dc15d1ae2025dce65b60db5fc45ff356",
+  "sourceSnapshotSha256": "db760e43d6e5e5bdf265f2c59d8a801977fa106f538b9b5bbdd77cdd80161b22",
   "upstream": {
     "url": "https://github.com/mariopartyrd/partyboard.git",
     "baseCommit": "f38304ebd13b09a15a80db7d7d015bf3fc387c5d"
@@ -12040,8 +12040,8 @@
     },
     {
       "path": "STATUS.md",
-      "bytes": 1804,
-      "sha256": "92302c5826ebef515975e895c6a21d1fe9a07687a05e5ae13cf9d6def024b3e8"
+      "bytes": 2555,
+      "sha256": "8dabc13aad32adb6176085118552c77526e567e86f15adb3060944e8d455c4da"
     },
     {
       "path": "tools/__init__.py",
@@ -14460,8 +14460,8 @@
     },
     {
       "path": "web/native-automatic-lobby-browser-test.cjs",
-      "bytes": 21562,
-      "sha256": "715f6d8e793633563f2d8f0d962b19387360bd3c3b6fa55d9d475464d05d843f"
+      "bytes": 22107,
+      "sha256": "bb2becd8d9c773e63204e399187a7dbfc3b274495497df068f01d08861dd755b"
     },
     {
       "path": "web/native-gameplay-recovery-test-support.mjs",
@@ -14542,6 +14542,16 @@
       "path": "web/pipeline-seed-channel.test.mjs",
       "bytes": 996,
       "sha256": "c90ec8469a5972b68b5b750baede7d0d9f31a606b8f859bccd761050356ce17d"
+    },
+    {
+      "path": "web/pipeline-seed-counts.cjs",
+      "bytes": 760,
+      "sha256": "828bc14131bdf105626d3afb8b666b019dfd4c3800902a1f9ae216b5fc71eeac"
+    },
+    {
+      "path": "web/pipeline-seed-counts.test.cjs",
+      "bytes": 1884,
+      "sha256": "d37058e2ea67a1d403710638da32788b58d9940f5ed7293be9a0796e4fe5e146"
     },
     {
       "path": "web/pipeline-seed.mjs",
