@@ -414,6 +414,9 @@ body.animate-in .intro-item {
     #menu-list button {
         width: 100%;
         max-width: 100%;
+        /* Wrapped replacement-font labels must grow instead of overlapping. */
+        height: auto;
+        min-height: 54dp;
         text-align: right;
     }
 

@@ -1,8 +1,8 @@
 {
   "version": 1,
   "repository": "https://github.com/wigwoo1/Mario-Party-4-PC-Download-Play-Edition",
-  "buildId": "d1e9a1c0f511914a8dc50a18cbb49948dc15d1ae2025dce65b60db5fc45ff356",
-  "sourceSnapshotSha256": "29fca900b97bd4af51c1a7089bd2a22a87d8369d44337de58c73115bd0c4e9de",
+  "buildId": "d8edbd8bcbe74cf675d7cee2792290e592ec7a2876cb0b5339e27ed10bde5bf8",
+  "sourceSnapshotSha256": "60eafacf0e6cc088e6115c7758797fabafcab72d62f742f6e92842b03a01a44f",
   "upstream": {
     "url": "https://github.com/mariopartyrd/partyboard.git",
     "baseCommit": "f38304ebd13b09a15a80db7d7d015bf3fc387c5d"
@@ -9140,8 +9140,8 @@
     },
     {
       "path": "res/rml/prelaunch.rcss",
-      "bytes": 9417,
-      "sha256": "c7fd6eff543f7fc2d4594e8e38960b0bd63670e9381b9070cc58ddd7ed01ca31"
+      "bytes": 9548,
+      "sha256": "502399dbb17b448966689eb21e837d9734c4f57786873967a3db95a008b293b2"
     },
     {
       "path": "res/rml/tabbing.rcss",
@@ -10340,8 +10340,8 @@
     },
     {
       "path": "src/port/ui/document.hpp",
-      "bytes": 1560,
-      "sha256": "1dab8b6f429713e3286d06ed0ccf0223da7b08c14a5053e3b210010101beb7dd"
+      "bytes": 2447,
+      "sha256": "b5164053aa94d9f7092b597f6e41bd8c1d7d13c6c68112932f53fd06bf58b35c"
     },
     {
       "path": "src/port/ui/event.cpp",
@@ -12040,8 +12040,8 @@
     },
     {
       "path": "STATUS.md",
-      "bytes": 5370,
-      "sha256": "14c77e2bc7c8a5223e657af9af1f70d09ea92378d5ab91c6b250c7c1b58f2f73"
+      "bytes": 3020,
+      "sha256": "4a8a04cbc80cb96c4e2f53993282f6383871a2cc84758bea70953632ceb654a1"
     },
     {
       "path": "tools/__init__.py",
@@ -12557,6 +12557,16 @@
       "path": "tools/native-rtc-probe/CMakeLists.txt",
       "bytes": 9615,
       "sha256": "8135d156edc4af4d431979d1b0ba8b775be0c94f5efba4532b7473916765287c"
+    },
+    {
+      "path": "tools/native-rtc-probe/compact-native-diagnostic-log.cjs",
+      "bytes": 927,
+      "sha256": "6e0e0160a78ed7b25628b245cc5b74d5d6016900e534e17fe9a84ba18470709f"
+    },
+    {
+      "path": "tools/native-rtc-probe/compact-native-diagnostic-log.test.cjs",
+      "bytes": 1831,
+      "sha256": "8205304d977afb52271063c97db3a0fb30d39cba2af7ea85c0ce57a333d4e34b"
     },
     {
       "path": "tools/native-rtc-probe/connection-route-test.cpp",
@@ -14450,8 +14460,8 @@
     },
     {
       "path": "web/native-automatic-lobby-browser-test.cjs",
-      "bytes": 21400,
-      "sha256": "23b7e1845c6a4809a44825f56d83e53ad46ef36e99d8b17a8749e8e7e5fa9fb3"
+      "bytes": 21562,
+      "sha256": "715f6d8e793633563f2d8f0d962b19387360bd3c3b6fa55d9d475464d05d843f"
     },
     {
       "path": "web/native-gameplay-recovery-test-support.mjs",

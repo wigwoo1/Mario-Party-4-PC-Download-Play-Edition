@@ -5,6 +5,10 @@
 #include "component.hpp"
 #include "ui.hpp"
 
+#include <cstdio>
+#include <cstdlib>
+#include <typeinfo>
+
 namespace partyboard::ui {
 
 class Document {
@@ -37,13 +41,24 @@ public:
     }
     void push(std::unique_ptr<Document> document)
     {
+        if (const char *trace = std::getenv("PARTYBOARD_TRACE_UI_STACK"); trace && trace[0] == '1') {
+            std::fprintf(stderr, "Native UI stack: push from=%s to=%s\n", typeid(*this).name(), typeid(*document).name());
+        }
         push_document(std::move(document));
         hide(false);
     }
     void pop()
     {
+        const char *trace = std::getenv("PARTYBOARD_TRACE_UI_STACK");
+        if (trace && trace[0] == '1') {
+            std::fprintf(stderr, "Native UI stack: pop begin=%s visible=%d pending=%d closed=%d\n", typeid(*this).name(), visible(), pending_close(), closed());
+        }
         hide(true);
         show_top_document();
+        if (trace && trace[0] == '1') {
+            const auto *top = top_document();
+            std::fprintf(stderr, "Native UI stack: pop end=%s visible=%d pending=%d closed=%d top=%s\n", typeid(*this).name(), visible(), pending_close(), closed(), top ? typeid(*top).name() : "none");
+        }
     }
 
     bool pending_close() const
