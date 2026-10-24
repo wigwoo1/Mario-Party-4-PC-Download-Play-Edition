@@ -65,6 +65,16 @@ const recoveryCredentials=new Map();
 export function lobbyRecoveryCredentialState(){return [...recoveryCredentials.values()].map(({session,peer})=>({session,peer,available:true}));}
 export function lobbySessionConfiguration(){return sessionConfiguration?{...sessionConfiguration}:null;}
 let lobbyRuntime,lobbyPreparing,lobbyGlyphs,lobbyCleanup=Promise.resolve();
+let lobbyPreparationAttempt;
+// Read-only QA snapshot: exclude session IDs, connection codes and asset paths.
+export function lobbyPreparationDiagnostics(){
+  const attempt=lobbyPreparationAttempt;
+  return {stage:attempt?.stage??'idle',inProgress:!!lobbyPreparing,runtimePresent:!!lobbyRuntime,
+    generationChanged:attempt?attempt.generation!==generation:false,
+    signalPresent:!!attempt?.signal,signalAborted:!!attempt?.signal?.aborted,
+    configurationPresent:!!sessionConfiguration,assetsPresent:!!lobbyHost||!!runtimeAsset,
+    ...(attempt?.error?{error:{...attempt.error}}:{})};
+}
 let lobbyPipelineSeed,guestPipelineChannel;
 export function setLobbyPipelineSeed(seed){
   if(lobbyRuntime||lobbyPreparing)throw Error('Pipeline seed must precede runtime preparation.');
@@ -506,14 +516,20 @@ function releaseLobbyRuntime(){
   lobbyCleanup.then(()=>downloadCacheControls?.refresh(),()=>downloadCacheControls?.refresh());
 }
 async function prepareLobbyGame(){
-  if(lobbyPreparing||lobbyRuntime)return;
+  if(lobbyPreparing||lobbyRuntime){
+    if(lobbyPreparationAttempt)lobbyPreparationAttempt.stage=lobbyPreparing?'already-preparing':'already-prepared';
+    return;
+  }
   const current=generation,signal=aborter?.signal,configuration=sessionConfiguration;
+  const attempt=lobbyPreparationAttempt={stage:'checking-inputs',generation:current,signal};
   if(!signal||!configuration||(!lobbyHost&&!runtimeAsset)){status('Connect and verify assets before preparing the game.');return;}
   const resolution=display.resolution();display.setLocked(true);
   const controlProfile=controlEditor.profile();controlEditor.setLocked(true);
   $('prepare-game').disabled=true;status('Preparing lobby game runtime…');
   lobbyPreparing=(async()=>{
+    attempt.stage='waiting-for-cleanup';
     await stopLocalGame();await lobbyCleanup;signal.throwIfAborted();
+    attempt.stage='loading-runtime-files';
     const [{localAssetStore},{loadBrowserRuntimePackage},{prepareFingerprintedSessionRuntime},
       {browserPlatformCallbacks},{prepareRuntimeGlyphs}]=await Promise.all([
       import('./local-asset-store.mjs'),import('./browser-runtime-package.mjs'),import('./session-runtime.mjs'),
@@ -522,6 +538,7 @@ async function prepareLobbyGame(){
     const files=await loadBrowserRuntimePackage({baseURL:new URL('./',location.href).href,signal,
       supplementalArtifacts:configuration.runtimeArtifacts??[]});
     const glyphs=await prepareRuntimeGlyphs({signal,bindings:controlBindingGlyphs(controlProfile)});
+    attempt.stage='preparing-session-runtime';
     const prepared=await prepareFingerprintedSessionRuntime(source,configuration.assetId,files,{
       runtimeBuild:{expectedBuildId:configuration.buildId},
       sessionSeed:configuration.seed,pipelineSeed:lobbyPipelineSeed,signal,...capturingPlatformCallbacks(browserPlatformCallbacks,{resolution,maxSteps:lobbyPipelineSeed?10000:60,
@@ -530,7 +547,7 @@ async function prepareLobbyGame(){
         print:line=>console.info(line),printErr:line=>console.warn(line)},
       progress:(bytes,total)=>{if(current===generation)status('Checking lobby game assets: '+Math.floor(bytes/total*100)+'%');},
     });
-    if(current!==generation||signal.aborted){await prepared.dispose();return;}
+    if(current!==generation||signal.aborted){attempt.stage='discarding-stale-runtime';await prepared.dispose();return;}
     lobbyRuntime=prepared;
     gameTouchControls.refresh();
     if(controlEditor.customized('keyboard'))applyRuntimeKeyboardBindings(prepared.module,controlProfile);
@@ -546,8 +563,11 @@ async function prepareLobbyGame(){
       guestPreparationChannel.send(JSON.stringify(report));preparedReports.set(localPeer,report);
     }
     status(manualLobby?'Lobby game initialized and paused at frame zero. Mark ready after the known shader pipelines finish preparing. Additional scene coverage remains under development.':'Game initialized. Completing automatic readiness checks…');
+    attempt.stage='prepared';
   })();
-  try{await lobbyPreparing;}catch(error){if(current===generation&&!signal.aborted){
+  try{await lobbyPreparing;}catch(error){
+    attempt.stage='failed';attempt.error={name:String(error?.name??'Error').slice(0,80),message:String(error?.message??error).slice(0,2000)};
+    if(current===generation&&!signal.aborted){
     const diagnostic=(cause,depth=0)=>({name:cause?.name,message:String(cause?.message??cause),stack:cause?.stack,
       ...(depth<4&&cause?.cause?{cause:diagnostic(cause.cause,depth+1)}:{}),
       ...(depth<4&&Array.isArray(cause?.errors)?{errors:cause.errors.slice(0,32).map(child=>diagnostic(child,depth+1))}:{})});

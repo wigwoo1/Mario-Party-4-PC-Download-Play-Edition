@@ -3,6 +3,7 @@
 #include "imgui/ImGuiEngine.hpp"
 #include "iso_validate.hpp"
 #include "ui/ui.hpp"
+#include "ui/input.hpp"
 
 #include "partyboard_version.h"
 #include "ui/menu_bar.hpp"
@@ -297,13 +298,15 @@ static void LanguageInit() {
 
 // Keep the UI event/render loop independent of game launch state: a stopped
 // engine's lobby must still service window/controller events and its owners.
-static bool nativeUILoop(const std::function<bool()>& keepRunning) {
+// Automated Start/Stop commands still use the actual lobby controls. Only the
+// explicit acceptance run isolates desktop UI input; normal menus keep it.
+static bool nativeUILoop(const std::function<bool()>& keepRunning, bool acceptDesktopInput=true) {
     while (keepRunning()) {
         const AuroraEvent* event = aurora_update();
         while (event != nullptr && event->type != AURORA_NONE) {
             switch (event->type) {
                 case AURORA_SDL_EVENT:
-                    partyboard::ui::handle_event(event->sdl);
+                    if(acceptDesktopInput)partyboard::ui::handle_event(event->sdl);
                 // partyboard::g_imguiConsole.HandleSDLEvent(event->sdl);
                 break;
                 case AURORA_DISPLAY_SCALE_CHANGED:
@@ -311,6 +314,7 @@ static bool nativeUILoop(const std::function<bool()>& keepRunning) {
                     // partyboard::ImGuiEngine_Initialize(event->windowSize.scale);
                 break;
                 case AURORA_EXIT:
+                    if(!acceptDesktopInput)fprintf(stderr,"Native automated UI stopped: window exit event\n");
                     return false;
             }
 
@@ -1650,6 +1654,10 @@ extern "C" int port_main(int argc, char* argv[]) {
         const auto deadline=std::chrono::steady_clock::now()+std::chrono::seconds(fullMatchProbe?21600:(probeHostConnected||automateHostRecovery)?1200:60);
         bool sessionEndedNoticeSeen=false;
         bool recoveryUiSeen=false;
+        if(automaticLobbyTest){
+            partyboard::ui::input::reset_input_state();
+            printf("Native frontend event: %s\n",nlohmann::ordered_json{{"type","automatic-ui-input-policy"},{"desktopUiInput",false},{"windowCloseAllowed",true}}.dump().c_str());fflush(stdout);
+        }
         const bool active=nativeUILoop([&]{
             if((probeHostLobby||returnedHostMenuAcceptance)&&onlineSessionEndedNotice)sessionEndedNoticeSeen|=lobby->sessionEndedNoticeVisible();
             if((!probeHostLobby||probeHostPreparation)&&!lobbyPackagePath.empty()&&lobby->prepared()&&!enginePrepared&&enginePreparationError.empty()){
@@ -1666,7 +1674,7 @@ extern "C" int port_main(int argc, char* argv[]) {
                                 fprintf(stderr,"Native Host renderer preparation stopped: window exit event\n");
                                 return false;
                             }
-                            if(event->type==AURORA_SDL_EVENT)partyboard::ui::handle_event(event->sdl);
+                            if(event->type==AURORA_SDL_EVENT&&!automaticLobbyTest)partyboard::ui::handle_event(event->sdl);
                             ++event;
                         }
                         partyboard::ui::update();
@@ -1845,7 +1853,7 @@ extern "C" int port_main(int argc, char* argv[]) {
             // ending the returned-menu check; manual lobbies stay unready.
             if(returnedHostMenuAcceptance&&enginePrepared&&sessionEndedNoticeSeen&&lobby->updates()>=30&&lobby->hostReady()==lobby->automatic())return false;
             return !diagnosticStopped&&!inputCommitted&&(enginePrepared||PartyBoard_IsRunning)&&enginePreparationError.empty()&&!lobby->cancelled()&&lobby->error().empty()&&
-            (!probeHostLobby||probeHostConnected||((lobby->updates()<30||!lobby->prepared()||(probeHostPreparation&&!enginePrepared)||(probeHostInvitations&&diagnosticInvitations.size()!=3))&&std::chrono::steady_clock::now()<deadline));});
+            (!probeHostLobby||probeHostConnected||((lobby->updates()<30||!lobby->prepared()||(probeHostPreparation&&!enginePrepared)||(probeHostInvitations&&diagnosticInvitations.size()!=3))&&std::chrono::steady_clock::now()<deadline));},!automaticLobbyTest);
         bool passed=active&&(!probeHostGameplay||inputCommitted)&&(!probeHostConnected||(diagnosticComplete&&(diagnosticStopped||inputCommitted)))&&(!probeHostInvitations||diagnosticInvitations.size()==3)&&lobby->prepared()&&lobby->updates()>=30&&lobby->error().empty()&&(probeHostPreparation?(enginePrepared&&PartyBoard_GameLifecyclePhase()==2&&PartyBoard_GameFrameCount()==0):PartyBoard_GameLifecyclePhase()==0)&&(!onlineSessionEndedNotice||sessionEndedNoticeSeen);
         if(automaticLobbyTest)passed=active&&inputCommitted&&lobby->automatic()&&lobby->error().empty()&&enginePreparationError.empty();
         if(probeHostLobby&&onlineSessionEndedNotice){printf("Native menu notice: %s\n",nlohmann::ordered_json({{"menu","host"},{"seenVisible",sessionEndedNoticeSeen},{"phase",PartyBoard_GameLifecyclePhase()},{"frame",PartyBoard_GameFrameCount()},{"text",partyboard::net::NativeSessionEndedNotice}}).dump().c_str());fflush(stdout);}
