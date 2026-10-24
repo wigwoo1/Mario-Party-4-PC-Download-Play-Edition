@@ -1,15 +1,15 @@
-# Development update: fullscreen touch visibility — 2026-10-24
+# Development status — 2026-10-24
 
-Incomplete Windows native/browser development build. Supply your own compatible game image; none is included.
+This is an incomplete native Windows and browser port. It does not include a game disc image. Story Mode is outside the user's requested test scope.
 
-Compiled/runtime artifact build ID: d8edbd8bcbe74cf675d7cee2792290e592ec7a2876cb0b5339e27ed10bde5bf8. Native/Wasm engine and bundled shader seed are unchanged from the previous native-layout download. This update changes the web touch-controller module only: mouse-only desktop fullscreen stays clear, while touch-capable devices or an actual touch event enable the overlay. Controller-button hiding and release of held touch keys are preserved.
+## Shader preparation update
 
-Verification:
-- Nine focused touch/input tests and real Edge fullscreen module tests passed. Mouse-only desktop stayed clear; emulated 915-by-412 mobile touch, saved key rebinding, arrow-stick defaults, injected controller-button hide/release, Show toggle and 20-button layout passed. Both screenshots were reviewed. This is not physical Android/Bluetooth acceptance or a new full game test of the changed module.
-- The preceding exact d8ed archive was extracted into a fresh folder with spaces. Its actual packaged native executable, bundled Node and packaged web server passed native Host plus three Edge guests and the reverse native Join/browser Host roles. All 1,335 known shaders were prepared before readiness; bounded synchronized input/checkpoint/RNG windows and signed recovery passed in about 5.49 and 3.15 seconds. All 479 package file hashes stayed unchanged; owned processes and ports closed.
-- That same preceding package passed actual guest preference changes during downloads. Three guests rendered at 640x360 (16:9), 960x600 (16:10) and 640x480 (4:3). Fullscreen aspect, eight canonical remapped A-input records, synchronized startup and 4.83-second reconnect passed. Those tests precede this touch visibility patch and do not establish a new full match.
-- The unchanged engine previously completed automatic five-turn native/browser gameplay with retained matching turn-entry/ranking windows. No continuous all-frame archive or fresh full-match acceptance for this web update is claimed.
+The source bundle now contains 1,355 observed shader/UI pipeline definitions (SHA-256 `bb229e6a746bba8469f73f37bae241e3b19c6f02586f3ab673d987f1b3c3c7c7`), expanded from 1,335 using valid records captured during a completed five-turn gameplay run. The previous seed is retained in the older release files. These are observed definitions only; full scene coverage is not verified.
 
-Story Mode is outside the requested completion/testing scope. Existing game content has not been removed by this UI update.
+The exact 1,355-definition candidate passed a same-PC four-player native/Edge preparation, synchronized start, and reconnect run: three guest receipts agreed, 1,345 graphics pipelines and ten UI definitions were prepared, and 90 matching recovery polls resumed after about 4.98 seconds. Native bundled-seed validation passed ten checks; six focused Node test files passed 14 tests. This is scoped evidence, not separate-device, WAN, mobile, or full-scene acceptance.
 
-Open limitations: physical separate-device/controller/audio/surround and Android/Bluetooth tests, WAN/public hosting (deferred until the user returns home), clean-machine verification, complete shader scene coverage, remaining non-Story content branches and complete transitive redistribution audit. An earlier intermittent native settings tuner issue did not recur in later traced and ordinary tests; its root cause is unresolved. Some HTTP 400/410 responses occur during shutdown; no active-session API errors occurred in the scoped packaged tests. The earlier different DLL's Microsoft review has no claimed final analyst verdict. This remains a development prerelease.
+The current public Windows/browser ZIP has not been rebuilt for this source-only seed change and still contains the earlier 1,335-definition seed. No replacement binary archive is published by this update. The measured runtime used for the seed candidate has build ID `d8edbd8bcbe74cf675d7cee2792290e592ec7a2876cb0b5339e27ed10bde5bf8`.
+
+## Remaining checks
+
+The current-build physical two-PC gameplay/start/recovery path, an actual wall-clock 60-second network interruption, full shader scene coverage, hardware controller/audio, clean-machine reliability, and visual review of the final ranking screen remain open. WAN and Android cellular testing are deferred until the user is home. No overall project completion percentage is claimed.

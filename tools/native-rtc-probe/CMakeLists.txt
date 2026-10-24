@@ -26,6 +26,13 @@ target_include_directories(partyboard_native_guest_start_test PRIVATE "${PARTYBO
 add_executable(partyboard_input_mailbox_test input-mailbox-test.cpp)
 target_compile_features(partyboard_input_mailbox_test PRIVATE cxx_std_20)
 target_include_directories(partyboard_input_mailbox_test PRIVATE "${CMAKE_CURRENT_LIST_DIR}/../../include")
+add_executable(partyboard_input_interruption_deadline_test input-interruption-deadline-test.cpp)
+target_compile_features(partyboard_input_interruption_deadline_test PRIVATE cxx_std_20)
+target_compile_definitions(partyboard_input_interruption_deadline_test PRIVATE TARGET_PC)
+target_include_directories(partyboard_input_interruption_deadline_test PRIVATE
+    "${CMAKE_CURRENT_LIST_DIR}/../../extern/aurora/include"
+    "${PARTYBOARD_JSON_INCLUDE}"
+    "${CMAKE_CURRENT_LIST_DIR}/../../include")
 add_executable(partyboard_guest_packet_diagnostics_test guest-packet-diagnostics-test.cpp)
 target_compile_features(partyboard_guest_packet_diagnostics_test PRIVATE cxx_std_20)
 target_include_directories(partyboard_guest_packet_diagnostics_test PRIVATE "${CMAKE_CURRENT_LIST_DIR}/../../include")

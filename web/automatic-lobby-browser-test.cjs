@@ -1,5 +1,20 @@
 const {chromium}=require(process.env.PLAYWRIGHT_MODULE||'playwright');
 const fs=require('node:fs'),path=require('node:path'),assert=require('node:assert/strict'),{spawn}=require('node:child_process');
+async function verifyLobbyPlaylist(page,peer){
+ const playing=track=>page.waitForFunction(name=>{const audio=document.querySelector('#lobby-audio');return audio?.currentSrc.endsWith(name)&&!audio.paused&&audio.readyState>=2&&audio.currentTime>0&&audio.error===null;},track,{timeout:30000});
+ await playing('wifi-menu.opus');
+ const tracks=[{name:'wifi-menu.opus',duration:await page.locator('#lobby-audio').evaluate(audio=>audio.duration)}];
+ let time=await page.locator('#lobby-audio').evaluate(audio=>audio.currentTime);
+ await page.waitForFunction(value=>document.querySelector('#lobby-audio').currentTime>value+0.5,time,{timeout:10000});
+ for(const name of ['currently-spectating.opus','wifi-menu.opus']){
+  await page.waitForFunction(()=>{const audio=document.querySelector('#lobby-audio');return Number.isFinite(audio.duration)&&audio.duration>1;},{},{timeout:30000});
+  await page.locator('#lobby-audio').evaluate(audio=>{if(!Number.isFinite(audio.duration)||audio.duration<=1)throw Error('Decoded track duration required.');audio.currentTime=audio.duration-0.2;});
+  await playing(name);time=await page.locator('#lobby-audio').evaluate(audio=>audio.currentTime);
+  await page.waitForFunction(value=>document.querySelector('#lobby-audio').currentTime>value+0.5,time,{timeout:10000});
+  tracks.push({name,duration:await page.locator('#lobby-audio').evaluate(audio=>audio.duration)});
+ }
+ return {peer,tracks,advancing:true,wrapped:true};
+}
 (async()=>{
  const output=path.resolve(process.env.PARTYBOARD_TEST_OUTPUT_DIRECTORY||'work/automatic-lobby-validation');fs.mkdirSync(output,{recursive:true});
  assert.ok(process.env.PARTYBOARD_RUNTIME_PACKAGE&&process.env.PARTYBOARD_LOCAL_CISO,'Measured runtime package and private local game required');
@@ -7,7 +22,7 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
  const preparationTimeout=Number(process.env.PARTYBOARD_TEST_PREPARATION_TIMEOUT_MS||(count===4?900000:270000));
  assert.ok(Number.isSafeInteger(preparationTimeout)&&preparationTimeout>=30000&&preparationTimeout<=900000,'Bounded browser preparation timeout required');
  const port=Number(process.env.PARTYBOARD_TEST_PORT||8951),base='http://127.0.0.1:'+port+'/',errors=[],warnings=[],snapshots=[];
- let browser;const pages=[];
+ let browser;const pages=[],lobbyMusic=[];
  const server=spawn(process.execPath,[path.join(__dirname,'serve.cjs')],{env:{...process.env,PARTYBOARD_PORT:String(port)},stdio:['ignore','pipe','pipe']});
  const deadline=setTimeout(()=>{server.kill();void browser?.close();},preparationTimeout+90000);
  try{
@@ -22,12 +37,14 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
   }
   await pages[0].locator('#file').setInputFiles(process.env.PARTYBOARD_LOCAL_CISO);
   await pages[0].locator('#host-game').click();
+  if(process.env.PARTYBOARD_TEST_LOBBY_MUSIC==='1')lobbyMusic.push(await verifyLobbyPlaylist(pages[0],'host'));
   await pages[0].waitForFunction(()=>document.querySelector('#lobby-link').value.includes('#room='),null,{timeout:30000});
   const link=await pages[0].locator('#lobby-link').inputValue();
   for(let i=1;i<count;i++){
    await pages[i].goto(link);await pages[i].evaluate(async()=>{globalThis.app=await import('/app.mjs');});
    assert.equal(await pages[i].locator('#join-link').inputValue(),link);
    await pages[i].locator('#join-game').click();
+   if(process.env.PARTYBOARD_TEST_LOBBY_MUSIC==='1')lobbyMusic.push(await verifyLobbyPlaylist(pages[i],'guest'+i));
   }
   const until=Date.now()+preparationTimeout;let ready=false,last=0;
   while(Date.now()<until){
@@ -75,10 +92,20 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
    recovery={paused,matchedRecoveredPolls:common.length,running:await Promise.all(pages.map(p=>p.evaluate(()=>app.lobbyGameState())))};
    console.log('PASS automatic signed replacement and agreed resume within the original recovery deadline; matching completed polls: '+common.length);
   }
+  const lobbyMusicStopped=[];
+  if(process.env.PARTYBOARD_TEST_LOBBY_MUSIC==='1'){
+   assert.equal(lobbyMusic.length,count,'Every lobby participant must complete playback and wrap checks.');
+   for(const [index,page] of pages.entries()){
+    await page.locator('#stop').click();
+    await page.waitForFunction(()=>{const audio=document.querySelector('#lobby-audio');return audio.paused&&!audio.hasAttribute('src');},{},{timeout:10000});
+    lobbyMusicStopped.push({peer:index===0?'host':'guest'+index,stopped:true});
+   }
+  }
   assert.deepEqual(errors,[]);
-  fs.writeFileSync(path.join(output,'acceptance.json'),JSON.stringify({status:'passed',peerCount:count,scope:count+' isolated Edge contexts on one PC using real P2P assets, production runtime and UI-only automatic join/preparation/start',reports,inputPlans,running,recovery,errors,warnings,at:new Date().toISOString()},null,2));
+  if(process.env.PARTYBOARD_TEST_LOBBY_MUSIC==='1')fs.writeFileSync(path.join(output,'lobby-music-acceptance.json'),JSON.stringify({status:'passed',muted:true,syntheticTransfers:false,lobbyMusic,stopped:lobbyMusicStopped,at:new Date().toISOString()},null,2));
+  fs.writeFileSync(path.join(output,'acceptance.json'),JSON.stringify({status:'passed',peerCount:count,scope:count+' isolated Edge contexts on one PC using real P2P assets, production runtime and UI-only automatic join/preparation/start',reports,inputPlans,running,recovery,lobbyMusic,lobbyMusicStopped,errors,warnings,at:new Date().toISOString()},null,2));
   console.log('PASS automatic Host/link Join, asset transfer, shader preparation, readiness and one-click synchronized start; all '+count+' peers ran at least 120 frames.');
- }catch(e){const finalStatus=await Promise.all(pages.map(p=>p.locator('#status').textContent().catch(()=> 'unavailable')));fs.writeFileSync(path.join(output,'failure.json'),JSON.stringify({message:e.stack,finalStatus,errors,warnings,snapshots},null,2));throw e;}
+ }catch(e){const finalStatus=await Promise.all(pages.map(p=>p.locator('#status').textContent().catch(()=> 'unavailable')));fs.writeFileSync(path.join(output,'failure.json'),JSON.stringify({message:e.stack,finalStatus,errors,warnings,snapshots,lobbyMusic},null,2));throw e;}
  finally{
   clearTimeout(deadline);for(const page of pages)try{await page.locator('#stop').click({timeout:5000});}catch{}
   await browser?.close();server.kill();

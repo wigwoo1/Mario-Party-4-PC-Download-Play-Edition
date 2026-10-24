@@ -745,7 +745,7 @@ const downloadReports=downloadProgressReporter((bytes,verified)=>{
     report:{assetId:offer.id,sequence:++reportSequence,bytes,verified,shaders:false,ready:false}}));
 });
 function reportDownload(bytes,verified=false){downloadReports.report(bytes,offer.size,verified);}
-function stop() {
+function stop({keepLobbyMusic=false}={}) {
   replacementNonces.clear();
   recoveryCredentials.clear();
   guestPipelineChannel=undefined;
@@ -755,7 +755,7 @@ function stop() {
   preparedReports.clear();guestPreparationChannel=undefined;
   releaseLobbyRuntime();
   sessionConfiguration=undefined;
-  music.stop();
+  if(!keepLobbyMusic)music.stop();
   generation++; aborter?.abort(); receiver?.cancel(); pc?.close(); store?.close();
   runtimeAsset=undefined;
   for(const connection of connections)connection.close();connections.clear();guestCount=0;
@@ -900,7 +900,7 @@ async function joinLobbyInvitation(invitationCode){
   await stopLocalGame();
   let current=generation;
   try {
-    const invitation=remote('offer',invitationCode);stop();lobbyPipelineSeed=undefined;current=generation;aborter=new AbortController();localPeer=invitation.playerId;music.start();
+    const invitation=remote('offer',invitationCode);stop({keepLobbyMusic:!manualLobby});lobbyPipelineSeed=undefined;current=generation;aborter=new AbortController();localPeer=invitation.playerId;if(manualLobby)music.start();
     const connection=peer();const openedStore=await browserStore();
     if(current!==generation){openedStore.close();return;}store=openedStore;
     const guard=fn=>(...args)=>{if(current===generation&&pc===connection)return fn(...args);};
@@ -1082,7 +1082,10 @@ async function openAutomaticLobby(mode){
     const joinLink=$('join-link').value.trim();
     const hostFile=$('file').files[0];
     if(mode==='guest'&&!joinLink)throw Error('Paste the host’s lobby link first.');
-    await closeAutomaticLobby();await stopLocalGame();stop();
+    // Start inside the Host/Join click's user activation so browser autoplay
+    // policy permits lobby music before asynchronous setup begins.
+    music.start();
+    await closeAutomaticLobby();await stopLocalGame();stop({keepLobbyMusic:true});
     request=automaticSetup;automaticSetupAbort=new AbortController();
     $('host-game').disabled=$('join-game').disabled=true;$('automatic-start').hidden=mode!=='host';
     $('lobby-link').value='';

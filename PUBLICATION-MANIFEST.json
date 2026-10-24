@@ -2,7 +2,7 @@
   "version": 1,
   "repository": "https://github.com/wigwoo1/Mario-Party-4-PC-Download-Play-Edition",
   "buildId": "d8edbd8bcbe74cf675d7cee2792290e592ec7a2876cb0b5339e27ed10bde5bf8",
-  "sourceSnapshotSha256": "ada539fb89adf44123ce103fb22ff993965fd1cd0a4f14ce842e8cae5dced742",
+  "sourceSnapshotSha256": "b957376c42508d0eca977ee9fa9fe980420b17a3078a0a298cbf8bd36bcb2e24",
   "upstream": {
     "url": "https://github.com/mariopartyrd/partyboard.git",
     "baseCommit": "f38304ebd13b09a15a80db7d7d015bf3fc387c5d"
@@ -310,13 +310,13 @@
     },
     {
       "path": "assets/shaders/initial_pipeline_cache.db",
-      "bytes": 5545984,
-      "sha256": "d4055ccde78ceccfc505cf8c66b546283e82be93b21f495294b9c6c8f07acb3e"
+      "bytes": 5586944,
+      "sha256": "bb229e6a746bba8469f73f37bae241e3b19c6f02586f3ab673d987f1b3c3c7c7"
     },
     {
       "path": "assets/shaders/initial_pipeline_cache.json",
-      "bytes": 173,
-      "sha256": "9f5c30b57c480cbf995a43ccdc60c729de98e1622c84dbafe22d26b118f8e1b4"
+      "bytes": 172,
+      "sha256": "8f13ae9e4d0705fcfa7526383bb01feea1a863a379b89a145f6262a84feb617b"
     },
     {
       "path": "assets/shaders/README.md",
@@ -4925,8 +4925,8 @@
     },
     {
       "path": "HOSTING-STARTUP-PLAN.md",
-      "bytes": 5475,
-      "sha256": "b3d081acc52e5748966eb4cdf45df402db69ffaafe193dd360a834c47826b493"
+      "bytes": 6971,
+      "sha256": "861c51f36355ab30e6c9f5e72df3dace6510d43a5e424bdbcaae2a9778085017"
     },
     {
       "path": "include/__ppc_eabi_linker.h",
@@ -12040,8 +12040,8 @@
     },
     {
       "path": "STATUS.md",
-      "bytes": 2945,
-      "sha256": "353f3d6d092f2a8409d7f03e5a672f1d2df538903b04c56976d6d72fd579cfb0"
+      "bytes": 1804,
+      "sha256": "92302c5826ebef515975e895c6a21d1fe9a07687a05e5ae13cf9d6def024b3e8"
     },
     {
       "path": "tools/__init__.py",
@@ -12555,8 +12555,8 @@
     },
     {
       "path": "tools/native-rtc-probe/CMakeLists.txt",
-      "bytes": 9615,
-      "sha256": "8135d156edc4af4d431979d1b0ba8b775be0c94f5efba4532b7473916765287c"
+      "bytes": 10109,
+      "sha256": "ac5288a2a644d7ac55cb433e4ae76fca46e53776d358564400737637497e9cc9"
     },
     {
       "path": "tools/native-rtc-probe/compact-native-diagnostic-log.cjs",
@@ -14000,8 +14000,8 @@
     },
     {
       "path": "web/app.mjs",
-      "bytes": 88162,
-      "sha256": "78fd7e2f6cc83fd98c909c564dae8cdb60ff9b956227f25723428488315e3ad3"
+      "bytes": 88436,
+      "sha256": "6690288bc4e19172ceb4a261b20f79f7b958105568cf63d78183dac1bdc8d662"
     },
     {
       "path": "web/async-blob-fs.mjs",
@@ -14035,8 +14035,8 @@
     },
     {
       "path": "web/automatic-lobby-browser-test.cjs",
-      "bytes": 8784,
-      "sha256": "e95e8b6f497a27ee27a65f2dbcc07ee50923826300060da200c6558da61f8df0"
+      "bytes": 11298,
+      "sha256": "23debd14afe6ede5d288d6e95b511bec3a0ad3d41fee0a82a6bffcb2d45f4198"
     },
     {
       "path": "web/automatic-lobby-ui-browser-test.cjs",
@@ -14180,8 +14180,8 @@
     },
     {
       "path": "web/control-glyphs.test.mjs",
-      "bytes": 1029,
-      "sha256": "3419132ea1193b3c66979881cff44eb742df5b2f19217b44e343733161ea1a91"
+      "bytes": 1588,
+      "sha256": "47581a798c9ac636d404b9cb3a284024d0ddfbb1c694895a215bbef057d37429"
     },
     {
       "path": "web/controller-capabilities.mjs",

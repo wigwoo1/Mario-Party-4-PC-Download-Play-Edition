@@ -23,3 +23,11 @@ The prior saved website setting and Linux deployment generator remain available.
 Keep Sol High for the separate exact-build match failure investigation: the observed-setup five-turn run rejected slot2's checkpoint at frame21183 (remote802092184, local427721330). The later destroyed-stream error is secondary. Do not bypass checkpoint validation or change dice/RNG rules as a workaround. Routine hosting reruns and documentation can use a lower model once network resolution is restored.
 
 Sources checked: https://sslip.io/ (redirects to https://nip.io/), https://caddyserver.com/docs/automatic-https, https://letsencrypt.org/docs/challenge-types/, https://developers.cloudflare.com/tunnel/get-started/quick-tunnels/.
+
+## 2026-10-24 local regression follow-up
+
+Offline automatic-hosting/package-staging and lobby-start regression suite: 27/27 passed. Evidence is retained in the task workspace at `outputs/validation/hosting-local-regressions-20261024.json`. Coverage includes rejection of LAN/reserved addresses, automatic fallback on direct-host verification failures, cancellation/cleanup, safe measured-package staging and unanimous host-start checks. No external hostname, public tunnel, WAN route, browser gameplay, or separate-device link was tested. The configured CUA browser runtime still fails during initialization, before page execution.
+
+## 2026-10-24 update to the older exact-build match note
+
+The prior observed-setup five-turn checkpoint mismatch at frame 21183 remains preserved as a diagnostic record, but it is not the latest normal Host/Join result. The subsequent automatic Host/Join five-turn mixed test completed through reported awards/rankings on build `d1e9a1c0f511914a8dc50a18cbb49948dc15d1ae2025dce65b60db5fc45ff356` (one native + three Edge, 1,335 pipelines, no manual invitation/Prepare/Ready, and signed recovery in 3,017 ms). Do not describe the supported automatic flow as currently failing that checkpoint. The older observed-setup path’s underlying discrepancy is still unexplained; if it reproduces in a supported test, retain checkpoint validation and compare raw traces. Full results and limitations: `outputs/validation/automatic-full-match-visual-review-20261024.json`.
