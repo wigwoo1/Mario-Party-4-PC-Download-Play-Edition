@@ -1308,10 +1308,40 @@
       "file": "dawn-zlib-LICENSE",
       "origin": "https://chromium.googlesource.com/chromium/src/third_party/zlib/+/3246f1b60849cc505e231c5d19d0cbf358093555/LICENSE",
       "sha256": "e32ff4e00d9d94930537635291da39e7e612703334bf6fde8c7f1686fe8a45a2"
+    },
+    {
+      "component": "Font upstream notice: alegreya",
+      "file": "font-alegreya-OFL.txt",
+      "origin": "https://github.com/huertatipografica/Alegreya/blob/1dd6b28b57c50e3168db1cbbb8086e7978abcfbf/OFL.txt",
+      "sha256": "f6f60d5d4cf4f4b1fc4e41353c897a2f5a16e6396c0cd8fa8bdfd2f4586a9a68"
+    },
+    {
+      "component": "Font upstream notice: inter",
+      "file": "font-inter-OFL.txt",
+      "origin": "https://github.com/rsms/inter/blob/66647c0bbbe41a850d79d9c76fb13add3378940f/LICENSE.txt",
+      "sha256": "262481e844521b326f5ecd053e59b98c8b2da78c8ee1bdbb6e8174305e54935a"
+    },
+    {
+      "component": "Font upstream notice: material",
+      "file": "font-material-symbols-LICENSE",
+      "origin": "https://github.com/google/material-design-icons/blob/10ecc14790612ca8fd164e3f4ffe9c16fc50d5b7/LICENSE",
+      "sha256": "58d1e17ffe5109a7ae296caafcadfdbe6a7d176f0bc4ab01e12a689b0499d8bd"
+    },
+    {
+      "component": "Font upstream notice: noto",
+      "file": "font-noto-OFL.txt",
+      "origin": "https://github.com/notofonts/noto-fonts/blob/ffebf8c1ee449e544955a7e813c54f9b73848eac/LICENSE",
+      "sha256": "0dab92d0544f7b233403f14b84a663bdbfa746982eda629e7f4f9ffe1b036feb"
+    },
+    {
+      "component": "Measured font resource attribution and unresolved permission scope",
+      "file": "font-resource-attribution.txt",
+      "origin": "Embedded SFNT name-table records in res/*.ttf and res/*.otf; original resource hashes retained in this notice",
+      "sha256": "9a819d9b8af3539f24a652420821753a72e6b835eaa6dec34a59702e93600ed9"
     }
   ],
   "unresolved": [
-    "Dawn/Tint notices now retain pinned SPIRV-Tools, SPIRV-Headers, Vulkan-Headers, VulkanMemoryAllocator, Abseil and Chromium zlib texts; existing DXC notices match its pinned revision. Other transitive notices, exact prebuilt feature selection and binary-inclusion mapping remain under review; PartitionAlloc checkout has no root license and is not treated as covered.",
-    "Complete browser static dependency, fonts/resources, platform prerequisites and source-availability requirements remain under review."
+    "Pinned notices retain SPIRV-Tools, SPIRV-Headers, Vulkan-Headers, VulkanMemoryAllocator, Abseil, Chromium zlib and DXC texts. The pinned Windows prebuilt archive and runtime DLL match; its documented CMake path uses Dawn-owned pointer wrappers covered by dawn-LICENSE, not the separate Chromium PartitionAlloc implementation. See DAWN-BUILD-AUDIT.md. Other transitive notices and exact binary feature inclusion remain under review.",
+    "Font notices retain pinned upstream OFL/Apache texts and measured embedded copyright records. FOT-NewRodin Pro and N64 Party redistribution permission remains unverified; document permission or verify replacements before final distribution approval. Complete browser static dependencies, other resources, platform prerequisites and source-availability requirements remain under review."
   ]
 }

@@ -1,8 +1,8 @@
 {
   "version": 1,
   "repository": "https://github.com/wigwoo1/Mario-Party-4-PC-Download-Play-Edition",
-  "buildId": "545c703dafe68388d96da5e452f56dc8ac2c43c6072f4ae793fb08d010865d1f",
-  "sourceSnapshotSha256": "bec2cbe567c669c0f0ea4fa13230573017b968627d31c7555a2c096be024952f",
+  "buildId": "ca2b198ed7b00b6a5850a6157265b8999051a855e193a9a0eae51bd1488c125f",
+  "sourceSnapshotSha256": "50aa39e7668618fd0d7a8f197d76e2772ddb90c3f59d5f2ba1369b2908370455",
   "upstream": {
     "url": "https://github.com/mariopartyrd/partyboard.git",
     "baseCommit": "f38304ebd13b09a15a80db7d7d015bf3fc387c5d"
@@ -7514,6 +7514,11 @@
       "sha256": "c79a7fea0e3cac04cd43f20e7b648e5a0ff8fa5344e644b0ee09ca1162b62747"
     },
     {
+      "path": "licenses/DAWN-BUILD-AUDIT.md",
+      "bytes": 2332,
+      "sha256": "22af8d2776bdc5d9e36a970bee318dc8f2f02a808f380a9c834d3ca441584ab3"
+    },
+    {
       "path": "licenses/dawn-LICENSE",
       "bytes": 1561,
       "sha256": "e2908f7576fb12be5bdb8480cddb0be62badb498cadb821d043aeaf01b0b0899"
@@ -7565,8 +7570,8 @@
     },
     {
       "path": "licenses/dependency-notices.json",
-      "bytes": 55617,
-      "sha256": "b7c90bbf608e92175936f75a5d50afdc9e22ad28a1b07d65709a984a330fbfb5"
+      "bytes": 57531,
+      "sha256": "62bb28f977537a9fff85b960425c451ea85f37d0c0a67033b44a9440f4a73dfd"
     },
     {
       "path": "licenses/dxc-LICENSE.TXT",
@@ -7582,6 +7587,31 @@
       "path": "licenses/fmt-LICENSE",
       "bytes": 1431,
       "sha256": "07580f2a3b35709ce703d523f447b242f6dfec7582a8c0df102c7fa2849375f8"
+    },
+    {
+      "path": "licenses/font-alegreya-OFL.txt",
+      "bytes": 4395,
+      "sha256": "f6f60d5d4cf4f4b1fc4e41353c897a2f5a16e6396c0cd8fa8bdfd2f4586a9a68"
+    },
+    {
+      "path": "licenses/font-inter-OFL.txt",
+      "bytes": 4380,
+      "sha256": "262481e844521b326f5ecd053e59b98c8b2da78c8ee1bdbb6e8174305e54935a"
+    },
+    {
+      "path": "licenses/font-material-symbols-LICENSE",
+      "bytes": 11357,
+      "sha256": "58d1e17ffe5109a7ae296caafcadfdbe6a7d176f0bc4ab01e12a689b0499d8bd"
+    },
+    {
+      "path": "licenses/font-noto-OFL.txt",
+      "bytes": 4377,
+      "sha256": "0dab92d0544f7b233403f14b84a663bdbfa746982eda629e7f4f9ffe1b036feb"
+    },
+    {
+      "path": "licenses/font-resource-attribution.txt",
+      "bytes": 3870,
+      "sha256": "9a819d9b8af3539f24a652420821753a72e6b835eaa6dec34a59702e93600ed9"
     },
     {
       "path": "licenses/freetype-ftl-LICENSE",
@@ -9064,11 +9094,6 @@
       "sha256": "c1d04700c3a5025ee3676114fd64250494c9b5c5a84b12f66efd08c53e48da37"
     },
     {
-      "path": "res/FOT-NewRodin Pro DB.otf",
-      "bytes": 3724836,
-      "sha256": "b55c8711d8e55e776297f57fb9a194c297a347b6b1caa639cc9e307207d5d81b"
-    },
-    {
       "path": "res/icon.png",
       "bytes": 180023,
       "sha256": "3edb91b07582ded579e29845b166eb9741fde2f999f93f94fb838b0c12f89743"
@@ -9094,16 +9119,6 @@
       "sha256": "2014db4bf7ba90bfd5de9378b48b63a4a8cd89b446b2c8cdc038c43d437ce3e7"
     },
     {
-      "path": "res/N64Party-Monochromatic.otf",
-      "bytes": 267208,
-      "sha256": "63a6d2b86b4e8794eec9c159ea7434ffb0228a480dd774e74704c9cae163ed18"
-    },
-    {
-      "path": "res/N64Party.otf",
-      "bytes": 1144304,
-      "sha256": "567e547ef0ea7686fb7007636c76ad56e5d2fb35cbf622255abfcd2a86cd4ca5"
-    },
-    {
       "path": "res/NotoMono-Regular.ttf",
       "bytes": 107848,
       "sha256": "41fd7ccc82375e2a1e47f0cc2c941c14d7c99ba2f57cf69c9f738d07fb257686"
@@ -9115,18 +9130,18 @@
     },
     {
       "path": "res/rml/overlay.rcss",
-      "bytes": 4961,
-      "sha256": "47e0efa6d6090847e1ca574e802619e684239011c917d8d493675b98f52fb187"
+      "bytes": 4952,
+      "sha256": "79058251291f3422f2f2be5bde0f627136e99f8a6e7376cf131b033aa215c474"
     },
     {
       "path": "res/rml/popup.rcss",
-      "bytes": 774,
-      "sha256": "1a2740fe3c694f0f2a40c1b07161a054d4ce4379ead0f2f71a4f39a463e0d86d"
+      "bytes": 763,
+      "sha256": "eb132e0f8aef9c08993451681ae291ca420ae6931449c785abdf5c4befdb2b1c"
     },
     {
       "path": "res/rml/prelaunch.rcss",
-      "bytes": 9415,
-      "sha256": "abcb61ee59ab8613a3219c488f83c4888a6e2d00e4f4e54ff82fa09876aae876"
+      "bytes": 9417,
+      "sha256": "c7fd6eff543f7fc2d4594e8e38960b0bd63670e9381b9070cc58ddd7ed01ca31"
     },
     {
       "path": "res/rml/tabbing.rcss",
@@ -9135,13 +9150,13 @@
     },
     {
       "path": "res/rml/tuner.rcss",
-      "bytes": 2741,
-      "sha256": "9fdaacb3c4b6bc9cc07d698aa21bb5a6a57ee343c2f3271a3924f7bfa4c86ce9"
+      "bytes": 2708,
+      "sha256": "09d90eefb08ff6a5f756b1ed3b274881e002502cea4e14c8e5b9ba089a878514"
     },
     {
       "path": "res/rml/window.rcss",
-      "bytes": 9458,
-      "sha256": "e5a99383ced13f4dd2f81b968d630ba0abe68f6eacca366faccef9d7e8989b9b"
+      "bytes": 9392,
+      "sha256": "385453116a33fdc4ef72981f28eb5bd80679fdc6b561ddd614db83af628d6f67"
     },
     {
       "path": "src/amcstubs/AmcExi2Stubs.c",
@@ -10220,8 +10235,8 @@
     },
     {
       "path": "src/port/portmain.cpp",
-      "bytes": 142452,
-      "sha256": "38fe44c8c0cdb3a7a6b8cbfbf9e18993e0ffec1bc79e7c325a05f5dfe3c8a0e9"
+      "bytes": 142873,
+      "sha256": "654de886cb2cf2f80a89003df1ac74cb65321405e3b3975fdb93522b80783b0c"
     },
     {
       "path": "src/port/settings.cpp",
@@ -10505,8 +10520,8 @@
     },
     {
       "path": "src/port/ui/ui.cpp",
-      "bytes": 12938,
-      "sha256": "225c26f5ccb5727a0b578007a6e3ccc1110eb4f3f452bb2759da4ad874354f70"
+      "bytes": 12920,
+      "sha256": "92c80185b66947c80b36ee56a228ea5d90b075e185e3f67dfac8f6bcef73dc91"
     },
     {
       "path": "src/port/ui/ui.hpp",
@@ -12025,8 +12040,8 @@
     },
     {
       "path": "STATUS.md",
-      "bytes": 7061,
-      "sha256": "fb4524133830703b9023d7e83e6b771c76b4917cd3d5976b1633ca163af4a9a5"
+      "bytes": 9418,
+      "sha256": "1b52607e8ae375971ecfbdf14cda03deee33062f53b26eedc9cee18ea7e0bfc7"
     },
     {
       "path": "tools/__init__.py",

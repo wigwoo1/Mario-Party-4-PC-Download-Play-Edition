@@ -55,8 +55,8 @@ bool initialize() noexcept
     load_font("AlegreyaSC-Regular.ttf");
     load_font("AlegreyaSC-Bold.ttf");
     load_font("MaterialSymbolsRounded-Regular.ttf");
-    load_font("N64Party-Monochromatic.otf");
-    load_font("FOT-NewRodin Pro DB.otf");
+    load_font("Inter-Regular.ttf");
+    load_font("Inter-Bold.ttf");
 
     // Rml::Debugger::Initialise(aurora::rmlui::get_context());
     // Rml::Debugger::SetVisible(true);

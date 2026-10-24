@@ -1662,12 +1662,17 @@ extern "C" int port_main(int argc, char* argv[]) {
                     partyboard::net::prepareNativeRenderer(prepared,[&]{
                         const auto* event=aurora_update();
                         while(event&&event->type!=AURORA_NONE){
-                            if(event->type==AURORA_EXIT)return false;
+                            if(event->type==AURORA_EXIT){
+                                fprintf(stderr,"Native Host renderer preparation stopped: window exit event\n");
+                                return false;
+                            }
                             if(event->type==AURORA_SDL_EVENT)partyboard::ui::handle_event(event->sdl);
                             ++event;
                         }
                         partyboard::ui::update();
-                        return !lobby->cancelled()&&lobby->error().empty();
+                        const bool keepPreparing=!lobby->cancelled()&&lobby->error().empty();
+                        if(!keepPreparing)fprintf(stderr,"Native Host renderer preparation stopped: lobby cancelled=%d error=%s\n",lobby->cancelled(),lobby->error().c_str());
+                        return keepPreparing;
                     });
                     const auto receipt=partyboard::net::nativePreparedRuntimeReport(prepared,configuration,true,installedPipelineSeed);
                     lobby->publishHostPrepared(partyboard::net::captureNativePreparedStart(prepared.assetId,prepared.buildId),receipt,installedPipelineSeed);

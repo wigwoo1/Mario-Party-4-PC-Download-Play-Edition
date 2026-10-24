@@ -1,0 +1,71 @@
+Font resources: measured installed Windows build
+
+AlegreyaSC-Bold.ttf
+SHA-256: f0edaf1f289b7eb1b94ba9290146d57e5b413364bcf723cd0196779faa557afa
+0: Copyright 2011 The Alegreya Project Authors (https://github.com/huertatipografica/Alegreya)
+9: Juan Pablo del Peral
+13: This Font Software is licensed under the SIL Open Font License, Version 1.1. This license is available with a FAQ at: http://scripts.sil.org/OFL
+14: http://scripts.sil.org/OFL
+
+AlegreyaSC-Regular.ttf
+SHA-256: 4b93934f4cf51aedc23bbadc4028811b6fd16d97cd7425c902015ae77bfe55ab
+0: Copyright 2011 The Alegreya Project Authors (https://github.com/huertatipografica/Alegreya)
+9: Juan Pablo del Peral
+13: This Font Software is licensed under the SIL Open Font License, Version 1.1. This license is available with a FAQ at: http://scripts.sil.org/OFL
+14: http://scripts.sil.org/OFL
+
+FOT-NewRodin Pro DB.otf
+SHA-256: b55c8711d8e55e776297f57fb9a194c297a347b6b1caa639cc9e307207d5d81b
+0: Copyright © 2003 Fontworks Japan, Inc. All Rights Reserved.
+9: Fontworks Japan, Inc.
+13: LID000451
+14: http://www.fontworks.co.jp/
+0: Copyright ˝ 2003 Fontworks Japan, Inc. All Rights Reserved.
+9: Fontworks Japan, Inc. ÉtÉHÉìÉgÉèÅ[ÉNÉXÉWÉÉÉpÉì
+9: Fontworks Japan, Inc. フォントワークスジャパン
+
+Inter-Bold.ttf
+SHA-256: b281126a9f79c24f93d1da90344d2558b2bdf38cb5a25d15377317e98256022a
+0: Copyright 2016 The Inter Project Authors (https://github.com/rsms/inter)
+9: Rasmus Andersson
+13: This Font Software is licensed under the SIL Open Font License, Version 1.1. This license is available with a FAQ at: https://openfontlicense.org
+14: https://openfontlicense.org
+
+Inter-Regular.ttf
+SHA-256: 712fb3ae7568cc3812776eda49922ff8bca5521cb02c006dec80040e9260c262
+0: Copyright 2016 The Inter Project Authors (https://github.com/rsms/inter)
+9: Rasmus Andersson
+13: This Font Software is licensed under the SIL Open Font License, Version 1.1. This license is available with a FAQ at: https://openfontlicense.org
+14: https://openfontlicense.org
+
+MaterialSymbolsRounded-Regular.ttf
+SHA-256: 2014db4bf7ba90bfd5de9378b48b63a4a8cd89b446b2c8cdc038c43d437ce3e7
+0: Copyright 2026 Google LLC.  All Rights Reserved.
+
+N64Party-Monochromatic.otf
+SHA-256: 63a6d2b86b4e8794eec9c159ea7434ffb0228a480dd774e74704c9cae163ed18
+9: ImWhoreHay
+
+N64Party.otf
+SHA-256: 567e547ef0ea7686fb7007636c76ad56e5d2fb35cbf622255abfcd2a86cd4ca5
+9: ImWhoreHay
+
+NotoMono-Regular.ttf
+SHA-256: 41fd7ccc82375e2a1e47f0cc2c941c14d7c99ba2f57cf69c9f738d07fb257686
+0: Copyright 2007 Google Inc. All Rights Reserved.
+9: Monotype Design Team
+13: This Font Software is licensed under the SIL Open Font License, Version 1.1. This Font Software is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the SIL Open Font License for the specific language, permissions and limitations governing your use of this Font Software.
+14: http://scripts.sil.org/OFL
+
+Name-table records are attribution evidence, not permission grants.
+Alegreya SC, Inter and Noto Mono identify SIL OFL 1.1 in their embedded metadata.
+The upstream Material Design Icons repository identifies Apache 2.0 for its icons/fonts.
+Separate exact upstream license texts are retained beside this file.
+Except Inter (version identifies commit 66647c0bb), these notice revisions do not establish
+the original font download revision or an exact upstream binary match.
+FOT-NewRodin Pro and N64 Party redistribution permission remains unverified.
+FOT-NewRodin Pro carries Fontworks all-rights-reserved metadata and a license identifier;
+N64 Party credits ImWhoreHay but contains no license grant in the inspected name table.
+Upstream project credits alone are not treated as redistribution authorization.
+Do not describe the resource/redistribution audit as complete until these two families
+have documented permission or verified replacements.
