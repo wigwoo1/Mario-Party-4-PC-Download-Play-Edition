@@ -1835,7 +1835,10 @@ extern "C" int port_main(int argc, char* argv[]) {
                 }catch(const std::exception& error){enginePreparationError=error.what();}
             }
 #endif
-            if(returnedHostMenuAcceptance&&enginePrepared&&sessionEndedNoticeSeen&&lobby->updates()>=30)return false;
+            // Publishing preparation happens in this callback, before the next
+            // UI update applies automatic readiness. Observe that update before
+            // ending the returned-menu check; manual lobbies stay unready.
+            if(returnedHostMenuAcceptance&&enginePrepared&&sessionEndedNoticeSeen&&lobby->updates()>=30&&lobby->hostReady()==lobby->automatic())return false;
             return !diagnosticStopped&&!inputCommitted&&(enginePrepared||PartyBoard_IsRunning)&&enginePreparationError.empty()&&!lobby->cancelled()&&lobby->error().empty()&&
             (!probeHostLobby||probeHostConnected||((lobby->updates()<30||!lobby->prepared()||(probeHostPreparation&&!enginePrepared)||(probeHostInvitations&&diagnosticInvitations.size()!=3))&&std::chrono::steady_clock::now()<deadline));});
         bool passed=active&&(!probeHostGameplay||inputCommitted)&&(!probeHostConnected||(diagnosticComplete&&(diagnosticStopped||inputCommitted)))&&(!probeHostInvitations||diagnosticInvitations.size()==3)&&lobby->prepared()&&lobby->updates()>=30&&lobby->error().empty()&&(probeHostPreparation?(enginePrepared&&PartyBoard_GameLifecyclePhase()==2&&PartyBoard_GameFrameCount()==0):PartyBoard_GameLifecyclePhase()==0)&&(!onlineSessionEndedNotice||sessionEndedNoticeSeen);
@@ -1846,7 +1849,7 @@ extern "C" int port_main(int argc, char* argv[]) {
             const auto players=lobby->prepared()?lobby->diagnosticSnapshot().at("players"):nlohmann::ordered_json::array();
             const bool menuPrepared=active&&enginePrepared&&!inputCommitted&&sessionEndedNoticeSeen&&lobby->prepared()&&lobby->error().empty()&&enginePreparationError.empty()&&PartyBoard_GameLifecyclePhase()==2&&PartyBoard_GameFrameCount()==0&&players.size()==1&&players[0].at("peer")=="host"&&(lobby->hostReady()==lobby->automatic())&&!lobby->startAgreed();
             std::ofstream report(PartyBoard_ConfigPath/"recovery-returned-host-menu.json");
-            report<<nlohmann::ordered_json({{"pid",GetCurrentProcessId()},{"passed",menuPrepared},{"menu","host"},{"seenVisible",sessionEndedNoticeSeen},{"enginePrepared",enginePrepared},{"inputCommitted",inputCommitted},{"probeHostLobby",probeHostLobby},{"players",players},{"hostReady",lobby->hostReady()},{"startAgreed",lobby->startAgreed()},{"phase",PartyBoard_GameLifecyclePhase()},{"frame",PartyBoard_GameFrameCount()},{"buildId",menuPrepared?lobby->measuredPackage().at("buildId"):nlohmann::ordered_json(nullptr)},{"text",partyboard::net::NativeSessionEndedNotice}}).dump()<<"\n";
+            report<<nlohmann::ordered_json({{"pid",GetCurrentProcessId()},{"passed",menuPrepared},{"menu","host"},{"seenVisible",sessionEndedNoticeSeen},{"enginePrepared",enginePrepared},{"inputCommitted",inputCommitted},{"probeHostLobby",probeHostLobby},{"players",players},{"hostReady",lobby->hostReady()},{"automatic",lobby->automatic()},{"active",active},{"lobbyError",lobby->error()},{"enginePreparationError",enginePreparationError},{"startAgreed",lobby->startAgreed()},{"phase",PartyBoard_GameLifecyclePhase()},{"frame",PartyBoard_GameFrameCount()},{"buildId",menuPrepared?lobby->measuredPackage().at("buildId"):nlohmann::ordered_json(nullptr)},{"text",partyboard::net::NativeSessionEndedNotice}}).dump()<<"\n";
             if(!menuPrepared||!report)enginePreparationError="Returned Host menu was not prepared or its report failed";
         }
 #endif

@@ -39,7 +39,7 @@ export function automaticRoom({baseURL,pageURL=baseURL,client=createRoomClient({
    if(e.type==='left'){
     const index=waiting.indexOf(e.peer);if(index>=0)waiting.splice(index,1);
     if(pending?.peer===e.peer){clearTimeout(pending.timer);pending=undefined;await cancelOffer();}
-    const transport=bindings.get(e.peer);bindings.delete(e.peer);if(transport)await left(transport);void pump();return;
+    const transport=bindings.get(e.peer);bindings.delete(e.peer);recovering.delete(e.peer);if(transport)await left(transport);void pump();return;
    }
    if(e.type!=='signal'||e.kind!=='answer'||pending?.peer!==e.from||!pending.payload)throw Error('Unexpected lobby connection reply.');
    const current=pending;clearTimeout(current.timer);
@@ -53,11 +53,17 @@ export function automaticRoom({baseURL,pageURL=baseURL,client=createRoomClient({
  }
  function observe(){watch=client.watch(event).catch(cause=>{if(!closed){closed=true;clearTimeout(pending?.timer);void client.close().catch(()=>{});error(cause);}});}
  return {
-  async remove(transportPeer){const peer=[...bindings].find(([,transport])=>transport===transportPeer)?.[0];if(!peer||closed)return;bindings.delete(peer);await client.removeGuest(peer);},
+  async remove(transportPeer){const peer=[...bindings].find(([,transport])=>transport===transportPeer)?.[0];if(!peer||closed)return;bindings.delete(peer);recovering.delete(peer);await client.removeGuest(peer);},
   async recover(transportPeer){
    const peer=[...bindings].find(([,transport])=>transport===transportPeer)?.[0];
    if(closed||role!=='host'||!peer||recovering.has(peer)||!createRecoveryOffer)throw Error('Assigned reconnecting guest required.');
-   recovering.add(peer);try{const payload=await createRecoveryOffer(transportPeer);if(!closed)await client.send(peer,'recovery-offer',payload);}catch(cause){recovering.delete(peer);throw cause;}
+   recovering.add(peer);try{
+    const payload=await createRecoveryOffer(transportPeer);
+    // Offer creation can outlive a leave/remove event. Do not signal a stale
+    // recipient; errors for guests still in the lobby must remain visible.
+    if(closed||bindings.get(peer)!==transportPeer){recovering.delete(peer);return;}
+    await client.send(peer,'recovery-offer',payload);
+   }catch(cause){recovering.delete(peer);if(closed||bindings.get(peer)!==transportPeer)return;throw cause;}
   },
   async seal(){if(role!=='host'||closed||pending||waiting.length)throw Error('Finish connecting players before starting.');await client.seal();},
   async host(){if(role||closed)throw Error('Lobby already opened.');role='host';const identity=await client.host();if(closed){await client.close();return;}observe();const link=roomJoinLink(pageURL,identity);changed({role,link,connected:0});return link;},

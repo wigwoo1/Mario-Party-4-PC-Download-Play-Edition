@@ -19,6 +19,7 @@ void espColorSet(s16 espId, u8 r, u8 g, u8 b);
 void espSpeedSet(s16 espId, float speed);
 void espBankSet(s16 espId, s16 bank);
 #ifdef TARGET_PC
+BOOL espControlPanelSet(s16 espId, s16 variant, s16 port);
 BOOL espControlGlyphSet(s16 espId, s16 entry, s16 port, s16 originalBank, BOOL completed);
 #endif
 void espDrawNoSet(s16 espId, s16 drawNo);

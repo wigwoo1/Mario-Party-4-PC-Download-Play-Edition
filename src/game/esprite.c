@@ -140,6 +140,10 @@ void espBankSet(s16 espId, s16 bank) {
     HuSprBankSet(gid, esprite[espId].memberNo, bank);
 }
 #ifdef TARGET_PC
+BOOL espControlPanelSet(s16 espId, s16 variant, s16 port) {
+    if (espId < 0 || espId >= HUSPR_MAX || esprite[espId].animNo < 0) return FALSE;
+    return HuSprControlPanelSet(HuSprGrpData[gid].members[esprite[espId].memberNo],variant,port);
+}
 BOOL espControlGlyphSet(s16 espId, s16 entry, s16 port, s16 originalBank, BOOL completed) {
     if (espId < 0 || espId >= HUSPR_MAX || esprite[espId].animNo < 0) return FALSE;
     return HuSprControlGlyphSet(HuSprGrpData[gid].members[esprite[espId].memberNo],

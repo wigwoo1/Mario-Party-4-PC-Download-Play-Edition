@@ -384,8 +384,13 @@ static ByteBuffer BuildRGBA8FromGCN(uint32_t width, uint32_t height, uint32_t mi
         const uint32_t baseX = bx * 4;
         for (uint32_t c = 0; c < 2; ++c) {
           for (uint32_t y = 0; y < 4; ++y) {
-            RGBA8* target = targetMip + (baseY + y) * w + baseX;
             for (size_t x = 0; x < 4; ++x) {
+              // GX stores complete tiles, but the linear output has logical dimensions.
+              // Consume padded input below without writing beyond this mip's pixels.
+              if (baseY + y >= h || baseX + x >= w) {
+                continue;
+              }
+              RGBA8* target = targetMip + (baseY + y) * w + baseX;
               if (c != 0) {
                 target[x].g = in[x * 2];
                 target[x].b = in[x * 2 + 1];

@@ -107,6 +107,7 @@ void HuSprAnimKill(ANIMDATA *anim);
 #ifdef TARGET_PC
 /* Borrows anim and retains a reference on success; caller keeps its reference. */
 BOOL HuSprAnimationReplace(s16 sprite, ANIMDATA *anim, s16 bank);
+BOOL HuSprControlPanelSet(s16 sprite, s16 variant, s16 port);
 BOOL HuSprControlGlyphSet(s16 sprite, s16 entry, s16 port, s16 originalBank, BOOL completed);
 #endif
 void HuSprAttrSet(s16 group, s16 member, s32 attr);

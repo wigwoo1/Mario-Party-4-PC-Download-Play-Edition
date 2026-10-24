@@ -630,6 +630,7 @@ EXPORTS
     Hu3DModelClusterAttrReset
     Hu3DModelClusterAttrSet
     Hu3DModelCreate
+    Hu3DModelControlGlyphSet
     Hu3DModelHiliteMapSet
     Hu3DModelHiliteTypeSet
     Hu3DModelHookObjReset
@@ -1022,6 +1023,7 @@ EXPORTS
     espAttrReset
     espAttrSet
     espBankSet
+    espControlPanelSet
     espControlGlyphSet
     espColorSet
     espDispOff

@@ -1,8 +1,8 @@
 {
   "version": 1,
   "repository": "https://github.com/wigwoo1/Mario-Party-4-PC-Download-Play-Edition",
-  "buildId": "82d2f45a75092f4ccf62b8df44891f8ef752eac61dd209226756ff24dd83a3af",
-  "sourceSnapshotSha256": "d2666a2eafac0afefa21493b761402dc626f985b063d0e3cb66577a1bc3b2c0c",
+  "buildId": "42167c4bcbf3d8669916cc890b014faa71cc607a93541a7ede3d6079f8670320",
+  "sourceSnapshotSha256": "4ea1857d264b36a1e5e9c43756615cc8f163ce8e0ccdd2808db819030a750c72",
   "upstream": {
     "url": "https://github.com/mariopartyrd/partyboard.git",
     "baseCommit": "f38304ebd13b09a15a80db7d7d015bf3fc387c5d"
@@ -2990,8 +2990,8 @@
     },
     {
       "path": "dol.def",
-      "bytes": 24927,
-      "sha256": "08660205ed6e72c164ed864d05bdbf0617a7b2f117ed9930bbf84548d976ad9e"
+      "bytes": 24981,
+      "sha256": "e283592036ed6c1929995fbf6aff86fa4ae1194583147aa6edd7d0a1109cece7"
     },
     {
       "path": "extern/aurora/.clang-format",
@@ -4170,8 +4170,8 @@
     },
     {
       "path": "extern/aurora/lib/gfx/texture_convert.cpp",
-      "bytes": 25374,
-      "sha256": "cbcdbfb79699733a7cf954ed9184097f906d970462736e93be154559adf61c23"
+      "bytes": 25652,
+      "sha256": "95bfb7326ad4800df0ecec5b5a3f5b880eb1bd34f2694946ef1bcf2c3cac9403"
     },
     {
       "path": "extern/aurora/lib/gfx/texture_convert.hpp",
@@ -5170,8 +5170,8 @@
     },
     {
       "path": "include/game/esprite.h",
-      "bytes": 869,
-      "sha256": "955072907a178058380820d4075b5361c658ee0e82ae765af72317897ab828ef"
+      "bytes": 933,
+      "sha256": "3abd9b865d4680668d4a5f15513f314e9389f65f7bfceb0af05095ce2892f47d"
     },
     {
       "path": "include/game/fault.h",
@@ -5305,8 +5305,8 @@
     },
     {
       "path": "include/game/sprite.h",
-      "bytes": 4323,
-      "sha256": "c1277d9fcc5a26fca44362929d84dad023ae03656ae36cae24ad358876a3f2af"
+      "bytes": 4392,
+      "sha256": "42309ffa065287fe9f0fa4470f4b02a6fb599308cddf4be8836dccd0de487365"
     },
     {
       "path": "include/game/sreset.h",
@@ -9295,8 +9295,8 @@
     },
     {
       "path": "src/game/esprite.c",
-      "bytes": 3966,
-      "sha256": "ddbe30d7806193143c3355c3270c37b9b9947a19c97f757852cd5ac4ab204734"
+      "bytes": 4223,
+      "sha256": "d160f5ebfc991b6fe85b82a7230aad784f176fae558ddf57bcc789b5cb9a38ea"
     },
     {
       "path": "src/game/fault.c",
@@ -9322,6 +9322,16 @@
       "path": "src/game/gamework.c",
       "bytes": 9649,
       "sha256": "0ba54fc1c3c86d51999c2289452aee6e0b3445c7f527e2d5a93902d55415c6cb"
+    },
+    {
+      "path": "src/game/glyph_panel_pixels.h",
+      "bytes": 3986,
+      "sha256": "f1bc90579996ab50695cd9e1ffbe0cefdb1d36dec426ea559279547a4ea945e9"
+    },
+    {
+      "path": "src/game/glyph_panel_sprite.inc",
+      "bytes": 3857,
+      "sha256": "beae98f30d2b58a6dc069880c2602d218f401c40047d951465ecaa152d5fa3b0"
     },
     {
       "path": "src/game/hsfanim.c",
@@ -9465,8 +9475,8 @@
     },
     {
       "path": "src/game/sprman.c",
-      "bytes": 29763,
-      "sha256": "f316318318a1929071762d5b9265976b70275067733996afc54582901a11ac6e"
+      "bytes": 30517,
+      "sha256": "ea9ed9fc229914ea00f0d20ff2f1c6a7ed8b57acb0958923cc0450b117aab815"
     },
     {
       "path": "src/game/sprput.c",
@@ -10160,8 +10170,8 @@
     },
     {
       "path": "src/port/portmain.cpp",
-      "bytes": 142041,
-      "sha256": "80feed4fd4cb49bf8d2a74fd3428bef9388f6a60396e0973b9e2d7a3a62b400b"
+      "bytes": 142452,
+      "sha256": "38fe44c8c0cdb3a7a6b8cbfbf9e18993e0ffec1bc79e7c325a05f5dfe3c8a0e9"
     },
     {
       "path": "src/port/settings.cpp",
@@ -10930,8 +10940,8 @@
     },
     {
       "path": "src/REL/m432Dll/main.c",
-      "bytes": 132581,
-      "sha256": "ca1a5e1706a0aa15548fc88cb5dc0fc47cf74ebb0387bdcfcda83ec3b5d32235"
+      "bytes": 133046,
+      "sha256": "f85d21faa9f822153af390237ba3838fcc071c4d949e2f8485374b4fec1e9a18"
     },
     {
       "path": "src/REL/m433Dll/main.c",
@@ -11280,8 +11290,8 @@
     },
     {
       "path": "src/REL/mgmodedll/datalist.c",
-      "bytes": 6743,
-      "sha256": "e06e888d44d4467ef68d1d8de9ca63f5ac5fc98ce0f9c222fdd245dd3a6ff175"
+      "bytes": 7159,
+      "sha256": "4f1836cfcf493e9c44a13442e0ab936ceff670f6e4f424645aa43d972d365d62"
     },
     {
       "path": "src/REL/mgmodedll/free_play.c",
@@ -11965,8 +11975,8 @@
     },
     {
       "path": "STATUS.md",
-      "bytes": 5702,
-      "sha256": "178b9607963ffa084b2fe9ea9b20b24b71470ce6e82748391dc8efbe47bc5333"
+      "bytes": 7997,
+      "sha256": "7bc5b9ec517e701a97ace6d46d29b2c216dd2756e82166efa59345068fd94ae0"
     },
     {
       "path": "tools/__init__.py",
@@ -13089,6 +13099,11 @@
       "sha256": "3b18dce34e17f840e7850199d18fc609a12b2d9e2124172756e42f9a22a8e135"
     },
     {
+      "path": "tools/test_gcn_rgba8_converter_bounds.py",
+      "bytes": 3889,
+      "sha256": "15ada7d7f2cde26f1bde38c0324a18733331f79d26bf16fd5a0a4d6b2a3fc153"
+    },
+    {
       "path": "tools/test_heap_failure_diagnostic.py",
       "bytes": 2969,
       "sha256": "03c031921a7eda8551d44aaa820f207e915d5826c9276bfa1f71ebfaa64a04a9"
@@ -13939,9 +13954,14 @@
       "sha256": "f91bd51deef7b9dfefe29da74dd0c471ef0f6d17ff6758bfcfa8086bd7b5bd62"
     },
     {
+      "path": "web/automatic-room-departure.test.mjs",
+      "bytes": 3099,
+      "sha256": "0b9859fb5ab50ddc4dbc8a820ecd99e19543be0703e441bff3262a9c9d765ca6"
+    },
+    {
       "path": "web/automatic-room.mjs",
-      "bytes": 5289,
-      "sha256": "e3f143d96e258d1dde571a3740ab0b2587442321d2a5f7718f94ac886281e686"
+      "bytes": 5633,
+      "sha256": "67ce985d6eee8f25c2c2ac2e91d7ba8de38dcdc43b23fae0cafd1352edd07d14"
     },
     {
       "path": "web/automatic-room.test.cjs",
@@ -14340,8 +14360,8 @@
     },
     {
       "path": "web/native-automatic-lobby-browser-test.cjs",
-      "bytes": 15611,
-      "sha256": "3fc83371f7c2f3ec25ec70a4a199fcfc9ec6f961552a22bf612a570d7883c8ae"
+      "bytes": 19862,
+      "sha256": "22b0025c59b2bab6796c6c00baa293b4cdedd980bff60092af5a76c4ac5c0f6c"
     },
     {
       "path": "web/native-gameplay-recovery-test-support.mjs",

@@ -116,6 +116,12 @@ void fn_1_26A78(DataListSprite *sprite_list)
     for (i = 0; list->datanum; i++, list++) {
         sprite = espEntry(list->datanum, 100, 0);
         lbl_1_bss_2C2C[i] = sprite;
+#ifdef TARGET_PC
+        /* These compound panels belong to the port-zero Free Play menu. */
+        if (list->datanum == DATA_MAKE_NUM(DATADIR_MGMODE, 0x18)) espControlPanelSet(sprite, 0, 0);
+        else if (list->datanum == DATA_MAKE_NUM(DATADIR_MGMODE, 0x2E)) espControlPanelSet(sprite, 1, 0);
+        else if (list->datanum == DATA_MAKE_NUM(DATADIR_MGMODE, 0x2F)) espControlPanelSet(sprite, 2, 0);
+#endif
         espPosSet(sprite, list->x, list->y);
         espColorSet(sprite, list->color.r, list->color.g, list->color.b);
         espTPLvlSet(sprite, list->color.a / 255.0f);

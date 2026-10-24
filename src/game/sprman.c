@@ -13,6 +13,7 @@
 #include "port/byteswap.h"
 #include "game/window.h"
 #include <string.h>
+#include "glyph_panel_pixels.h"
 #endif
 
 #define SPRITE_DIRTY_ATTR 0x1
@@ -42,6 +43,9 @@ typedef struct ControlGlyphSprite_s {
     u16 refresh;
 } ControlGlyphSprite;
 static ControlGlyphSprite controlGlyphSprites[HUSPR_MAX];
+typedef struct { ANIMDATA *original; s16 variant, port; u16 refresh; } ControlPanelSprite;
+static ControlPanelSprite controlPanelSprites[HUSPR_MAX];
+static void ControlPanelRefresh(s16 sprite);
 #endif
 
 static void HuSprOrderEntry(s16 group, s16 sprite);
@@ -202,6 +206,9 @@ void HuSprFinish(void)
     
     for(sprite = &HuSprData[1], i=1; i<HUSPR_MAX; i++, sprite++) {
         if(sprite->data && !(sprite->attr & HUSPR_ATTR_FUNC)) {
+#ifdef TARGET_PC
+            if(controlPanelSprites[i].original)ControlPanelRefresh(i);
+#endif
             if(!HuSprPauseF || (sprite->attr & HUSPR_ATTR_NOPAUSE)) {
                 anim = sprite->data;
                 bank = &anim->bank[sprite->bank];
@@ -451,6 +458,10 @@ void HuSprKill(s16 sprite)
     }
     if(!(sprite_ptr->attr & HUSPR_ATTR_FUNC)) {
 #ifdef TARGET_PC
+        if (controlPanelSprites[sprite].original) {
+            HuSprAnimKill(controlPanelSprites[sprite].original);
+            memset(&controlPanelSprites[sprite],0,sizeof(ControlPanelSprite));
+        }
         if (controlGlyphSprites[sprite].original) {
             HuSprAnimKill(controlGlyphSprites[sprite].original);
             memset(&controlGlyphSprites[sprite], 0, sizeof(ControlGlyphSprite));
@@ -494,6 +505,7 @@ BOOL HuSprAnimationReplace(s16 sprite, ANIMDATA *anim, s16 bank)
     HuSprAnimKill(previous);
     return TRUE;
 }
+#include "glyph_panel_sprite.inc"
 BOOL HuSprControlGlyphSet(s16 sprite, s16 entry, s16 port, s16 originalBank, BOOL completed)
 {
     ControlGlyphSprite *state;
@@ -506,6 +518,7 @@ BOOL HuSprControlGlyphSet(s16 sprite, s16 entry, s16 port, s16 originalBank, BOO
     if (sprite <= 0 || sprite >= HUSPR_MAX) return FALSE;
     target = &HuSprData[sprite];
     if (!target->data || (target->attr & HUSPR_ATTR_FUNC)) return FALSE;
+    if (controlPanelSprites[sprite].original) return FALSE;
     state = &controlGlyphSprites[sprite];
     original = state->original ? state->original : target->data;
     if (originalBank < 0 || originalBank >= original->bankNum ||

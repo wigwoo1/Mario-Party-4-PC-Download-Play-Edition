@@ -2357,6 +2357,14 @@ void fn_1_BAA8(UnkM432DllStruct *arg0)
         var_f31 = 0.0f;
         var_f30 = 0.0f;
         for (var_r29 = arg0->unk_C4, var_r27 = 1; var_r29[0] >= 0; var_r29 += 3) {
+#ifdef TARGET_PC
+            /* Only the five authored button sprites use player-specific labels. */
+            if (var_r29[0] >= 4 && var_r29[0] <= 8) {
+                static const s16 glyphEntry[5] = { 3, 8, 6, 5, 4 }; /* B, L, R, Y, X */
+                espControlGlyphSet(arg0->unk_118[var_r29[0]], glyphEntry[var_r29[0] - 4],
+                    GWPlayerCfg[arg0->unk_188].iscom ? -1 : arg0->unk_190, 0, FALSE);
+            }
+#endif
             espPosSet(arg0->unk_118[var_r29[0]], var_r29[1] + (arg0->unk_110 + var_f31), var_r29[2] + (arg0->unk_114 + var_f30));
             espDispOn(arg0->unk_118[var_r29[0]]);
             if (var_r27 != 0) {
