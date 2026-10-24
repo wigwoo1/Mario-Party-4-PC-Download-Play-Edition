@@ -307,6 +307,8 @@ void synthKillVoicesBySampleReferences(u16* ref);
 #endif
 void synthExit();
 void synthInit(u32 mixFrq, u32 numVoices);
+/* Recoverable initialization for hosts that handle allocation failure. */
+bool synthTryInit(u32 mixFrq, u32 numVoices);
 void synthSetBpm(u32 pbm, u8 set, u8 section);
 void synthFXCloneMidiSetup(SYNTH_VOICE* dest, SYNTH_VOICE* src);
 void synthSetMusicVolumeType(u8 vGroup, u8 type);

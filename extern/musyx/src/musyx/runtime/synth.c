@@ -1395,8 +1395,12 @@ static u32 synthHWMessageHandler(u32 mesg, u32 voiceID) {
   return ret;
 }
 
-void synthInit(u32 mixFrq, u32 numVoices) {
+bool synthTryInit(u32 mixFrq, u32 numVoices) {
   u32 i; // r31
+  SYNTH_VOICE* voices = salMalloc(numVoices * sizeof(SYNTH_VOICE));
+  if (voices == NULL) {
+    return FALSE;
+  }
 
   synthRealTime = 0;
   synthInfo.mixFrq = mixFrq;
@@ -1404,10 +1408,7 @@ void synthInit(u32 mixFrq, u32 numVoices) {
   synthFlags = 0;
   synthMessageCallback = NULL;
 
-  synthVoice = salMalloc(numVoices * sizeof(SYNTH_VOICE));
-  if (synthVoice == NULL) {
-    MUSY_FATAL("Fatal: Could not allocate synthesizer voice array.");
-  }
+  synthVoice = voices;
   memset(synthVoice, 0, numVoices * sizeof(SYNTH_VOICE));
 
   for (i = 0; i < numVoices; ++i) {
@@ -1485,6 +1486,13 @@ void synthInit(u32 mixFrq, u32 numVoices) {
   voiceInitLastStarted();
   synthInitJobQueue();
   hwSetMesgCallback(synthHWMessageHandler);
+  return TRUE;
+}
+
+void synthInit(u32 mixFrq, u32 numVoices) {
+  if (!synthTryInit(mixFrq, numVoices)) {
+    MUSY_FATAL("Fatal: Could not allocate synthesizer voice array.");
+  }
 }
 
 void synthExit() { salFree(synthVoice); }

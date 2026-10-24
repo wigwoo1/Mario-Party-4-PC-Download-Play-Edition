@@ -1,8 +1,8 @@
 {
   "version": 1,
   "repository": "https://github.com/wigwoo1/Mario-Party-4-PC-Download-Play-Edition",
-  "buildId": "42167c4bcbf3d8669916cc890b014faa71cc607a93541a7ede3d6079f8670320",
-  "sourceSnapshotSha256": "73d1e48ffd0313aca1018edfe7f555534623f878397d723851b19719d445aa6e",
+  "buildId": "545c703dafe68388d96da5e452f56dc8ac2c43c6072f4ae793fb08d010865d1f",
+  "sourceSnapshotSha256": "c1581a69da416ebb2711afe1818badee253c6609eb9e7b778238efe660df6529",
   "upstream": {
     "url": "https://github.com/mariopartyrd/partyboard.git",
     "baseCommit": "f38304ebd13b09a15a80db7d7d015bf3fc387c5d"
@@ -4710,8 +4710,8 @@
     },
     {
       "path": "extern/musyx/include/musyx/synth.h",
-      "bytes": 13485,
-      "sha256": "724d81ec0f02f1ef1d86a29c57bc5cabae7363c7b669d85332568a37a5762f58"
+      "bytes": 13608,
+      "sha256": "7ff53691c35fd808b5a7febdc132d7092d23833755e07d243718a8acec0213b3"
     },
     {
       "path": "extern/musyx/include/musyx/synthdata.h",
@@ -4890,8 +4890,8 @@
     },
     {
       "path": "extern/musyx/src/musyx/runtime/synth.c",
-      "bytes": 42021,
-      "sha256": "a19899e8163d7c204a70c850b0a682de70e347a76853c8fbb95a3794176d4b0f"
+      "bytes": 42186,
+      "sha256": "7c3374910353c02147354248513fbcadc29a05cff26dadeb1731171ef451ac22"
     },
     {
       "path": "extern/musyx/src/musyx/runtime/synthdata.c",
@@ -10070,8 +10070,8 @@
     },
     {
       "path": "src/port/musyx_software.h",
-      "bytes": 21409,
-      "sha256": "4159796b3b633e90f11654af66770599fbd2e1f00f8b7e36ef79f0810306fb67"
+      "bytes": 21897,
+      "sha256": "4c6e849040ae8e0b3fada9daf0f5feb578080f685a6e6e8ce33a479e02026822"
     },
     {
       "path": "src/port/musyx_song_runtime.h",
@@ -11975,8 +11975,8 @@
     },
     {
       "path": "STATUS.md",
-      "bytes": 5348,
-      "sha256": "62674787d21c5084dd779222cfc09a4ecb1b4e7c9d7c7159c8b325984c12f163"
+      "bytes": 6077,
+      "sha256": "f1b6cc288406fe87eb13b315378b48852ef67c902c903979271710c0882b9cbd"
     },
     {
       "path": "tools/__init__.py",
@@ -12007,6 +12007,11 @@
       "path": "tools/audit_wasm_renderer.py",
       "bytes": 2166,
       "sha256": "22d6a5fd934334a40c2a834f2e908e799db867cf927f394c572c12368add3b70"
+    },
+    {
+      "path": "tools/audit_windows_package_imports.py",
+      "bytes": 5726,
+      "sha256": "9c4e36846ff65d3ff66c009b16a7802938a0c06b5cb9b54e2f1e7f1caf21943a"
     },
     {
       "path": "tools/automatic-hosting.cjs",
@@ -13234,6 +13239,11 @@
       "sha256": "9a4bc1a04d7bd43096ffe8b0c8273f2a40fbcc99dad32d99786cbe661b74b97a"
     },
     {
+      "path": "tools/test_musyx_initialization_failure.c",
+      "bytes": 2759,
+      "sha256": "0af9a5852ba80c1060a2eaf4f5c56b3e64db35d6a48e3dbb89893741bb13d807"
+    },
+    {
       "path": "tools/test_musyx_pcm_output.c",
       "bytes": 12964,
       "sha256": "c8575f98d6781e45224bbb3b799975a9b60caabfc0916686aa46f059486e0810"
@@ -13612,6 +13622,11 @@
       "path": "tools/test_wasm_webgpu.cpp",
       "bytes": 6517,
       "sha256": "1c54c046df5cb0ec5922cf8ee02b3590e00dd8305660a4cfbeb2c0e2981d6800"
+    },
+    {
+      "path": "tools/test_windows_package_imports.py",
+      "bytes": 1943,
+      "sha256": "c1a7ed1534334cbb29799af60f941736d840cd8d60dc4eb85a7c6ab294fca7a4"
     },
     {
       "path": "tools/test-bind-group-lifetime-browser.cjs",

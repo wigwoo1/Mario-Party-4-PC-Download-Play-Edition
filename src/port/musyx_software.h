@@ -237,20 +237,26 @@ static inline int PartyboardMusyxSoftwareShutdown(PartyboardMusyxSoftware *s) {
     salNumVoices=salMaxStudioNum=0; memset(dspStudio,0,sizeof dspStudio); memset(&synthInfo,0,sizeof synthInfo);
     memset(s,0,sizeof *s); return 1;
 }
-static inline int PartyboardMusyxSoftwareInit(PartyboardMusyxSoftware *s,const uint8_t *raw,size_t bytes) {
+static inline int PartyboardMusyxSoftwareInitWithAllocator(PartyboardMusyxSoftware *s,const uint8_t *raw,size_t bytes,
+        void *(*allocate)(size_t),void (*release)(void *)) {
     PartyboardMsmContainer container; PartyboardMsmContainerInfo info; int error=0;
-    if(!s) return 0;
+    if(!s || !allocate || !release) return 0;
     if(s->active || sndActive) { s->last_error=1;return 0; }
     if(!PartyboardMsmContainerOpen(&container,raw,bytes)) { s->last_error=2;return 0; }
     if(!PartyboardMsmContainerGetInfo(&info,&container) || !info.voices || info.voices>64) { s->last_error=3;return 0; }
     memset(s,0,sizeof *s); s->container=container; s->info=info;
-    salHooks.malloc=malloc; salHooks.free=free;
+    salHooks.malloc=allocate; salHooks.free=release;
     dspVoice=s->voices; dspSurround=s->surround; salNumVoices=(u8)info.voices; salMaxStudioNum=1;
     salFrame=salAuxFrame=0; memset(dspStudio,0,sizeof dspStudio); memset(&synthInfo,0,sizeof synthInfo);
     for(unsigned i=0;i<info.voices;++i) s->voices[i].pb=&s->pbs[i];
     synthInfo.voiceNum=(u8)info.voices; synthInfo.maxMusic=(u8)info.music; synthInfo.maxSFX=(u8)info.effects;
     synthInfo.studioNum=1; synthInfo.numSamples=32;
-    synthInit(32000,info.voices); seqInit(); dataInitStack(); streamInit(); vsInit(); s3dInit(0); sndActive=1; s->active=1;
+    if(!synthTryInit(32000,info.voices)) {
+        dspVoice=NULL; dspSurround=NULL; salNumVoices=salMaxStudioNum=0;
+        memset(&synthInfo,0,sizeof synthInfo); memset(s,0,sizeof *s); s->last_error=10;
+        return 0;
+    }
+    seqInit(); dataInitStack(); streamInit(); vsInit(); s3dInit(0); sndActive=1; s->active=1;
     dspStudio[0].state=dspStudio[0].isMaster=1; dspStudio[0].type=SND_STUDIO_TYPE_STD; dspStudio[0].spb=&s->spb;
     for(unsigned i=0;i<2;++i) dspStudio[0].main[i]=s->main[i];
     for(unsigned i=0;i<3;++i) { dspStudio[0].auxA[i]=s->aux_buffers[0][i]; dspStudio[0].auxB[i]=s->aux_buffers[1][i]; }
@@ -265,6 +271,9 @@ static inline int PartyboardMusyxSoftwareInit(PartyboardMusyxSoftware *s,const u
     sndVolume(127,0,255); sndOutputMode(SND_OUTPUTMODE_STEREO); return 1;
 failed:
     PartyboardMusyxSoftwareShutdown(s); s->last_error=error;return 0;
+}
+static inline int PartyboardMusyxSoftwareInit(PartyboardMusyxSoftware *s,const uint8_t *raw,size_t bytes) {
+    return PartyboardMusyxSoftwareInitWithAllocator(s,raw,bytes,malloc,free);
 }
 /* Configuration, not device availability, selects original surround controls.
  * A failed/full/missing playback stream must not change source SDK behavior. */
