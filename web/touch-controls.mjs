@@ -22,6 +22,8 @@ export function touchControls({container,canvas,profile,enabled=()=>true,documen
   if(!container||!canvas||typeof profile!=='function'||typeof enabled!=='function'||!document?.createElement)
     throw TypeError('Touch controls require a game container, canvas, and saved-control provider.');
   const view=document.defaultView,KeyboardEventType=view?.KeyboardEvent;
+  const coarsePointer=view?.matchMedia?.('(any-pointer: coarse)');
+  let observedTouch=false;
   if(typeof KeyboardEventType!=='function')throw Error('This browser cannot create game keyboard input events.');
   const style=document.createElement('style');
   style.textContent=`.partyboard-touch-controls{position:absolute;inset:0;z-index:5;pointer-events:none;touch-action:none;user-select:none;-webkit-user-select:none}.partyboard-touch-controls[hidden],.partyboard-touch-pad[hidden]{display:none!important}.partyboard-touch-toggle{position:absolute;left:calc(8px + env(safe-area-inset-left));top:calc(8px + env(safe-area-inset-top));pointer-events:auto;touch-action:manipulation;opacity:.78}.partyboard-touch-pad{position:absolute;bottom:calc(10px + env(safe-area-inset-bottom));display:flex;align-items:end;gap:clamp(4px,1.5vmin,14px)}.partyboard-touch-left{left:calc(8px + env(safe-area-inset-left));flex-wrap:wrap;width:min(42vw,310px)}.partyboard-touch-center{left:50%;transform:translateX(-50%)}.partyboard-touch-right{right:calc(8px + env(safe-area-inset-right));flex-direction:column;align-items:center}.partyboard-touch-cross,.partyboard-touch-face,.partyboard-touch-extra{display:grid;grid-template-columns:repeat(3,clamp(38px,8vmin,64px));grid-template-rows:repeat(3,clamp(38px,8vmin,64px));gap:2px}.partyboard-touch-cross .up,.partyboard-touch-face .y{grid-column:2}.partyboard-touch-cross .left,.partyboard-touch-face .x{grid-column:1;grid-row:2}.partyboard-touch-cross .down,.partyboard-touch-face .a{grid-column:2;grid-row:3}.partyboard-touch-cross .right,.partyboard-touch-face .b{grid-column:3;grid-row:2}.partyboard-touch-extra{grid-template-columns:repeat(4,clamp(32px,6.5vmin,48px));grid-template-rows:clamp(32px,6.5vmin,48px)}.partyboard-touch-button{pointer-events:auto;touch-action:none;min-width:0;min-height:0;width:100%;height:100%;margin:0;padding:2px;border:2px solid #e9f2ffb8;border-radius:50%;background:#14213bd9;color:white;font:700 clamp(13px,2.4vmin,20px) system-ui;box-shadow:0 2px 8px #0009}.partyboard-touch-button:active,.partyboard-touch-button[aria-pressed=true]{background:#b9dc65;color:#152000;transform:scale(.94)}.partyboard-touch-label{position:absolute;clip-path:inset(50%);width:1px;height:1px;overflow:hidden}`;
@@ -41,7 +43,8 @@ export function touchControls({container,canvas,profile,enabled=()=>true,documen
   const release=(code)=>{const count=heldCodes.get(code)||0;if(count>1){heldCodes.set(code,count-1);return;}heldCodes.delete(code);if(count&&!physicalCodes.has(code))dispatch('keyup',code);};
   const releaseAll=()=>{for(const [pointer,code] of byPointer){const button=controlPads.get(pointer)?.button;if(button)button.setAttribute('aria-pressed','false');release(code);}byPointer.clear();controlPads.clear();};
   function update(){
-    const show=!closed&&(document.fullscreenElement===container||document.fullscreenElement===document.documentElement)&&!!enabled();
+    const touchAvailable=observedTouch||Number(view?.navigator?.maxTouchPoints)>0||coarsePointer?.matches===true;
+    const show=!closed&&touchAvailable&&(document.fullscreenElement===container||document.fullscreenElement===document.documentElement)&&!!enabled();
     if(root.hidden!==!show){root.hidden=!show;if(!show)releaseAll();}
     if(show){
       let pads=[];try{pads=Array.from(gamepads());}catch{/* Touch remains available if gamepad access is unavailable. */}
@@ -90,10 +93,12 @@ export function touchControls({container,canvas,profile,enabled=()=>true,documen
   document.addEventListener('keydown',physical);document.addEventListener('keyup',physical);
   const blur=()=>{releaseAll();physicalCodes.clear();};
   const hidden=()=>{if(document.hidden)blur();};document.addEventListener('visibilitychange',hidden);view?.addEventListener('blur',blur);
+  const touchDetected=event=>{if(event.pointerType==='touch'){observedTouch=true;update();}};
+  document.addEventListener('pointerdown',touchDetected);
   document.addEventListener('fullscreenchange',update);update();
   const animate=()=>{if(closed)return;update();animationFrame=view.requestAnimationFrame(animate);};
   if(view?.requestAnimationFrame)animationFrame=view.requestAnimationFrame(animate);
-  return {refresh:update,close(){if(closed)return;closed=true;if(animationFrame!==undefined)view?.cancelAnimationFrame?.(animationFrame);releaseAll();document.removeEventListener('keydown',physical);document.removeEventListener('keyup',physical);document.removeEventListener('fullscreenchange',update);document.removeEventListener('visibilitychange',hidden);view?.removeEventListener('blur',blur);root.remove();style.remove();}};
+  return {refresh:update,close(){if(closed)return;closed=true;if(animationFrame!==undefined)view?.cancelAnimationFrame?.(animationFrame);releaseAll();document.removeEventListener('keydown',physical);document.removeEventListener('keyup',physical);document.removeEventListener('pointerdown',touchDetected);document.removeEventListener('fullscreenchange',update);document.removeEventListener('visibilitychange',hidden);view?.removeEventListener('blur',blur);root.remove();style.remove();}};
 }
 
 

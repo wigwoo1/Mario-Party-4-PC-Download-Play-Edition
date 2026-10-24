@@ -19,10 +19,12 @@ class KeyboardEvent{
  constructor(type,init){this.type=type;Object.assign(this,init);}
 }
 function fixture(options={}){
+ const {touchPoints=1,coarsePointer=false,...controlOptions}=options;
  const doc=new Element('document'),view=new Element('window'),head=new Element('head'),container=new Element(),canvas=new Element('canvas');
+ view.navigator={maxTouchPoints:touchPoints};view.matchMedia=()=>({matches:coarsePointer});
  view.KeyboardEvent=KeyboardEvent;doc.defaultView=view;doc.head=head;doc.documentElement=new Element();doc.hidden=false;doc.fullscreenElement=null;doc.createElement=name=>new Element(name);
  const profile=defaultControlBindings();let active=false;
- const api=touchControls({container,canvas,profile:()=>profile,enabled:()=>active,document:doc,...options});
+ const api=touchControls({container,canvas,profile:()=>profile,enabled:()=>active,document:doc,...controlOptions});
  return {doc,view,head,container,canvas,profile,api,setActive(value){active=value;api.refresh();}};
 }
 function controls(root){const found=[];const visit=node=>{if(node.tagName==='button'&&node.dataset.touchAction)found.push(node);for(const child of node.children||[])visit(child);};visit(root);return found;}
@@ -94,4 +96,16 @@ test('physical gamepad input hides touch pads, releases held keys and restores a
 test('unavailable or disconnected gamepads do not hide touch controls',()=>{
  const f=fixture({gamepads:()=>[{connected:false,buttons:[{pressed:true,value:1}]}]});
  f.setActive(true);f.doc.fullscreenElement=f.container;f.api.refresh();assert.ok(f.container.children[0].children.slice(1).every(p=>!p.hidden));
+});
+
+test('mouse-only desktop fullscreen stays unobstructed until actual touch is detected',()=>{
+ const f=fixture({touchPoints:0});f.setActive(true);f.doc.fullscreenElement=f.container;f.api.refresh();
+ const root=f.container.children[0];assert.equal(root.hidden,true);
+ f.doc.fire('pointerdown',{pointerType:'mouse'});assert.equal(root.hidden,true);
+ f.doc.fire('pointerdown',{pointerType:'touch'});assert.equal(root.hidden,false);
+ f.api.close();assert.equal(f.doc.handlers.get('pointerdown').length,0);
+});
+test('coarse pointer devices retain fullscreen touch controls without a reported touch count',()=>{
+ const f=fixture({touchPoints:0,coarsePointer:true});f.setActive(true);f.doc.fullscreenElement=f.container;f.api.refresh();
+ assert.equal(f.container.children[0].hidden,false);
 });

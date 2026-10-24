@@ -2,7 +2,7 @@
   "version": 1,
   "repository": "https://github.com/wigwoo1/Mario-Party-4-PC-Download-Play-Edition",
   "buildId": "d8edbd8bcbe74cf675d7cee2792290e592ec7a2876cb0b5339e27ed10bde5bf8",
-  "sourceSnapshotSha256": "60eafacf0e6cc088e6115c7758797fabafcab72d62f742f6e92842b03a01a44f",
+  "sourceSnapshotSha256": "ada539fb89adf44123ce103fb22ff993965fd1cd0a4f14ce842e8cae5dced742",
   "upstream": {
     "url": "https://github.com/mariopartyrd/partyboard.git",
     "baseCommit": "f38304ebd13b09a15a80db7d7d015bf3fc387c5d"
@@ -12040,8 +12040,8 @@
     },
     {
       "path": "STATUS.md",
-      "bytes": 3020,
-      "sha256": "4a8a04cbc80cb96c4e2f53993282f6383871a2cc84758bea70953632ceb654a1"
+      "bytes": 2945,
+      "sha256": "353f3d6d092f2a8409d7f03e5a672f1d2df538903b04c56976d6d72fd579cfb0"
     },
     {
       "path": "tools/__init__.py",
@@ -15005,13 +15005,13 @@
     },
     {
       "path": "web/touch-controls.mjs",
-      "bytes": 11282,
-      "sha256": "eb120e0a7b72e098d29fc8486669f1916dc0493965fe621fe41862dec03e8b58"
+      "bytes": 11818,
+      "sha256": "e56b0f24fa2db032496f728f85ca07f2f347737e904dc1082d1c6016ab362485"
     },
     {
       "path": "web/touch-controls.test.mjs",
-      "bytes": 7332,
-      "sha256": "4f0d1c60ea0d4f29984cd9aee27f2fc8688cfdfd5c1e068fdf543c37c96b2a08"
+      "bytes": 8398,
+      "sha256": "f8bd2178dcb7c9ed804810facc43bc588732d1129898604974f2a174b2b8ca13"
     },
     {
       "path": "web/transfer.mjs",
