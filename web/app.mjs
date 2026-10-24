@@ -395,6 +395,8 @@ $('start-agreement').onclick=()=>{try{const state=beginLobbyStartAgreement();$('
 $('start-game').onclick=()=>{try{commitLobbyStart();$('start-game').disabled=true;status('Agreed online game started.');}catch(error){fail(error);}};
 export function lobbyReadyState(){return currentLobbySnapshot?{canStart:currentLobbySnapshot.canStart,players:currentLobbySnapshot.players.map(({peer,ready,shaders})=>({peer,ready,shaders}))}:null;}
 export function lobbyInputObservations(){return lobbyGameInput?.observations()??[];}
+// Read-only public lottery state for the existing full-match QA controller.
+export function lobbyLotteryFields(){const read=lobbyRuntime?.module?._PartyBoard_GameLotteryField;return typeof read==='function'?Array.from({length:10},(_,field)=>read(field)):null;}
 // Wall time of completed exchanges includes peer waits and any recovery pause.
 // This diagnostic snapshot does not participate in deterministic state hashing.
 export function lobbyInputTiming(){return lobbyGameInput?.timing()??null;}

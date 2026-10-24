@@ -24,3 +24,14 @@ Known limitations:
 - A previous, different DLL was submitted to Microsoft for review; no final analyst determination is claimed for it. Defender scans are scoped observations, not guarantees.
 
 Use `-LocalOnly` for local-only testing. Keep all package files together. Read the included launcher instructions for prerequisites. This snapshot is not a completed product.
+
+## Daily source update — automatic full-match QA
+
+Current source is ahead of the downloadable build. Compiled native/browser engine and the existing d1e9a1c0 archive remain unchanged; no new archive is published by this source update.
+
+- Added an optional full-match adapter to the actual automatic Host/Join test. It reuses the existing native observation/input hooks and match driver, plus a read-only browser lottery-state getter. A controller-owner numbering mistake in the first adapter attempt was corrected against the real lobby ownership module. Six focused publication/ownership checks pass.
+- The corrected actual native Host plus three Edge guests completed automatic transfer, 1,335 known shaders, readiness, Start, signed reconnect and five-turn gameplay through reported awards/rankings; the process exited 0. Five retained turn-entry windows agree across all four peers (1,279 common records); 60 altered-record cases were rejected. All 35 recorded owned processes and the listener closed.
+- Independent final acceptance remains incomplete: the inherited short-run audit tried to load the long native log as one string and exceeded Node's string-size limit. A streaming audit is required. Rendered final rankings were not independently reviewed for this automatic run, and no continuous all-frame archive is claimed. The earlier two-native/two-browser diagnostic match's reviewed rankings retain their original scope.
+- A separate real Edge fullscreen/touch module fixture passed touch buttons, saved rebinding, arrow-stick defaults, injected controller-button hide/release and touch-toggle restore. All 20 controls fit the tested 915-by-412 landscape viewport. This is emulation, not Android/Bluetooth or full phone gameplay acceptance.
+
+The existing development download, checksums, source provenance and prior releases are preserved. Device/WAN/mobile, physical input/audio, native visual layout, full shader coverage and remaining resource/content gates are still open.

@@ -2,7 +2,7 @@
   "version": 1,
   "repository": "https://github.com/wigwoo1/Mario-Party-4-PC-Download-Play-Edition",
   "buildId": "d1e9a1c0f511914a8dc50a18cbb49948dc15d1ae2025dce65b60db5fc45ff356",
-  "sourceSnapshotSha256": "71854ce12d58aff13353ceab19163998958398aff6e45725fe7fd43dfa7ed883",
+  "sourceSnapshotSha256": "29fca900b97bd4af51c1a7089bd2a22a87d8369d44337de58c73115bd0c4e9de",
   "upstream": {
     "url": "https://github.com/mariopartyrd/partyboard.git",
     "baseCommit": "f38304ebd13b09a15a80db7d7d015bf3fc387c5d"
@@ -12040,8 +12040,8 @@
     },
     {
       "path": "STATUS.md",
-      "bytes": 3340,
-      "sha256": "b3384f4cb47bae4857beb084c523ed2930366f1ba338b5df270230c89c3dc4f5"
+      "bytes": 5370,
+      "sha256": "14c77e2bc7c8a5223e657af9af1f70d09ea92378d5ab91c6b250c7c1b58f2f73"
     },
     {
       "path": "tools/__init__.py",
@@ -12572,6 +12572,16 @@
       "path": "tools/native-rtc-probe/control-mailbox-test.cpp",
       "bytes": 1590,
       "sha256": "82c3f55fc300c53421410092c6163733f9c9dc00906cabd802017d2d44e81914"
+    },
+    {
+      "path": "tools/native-rtc-probe/drive-automatic-full-match.cjs",
+      "bytes": 2475,
+      "sha256": "9e39fda973cfb8611eb727e1c0bcadb5a3bec890592d7bc72034840ff33667dd"
+    },
+    {
+      "path": "tools/native-rtc-probe/drive-automatic-full-match.test.cjs",
+      "bytes": 722,
+      "sha256": "5e9067bfbcb476f9419170f74c55996d4e572e319718b40f039d88ff45eee6a9"
     },
     {
       "path": "tools/native-rtc-probe/drive-extra-room.cjs",
@@ -13980,8 +13990,8 @@
     },
     {
       "path": "web/app.mjs",
-      "bytes": 87900,
-      "sha256": "cee1a5d43913b12c86c14f5323660679f27655415c8ee8a32e4fcf6c432d2c6a"
+      "bytes": 88162,
+      "sha256": "78fd7e2f6cc83fd98c909c564dae8cdb60ff9b956227f25723428488315e3ad3"
     },
     {
       "path": "web/async-blob-fs.mjs",
@@ -14440,8 +14450,8 @@
     },
     {
       "path": "web/native-automatic-lobby-browser-test.cjs",
-      "bytes": 20024,
-      "sha256": "1bd167e2f86a0622d52acecc45d540b51b2669d8b0236188bb32a7bad6491e3f"
+      "bytes": 21400,
+      "sha256": "23b7e1845c6a4809a44825f56d83e53ad46ef36e99d8b17a8749e8e7e5fa9fb3"
     },
     {
       "path": "web/native-gameplay-recovery-test-support.mjs",
