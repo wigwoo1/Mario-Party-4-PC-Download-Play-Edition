@@ -2,7 +2,7 @@
   "version": 1,
   "repository": "https://github.com/wigwoo1/Mario-Party-4-PC-Download-Play-Edition",
   "buildId": "42167c4bcbf3d8669916cc890b014faa71cc607a93541a7ede3d6079f8670320",
-  "sourceSnapshotSha256": "4ea1857d264b36a1e5e9c43756615cc8f163ce8e0ccdd2808db819030a750c72",
+  "sourceSnapshotSha256": "73d1e48ffd0313aca1018edfe7f555534623f878397d723851b19719d445aa6e",
   "upstream": {
     "url": "https://github.com/mariopartyrd/partyboard.git",
     "baseCommit": "f38304ebd13b09a15a80db7d7d015bf3fc387c5d"
@@ -310,18 +310,18 @@
     },
     {
       "path": "assets/shaders/initial_pipeline_cache.db",
-      "bytes": 2584576,
-      "sha256": "af3559ab275cf1008c12c1db967c1895ac2f92669a8154144852a8700e4896c0"
+      "bytes": 5545984,
+      "sha256": "d4055ccde78ceccfc505cf8c66b546283e82be93b21f495294b9c6c8f07acb3e"
     },
     {
       "path": "assets/shaders/initial_pipeline_cache.json",
-      "bytes": 163,
-      "sha256": "9cc8c7a13af6207c28c6be0d8f5b84750b17def10128bce87099651eaad56387"
+      "bytes": 173,
+      "sha256": "9f5c30b57c480cbf995a43ccdc60c729de98e1622c84dbafe22d26b118f8e1b4"
     },
     {
       "path": "assets/shaders/README.md",
-      "bytes": 803,
-      "sha256": "8a585be72fad1d07dfee27a7a079e2cdcb40624e024f50582165c3f423213305"
+      "bytes": 1293,
+      "sha256": "0604855a710a8f1f8b4fafb403f25715822320d5c8c596643cfafbf02c0ec4b4"
     },
     {
       "path": "building.md",
@@ -11975,8 +11975,8 @@
     },
     {
       "path": "STATUS.md",
-      "bytes": 7997,
-      "sha256": "7bc5b9ec517e701a97ace6d46d29b2c216dd2756e82166efa59345068fd94ae0"
+      "bytes": 5348,
+      "sha256": "62674787d21c5084dd779222cfc09a4ecb1b4e7c9d7c7159c8b325984c12f163"
     },
     {
       "path": "tools/__init__.py",
