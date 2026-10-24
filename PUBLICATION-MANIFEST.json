@@ -2,7 +2,7 @@
   "version": 1,
   "repository": "https://github.com/wigwoo1/Mario-Party-4-PC-Download-Play-Edition",
   "buildId": "545c703dafe68388d96da5e452f56dc8ac2c43c6072f4ae793fb08d010865d1f",
-  "sourceSnapshotSha256": "c1581a69da416ebb2711afe1818badee253c6609eb9e7b778238efe660df6529",
+  "sourceSnapshotSha256": "bec2cbe567c669c0f0ea4fa13230573017b968627d31c7555a2c096be024952f",
   "upstream": {
     "url": "https://github.com/mariopartyrd/partyboard.git",
     "baseCommit": "f38304ebd13b09a15a80db7d7d015bf3fc387c5d"
@@ -7509,14 +7509,64 @@
       "sha256": "58d1e17ffe5109a7ae296caafcadfdbe6a7d176f0bc4ab01e12a689b0499d8bd"
     },
     {
+      "path": "licenses/dawn-abseil-cpp-LICENSE",
+      "bytes": 11361,
+      "sha256": "c79a7fea0e3cac04cd43f20e7b648e5a0ff8fa5344e644b0ee09ca1162b62747"
+    },
+    {
       "path": "licenses/dawn-LICENSE",
       "bytes": 1561,
       "sha256": "e2908f7576fb12be5bdb8480cddb0be62badb498cadb821d043aeaf01b0b0899"
     },
     {
+      "path": "licenses/dawn-spirv-headers-CC-BY-4.0.txt",
+      "bytes": 17023,
+      "sha256": "d557539df68e771cc1eedcc91d13f70fca930e508d11eedcafa4b15db49e3744"
+    },
+    {
+      "path": "licenses/dawn-spirv-headers-LICENSE",
+      "bytes": 23503,
+      "sha256": "ea43b1de38a6f90c488800d66dec1ed671e68cda530266bc96951fb5b6307613"
+    },
+    {
+      "path": "licenses/dawn-spirv-headers-MIT.txt",
+      "bytes": 1087,
+      "sha256": "6d7c9e9d7d12c8d3753bdb24417b84819ba4d6c2f025c37948113d86dc81eef9"
+    },
+    {
+      "path": "licenses/dawn-spirv-tools-LICENSE",
+      "bytes": 11358,
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    },
+    {
+      "path": "licenses/dawn-vulkan-headers-Apache-2.0.txt",
+      "bytes": 11358,
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    },
+    {
+      "path": "licenses/dawn-vulkan-headers-LICENSE.md",
+      "bytes": 458,
+      "sha256": "ac24e5ea920e4318e4d02c4086ae51f53cfb03feed06c18df1019e7ada1ec7bc"
+    },
+    {
+      "path": "licenses/dawn-vulkan-headers-MIT.txt",
+      "bytes": 1084,
+      "sha256": "1ca3502222d967f3be5751c55f6b7ee735b5383909c3b501495f54b216dbf227"
+    },
+    {
+      "path": "licenses/dawn-vulkan-memory-allocator-LICENSE.txt",
+      "bytes": 1099,
+      "sha256": "cdb520614db3ec62e667ece01e64e6afa21948fa51e85e748b1494597a7be907"
+    },
+    {
+      "path": "licenses/dawn-zlib-LICENSE",
+      "bytes": 1002,
+      "sha256": "e32ff4e00d9d94930537635291da39e7e612703334bf6fde8c7f1686fe8a45a2"
+    },
+    {
       "path": "licenses/dependency-notices.json",
-      "bytes": 50607,
-      "sha256": "cb1242389ee0201b5afa2df06eaf9f022b88c839120554c67756e69dc35d566b"
+      "bytes": 55617,
+      "sha256": "b7c90bbf608e92175936f75a5d50afdc9e22ad28a1b07d65709a984a330fbfb5"
     },
     {
       "path": "licenses/dxc-LICENSE.TXT",
@@ -11975,8 +12025,8 @@
     },
     {
       "path": "STATUS.md",
-      "bytes": 6077,
-      "sha256": "f1b6cc288406fe87eb13b315378b48852ef67c902c903979271710c0882b9cbd"
+      "bytes": 7061,
+      "sha256": "fb4524133830703b9023d7e83e6b771c76b4917cd3d5976b1633ca163af4a9a5"
     },
     {
       "path": "tools/__init__.py",

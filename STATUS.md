@@ -4,7 +4,13 @@ This project is unfinished. Whole-project completion is unmeasured. This Windows
 
 Compiled runtime identity: `545c703dafe68388d96da5e452f56dc8ac2c43c6072f4ae793fb08d010865d1f` (204 measured artifacts). The shader seed contains **1,335 observed pipeline definitions**, SHA-256 `d4055ccde78ceccfc505cf8c66b546283e82be93b21f495294b9c6c8f07acb3e`. Browser signaling source remains `67ce985d6eee8f25c2c2ac2e91d7ba8de38dcdc43b23fae0cafd1352edd07d14`. Package provenance identifies the exported source commit and exact archive.
 
-## This update
+## Source-only notice update
+
+Ten additional license files are retained from the exact Dawn dependency revisions for SPIRV-Tools, SPIRV-Headers, Vulkan-Headers, VulkanMemoryAllocator, Abseil and Chromium zlib. Existing DXC license/third-party notice bytes match its pinned revision; their origin links now identify that revision. Each added text matches its upstream Git blob hash. This corrects stale wrapper metadata without asserting every optional component is present in the prebuilt DLL.
+
+The existing runtime archive and its source/provenance commit `062e678f4c74b3fb7034d94eda48e6876a11e220` remain unchanged. The extra texts are available in the current repository `licenses` directory and are registered for the next package. No new engine, binary release, gameplay run or device acceptance is claimed by this documentation update. PartitionAlloc attribution/inclusion and the complete prebuilt feature/dependency mapping remain open.
+
+## Runtime update retained from the existing release
 
 - The port now uses checked synthesizer initialization. If the SDK's initial voice-array allocation fails, it clears partial ownership and returns an audio startup error instead of aborting the process. The SDK's existing entry point remains available for legacy callers. This does not promise automatic recovery from every allocation failure.
 - Fresh native and Wasm SDK tests using actual disc audio passed eight forced voice-allocation failure/retry/shutdown cycles per platform. Each retry reproduced the healthy-start PCM hash over 12 video ticks and 40 synthesis blocks of the tested song. Healthy output also matched the previous SDK archives. All 31 existing group/song/auxiliary allocation rollback and retry cases passed on both platforms. No playback device was opened by these fixtures.

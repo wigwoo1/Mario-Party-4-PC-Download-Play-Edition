@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "scope": "Verbatim notices from configured native dependency sources; not a complete redistribution audit.",
+  "scope": "Verbatim notices from configured native sources and pinned Dawn transitive repositories; conservative notice collection, not a complete binary-inclusion or redistribution audit.",
   "notices": [
     {
       "component": "opus",
@@ -162,13 +162,13 @@
       "component": "DirectX Shader Compiler",
       "file": "dxc-LICENSE.TXT",
       "sha256": "27a49e35d1da96eba18fba54bc882667ff0ff8c0254f16f2b6e165d605ba7df8",
-      "origin": "https://raw.githubusercontent.com/microsoft/DirectXShaderCompiler/517dd5eb5d8cbb46c15fc1230acac1d2f4779092/LICENSE.TXT"
+      "origin": "https://github.com/microsoft/DirectXShaderCompiler/blob/517dd5eb5d8cbb46c15fc1230acac1d2f4779092/LICENSE.TXT"
     },
     {
       "component": "DirectX Shader Compiler",
       "file": "dxc-ThirdPartyNotices.txt",
       "sha256": "19512a5d0a015ef16d167272c164da49a604614a786206212a80ad486ed0be6d",
-      "origin": "https://raw.githubusercontent.com/microsoft/DirectXShaderCompiler/517dd5eb5d8cbb46c15fc1230acac1d2f4779092/ThirdPartyNotices.txt"
+      "origin": "https://github.com/microsoft/DirectXShaderCompiler/blob/517dd5eb5d8cbb46c15fc1230acac1d2f4779092/ThirdPartyNotices.txt"
     },
     {
       "component": "nod vendored dependencies",
@@ -1248,10 +1248,70 @@
       "file": "nod-vendored-notice-index.json",
       "sha256": "b7ddf27825c4ac0462d10bfd03368dd9f6acaa7978a085a89f4d083eb665abf4",
       "origin": "https://github.com/encounter/nod/releases/download/v2.0.0-alpha.10/vendored-crates-v2.0.0-alpha.10.tar.zst"
+    },
+    {
+      "component": "Dawn pinned spirv-tools / LICENSE",
+      "file": "dawn-spirv-tools-LICENSE",
+      "origin": "https://github.com/KhronosGroup/SPIRV-Tools/blob/b38c4f83024546d4000b2db8e2294cf81b7f26e0/LICENSE",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    },
+    {
+      "component": "Dawn pinned spirv-headers / LICENSE",
+      "file": "dawn-spirv-headers-LICENSE",
+      "origin": "https://github.com/KhronosGroup/SPIRV-Headers/blob/1e770e7de8373a8dd49f23416cf7ca4001d01040/LICENSE",
+      "sha256": "ea43b1de38a6f90c488800d66dec1ed671e68cda530266bc96951fb5b6307613"
+    },
+    {
+      "component": "Dawn pinned vulkan-headers / LICENSE.md",
+      "file": "dawn-vulkan-headers-LICENSE.md",
+      "origin": "https://github.com/KhronosGroup/Vulkan-Headers/blob/015e25c3c91b70eb1a754d36fb14c4ba6ad9b0b9/LICENSE.md",
+      "sha256": "ac24e5ea920e4318e4d02c4086ae51f53cfb03feed06c18df1019e7ada1ec7bc"
+    },
+    {
+      "component": "Dawn pinned spirv-headers / LICENSES/CC-BY-4.0.txt",
+      "file": "dawn-spirv-headers-CC-BY-4.0.txt",
+      "origin": "https://github.com/KhronosGroup/SPIRV-Headers/blob/1e770e7de8373a8dd49f23416cf7ca4001d01040/LICENSES/CC-BY-4.0.txt",
+      "sha256": "d557539df68e771cc1eedcc91d13f70fca930e508d11eedcafa4b15db49e3744"
+    },
+    {
+      "component": "Dawn pinned spirv-headers / LICENSES/MIT.txt",
+      "file": "dawn-spirv-headers-MIT.txt",
+      "origin": "https://github.com/KhronosGroup/SPIRV-Headers/blob/1e770e7de8373a8dd49f23416cf7ca4001d01040/LICENSES/MIT.txt",
+      "sha256": "6d7c9e9d7d12c8d3753bdb24417b84819ba4d6c2f025c37948113d86dc81eef9"
+    },
+    {
+      "component": "Dawn pinned vulkan-headers / LICENSES/Apache-2.0.txt",
+      "file": "dawn-vulkan-headers-Apache-2.0.txt",
+      "origin": "https://github.com/KhronosGroup/Vulkan-Headers/blob/015e25c3c91b70eb1a754d36fb14c4ba6ad9b0b9/LICENSES/Apache-2.0.txt",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    },
+    {
+      "component": "Dawn pinned vulkan-headers / LICENSES/MIT.txt",
+      "file": "dawn-vulkan-headers-MIT.txt",
+      "origin": "https://github.com/KhronosGroup/Vulkan-Headers/blob/015e25c3c91b70eb1a754d36fb14c4ba6ad9b0b9/LICENSES/MIT.txt",
+      "sha256": "1ca3502222d967f3be5751c55f6b7ee735b5383909c3b501495f54b216dbf227"
+    },
+    {
+      "component": "Dawn pinned vulkan_memory_allocator",
+      "file": "dawn-vulkan-memory-allocator-LICENSE.txt",
+      "origin": "https://chromium.googlesource.com/external/github.com/GPUOpen-LibrariesAndSDKs/VulkanMemoryAllocator/+/7e55b011e16182fc349149abbd3aaf3b1db46421/LICENSE.txt",
+      "sha256": "cdb520614db3ec62e667ece01e64e6afa21948fa51e85e748b1494597a7be907"
+    },
+    {
+      "component": "Dawn pinned abseil-cpp",
+      "file": "dawn-abseil-cpp-LICENSE",
+      "origin": "https://chromium.googlesource.com/chromium/src/third_party/abseil-cpp/+/d16e32215c3ab90ba57c2e904a5344d85c7353e4/LICENSE",
+      "sha256": "c79a7fea0e3cac04cd43f20e7b648e5a0ff8fa5344e644b0ee09ca1162b62747"
+    },
+    {
+      "component": "Dawn pinned zlib",
+      "file": "dawn-zlib-LICENSE",
+      "origin": "https://chromium.googlesource.com/chromium/src/third_party/zlib/+/3246f1b60849cc505e231c5d19d0cbf358093555/LICENSE",
+      "sha256": "e32ff4e00d9d94930537635291da39e7e612703334bf6fde8c7f1686fe8a45a2"
     }
   ],
   "unresolved": [
-    "Dawn/Tint transitive dependency notices and build-feature selection still require review.",
+    "Dawn/Tint notices now retain pinned SPIRV-Tools, SPIRV-Headers, Vulkan-Headers, VulkanMemoryAllocator, Abseil and Chromium zlib texts; existing DXC notices match its pinned revision. Other transitive notices, exact prebuilt feature selection and binary-inclusion mapping remain under review; PartitionAlloc checkout has no root license and is not treated as covered.",
     "Complete browser static dependency, fonts/resources, platform prerequisites and source-availability requirements remain under review."
   ]
 }
