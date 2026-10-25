@@ -18,3 +18,8 @@ The current-build physical two-PC gameplay/start/recovery path, an actual wall-c
 
 The private d1e9 runtime candidate with the 1,355-definition observed seed passed same-PC automatic Native Host plus three actual Edge guests: all 1,345 graphics pipelines prepared with zero queued, ten UI records matched in the seed receipt, 130 initial matching polls, and 90 recovery polls in 4.95 seconds. Native exited 0 with no errors. A test-only typed-count helper fixed a false assertion without changing game code. Local evidence is outputs/validation/shader-seed-d1e9-four-peer-20261024.json; no executable/archive was rebuilt. Physical two-PC and full scene coverage remain open.
 Exact runtime build ID for this follow-up: d1e9a1c0f511914a8dc50a18cbb49948dc15d1ae2025dce65b60db5fc45ff356.
+
+
+## 2026-10-25 daily status
+
+No new source changes, builds, or validation runs are recorded since the 2026-10-24 d1e9 shader-readiness update above. The gameplay goal is paused while the user prepares to use a second computer; physical two-PC verification therefore remains pending. No new executable or archive is published. The existing same-PC shader preparation/start/reconnect result remains scoped evidence and does not establish physical-device play, full-match completion, or full shader coverage.
