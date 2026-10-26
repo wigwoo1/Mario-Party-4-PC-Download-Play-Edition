@@ -523,7 +523,7 @@ async function prepareLobbyGame(){
     return;
   }
   const current=generation,signal=aborter?.signal,configuration=sessionConfiguration;
-  const attempt=lobbyPreparationAttempt={stage:'checking-inputs',generation:current,signal};
+  const attempt=lobbyPreparationAttempt={stage:'checking-inputs',generation:current,signal,runtimeLogs:[]};
   if(!signal||!configuration||(!lobbyHost&&!runtimeAsset)){status('Connect and verify assets before preparing the game.');return;}
   const resolution=display.resolution();display.setLocked(true);
   const controlProfile=controlEditor.profile();controlEditor.setLocked(true);
@@ -541,12 +541,17 @@ async function prepareLobbyGame(){
       supplementalArtifacts:configuration.runtimeArtifacts??[]});
     const glyphs=await prepareRuntimeGlyphs({signal,bindings:controlBindingGlyphs(controlProfile)});
     attempt.stage='preparing-session-runtime';
+    const retainRuntimeLog=(level,line)=>{
+      const text=String(line).trim();
+      if(text&&attempt.runtimeLogs.length<128)attempt.runtimeLogs.push(text.slice(0,500));
+      (level==='error'?console.warn:console.info)(line);
+    };
     const prepared=await prepareFingerprintedSessionRuntime(source,configuration.assetId,files,{
       runtimeBuild:{expectedBuildId:configuration.buildId},
       sessionSeed:configuration.seed,pipelineSeed:lobbyPipelineSeed,signal,...capturingPlatformCallbacks(browserPlatformCallbacks,{resolution,maxSteps:lobbyPipelineSeed?10000:60,
         progress:({queued,created})=>{if(current===generation)status('Preparing recorded shader pipelines: '+created+' compiled, '+queued+' queued.');}},true),
       runtimeOptions:{canvas:$('canvas'),partyBoardGlyphTextures:glyphs.initial,
-        print:line=>console.info(line),printErr:line=>console.warn(line)},
+        print:line=>retainRuntimeLog('info',line),printErr:line=>retainRuntimeLog('error',line)},
       progress:(bytes,total)=>{if(current===generation)status('Checking lobby game assets: '+Math.floor(bytes/total*100)+'%');},
     });
     if(current!==generation||signal.aborted){attempt.stage='discarding-stale-runtime';await prepared.dispose();return;}
@@ -569,6 +574,7 @@ async function prepareLobbyGame(){
   })();
   try{await lobbyPreparing;}catch(error){
     attempt.stage='failed';attempt.error={name:String(error?.name??'Error').slice(0,80),message:String(error?.message??error).slice(0,2000)};
+    if(error&&typeof error==='object')try{Object.defineProperty(error,'partyBoardRuntimeLogs',{value:attempt.runtimeLogs.slice(-32),configurable:true});}catch{}
     if(current===generation&&!signal.aborted){
     const diagnostic=(cause,depth=0)=>({name:cause?.name,message:String(cause?.message??cause),stack:cause?.stack,
       ...(depth<4&&cause?.cause?{cause:diagnostic(cause.cause,depth+1)}:{}),
@@ -583,7 +589,7 @@ let capturedPipelineSeed,capturedLobbyPipelineSeed;
 export function lastCapturedPipelineSeed(){return capturedPipelineSeed;}
 export function lastCapturedLobbyPipelineSeed(){return capturedLobbyPipelineSeed;}
 function capturingPlatformCallbacks(browserPlatformCallbacks,options={},lobby=false){
-  const callbacks=browserPlatformCallbacks({...options,audioChannels:speakers.channels}),shutdown=callbacks.shutdown,setup=callbacks.setup;
+  const callbacks=browserPlatformCallbacks({...options,audioChannels:speakers.channels,checkWebGPUAdapter:true}),shutdown=callbacks.shutdown,setup=callbacks.setup;
   return {...callbacks,setup:async(module,options)=>{await setup(module,options);gameAudio.bind(module);},shutdown:async module=>{
     gameAudio.unbind(module);await shutdown(module);
     try{

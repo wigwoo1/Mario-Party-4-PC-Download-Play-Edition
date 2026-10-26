@@ -14,7 +14,8 @@ function supportedResolution({width,height}={}){
 
 // Platform callbacks for prepareSessionRuntime. Game initialization, execution,
 // input ownership and mounted asset lifetime remain owned by that adapter.
-export function browserPlatformCallbacks({maxSteps=60,progress,resolution,audioChannels}={}) {
+export function browserPlatformCallbacks({maxSteps=60,progress,resolution,audioChannels,
+    checkWebGPUAdapter=false,webgpu=globalThis.navigator?.gpu,secureContext=globalThis.isSecureContext}={}) {
   if(!Number.isInteger(maxSteps)||maxSteps<1||maxSteps>10000)throw Error('Invalid renderer preparation bound.');
   if(resolution&&!supportedResolution(resolution))throw Error('Invalid game resolution.');
   if(audioChannels!==undefined&&audioChannels!==2&&audioChannels!==6)throw Error('Invalid speaker layout.');
@@ -31,6 +32,15 @@ export function browserPlatformCallbacks({maxSteps=60,progress,resolution,audioC
   return {
     async setup(module,{signal}={}) {
       signal?.throwIfAborted();
+      if(checkWebGPUAdapter){
+        if(!secureContext)throw Error('The lobby page is not a secure browser context. Open it using its HTTPS address.');
+        if(typeof webgpu?.requestAdapter!=='function')throw Error('WebGPU is unavailable in this browser. Use a current Edge version with graphics acceleration enabled.');
+        let adapter;
+        try{adapter=await webgpu.requestAdapter({powerPreference:'high-performance'});}
+        catch(cause){throw new Error('Edge could not query a WebGPU graphics adapter. Check graphics acceleration and the display driver.',{cause});}
+        if(!adapter)throw Error('Edge found no WebGPU graphics adapter. Enable graphics acceleration and update the display driver, then restart Edge.');
+        signal?.throwIfAborted();
+      }
       if(selectedResolution){
         if(typeof module?._PartyBoardBrowserSetInitialResolution!=='function')throw Error('Browser runtime does not support selected resolution.');
         const result=await module.ccall('PartyBoardBrowserSetInitialResolution','number',['number','number'],

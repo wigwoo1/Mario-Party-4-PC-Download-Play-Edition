@@ -22,3 +22,23 @@ test('unrelated failures retain their actual message and cyclic causes terminate
     'Automatic game preparation failed: Shader pipeline rejected Stop the session and try again.');
   assert.doesNotMatch(preparationFailureMessage(new Error('Quota mentioned by unrelated error')),/free space/);
 });
+
+test('wrapped preparation and cleanup failures expose their underlying messages',()=>{
+  const failure=new AggregateError([
+    new Error('Runtime module initialization failed'),
+    new Error('Runtime shutdown failed while Asyncify was active'),
+  ],'Session preparation and cleanup failed.');
+  assert.equal(preparationFailureMessage(failure,{automatic:true}),
+    'Automatic game preparation failed: Session preparation and cleanup failed. Details: Runtime module initialization failed Details: Runtime shutdown failed while Asyncify was active Stop the session and try again.');
+});
+
+test('captured platform error logs are included without leaking resource URLs',()=>{
+  const failure=new Error('RuntimeError: Aborted (native code called abort())');
+  failure.partyBoardRuntimeLogs=[
+    'aurora: Aurora initializing',
+    'aurora: Error creating window: adapter unavailable at https://example.invalid/private',
+  ];
+  const message=preparationFailureMessage(failure,{automatic:true});
+  assert.match(message,/Graphics log: aurora: Error creating window: adapter unavailable/);
+  assert.doesNotMatch(message,/example\.invalid|https:\/\//);
+});

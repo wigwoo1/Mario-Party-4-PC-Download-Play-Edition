@@ -2,7 +2,7 @@
   "version": 1,
   "repository": "https://github.com/wigwoo1/Mario-Party-4-PC-Download-Play-Edition",
   "buildId": "d1e9a1c0f511914a8dc50a18cbb49948dc15d1ae2025dce65b60db5fc45ff356",
-  "sourceSnapshotSha256": "db760e43d6e5e5bdf265f2c59d8a801977fa106f538b9b5bbdd77cdd80161b22",
+  "sourceSnapshotSha256": "fb33fd661dff3019389c3c9629f8b1c51787b269cd14c9f8bf9d7d89652e83f2",
   "upstream": {
     "url": "https://github.com/mariopartyrd/partyboard.git",
     "baseCommit": "f38304ebd13b09a15a80db7d7d015bf3fc387c5d"
@@ -12040,8 +12040,8 @@
     },
     {
       "path": "STATUS.md",
-      "bytes": 2555,
-      "sha256": "8dabc13aad32adb6176085118552c77526e567e86f15adb3060944e8d455c4da"
+      "bytes": 4711,
+      "sha256": "dbab18bbb3c1bdeabef3b786c87e275ecc985dc4b7c5b865810ffb089f10f3de"
     },
     {
       "path": "tools/__init__.py",
@@ -14000,8 +14000,8 @@
     },
     {
       "path": "web/app.mjs",
-      "bytes": 88436,
-      "sha256": "6690288bc4e19172ceb4a261b20f79f7b958105568cf63d78183dac1bdc8d662"
+      "bytes": 88895,
+      "sha256": "b30af07aa14af7ddac063cfef38b78ed6472e5b22f6b20f44c2a4c0b9b8b4aaf"
     },
     {
       "path": "web/async-blob-fs.mjs",
@@ -14100,13 +14100,13 @@
     },
     {
       "path": "web/browser-platform.mjs",
-      "bytes": 4584,
-      "sha256": "c3f0f37618cb7ec4df61c413cbdf6c20ff98a9b7d83b5f35c1749342bd5e09af"
+      "bytes": 5468,
+      "sha256": "c8f0c1b22741b514d016dff5bd8b8b05f7bb37630ba7638c9ee3420efdc2e9e9"
     },
     {
       "path": "web/browser-platform.test.mjs",
-      "bytes": 6067,
-      "sha256": "3cfb71a037568734373efa6b6985dd8c7885a4a2b2e2d6f24d551c21e505e2ad"
+      "bytes": 7544,
+      "sha256": "b3e4bb60692bc204c6f84daa431af080cddb8eb851feafb4011450b17c4f0606"
     },
     {
       "path": "web/browser-runtime-package.mjs",
@@ -14565,13 +14565,13 @@
     },
     {
       "path": "web/preparation-error.mjs",
-      "bytes": 1024,
-      "sha256": "a65b5df8a27bb7a525e4bfd356e3100dde77d2ef4dbe86d5c337c465835b64d5"
+      "bytes": 1965,
+      "sha256": "edd662a0e4ce032ee0577c79b1e8d03f3178385ad1e6682e205e9cbb189cf70c"
     },
     {
       "path": "web/preparation-error.test.mjs",
-      "bytes": 1435,
-      "sha256": "e5146b3224e0591b790df61e508356a04c14f7a37110d8b3b22d13947751372d"
+      "bytes": 2584,
+      "sha256": "d870c2aaf2746c3647532e23c1b3cecfc7246f1de9f002dd04a622b79bdf4009"
     },
     {
       "path": "web/prepared-runtime-report.mjs",

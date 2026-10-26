@@ -1,4 +1,4 @@
-# Development status — 2026-10-24
+# Development status — 2026-10-26
 
 This is an incomplete native Windows and browser port. It does not include a game disc image. Story Mode is outside the user's requested test scope.
 
@@ -23,3 +23,14 @@ Exact runtime build ID for this follow-up: d1e9a1c0f511914a8dc50a18cbb49948dc15d
 ## 2026-10-25 daily status
 
 No new source changes, builds, or validation runs are recorded since the 2026-10-24 d1e9 shader-readiness update above. The gameplay goal is paused while the user prepares to use a second computer; physical two-PC verification therefore remains pending. No new executable or archive is published. The existing same-PC shader preparation/start/reconnect result remains scoped evidence and does not establish physical-device play, full-match completion, or full shader coverage.
+
+
+## 2026-10-26: browser graphics startup diagnostics
+
+Current source adds a WebGPU adapter check before starting Aurora, actionable no-adapter messages, and bounded startup error details. A diagnostic regression uses an example address; no private connection details are published. The unchanged measured runtime underlying the earlier tests is `d1e9a1c0f511914a8dc50a18cbb49948dc15d1ae2025dce65b60db5fc45ff356`; the JavaScript changes are newer than the downloadable archives.
+
+Today, JavaScript syntax checks and 26 focused browser-platform, preparation-error, publication-boundary and package-staging tests passed. The earlier development browser suite reported 405 passing cases. These are software checks; no successful physical-device gameplay retry or newly verified executable/archive is claimed.
+
+The two-PC LAN attempt reached a complete guest asset download, then failed during graphics startup. Guest diagnostics showed a secure context and an exposed WebGPU API, but adapter creation failed. Edge reported repeated graphics-process crashes and disabled GPU features even with graphics acceleration enabled. Recovery after restarting the guest PC remains unverified. This is an open compatibility/startup failure.
+
+Existing prerelease archives and checksums are preserved. No new binary release, public hosting or WAN test is performed by this daily update. Physical two-PC start/gameplay/reconnect, a live 60-second interruption, full shader scene coverage, controller/audio hardware checks, clean-machine reliability and final ranking visual review remain open. Story Mode remains excluded; whole-project completion is not established.

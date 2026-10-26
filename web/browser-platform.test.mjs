@@ -87,3 +87,27 @@ test('setup cancellation prevents invocation; failed and missing exports remain 
   delete f.module._PartyBoardBrowserPreparePlatform;await assert.rejects(api.setup(f.module),/export missing/);
   assert.throws(()=>browserPlatformCallbacks({maxSteps:0}),/bound/);
 });
+test('missing WebGPU adapter is reported before native platform initialization',async()=>{
+  const f=fixture(),api=browserPlatformCallbacks({checkWebGPUAdapter:true,secureContext:true,
+    webgpu:{requestAdapter:async()=>null}});
+  await assert.rejects(api.setup(f.module),/found no WebGPU graphics adapter/);
+  assert.deepEqual(f.events,[]);
+  const insecure=browserPlatformCallbacks({checkWebGPUAdapter:true,secureContext:false,
+    webgpu:{requestAdapter:async()=>({})}});
+  await assert.rejects(insecure.setup(f.module),/not a secure browser context/);
+});
+test('WebGPU adapter lookup failures are actionable and preserve their cause',async()=>{
+  const f=fixture(),cause=Error('driver initialization rejected');
+  const api=browserPlatformCallbacks({checkWebGPUAdapter:true,secureContext:true,
+    webgpu:{requestAdapter:async()=>{throw cause;}}});
+  await assert.rejects(api.setup(f.module),error=>/graphics acceleration and the display driver/.test(error.message)&&error.cause===cause);
+  assert.deepEqual(f.events,[]);
+});
+test('successful WebGPU preflight proceeds to native platform initialization',async()=>{
+  const f=fixture(),calls=[];
+  const api=browserPlatformCallbacks({checkWebGPUAdapter:true,secureContext:true,
+    webgpu:{requestAdapter:async options=>{calls.push(options);return {};}}});
+  await api.setup(f.module);
+  assert.deepEqual(calls,[{powerPreference:'high-performance'}]);
+  assert.deepEqual(f.events,['PartyBoardBrowserPreparePlatform']);
+});
