@@ -395,7 +395,11 @@ bool initialize_event_watch() {
 void shutdown() {
   SDL_RemoveEventWatch(lifecycle_event_watch, nullptr);
   destroy_window();
+#ifndef __EMSCRIPTEN__
+  // Browsers own display blanking and SDL's Emscripten backend may not
+  // implement re-enabling the operating-system screensaver.
   TRY_WARN(SDL_EnableScreenSaver(), "Error enabling screensaver: {}", SDL_GetError());
+#endif
   SDL_Quit();
 }
 

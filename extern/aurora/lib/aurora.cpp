@@ -211,31 +211,58 @@ const AuroraEvent* update() noexcept {
 
 bool begin_frame() noexcept {
   ZoneScoped;
+#ifdef __EMSCRIPTEN__
+  // Hidden surfaces are retried without advancing simulation. Report a change
+  // of failure once rather than logging on every browser retry while hidden.
+  static int reportedFailure = 0;
+  const auto reportFailure = [&](int reason, const char* message) {
+    if (reportedFailure != reason) Log.error("Cannot begin frame: {}", message);
+    reportedFailure = reason;
+  };
+#endif
 #if defined(__EMSCRIPTEN__) && defined(AURORA_ENABLE_GX)
-  if (webgpu::device_lost()) return false;
+  if (webgpu::device_lost()) {
+    reportFailure(1, "WebGPU device was lost");
+    return false;
+  }
 #endif
 #ifdef AURORA_ENABLE_GX
   {
     window::SurfaceLock surfaceLock;
     if (!window::is_presentable()) {
+#ifdef __EMSCRIPTEN__
+      reportFailure(2, "browser window surface is not presentable");
+#endif
       webgpu::release_surface();
       return false;
     }
     if (window::is_paused()) {
+#ifdef __EMSCRIPTEN__
+      reportFailure(3, "window is paused or hidden");
+#endif
       return false;
     }
     if (!g_surface) {
       webgpu::refresh_surface(true);
       if (!g_surface) {
+#ifdef __EMSCRIPTEN__
+        reportFailure(4, "WebGPU surface could not be created");
+#endif
         return false;
       }
     }
   }
 
-  imgui::new_frame(window::get_window_size());
   if (!gfx::begin_frame()) {
+#ifdef __EMSCRIPTEN__
+    reportFailure(5, "renderer frame resources are unavailable");
+#endif
     return false;
   }
+  imgui::new_frame(window::get_window_size());
+#endif
+#ifdef __EMSCRIPTEN__
+  reportedFailure = 0;
 #endif
   return true;
 }

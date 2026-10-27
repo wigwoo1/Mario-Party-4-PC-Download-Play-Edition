@@ -1,36 +1,30 @@
-# Development status — 2026-10-26
+# Development status — 2026-10-27
 
-This is an incomplete native Windows and browser port. It does not include a game disc image. Story Mode is outside the user's requested test scope.
+This native Windows and browser port remains incomplete. A game disc image is not included. Story Mode is outside the requested test scope. Use the exact build identity in each development prerelease; previous downloads are preserved.
 
-## Shader preparation update
+## Current browser startup correction
 
-The source bundle now contains 1,355 observed shader/UI pipeline definitions (SHA-256 `bb229e6a746bba8469f73f37bae241e3b19c6f02586f3ab673d987f1b3c3c7c7`), expanded from 1,335 using valid records captured during a completed five-turn gameplay run. The previous seed is retained in the older release files. These are observed definitions only; full scene coverage is not verified.
+Measured combined runtime identity: `b8f41066762b0c9ae0ade7fdfd0b0a83ed6061557f615f237844ea437d7ce51d` (201 artifacts). The browser executable was rebuilt. The Windows executable and game DLL are byte-identical to the previous touch-visibility development release; they were not rebuilt for this correction. Current source includes the shared frame gate, but this is not a claim that the new native source is present in those retained Windows binaries.
 
-The exact 1,355-definition candidate passed a same-PC four-player native/Edge preparation, synchronized start, and reconnect run: three guest receipts agreed, 1,345 graphics pipelines and ten UI definitions were prepared, and 90 matching recovery polls resumed after about 4.98 seconds. Native bundled-seed validation passed ten checks; six focused Node test files passed 14 tests. This is scoped evidence, not separate-device, WAN, mobile, or full-scene acceptance.
+A physical two-PC attempt on the preceding browser candidate reached complete asset verification and 1,345 prepared graphics pipelines on both peers, then stopped at the Nintendo logo. Live host diagnostics established that the renderer rejected a paused/hidden window and the game continued drawing without an active graphics frame, aborting execution. The old page still reported that the game was running after that abort.
 
-The current public Windows/browser ZIP has not been rebuilt for this source-only seed change and still contains the earlier 1,335-definition seed. No replacement binary archive is published by this update. The measured runtime used for the seed candidate has build ID `d8edbd8bcbe74cf675d7cee2792290e592ec7a2876cb0b5339e27ed10bde5bf8`.
+The correction waits for an available graphics frame while retaining the accepted network input, pumps window events and yields without another input poll or simulation advance. The canvas is displayed before synchronous game startup. Execution failures now have a page status handler. Repeated identical renderer-wait logs are bounded, and ImGui starts only after a graphics frame is available.
 
-## Remaining checks
+## Verified scope for this candidate
 
-The current-build physical two-PC gameplay/start/recovery path, an actual wall-clock 60-second network interruption, full shader scene coverage, hardware controller/audio, clean-machine reliability, and visual review of the final ranking screen remain open. WAN and Android cellular testing are deferred until the user is home. No overall project completion percentage is claimed.
+- Windows C11 and WebAssembly frame-gate fixtures passed immediate availability, repeated wait, stop, window-close and already-stopped cases.
+- The actual game runtime received SDL's visibility-change event between input acceptance and rendering. Its frame remained 1 while hidden; visibility restoration allowed four completed frames with exactly four input samples and clean shutdown. This was one local Edge context with diagnostic commit/echoed input, not independent multiplayer evidence.
+- The actual Aurora renderer contract passed in muted Chrome, including hidden-window rejection/restoration, subsequent GX drawing, clean shutdown, and 12 yielding frames with GX, ImGui and RmlUi pixel checks.
+- The production browser package instantiated in muted Chrome; all 91 embedded overlay SHA-256 values, startup callback fallback and supported resolution validation passed.
+- Two isolated Chrome contexts on one PC used production automatic Host/link Join, real host-to-guest game asset transfer, verification, readiness and synchronized start. Each prepared 1,345 recorded graphics pipelines. The initial observations reached frames 123 and 122; deliberate transport closure then triggered signed automatic recovery, with 91 matching completed input/checkpoint/RNG polls and both peers subsequently at frame 226. There were no page errors. The captured nonfatal diagnostics concerned ignored adapter power preference, successful heap growth and deprecated ScriptProcessorNode audio.
+- The browser regression suite passed 405 tests. Publication checks are run independently for this export.
 
-## 2026-10-24 d1e9 shader-readiness follow-up
+These results verify bounded same-PC startup and recovery. They do not verify a complete match, physical two-PC gameplay, cross-network availability or phone support on this candidate. A physical retry remains pending. A previous controlled-runtime probe failed with a cleanup error that masked its original exception; the independent live physical-host console established the actual renderer abort.
 
-The private d1e9 runtime candidate with the 1,355-definition observed seed passed same-PC automatic Native Host plus three actual Edge guests: all 1,345 graphics pipelines prepared with zero queued, ten UI records matched in the seed receipt, 130 initial matching polls, and 90 recovery polls in 4.95 seconds. Native exited 0 with no errors. A test-only typed-count helper fixed a false assertion without changing game code. Local evidence is outputs/validation/shader-seed-d1e9-four-peer-20261024.json; no executable/archive was rebuilt. Physical two-PC and full scene coverage remain open.
-Exact runtime build ID for this follow-up: d1e9a1c0f511914a8dc50a18cbb49948dc15d1ae2025dce65b60db5fc45ff356.
+## Shader and retained Windows scope
 
+The bundled observed cache contains 1,345 graphics definitions and ten UI definitions. This is preparation of known pipelines, not complete scene coverage. The earlier Windows/native Host and Join, mixed five-turn and non-Story minigame evidence remains scoped to its recorded older builds. This browser correction does not establish fresh native startup, native multiplayer or native full-match acceptance.
 
-## 2026-10-25 daily status
+## Remaining acceptance work
 
-No new source changes, builds, or validation runs are recorded since the 2026-10-24 d1e9 shader-readiness update above. The gameplay goal is paused while the user prepares to use a second computer; physical two-PC verification therefore remains pending. No new executable or archive is published. The existing same-PC shader preparation/start/reconnect result remains scoped evidence and does not establish physical-device play, full-match completion, or full shader coverage.
-
-
-## 2026-10-26: browser graphics startup diagnostics
-
-Current source adds a WebGPU adapter check before starting Aurora, actionable no-adapter messages, and bounded startup error details. A diagnostic regression uses an example address; no private connection details are published. The unchanged measured runtime underlying the earlier tests is `d1e9a1c0f511914a8dc50a18cbb49948dc15d1ae2025dce65b60db5fc45ff356`; the JavaScript changes are newer than the downloadable archives.
-
-Today, JavaScript syntax checks and 26 focused browser-platform, preparation-error, publication-boundary and package-staging tests passed. The earlier development browser suite reported 405 passing cases. These are software checks; no successful physical-device gameplay retry or newly verified executable/archive is claimed.
-
-The two-PC LAN attempt reached a complete guest asset download, then failed during graphics startup. Guest diagnostics showed a secure context and an exposed WebGPU API, but adapter creation failed. Edge reported repeated graphics-process crashes and disabled GPU features even with graphics acceleration enabled. Recovery after restarting the guest PC remains unverified. This is an open compatibility/startup failure.
-
-Existing prerelease archives and checksums are preserved. No new binary release, public hosting or WAN test is performed by this daily update. Physical two-PC start/gameplay/reconnect, a live 60-second interruption, full shader scene coverage, controller/audio hardware checks, clean-machine reliability and final ranking visual review remain open. Story Mode remains excluded; whole-project completion is not established.
+Physical two-PC start/gameplay/reconnect; an actual wall-clock 60-second interruption; current-build complete-match and final-ranking visual review; complete shader scene coverage; physical controllers, Bluetooth/touch phone use and speaker layouts; clean-machine/native-tuner reliability; and Internet/mobile-cellular hosting remain open. Public hosting and WAN tests remain deferred. The earlier Microsoft malware-review submission has no newly verified final analyst determination in this update. No whole-project completion percentage or finished-product claim is made.

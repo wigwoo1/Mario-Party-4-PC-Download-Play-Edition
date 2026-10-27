@@ -1,8 +1,8 @@
 {
   "version": 1,
   "repository": "https://github.com/wigwoo1/Mario-Party-4-PC-Download-Play-Edition",
-  "buildId": "d1e9a1c0f511914a8dc50a18cbb49948dc15d1ae2025dce65b60db5fc45ff356",
-  "sourceSnapshotSha256": "fb33fd661dff3019389c3c9629f8b1c51787b269cd14c9f8bf9d7d89652e83f2",
+  "buildId": "b8f41066762b0c9ae0ade7fdfd0b0a83ed6061557f615f237844ea437d7ce51d",
+  "sourceSnapshotSha256": "e179f6815288fa802d3c6a235785d88ff40680a10614c599bca708835a5025d7",
   "upstream": {
     "url": "https://github.com/mariopartyrd/partyboard.git",
     "baseCommit": "f38304ebd13b09a15a80db7d7d015bf3fc387c5d"
@@ -3650,8 +3650,8 @@
     },
     {
       "path": "extern/aurora/lib/aurora.cpp",
-      "bytes": 16718,
-      "sha256": "97d551bac27bb8c1c8fb1111681ea39fbb2138ce726a0aa2846e2f2a3f9134e7"
+      "bytes": 17630,
+      "sha256": "58ada6455d0e53103229f878bfe9cbc21347b887fc799dfe2a882ac5a9bb5cf5"
     },
     {
       "path": "extern/aurora/lib/card/BlockAllocationTable.cpp",
@@ -4430,8 +4430,8 @@
     },
     {
       "path": "extern/aurora/lib/window.cpp",
-      "bytes": 18280,
-      "sha256": "c93bca082ae7d526128d31ef690a37b9343538824136078002ec062e0f7e66d0"
+      "bytes": 18447,
+      "sha256": "fad61edbed58a1d0edbd1825c49f66c32f024db96ea633af93e9f92e75ba56f9"
     },
     {
       "path": "extern/aurora/lib/window.hpp",
@@ -5427,6 +5427,11 @@
       "path": "include/port/dolassets.h",
       "bytes": 4562,
       "sha256": "6eb0ce6d3c372bdd5ae7bf34e38c204bc1dc6d895f98857f2ff73c04e379d24f"
+    },
+    {
+      "path": "include/port/frame_begin_gate.h",
+      "bytes": 699,
+      "sha256": "732626a0e2e91bc5b008574a33d486cf5f672d3d947604db96cbc09c4a664886"
     },
     {
       "path": "include/port/guest_input_bridge.hpp",
@@ -9445,8 +9450,8 @@
     },
     {
       "path": "src/game/main.c",
-      "bytes": 26216,
-      "sha256": "12f89b4587b13817bbdc008ebf712dd89bb961ac5298fced994d51ab9db479d0"
+      "bytes": 26478,
+      "sha256": "8f51818e3cc18fa2e3f953f8b77e4adba028e15aceb97c9bb0474946a04205d8"
     },
     {
       "path": "src/game/malloc.c",
@@ -12040,8 +12045,8 @@
     },
     {
       "path": "STATUS.md",
-      "bytes": 4711,
-      "sha256": "dbab18bbb3c1bdeabef3b786c87e275ecc985dc4b7c5b865810ffb089f10f3de"
+      "bytes": 4677,
+      "sha256": "af9bc5bb0ddb52b2c1dc144a9a56104473a8a4250a5a4b3d2a9b9e5139a49862"
     },
     {
       "path": "tools/__init__.py",
@@ -13189,6 +13194,11 @@
       "sha256": "3b18dce34e17f840e7850199d18fc609a12b2d9e2124172756e42f9a22a8e135"
     },
     {
+      "path": "tools/test_frame_begin_gate.c",
+      "bytes": 1566,
+      "sha256": "041e88a85bf95907815d59b147e9005d818534a49db9e1f59fd97da682bc60ae"
+    },
+    {
       "path": "tools/test_gcn_rgba8_converter_bounds.py",
       "bytes": 3889,
       "sha256": "15ada7d7f2cde26f1bde38c0324a18733331f79d26bf16fd5a0a4d6b2a3fc153"
@@ -13615,8 +13625,8 @@
     },
     {
       "path": "tools/test_wasm_aurora.cpp",
-      "bytes": 12712,
-      "sha256": "dcccaddd48c376988f23d96855e40871ebd324d0d15a86954f97c80326aae440"
+      "bytes": 14071,
+      "sha256": "89f08f9466c98d664cf5bcd6dd973c0d44c6806ff71b5b8996971f79c7070131"
     },
     {
       "path": "tools/test_wasm_bind_group_lifetime.cpp",
@@ -13840,8 +13850,8 @@
     },
     {
       "path": "tools/test-wasm-browser.cjs",
-      "bytes": 111738,
-      "sha256": "55de1cd3b02115294301a348a22455cd16f4f802e0082bead1c7a9a17aa3dca3"
+      "bytes": 111946,
+      "sha256": "0b8e5c121fa5f46c6e9b59c42de4aac063386505b667373fa959b7c1920980c8"
     },
     {
       "path": "tools/test-wasm-coroutine.ps1",
@@ -14000,8 +14010,8 @@
     },
     {
       "path": "web/app.mjs",
-      "bytes": 88895,
-      "sha256": "b30af07aa14af7ddac063cfef38b78ed6472e5b22f6b20f44c2a4c0b9b8b4aaf"
+      "bytes": 89258,
+      "sha256": "2ccf0ad07f9997175db62dae8a6261ffb6fc5c99a690a5ba3c94ead035acf6da"
     },
     {
       "path": "web/async-blob-fs.mjs",
@@ -14035,8 +14045,8 @@
     },
     {
       "path": "web/automatic-lobby-browser-test.cjs",
-      "bytes": 11298,
-      "sha256": "23debd14afe6ede5d288d6e95b511bec3a0ad3d41fee0a82a6bffcb2d45f4198"
+      "bytes": 11398,
+      "sha256": "d67ab196ee3c6f36d36a8c59636a4e6d302ba01fd135b84f8240972e72854880"
     },
     {
       "path": "web/automatic-lobby-ui-browser-test.cjs",
@@ -14880,8 +14890,8 @@
     },
     {
       "path": "web/session-runtime-browser-test.cjs",
-      "bytes": 34443,
-      "sha256": "8b5fd3254a07c83796ef2a6cf07296cdf92c59ffd1c54a9ca4cda226883bc033"
+      "bytes": 36009,
+      "sha256": "02a75b5108be74c717d5624832edc12729bdc383c10915ae2b78b12d4a4f2994"
     },
     {
       "path": "web/session-runtime.mjs",

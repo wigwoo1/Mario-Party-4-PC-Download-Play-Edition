@@ -36,6 +36,7 @@ SHARED_SYM void PartyBoardTraceScrollIntegrity(const char *phase);
 #include "port/session_checkpoint.h"
 #include "port/dolassets.h"
 #include "port/ui.h"
+#include "port/frame_begin_gate.h"
 #include "aurora/dvd.h"
 #include <aurora/aurora.h>
 #include <aurora/event.h>
@@ -159,6 +160,38 @@ PARTYBOARD_BROWSER_API int PartyBoard_OnlineMenuRequest(int action)
 PARTYBOARD_BROWSER_API int PartyBoard_GameLifecyclePhase(void) { return partyBoardEnginePhase; }
 static bool partyBoardWindowExitRequested;
 int PartyBoard_GameWindowExitRequested(void) { return partyBoardWindowExitRequested ? 1 : 0; }
+static int PartyBoardPumpFrameEvents(void)
+{
+    const AuroraEvent *event = aurora_update();
+    while (event != NULL && event->type != AURORA_NONE) {
+        if (event->type == AURORA_EXIT) {
+            partyBoardWindowExitRequested = true;
+            return 0;
+        }
+        if (event->type == AURORA_SDL_EVENT) {
+            ui_handle_sdl_event(&event->sdl);
+            if (event->sdl.type == SDL_EVENT_WINDOW_FOCUS_LOST) partyBoardTurboHeld = FALSE;
+            if (partyboard_settings_enableTurboKeybind()) {
+                if (event->sdl.type == SDL_EVENT_KEY_DOWN && event->sdl.key.scancode == SDL_SCANCODE_TAB)
+                    partyBoardTurboHeld = TRUE;
+                else if (event->sdl.type == SDL_EVENT_KEY_UP && event->sdl.key.scancode == SDL_SCANCODE_TAB)
+                    partyBoardTurboHeld = FALSE;
+            }
+        }
+        ++event;
+    }
+    return 1;
+}
+static int PartyBoardFrameRunning(void) { return PartyBoard_IsRunning; }
+static int PartyBoardTryBeginFrame(void) { return aurora_begin_frame(); }
+static void PartyBoardWaitForSurface(void)
+{
+#ifdef __EMSCRIPTEN__
+    emscripten_sleep(16);
+#else
+    SDL_Delay(16);
+#endif
+}
 static bool partyBoardStartClockAligned;
 static bool partyBoardSessionSeedConfigured;
 static bool partyBoardStateDiagnosticsEnabled;
@@ -335,34 +368,7 @@ static void PartyBoard_GameRun(void)
         PartyBoardObserveFrameStage(0, GlobalCounter); /* events */
 #endif
 #ifdef TARGET_PC
-        const AuroraEvent *event = aurora_update();
-        bool exiting = false;
-        while (event != NULL && event->type != AURORA_NONE) {
-            if (event->type == AURORA_EXIT) {
-                partyBoardWindowExitRequested = true;
-                exiting = true;
-                break;
-            }
-            if (event->type == AURORA_SDL_EVENT) {
-                ui_handle_sdl_event(&event->sdl);
-                if (event->sdl.type == SDL_EVENT_WINDOW_FOCUS_LOST) partyBoardTurboHeld = FALSE;
-                if (partyboard_settings_enableTurboKeybind()) {
-                    if (event->sdl.type == SDL_EVENT_KEY_DOWN) {
-                        if (event->sdl.key.scancode == SDL_SCANCODE_TAB) {
-                            partyBoardTurboHeld = TRUE;
-                        }
-                    } else if (event->sdl.type == SDL_EVENT_KEY_UP) {
-                        if (event->sdl.key.scancode == SDL_SCANCODE_TAB) {
-                            partyBoardTurboHeld = FALSE;
-                        }
-                    }
-                }
-            }
-            ++event;
-        }
-        if (exiting) {
-            break;
-        }
+        if (!PartyBoardPumpFrameEvents()) break;
 #endif
         retrace = VIGetRetraceCount();
         if (HuSoftResetButtonCheck() != 0 || HuDvdErrWait != 0) {
@@ -381,12 +387,13 @@ static void PartyBoard_GameRun(void)
         // Native online exchange must complete before any simulation/render work.
         if (!HuPadReadOnlineFrame()) break;
 #endif
+#ifdef TARGET_PC
+        if (!PartyBoardWaitForRenderFrame(PartyBoardFrameRunning, PartyBoardPumpFrameEvents,
+                                         PartyBoardTryBeginFrame, PartyBoardWaitForSurface)) break;
+#endif
         HuPerfZero();
 
         HuPerfBegin(2);
-#ifdef TARGET_PC
-        aurora_begin_frame();
-#endif
 #ifdef __EMSCRIPTEN__
         frameTimes[3] = emscripten_get_now();
         PartyBoardObserveFrameStage(3, GlobalCounter); /* simulation */

@@ -1086,6 +1086,7 @@ const server=http.createServer((req,res)=>{
     if(process.argv[3]==='aurora') {
       assert.ok(result.output.some(line=>line.startsWith('Aurora initialization passed:')), JSON.stringify(result));
       assert.ok(result.output.some(line=>line.startsWith('Aurora frames passed:')), JSON.stringify(result));
+      assert.ok(result.output.some(line=>line.startsWith('Aurora hidden surface passed:')), JSON.stringify(result));
       assert.ok(result.output.some(line=>line.startsWith('Aurora pixels passed:')), JSON.stringify(result));
       assert.ok(result.output.some(line=>line.startsWith('Aurora GX passed:')), JSON.stringify(result));
       assert.ok(result.output.some(line=>line.startsWith('Aurora texture passed:')), JSON.stringify(result));
@@ -1097,7 +1098,7 @@ const server=http.createServer((req,res)=>{
       assert.ok(result.output.some(line=>line.startsWith('Aurora retrace passed:')), JSON.stringify(result));
       assert.ok(result.output.some(line=>line.startsWith('Aurora menu passed:')), JSON.stringify(result));
       assert.ok(result.output.some(line=>line.startsWith('Aurora document passed:')), JSON.stringify(result));
-      console.log('PASS: Edge initialized and shut down the actual Aurora runtime.');
+      console.log('PASS: '+(process.env.PARTYBOARD_TEST_BROWSER_CHANNEL||'msedge')+' initialized and shut down the actual Aurora runtime, including hidden-surface recovery.');
     } else if(externalEngine) {
       assert.ok(result.output.some(line=>line.startsWith('External engine lifecycle passed:')),JSON.stringify(result));
       assert.ok(result.errors.some(line=>externalStop?(inputCrossPeer?line===`Input trace: closed after ${inputCrossPolls+4+(inputCrossLoss?64:0)} samples`:/^Input trace: closed after [4-7] samples$/.test(line)):line===`Input trace: closed after ${sampleLimit} samples`),JSON.stringify(result));

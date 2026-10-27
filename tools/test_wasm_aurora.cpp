@@ -17,11 +17,21 @@ extern "C" void byteswap_s32(int32_t*);
 extern "C" void byteswap_float(float*);
 extern "C" void frame_limiter(void);
 #include <emscripten.h>
+#include "../include/port/frame_begin_gate.h"
+#include <SDL3/SDL.h>
 #include <imgui.h>
 #include <dolphin/gx.h>
 #include <dolphin/card.h>
 #include <dolphin/vi.h>
 static unsigned retraceCallbacks;
+static SDL_Window* surfaceGateWindow;
+static bool surfaceGateRestored;
+static int surface_gate_running() { return 1; }
+static int surface_gate_pump() { aurora_update(); return 1; }
+static int surface_gate_begin() { return aurora_begin_frame(); }
+static void surface_gate_wait() {
+    emscripten_sleep(20);
+}
 static void test_retrace_callback(u32 count) {
     assert(count == VIGetRetraceCount());
     ++retraceCallbacks;
@@ -211,6 +221,24 @@ int main(int argc,char **argv) {
     puts("Aurora RmlUi passed: live document rendered an opaque magenta rectangle.");
     puts("Aurora text passed: FreeType font produced white glyph pixels over a black text panel.");
     puts("Aurora frames passed: 12 yielding frames submitted with ImGui geometry.");
+    int windowCount=0;
+    auto windows=SDL_GetWindows(&windowCount);
+    assert(windows && windowCount==1);
+    surfaceGateWindow=windows[0];SDL_free(windows);
+    assert(SDL_HideWindow(surfaceGateWindow));
+    assert(!aurora_begin_frame());
+    // SDL's paused event pump may wait for an external window event. Restore
+    // independently, like the user returning to the tab, rather than waiting
+    // for the render gate's next retry before sending that event.
+    emscripten_async_call([](void*) {
+        assert(SDL_ShowWindow(surfaceGateWindow));surfaceGateRestored=true;
+    },nullptr,60);
+    assert(PartyBoardWaitForRenderFrame(surface_gate_running,surface_gate_pump,surface_gate_begin,surface_gate_wait));
+    assert(surfaceGateRestored);
+    draw_gx_quad();
+    aurora_end_frame();
+    emscripten_sleep(20);
+    puts("Aurora hidden surface passed: rejected hidden frame waited for external visibility restore, then GX drawing resumed without an inactive-frame abort.");
     aurora_shutdown();
     const u32 retraceStart = VIGetRetraceCount();
     assert(VISetPostRetraceCallback(test_retrace_callback) == nullptr);

@@ -53,10 +53,13 @@ const server=http.createServer((req,res)=>{
     if(reconnect&&!recoveryDeadline)throw Error('Reconnect fixture requires recovery mode');
     if(recoveryDeadline&&!ownership)throw Error('Recovery fixture requires owned input mode');
     const inputExchange=ownership||process.env.PARTYBOARD_TEST_SESSION_INPUT==='1';
+    const hiddenSurface=process.env.PARTYBOARD_TEST_SESSION_HIDDEN_SURFACE==='1';
+    if(hiddenSurface)page.on('console',message=>{if(/Hidden surface runtime:/.test(message.text()))console.log(message.text());});
     let expectedFrames=inputExchange?4:5;
     if(mapping&&(!platform||!ownership))throw Error('Keyboard mapping fixture requires reusable platform and owned input');
     if(ownership&&!rtcCommit)throw Error('Ownership fixture requires RTC commit mode');
     const runCommit=rtcCommit||process.env.PARTYBOARD_TEST_SESSION_COMMIT==='1';
+    if(hiddenSurface&&(!platform||!runCommit||!inputExchange))throw Error('Hidden-surface fixture requires committed platform execution with online input');
     const neutralProbe=process.env.PARTYBOARD_TEST_NEUTRAL_FRAME_PROBE==='1';
     const probeButtons=process.env.PARTYBOARD_TEST_PROBE_BUTTONS==='1';
     if(probeButtons&&!neutralProbe)throw Error('Button probe requires bounded logical-port probe');
@@ -71,7 +74,7 @@ const server=http.createServer((req,res)=>{
     if(platform&&runCommit&&!inputExchange)throw Error('Reusable platform bounded execution requires owned or echo input');
     if((cancellation&&runCommit)||(cancelRenderer&&cancelInitialize))throw Error('Choose one cancellation or committed execution mode');
     const resolution=process.env.PARTYBOARD_TEST_GUEST_RESOLUTION?JSON.parse(process.env.PARTYBOARD_TEST_GUEST_RESOLUTION):undefined;
-    const execution=page.evaluate(async({resolution,mapping,customKeyboard,extendedKeyboard,glyphLifetime,standalone,platform,runCommit,rtcCommit,cancelRenderer,cancelInitialize,cancellation,inputExchange,ownership,recoveryDeadline,reconnect,neutralProbe,expectedFrames,probeButtons})=>{
+    const execution=page.evaluate(async({resolution,mapping,customKeyboard,extendedKeyboard,glyphLifetime,standalone,platform,runCommit,rtcCommit,cancelRenderer,cancelInitialize,cancellation,inputExchange,ownership,recoveryDeadline,reconnect,neutralProbe,expectedFrames,probeButtons,hiddenSurface})=>{
       const {prepare,browserStore,CHUNK}=await import('/transfer.mjs');
       const {browserPlatformCallbacks}=await import('/browser-platform.mjs');
       const platformCallbacks=browserPlatformCallbacks({resolution});
@@ -101,7 +104,7 @@ const server=http.createServer((req,res)=>{
       const artifacts=await loadBrowserRuntimePackage({baseURL:location.origin+'/'});
       const file=document.querySelector('input').files[0],asset=await prepare(file),store=await browserStore();
       await globalThis.partyBoardDiagnosticStage('local-assets-hashed');
-      let runtime,module,buildId,inputSamples=0,terminalInput,terminalUnchanged=false;
+      let runtime,module,buildId,inputSamples=0,terminalInput,terminalUnchanged=false,hiddenReport;
       const frameCount=()=>platform?module._PartyBoard_GameFrameCount():module._PartyBoardTestExternalFrames();
       const verifyTerminal=()=>{
         if(!terminalInput)return;
@@ -117,10 +120,22 @@ const server=http.createServer((req,res)=>{
         await globalThis.partyBoardDiagnosticStage('local-assets-stored');
         if(!platform){globalThis.testExternalEngine=true;globalThis.testSampleLimit=8;}
         runtime=await prepareFingerprintedSessionRuntime(store,asset.manifest.id,artifacts,{
-            runtimeOptions:{canvas:document.getElementById('canvas'),print:line=>{output.push(line);if(globalThis.testTraceState&&(line.includes('State snapshot:')||line.includes('Global state snapshot:')||line.includes('Prepared engine RNG:')))console.log(line);},printErr:line=>output.push(line)},
+            runtimeOptions:{canvas:document.getElementById('canvas'),print:line=>{output.push(line);if(hiddenSurface&&/Cannot begin frame|No active frame|abort/i.test(line))console.log('Hidden surface runtime: '+line);if(globalThis.testTraceState&&(line.includes('State snapshot:')||line.includes('Global state snapshot:')||line.includes('Prepared engine RNG:')))console.log(line);},printErr:line=>{output.push(line);if(hiddenSurface)console.log('Hidden surface runtime: '+line);}},
             sessionSeed:1,signal:callerAbort.signal,
             inputExchange:inputExchange?async(input,options)=>{
               const frame=frameCount();
+              if(hiddenSurface&&frame===1&&!hiddenReport){
+                hiddenReport={before:frame,restored:false};
+                // Exercise SDL's real visibility callback between input and
+                // renderer begin, without changing any game state or input.
+                Object.defineProperty(document,'hidden',{configurable:true,value:true});
+                document.dispatchEvent(new Event('visibilitychange'));
+                setTimeout(()=>{
+                  hiddenReport.whileHidden=frameCount();
+                  delete document.hidden;document.dispatchEvent(new Event('visibilitychange'));
+                  hiddenReport.restored=true;
+                },250);
+              }
               if(neutralProbe)probeStates.push({frame,checkpoint:options.checkpoint,frand:options.frand,rand8:options.rand8});
               if(platform&&runCommit&&inputSamples===expectedFrames){terminalInput={frame,...options};return null;}
               inputSamples++;
@@ -326,15 +341,16 @@ const server=http.createServer((req,res)=>{
         const terminalComponents=neutralProbe?[0,1,2,3].map(field=>module._PartyBoard_GameCheckpointComponent(field)):undefined;
         const canvas=document.querySelector('canvas'),renderSize={width:canvas.width,height:canvas.height};
         await Promise.all([runtime.dispose(),runtime.dispose()]);
-        return {glyphLifetime,renderSize,mappedKeyboardPackets,terminalUnchanged,standalone,platform,prepared,buildId,committedFrames,inputSamples,inputSent,inputReceived,recoveryResult,inputFrame:inputQueue?String(inputQueue.status(inputNow()).frame):undefined,inputReleased:module.partyBoardInputExchange===undefined,events,released:runtime.module===undefined&&!module.FS.analyzePath('/assets').exists,
+        return {hiddenReport,glyphLifetime,renderSize,mappedKeyboardPackets,terminalUnchanged,standalone,platform,prepared,buildId,committedFrames,inputSamples,inputSent,inputReceived,recoveryResult,inputFrame:inputQueue?String(inputQueue.status(inputNow()).frame):undefined,inputReleased:module.partyBoardInputExchange===undefined,events,released:runtime.module===undefined&&!module.FS.analyzePath('/assets').exists,
           size:asset.manifest.size,probeStates,terminalComponents,cleanup:events.includes('shutdownCompleted')};
       } finally {if(runtime)await runtime.dispose();store.close();}
-    },{resolution,mapping,customKeyboard,extendedKeyboard,glyphLifetime,standalone,platform,runCommit,rtcCommit,cancelRenderer,cancelInitialize,cancellation,inputExchange,ownership,recoveryDeadline,reconnect,neutralProbe,expectedFrames,probeButtons});
+    },{resolution,mapping,customKeyboard,extendedKeyboard,glyphLifetime,standalone,platform,runCommit,rtcCommit,cancelRenderer,cancelInitialize,cancellation,inputExchange,ownership,recoveryDeadline,reconnect,neutralProbe,expectedFrames,probeButtons,hiddenSurface});
     let diagnosticTimer;
     const result=await Promise.race([execution,new Promise((_,reject)=>{
       diagnosticTimer=setTimeout(()=>reject(Error('Session diagnostic exceeded 10-minute acceptance deadline at '+lastDiagnosticStage)),600000);
     })]).finally(()=>clearTimeout(diagnosticTimer));
     console.log('Session diagnostic result: '+JSON.stringify(result));
+    if(hiddenSurface){assert.deepEqual(result.hiddenReport,{before:1,restored:true,whileHidden:1});console.log('PASS: actual SDL hidden-surface wait kept game frame 1 unchanged, restored visibility and completed the bounded run.');}
     if(resolution&&!cancellation)assert.deepEqual(result.renderSize,resolution,'Selected guest framebuffer size differs');
     if(cancellation) {
       assert.deepEqual(errors,[]);assert.equal(result.cancelled,true);assert.equal(result.frame,0);

@@ -27,7 +27,7 @@ async function verifyLobbyPlaylist(page,peer){
  const deadline=setTimeout(()=>{server.kill();void browser?.close();},preparationTimeout+90000);
  try{
   await new Promise((resolve,reject)=>{server.stdout.once('data',resolve);server.once('error',reject);server.once('exit',code=>reject(Error('Server exited: '+code)));});
-  browser=await chromium.launch({channel:'msedge',headless:true,args:['--mute-audio','--disable-features=WebRtcHideLocalIpsWithMdns']});
+  browser=await chromium.launch({channel:process.env.PARTYBOARD_TEST_BROWSER_CHANNEL||'msedge',headless:true,args:['--mute-audio','--disable-features=WebRtcHideLocalIpsWithMdns']});
   for(let i=0;i<count;i++){
    const context=await browser.newContext();await context.addInitScript(()=>{const Original=RTCPeerConnection;globalThis.testConnections=[];globalThis.RTCPeerConnection=class extends Original{constructor(...args){super(...args);testConnections.push(this);}};});
    const page=await context.newPage();pages.push(page);
@@ -103,7 +103,7 @@ async function verifyLobbyPlaylist(page,peer){
   }
   assert.deepEqual(errors,[]);
   if(process.env.PARTYBOARD_TEST_LOBBY_MUSIC==='1')fs.writeFileSync(path.join(output,'lobby-music-acceptance.json'),JSON.stringify({status:'passed',muted:true,syntheticTransfers:false,lobbyMusic,stopped:lobbyMusicStopped,at:new Date().toISOString()},null,2));
-  fs.writeFileSync(path.join(output,'acceptance.json'),JSON.stringify({status:'passed',peerCount:count,scope:count+' isolated Edge contexts on one PC using real P2P assets, production runtime and UI-only automatic join/preparation/start',reports,inputPlans,running,recovery,lobbyMusic,lobbyMusicStopped,errors,warnings,at:new Date().toISOString()},null,2));
+  fs.writeFileSync(path.join(output,'acceptance.json'),JSON.stringify({status:'passed',peerCount:count,scope:count+' isolated '+(process.env.PARTYBOARD_TEST_BROWSER_CHANNEL||'msedge')+' contexts on one PC using real P2P assets, production runtime and UI-only automatic join/preparation/start',reports,inputPlans,running,recovery,lobbyMusic,lobbyMusicStopped,errors,warnings,at:new Date().toISOString()},null,2));
   console.log('PASS automatic Host/link Join, asset transfer, shader preparation, readiness and one-click synchronized start; all '+count+' peers ran at least 120 frames.');
  }catch(e){const finalStatus=await Promise.all(pages.map(p=>p.locator('#status').textContent().catch(()=> 'unavailable')));fs.writeFileSync(path.join(output,'failure.json'),JSON.stringify({message:e.stack,finalStatus,errors,warnings,snapshots,lobbyMusic},null,2));throw e;}
  finally{

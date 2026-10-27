@@ -446,8 +446,12 @@ export function beginLobbyStartAgreement(){
 }
 function runCommittedLobbyGame(commit,prepared,peer){
   const runtime=lobbyRuntime,input=lobbyGameInput,plan=lobbyInputPlan();
+  // Resume enters Wasm synchronously until its first yield. Expose the canvas
+  // first so SDL can observe its actual visibility during that first frame.
+  $('game-view').hidden=false;$('canvas').focus();music.stop();
   const run=resumeCommittedClientRuntime(commit,prepared,{peer,buildId:lobbyRuntime.buildId,
     snapshot:()=>currentLobbySnapshot,requireOnlineInput:true});
+  let runtimeFailure;
   lobbyRecoveryPlan=plan;
   lobbyCommittedIdentity=structuredClone(commit);
   lobbyHost?.freezeMembership();
@@ -459,10 +463,13 @@ function runCommittedLobbyGame(commit,prepared,peer){
       return bindings.every(binding=>lobbyInputChannels.get(binding.peer)?.readyState==='open');
     },
     dispose:async()=>{releaseLobbyRuntime();await lobbyCleanup;},
-    returnToMenu:async()=>{stop();await lobbyCleanup;$('game-view').hidden=true;status('Online session ended. Return to the lobby to start again.');},
-    error:error=>console.error('Online session recovery',error),
+    returnToMenu:async()=>{stop();await lobbyCleanup;$('game-view').hidden=true;status(runtimeFailure??'Online session ended. Return to the lobby to start again.');},
+    error:error=>{
+      console.error('Online session recovery',error);
+      runtimeFailure??='Online game stopped: '+String(error?.message??error).slice(0,240)+'. Stop the session and rejoin.';
+      status(runtimeFailure);
+    },
   });
-  $('game-view').hidden=false;$('canvas').focus();music.stop();
   $('host').disabled=$('join').disabled=true;
   return {phase:lobbyRuntime.engine.phase};
 }
