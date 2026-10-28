@@ -1,4 +1,4 @@
-# Development status — 2026-10-27
+# Development status — 2026-10-28
 
 This native Windows and browser port remains incomplete. A game disc image is not included. Story Mode is outside the requested test scope. Use the exact build identity in each development prerelease; previous downloads are preserved.
 
@@ -28,3 +28,11 @@ The bundled observed cache contains 1,345 graphics definitions and ten UI defini
 ## Remaining acceptance work
 
 Physical two-PC start/gameplay/reconnect; an actual wall-clock 60-second interruption; current-build complete-match and final-ranking visual review; complete shader scene coverage; physical controllers, Bluetooth/touch phone use and speaker layouts; clean-machine/native-tuner reliability; and Internet/mobile-cellular hosting remain open. Public hosting and WAN tests remain deferred. The earlier Microsoft malware-review submission has no newly verified final analyst determination in this update. No whole-project completion percentage or finished-product claim is made.
+
+## Daily publication check — 2026-10-28
+
+No new compiled build or gameplay acceptance is available in the current project evidence. The October 27 browser-startup development archive remains the current download; its native binaries retain their previously documented source provenance. Today is a source/status refresh, with publication boundary checks rerun; the gameplay tests described above are historical October 27 results, not new runs. Physical two-PC gameplay and reconnect still await a retry. Existing releases are preserved, with no empty replacement release. Overall completion remains unmeasured.
+
+## Daily publication check — 2026-10-28
+
+No new compiled build or gameplay acceptance is available in the current project evidence. The October 27 browser-startup development archive remains the current download; its native binaries retain their previously documented source provenance. Today is a source/status refresh, with publication boundary checks rerun; the gameplay tests described above are historical October 27 results, not new runs. Physical two-PC gameplay and reconnect still await a retry. Existing releases are preserved, with no empty replacement release. Overall completion remains unmeasured.
