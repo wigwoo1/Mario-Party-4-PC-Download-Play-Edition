@@ -1,4 +1,4 @@
-# Development status — 2026-10-29
+# Development status — 2026-10-30
 
 This native Windows and browser port remains incomplete. A game disc image is not included. Story Mode is outside the requested test scope. Use the exact build identity in each development prerelease; previous downloads are preserved.
 
@@ -29,6 +29,14 @@ The bundled observed cache contains 1,345 graphics definitions and ten UI defini
 
 Physical two-PC start/gameplay/reconnect; an actual wall-clock 60-second interruption; current-build complete-match and final-ranking visual review; complete shader scene coverage; physical controllers, Bluetooth/touch phone use and speaker layouts; clean-machine/native-tuner reliability; and Internet/mobile-cellular hosting remain open. Public hosting and WAN tests remain deferred. The earlier Microsoft malware-review submission has no newly verified final analyst determination in this update. No whole-project completion percentage or finished-product claim is made.
 
-## Daily publication check — 2026-10-29
+## Daily publication check — 2026-10-30
 
-No new compiled build or gameplay acceptance is available in the current project evidence. The October 27 browser-startup development archive remains the current download; its native binaries retain their previously documented source provenance. Today is a source/status refresh, with publication boundary checks rerun; the gameplay tests described above are historical October 27 results, not new runs. Physical two-PC gameplay and reconnect still await a retry. Existing releases are preserved, with no empty replacement release. Overall completion remains unmeasured.
+No new compiled build is available. The October 27 browser-startup archive remains current, with its documented retained Windows-binary provenance. Today exports source and updated validation status; existing releases remain preserved.
+
+Fresh same-PC validation used four isolated muted Chrome contexts with production automatic Host/link Join, real asset transfer, 1,345 prepared graphics pipelines per peer, readiness and synchronized startup. Deliberate transport loss recovered automatically with 91 matching completed input/checkpoint/RNG records and no page errors.
+
+A separate four-context browser run used diagnostic transport setup followed by normal game menus and inputs for a five-turn Toad’s Midway Madness match. All five turn transitions retained 30 matching records per peer. It reached awards and settled final rankings after 600 settling polls, with 255 matching common final records. All four ranking images were visually reviewed and agreed on Peach, Luigi, Yoshi, Mario order; keyboard Z and Enter prompts were readable. This is sampled transition/final-state evidence, not a continuous archive of every match poll.
+
+The end-to-end follow-up FAILED: four simulated Skip presses did not leave rankings; the failure image shows the detailed star-results view. The test ended with exit code 1. Interactive menu return is not accepted, and the root cause still needs focused diagnosis. No game-rule or RNG changes were made. A separate model-label observation also needs confirmation of CPU/local ownership before being called a regression.
+
+Physical two-PC gameplay/reconnect, native current-source revalidation, live wall-clock 60-second interruption, complete shader coverage, physical controller/audio and clean-machine checks remain open. WAN/mobile tests remain deferred. No new final Microsoft analyst determination or whole-project completion percentage is claimed. The 405-test browser result above is historical; focused publication checks are rerun for this update.
