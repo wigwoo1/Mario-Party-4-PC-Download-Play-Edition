@@ -1,4 +1,4 @@
-# Development status — 2026-10-30
+# Development status — 2026-10-31
 
 This native Windows and browser port remains incomplete. A game disc image is not included. Story Mode is outside the requested test scope. Use the exact build identity in each development prerelease; previous downloads are preserved.
 
@@ -29,7 +29,7 @@ The bundled observed cache contains 1,345 graphics definitions and ten UI defini
 
 Physical two-PC start/gameplay/reconnect; an actual wall-clock 60-second interruption; current-build complete-match and final-ranking visual review; complete shader scene coverage; physical controllers, Bluetooth/touch phone use and speaker layouts; clean-machine/native-tuner reliability; and Internet/mobile-cellular hosting remain open. Public hosting and WAN tests remain deferred. The earlier Microsoft malware-review submission has no newly verified final analyst determination in this update. No whole-project completion percentage or finished-product claim is made.
 
-## Daily publication check — 2026-10-30
+## Validation recorded — 2026-10-30
 
 No new compiled build is available. The October 27 browser-startup archive remains current, with its documented retained Windows-binary provenance. Today exports source and updated validation status; existing releases remain preserved.
 
@@ -40,3 +40,7 @@ A separate four-context browser run used diagnostic transport setup followed by 
 The end-to-end follow-up FAILED: four simulated Skip presses did not leave rankings; the failure image shows the detailed star-results view. The test ended with exit code 1. Interactive menu return is not accepted, and the root cause still needs focused diagnosis. No game-rule or RNG changes were made. A separate model-label observation also needs confirmation of CPU/local ownership before being called a regression.
 
 Physical two-PC gameplay/reconnect, native current-source revalidation, live wall-clock 60-second interruption, complete shader coverage, physical controller/audio and clean-machine checks remain open. WAN/mobile tests remain deferred. No new final Microsoft analyst determination or whole-project completion percentage is claimed. The 405-test browser result above is historical; focused publication checks are rerun for this update.
+
+## Daily publication check — 2026-10-31
+
+No new source-code correction, compiled build or gameplay acceptance is recorded since the October 30 update. The prior four-browser five-turn results and failed menu-return check remain scoped to that date. Return diagnosis remains open. The October 27 browser-startup development archive and its build-specific native/browser provenance remain unchanged. Today reruns focused publication checks and exports current project and modified dependency source with this status refresh; it does not rerun gameplay or create an empty release. Physical-device, WAN/mobile and other acceptance limits above remain open. Whole-project completion is unmeasured.
