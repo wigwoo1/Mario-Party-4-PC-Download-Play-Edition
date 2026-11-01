@@ -1,4 +1,4 @@
-# Development status — 2026-10-31
+# Development status — 2026-11-01
 
 This native Windows and browser port remains incomplete. A game disc image is not included. Story Mode is outside the requested test scope. Use the exact build identity in each development prerelease; previous downloads are preserved.
 
@@ -41,6 +41,12 @@ The end-to-end follow-up FAILED: four simulated Skip presses did not leave ranki
 
 Physical two-PC gameplay/reconnect, native current-source revalidation, live wall-clock 60-second interruption, complete shader coverage, physical controller/audio and clean-machine checks remain open. WAN/mobile tests remain deferred. No new final Microsoft analyst determination or whole-project completion percentage is claimed. The 405-test browser result above is historical; focused publication checks are rerun for this update.
 
-## Daily publication check — 2026-10-31
+## Daily publication check — 2026-11-01
 
-No new source-code correction, compiled build or gameplay acceptance is recorded since the October 30 update. The prior four-browser five-turn results and failed menu-return check remain scoped to that date. Return diagnosis remains open. The October 27 browser-startup development archive and its build-specific native/browser provenance remain unchanged. Today reruns focused publication checks and exports current project and modified dependency source with this status refresh; it does not rerun gameplay or create an empty release. Physical-device, WAN/mobile and other acceptance limits above remain open. Whole-project completion is unmeasured.
+The gameplay goal is paused at the user’s request. Its latest live retry was stopped during preparation and has no new return-to-menu result. This separate scheduled source publication does not resume gameplay testing. The October 30 five-turn rankings remain verified within their recorded scope; that run’s menu-return check failed.
+
+Current test source now handles the observed detailed-results path: original result.c accepts B/Back in details, while Start/Skip is handled on the summary. The revised test driver focuses the game canvas, sends Back then Skip for three observed game frames each, allows 90 frames for the Back transition, releases keys on observation failure and retains a four-cycle limit. This changes test automation only; no game rule, RNG, executable or browser binary was changed. The exact trigger that opened the earlier detail view remains unproven.
+
+Twelve focused driver/ranking/progress checks passed before the pause; publication reruns them with its boundary/platform/error checks. Offline fixtures cannot prove live menu return or rendered correctness. The added negative-limit test initially exposed a fake page-evaluation callback error; the fixture was corrected and all twelve checks passed. The live follow-up was cancelled on pause, not counted as another game failure.
+
+No new compiled build or binary release is produced. The October 27 development archive, its exact build identity and Windows-binary provenance remain current. Physical two-PC gameplay/reconnect, current native-source revalidation, a live wall-clock 60-second interruption, full shader coverage, device/audio/clean-machine checks and WAN/mobile acceptance remain open. Whole-project completion is unmeasured.

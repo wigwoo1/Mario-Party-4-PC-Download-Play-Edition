@@ -1,5 +1,16 @@
 'use strict';
 const fs=require('node:fs'),path=require('node:path'),assert=require('node:assert/strict');
+async function pressPostRankingAction(pages,key){
+ // Use emulated frames: a short wall-clock tap can miss a busy online poll.
+ await Promise.all(pages.map(async page=>{
+  await page.locator('#canvas').focus();
+  await page.keyboard.down(key);
+  try{
+   const frame=await page.evaluate(()=>partyBoardApp.lobbyGameState().frame);
+   await page.waitForFunction(before=>partyBoardApp.lobbyGameState()?.frame>=before+3,frame,{timeout:120000});
+  }finally{await page.keyboard.up(key);}
+ }));
+}
 // Ordinary input only; no scene selection, state injection or save overrides.
 async function driveBrowserPostRanking({pages,inventory,outputDirectory,timeoutMs=180000,verifyInteractiveMenu=false}){
  const find=name=>inventory.overlays.find(row=>row.name.toLowerCase()===name)?.overlay;
@@ -8,7 +19,7 @@ async function driveBrowserPostRanking({pages,inventory,outputDirectory,timeoutM
  const read=()=>Promise.all(pages.map(page=>page.evaluate(()=>partyBoardApp.lobbyGameState())));
  const initial=await read();
  assert.ok(initial.every(state=>state?.input.state==='Running'&&state.progress.overlay===awards&&state.progress.event===1),'Every peer must begin on normal final rankings');
- const history=[],inputs=[],start=Date.now();let lastInputFrame=-Infinity;
+ const history=[],inputs=[],start=Date.now();let lastInputFrame=-Infinity,skipAttempts=0;
  const receipts=pages.map(()=>[]),handlers=pages.map((page,index)=>{
   const handler=message=>{if(message.text().includes('Online Multiplayer entry: available'))receipts[index].push(message.text());};
   page.on('console',handler);return handler;
@@ -46,17 +57,28 @@ async function driveBrowserPostRanking({pages,inventory,outputDirectory,timeoutM
      for(const [index,page]of pages.entries())await page.locator('#canvas').screenshot({path:path.join(outputDirectory,'browser-post-ranking-'+label+'-peer'+index+'.png')});
     }
    }
-   const result={status:'execution passed; visual inspection required',scope:'Normal Start/Skip inputs leave final standings and reach a known menu overlay; interactive navigation requires separate image review',initial:initial.map(state=>({frame:state.frame,progress:state.progress})),settled:settled.map(state=>({frame:state.frame,progress:state.progress})),inputs,interactiveMenuExecutionCompleted:verifyInteractiveMenu,modeSelectionReceipts:receipts,elapsedMs:Date.now()-start,renderedMenuReviewed:false,noCardScreenVisuallyVerified:false};
+   const result={status:'execution passed; visual inspection required',scope:'Normal B/Back and Start/Skip inputs leave final standings or detailed results and reach a known menu overlay; interactive navigation requires separate image review',initial:initial.map(state=>({frame:state.frame,progress:state.progress})),settled:settled.map(state=>({frame:state.frame,progress:state.progress})),inputs,interactiveMenuExecutionCompleted:verifyInteractiveMenu,modeSelectionReceipts:receipts,elapsedMs:Date.now()-start,renderedMenuReviewed:false,noCardScreenVisuallyVerified:false};
    fs.writeFileSync(path.join(outputDirectory,'browser-post-ranking-return.json'),JSON.stringify(result,null,2)+'\n',{flag:'wx'});return result;
   }
   if(states.every(state=>state.progress.overlay===awards)&&states[0].frame>=lastInputFrame+180){
-   assert.ok(inputs.length<4,'Four ordinary Skip attempts did not leave rankings');
-   inputs.push({key:'Enter',frames:states.map(state=>state.frame)});lastInputFrame=states[0].frame;
-   await Promise.all(pages.map(page=>page.keyboard.press('Enter',{delay:120})));
+   assert.ok(skipAttempts++<4,'Four ordinary Back/Skip attempts did not leave rankings');
+   // result.c: detailed results only accepts B to return; Start is ignored.
+   // B is harmless on the summary. Normalize either observed screen before
+   // Skip, allowing its wipe to finish without changing game state directly.
+   inputs.push({key:'x',purpose:'leave detailed results if open',frames:states.map(state=>state.frame)});
+   await pressPostRankingAction(pages,'x');
+   const backed=await read();
+   await Promise.all(pages.map((page,index)=>page.waitForFunction(frame=>partyBoardApp.lobbyGameState()?.frame>=frame+90,backed[index].frame,{timeout:120000})));
+   const beforeSkip=await read();
+   assert.ok(beforeSkip.every(state=>state?.input.state==='Running'),'Back must retain running input');
+   if(beforeSkip.every(state=>state.progress.overlay===awards)){
+    inputs.push({key:'Enter',purpose:'skip final standings',frames:beforeSkip.map(state=>state.frame)});lastInputFrame=beforeSkip[0].frame;
+    await pressPostRankingAction(pages,'Enter');
+   }
   }
   await new Promise(resolve=>setTimeout(resolve,500));
  }
  throw Error('Normal post-ranking return did not reach a known menu within its bounded lifetime');
  }finally{for(const [index,page]of pages.entries())page.off('console',handlers[index]);}
 }
-module.exports={driveBrowserPostRanking};
+module.exports={driveBrowserPostRanking,pressPostRankingAction};
