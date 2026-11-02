@@ -754,8 +754,8 @@ void ObjectSetup(void)
      // TODO PC
      OSReport(">>>>>>>>MSM_SE_SEL_01 %d\n", msmSeGetEntryID(2092, seNo));
      OSReport(">>>>>>>>SE Num %d\n", msmSeGetNumPlay(0));
-     HuAudSStreamPlay(20);
 #endif
+     HuAudSStreamPlay(20);
      WipeCreate(WIPE_MODE_IN, WIPE_TYPE_NORMAL, 30);
      while (WipeStatGet()) {
          HuPrcVSleep();

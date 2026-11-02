@@ -1,6 +1,6 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
-import {displayControls} from './display-controls.mjs';
+import {displayControls,exposeGameSurface} from './display-controls.mjs';
 
 class Element{
  constructor(){this.handlers={};this.options=[];this.dataset={};this.children=[];this.hidden=false;this.value='640x480';this.disabled=false;this.attributes={};
@@ -31,9 +31,23 @@ test('resolution and aspect are restored, saved locally, and frozen during runti
  const f=fixture();assert.equal(f.select.value,'1280x960');assert.deepEqual(f.controls.resolution(),{width:1280,height:960});
  f.select.value='960x720';f.select.handlers.change();assert.equal(f.values.get('partyboard-game-resolution'),'960x720');
  const ratio=f.container.querySelector('[data-display-aspect]');ratio.value='16:9';ratio.handlers.change();
+ assert.equal(f.canvas.style.getPropertyValue('--game-aspect'),'16 / 9');
  assert.equal(f.values.get('partyboard-game-aspect'),'16:9');assert.deepEqual(f.controls.resolution(),{width:960,height:540});
  f.controls.setLocked(true);assert.equal(f.select.disabled,true);assert.equal(ratio.disabled,true);
  f.controls.setLocked(false);assert.equal(f.select.disabled,false);assert.equal(ratio.disabled,false);
+});
+
+test('committed start reveals the canvas before SDL resize and focus',()=>{
+ const calls=[],view={hidden:true,ownerDocument:{defaultView:{Event,dispatchEvent(event){
+  assert.equal(view.hidden,false);assert.equal(event.type,'resize');calls.push('resize');
+ }}},querySelector(){return {focus(){assert.equal(view.hidden,false);calls.push('focus');}};}};
+ exposeGameSurface(view);assert.deepEqual(calls,['resize','focus']);
+});
+
+test('committed start preserves an already valid selected backing resolution',()=>{
+ const canvas={width:1920,height:1080,focus(){}},view={hidden:true,querySelector:()=>canvas,
+  ownerDocument:{defaultView:{dispatchEvent(){throw Error('Unnecessary resize would replace the selected backing size');}}}};
+ exposeGameSurface(view);assert.equal(view.hidden,false);assert.deepEqual([canvas.width,canvas.height],[1920,1080]);
 });
 
 test('full-screen button fills the available screen at the chosen ratio and exits cleanly',async()=>{

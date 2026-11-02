@@ -3,6 +3,11 @@
 <title>Party Board · Peer transfer</title>
 <style>
 [hidden]{display:none!important}
+/* SDL reads CSS dimensions on browser resize, including while preparing.
+   Keep the hidden game surface measurable without showing it or taking space. */
+#game-view[hidden]{display:block!important;position:fixed;left:-10000px;top:0;width:640px;visibility:hidden;pointer-events:none}
+#game-view[hidden] #canvas{width:var(--game-preparation-width,640px)!important;max-width:none!important}
+#canvas{height:auto!important;aspect-ratio:var(--game-aspect,4 / 3)}
 body{margin:0;background:#10182a;color:#edf2ff;font:16px system-ui;line-height:1.55}main{max-width:900px;margin:45px auto;padding:0 24px}h1{font-size:36px;margin-bottom:6px}p{color:#bac9e3}section{background:#19253d;padding:22px;border:1px solid #344365;border-radius:16px;margin:20px 0}h2{margin:0 0 12px;font-size:22px}label{display:block;margin:12px 0}button{background:#b9dc65;color:#152000;border:0;border-radius:8px;padding:12px 18px;font-weight:700;cursor:pointer;margin:8px 8px 8px 0}button:disabled{opacity:.4;cursor:default}input,textarea{box-sizing:border-box;background:#0d1526;color:#edf2ff;border:1px solid #536381;border-radius:6px;padding:10px;max-width:100%}textarea{width:100%;height:100px}progress{width:100%;height:22px;accent-color:#b9dc65}.note{color:#edcd8d}#status{white-space:pre-wrap}small{color:#bac9e3}
 </style>
 <main><h1>Party Board</h1><p>Host a game or join your friends. Game assets transfer privately between players.</p>

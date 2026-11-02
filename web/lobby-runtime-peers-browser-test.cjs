@@ -66,6 +66,20 @@ async function observe(page,evaluate){
  const errors=[],lifecycleEvents=[];const recordLifecycle=(event)=>{lifecycleEvents.push({...event,at:Date.now()});if(lifecycleEvents.length>500)lifecycleEvents.shift();fs.writeFileSync(path.join(outputDirectory,'browser-production-peer-lifecycle-events.json'),JSON.stringify(lifecycleEvents,null,2)+'\n');};
  browser.on('disconnected',()=>recordLifecycle({scope:'browser',type:'disconnected'}));
  for(let i=0;i<count;i++){const context=await browser.newContext();gameMarkers[i]=[];runtimeWarnings[i]=[];
+    if(process.env.PARTYBOARD_TEST_GAME_AUDIO_METERS==='1'){
+      const meter=fs.readFileSync(path.resolve(__dirname,'../tools/web-audio-channel-meter.mjs'),'utf8').replace('export function attachAudioChannelMeter','function attachAudioChannelMeter');
+      await context.addInitScript({content:meter+`\n(() => {
+        globalThis.testGameAudioMeters=[];globalThis.testGameAudioMeterErrors=[];
+        const prototype=globalThis.BaseAudioContext?.prototype;
+        if(!prototype)return;
+        const original=prototype.createScriptProcessor;
+        prototype.createScriptProcessor=function(...args){
+          const node=original.apply(this,args);
+          queueMicrotask(()=>{try{testGameAudioMeters.push(attachAudioChannelMeter(node));}catch(error){testGameAudioMeterErrors.push(String(error));}});
+          return node;
+        };
+      })();`});
+    }
     context.on('close',()=>recordLifecycle({scope:'context',peer:i,type:'close'}));
     if(tracePinball)await context.addInitScript(()=>{globalThis.testPinballDiagnostics=true;});
     if(process.env.PARTYBOARD_TEST_FRAME_STAGE_DIAGNOSTICS==='1')await context.addInitScript(()=>{globalThis.testFrameStageDiagnostics=true;});
@@ -244,6 +258,22 @@ async function observe(page,evaluate){
     for(const page of pages){const ready=await page.evaluate(async()=>(await import('/app.mjs')).lobbyReadyState());assert.ok(ready.players.every(player=>player.ready&&player.shaders));}
     console.log('Known shader cache prepared on each actual GPU before explicit player Ready; no full coverage claim.');
     if(process.env.PARTYBOARD_TEST_COMMITTED_GAME==='1'){
+      if(process.env.PARTYBOARD_TEST_HIDDEN_CANVAS_RESIZE==='1'){
+        const resized=[];
+        for(const page of pages){
+          // Real SDL resize callback runs while its prepared canvas is hidden.
+          await page.setViewportSize({width:997,height:731});
+          await page.evaluate(()=>window.dispatchEvent(new Event('resize')));
+          resized.push(await page.evaluate(()=>{
+            const canvas=document.querySelector('#canvas'),rect=canvas.getBoundingClientRect();
+            return {hidden:document.querySelector('#game-view').hidden,width:canvas.width,height:canvas.height,
+              cssWidth:rect.width,cssHeight:rect.height,phase:partyBoardApp.lobbyRuntimeState().phase};
+          }));
+        }
+        for(const state of resized){assert.equal(state.hidden,true);assert.equal(state.phase,'Idle');
+          assert.ok(state.width>0&&state.height>0&&state.cssWidth>0&&state.cssHeight>0,'Hidden prepared SDL canvas must retain nonzero dimensions');}
+        fs.writeFileSync(path.join(outputDirectory,'hidden-canvas-resize.json'),JSON.stringify(resized,null,2)+'\n');
+      }
       await host.locator('#start-agreement').click();
       await host.waitForFunction(()=>partyBoardApp.lobbyStartState()?.state==='Agreed');
       await host.locator('#start-game').click();
@@ -259,6 +289,18 @@ async function observe(page,evaluate){
       console.log('Actual committed production game liveness: '+JSON.stringify(running));
       if(process.env.PARTYBOARD_TEST_GAME_BOOT_MENU==='1'){
         for(const page of pages)await page.waitForFunction(()=>partyBoardApp.lobbyGameState()?.frame>=950,{},{timeout:90000});
+        if(process.env.PARTYBOARD_TEST_GAME_AUDIO_METERS==='1'){
+          const audio=[];
+          for(const page of pages)await page.evaluate(()=>testGameAudioMeters.forEach(meter=>meter.reset()));
+          for(const page of pages){const before=await page.evaluate(()=>partyBoardApp.lobbyGameState().frame);
+            await page.waitForFunction(frame=>partyBoardApp.lobbyGameState()?.frame>=frame+120,before,{timeout:30000});}
+          for(const [index,page] of pages.entries()){
+            const state=await page.evaluate(()=>({game:partyBoardApp.lobbyGameState(),meters:testGameAudioMeters.map(m=>m.snapshot()),errors:testGameAudioMeterErrors}));
+            audio.push(state);await page.locator('#canvas').screenshot({path:path.join(outputDirectory,'title-audio-peer'+index+'.png')});
+          }
+          fs.writeFileSync(path.join(outputDirectory,'title-audio.json'),JSON.stringify(audio,null,2)+'\n');
+          for(const state of audio){assert.deepEqual(state.errors,[]);assert.ok(state.meters.some(m=>m.callbacks>0&&m.energy.some(e=>e>0)),'Actual title audio callback must produce nonzero PCM');assert.ok(state.meters.every(m=>m.nonFinite===0));}
+        }
         await host.locator('#canvas').click();const deadline=Date.now()+120000;
         while(!gameMarkers.every(markers=>markers.some(text=>text.includes('Start New OVL 74 ')))){
           assert.ok(Date.now()<deadline,'Every actual game must reach mode selection.');
@@ -288,6 +330,9 @@ async function observe(page,evaluate){
         assert.ok(common.length>=30,'Actual mode-selection state comparison required.');
         for(const record of common)for(const other of records)assert.deepEqual(other.find(item=>item.frame===record.frame),record);
         console.log('Actual synchronized boot to mode-selection markers: '+JSON.stringify(gameMarkers));
+        if(process.env.PARTYBOARD_TEST_GAME_FREE_PLAY_INSPECT==='1'){
+          await require('../tools/inspect-free-play-menu.cjs').inspectFreePlayMenu(pages,outputDirectory);
+        }
         if(process.env.PARTYBOARD_TEST_GAME_PARTY_BOARD==='1'){
           const selectedBoard=Number(process.env.PARTYBOARD_TEST_BOARD_INDEX||0);
           assert.ok(Number.isInteger(selectedBoard)&&selectedBoard>=0&&selectedBoard<6,'Valid ordinary board selection required.');

@@ -45,11 +45,13 @@ test('selected resolution and aspect are retained before platform/GPU startup',a
   for(const width of [640,960,1280,1920,2560])for(const aspect of [[4,3],[16,9],[16,10],[21,9]]){
     const [ratioWidth,ratioHeight]=aspect,height=Math.round(width*ratioHeight/ratioWidth);
     const f=fixture(),calls=[],resolution={width,height},api=browserPlatformCallbacks({resolution});
+    const styles=new Map();f.module.canvas={style:{setProperty:(name,value)=>styles.set(name,value)}};
     resolution.width=1;f.module._PartyBoardBrowserSetInitialResolution=()=>{};
     f.module.ccall=async(name,result,types,args)=>{calls.push({name,types,args});return 0;};
     await api.setup(f.module);
     assert.deepEqual(calls[0],{name:'PartyBoardBrowserSetInitialResolution',types:['number','number'],args:[width,height]});
     assert.equal(calls[1].name,'PartyBoardBrowserPreparePlatform');
+    assert.equal(styles.get('--game-preparation-width'),width+'px');
   }
 });
 test('invalid, unsupported or rejected resolution prevents platform startup',async()=>{

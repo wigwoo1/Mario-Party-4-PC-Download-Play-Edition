@@ -1,8 +1,8 @@
 {
   "version": 1,
   "repository": "https://github.com/wigwoo1/Mario-Party-4-PC-Download-Play-Edition",
-  "buildId": "b8f41066762b0c9ae0ade7fdfd0b0a83ed6061557f615f237844ea437d7ce51d",
-  "sourceSnapshotSha256": "ff501f108010e5ec0c96c97628c220e6b8fda7aafc4576a8c4cf37c80ad0e25d",
+  "buildId": "9eec39fece5808019735ceda366b760795691b61179b0714339b63947dfafa94",
+  "sourceSnapshotSha256": "8772dc184b6bc58560941228373f2ff3ff4193f052194b9326d42e6b7786b241",
   "upstream": {
     "url": "https://github.com/mariopartyrd/partyboard.git",
     "baseCommit": "f38304ebd13b09a15a80db7d7d015bf3fc387c5d"
@@ -10105,8 +10105,8 @@
     },
     {
       "path": "src/port/musyx_pcm_runtime.h",
-      "bytes": 26757,
-      "sha256": "13e0f153ae59fa3a3bc1cec426a02e73c363c3477874693072364bd7b67bd075"
+      "bytes": 27176,
+      "sha256": "1d360f09f18ebb04eeee6b26a17dd9c3388b74cad6b86ecc9ba369260daf0c58"
     },
     {
       "path": "src/port/musyx_pcm_voice.h",
@@ -10611,7 +10611,7 @@
     {
       "path": "src/REL/bootDll/main.c",
       "bytes": 38740,
-      "sha256": "5e7a5c6a28c016cea0cfc18eba3519a1c8fd8aa536f3fedb70db81637c2de583"
+      "sha256": "6b9f70e4246fbb0de7013c190481112d2fc8ffcee20b9c3a5b61d744b6140d9e"
     },
     {
       "path": "src/REL/E3setupDLL/main.c",
@@ -12045,8 +12045,8 @@
     },
     {
       "path": "STATUS.md",
-      "bytes": 8482,
-      "sha256": "0f80682f832f844b6d9fc699b59d808b46aea0e45e0b79db58391395852094d9"
+      "bytes": 5284,
+      "sha256": "898193004cdc3cd7db232ecf70d9f910a375fecd29513ab93d655ad5fdfa0f5c"
     },
     {
       "path": "tools/__init__.py",
@@ -12082,6 +12082,11 @@
       "path": "tools/audit_windows_package_imports.py",
       "bytes": 5726,
       "sha256": "9c4e36846ff65d3ff66c009b16a7802938a0c06b5cb9b54e2f1e7f1caf21943a"
+    },
+    {
+      "path": "tools/audit-menu-callbacks.cjs",
+      "bytes": 2191,
+      "sha256": "8a3ebf08bc39587d4ac08c7c7802824d4a0b91aa6a3356277754ff133e694f41"
     },
     {
       "path": "tools/automatic-hosting.cjs",
@@ -12394,6 +12399,11 @@
       "sha256": "09859bd73e8edb75671dc0e891a5962ad6c3f53b4c90f3d1c70a63948e13315e"
     },
     {
+      "path": "tools/hidden-canvas-browser-test.cjs",
+      "bytes": 3231,
+      "sha256": "5604eb3a06be00ac333971ab9858b6424573cb06594da3dddf50d9d3c02138fd"
+    },
+    {
       "path": "tools/host-game.cjs",
       "bytes": 10123,
       "sha256": "1df2aa0434c50b50a8aa6230b6d64e4b7805e4b4aa8f9f8f8b57eda0310871a7"
@@ -12447,6 +12457,11 @@
       "path": "tools/inspect_win_icons.py",
       "bytes": 6054,
       "sha256": "fe2f72ad96501d0d5578a4dd1e21664d1a57f333c17e8aa9c102f00f597e50eb"
+    },
+    {
+      "path": "tools/inspect-free-play-menu.cjs",
+      "bytes": 3577,
+      "sha256": "b6230cf3dc1a138ecf4972648b4a87a64aa0e5138ddb43310b9bc688055bef79"
     },
     {
       "path": "tools/install-native-runtime.cjs",
@@ -13154,6 +13169,11 @@
       "sha256": "2228ddbfb33bedd6a087c305b4ccf1ec0efd98f9516f13e1738fd52ea5c5ec9e"
     },
     {
+      "path": "tools/test_character_voice_lifetime.c",
+      "bytes": 5489,
+      "sha256": "9eed4116ca17aab1bd18a7759cbe2bbf4afeac6867b530af55cdf1a617b21792"
+    },
+    {
       "path": "tools/test_controller_routes.cpp",
       "bytes": 7868,
       "sha256": "91633fa14f76537a15d94f62f6717cd84d8694c1e2b874b1f285c58c65d81a82"
@@ -13445,8 +13465,8 @@
     },
     {
       "path": "tools/test_original_voice_controls.c",
-      "bytes": 42518,
-      "sha256": "9a3f2041c80ebc138ecc86de6fcb37c78b7a33089dba532fb3aec8d80f5d6b11"
+      "bytes": 43195,
+      "sha256": "1b9e8de7716c024e52d1d7cef70f738ec48bbfc7b73a806b149c3a36c02038ce"
     },
     {
       "path": "tools/test_original_volume.c",
@@ -14015,8 +14035,8 @@
     },
     {
       "path": "web/app.mjs",
-      "bytes": 89258,
-      "sha256": "2ccf0ad07f9997175db62dae8a6261ffb6fc5c99a690a5ba3c94ead035acf6da"
+      "bytes": 89262,
+      "sha256": "8f5d2015599dc3f83cbc737420a5fe73ad1ded252a86feea0e9e6004142dba06"
     },
     {
       "path": "web/async-blob-fs.mjs",
@@ -14115,13 +14135,13 @@
     },
     {
       "path": "web/browser-platform.mjs",
-      "bytes": 5468,
-      "sha256": "c8f0c1b22741b514d016dff5bd8b8b05f7bb37630ba7638c9ee3420efdc2e9e9"
+      "bytes": 5727,
+      "sha256": "5d3e2e3729467556fe5442454b781c0a8f27f61495fe6035cc525fa6b384256d"
     },
     {
       "path": "web/browser-platform.test.mjs",
-      "bytes": 7544,
-      "sha256": "b3e4bb60692bc204c6f84daa431af080cddb8eb851feafb4011450b17c4f0606"
+      "bytes": 7716,
+      "sha256": "62a9bacf15e8c3b827fb7a58f4d435f751e35253fb92e4d1ca8b408f1bde985b"
     },
     {
       "path": "web/browser-runtime-package.mjs",
@@ -14215,13 +14235,13 @@
     },
     {
       "path": "web/display-controls.mjs",
-      "bytes": 6487,
-      "sha256": "c215bc6006893e0165ea957d984e0f86130a9546d2a0e060eb07e6610245b723"
+      "bytes": 7209,
+      "sha256": "a8b6da556d98e12eb7796407cd51a9a27795100dedb4062c8674ba950c2ab533"
     },
     {
       "path": "web/display-controls.test.mjs",
-      "bytes": 5972,
-      "sha256": "d1360cb129a94f911afdd0c6639c6d58173a6bbf00d9469e02a944866ebbfd84"
+      "bytes": 6915,
+      "sha256": "f135b8e16dcbe29f1b6b73056e7e28c2e6b7805897e048a870e15e8a48bd871f"
     },
     {
       "path": "web/download-controls-browser-test.cjs",
@@ -14285,8 +14305,8 @@
     },
     {
       "path": "web/index.html",
-      "bytes": 8720,
-      "sha256": "ae0748725cecc5215779ff3bfbb7b4de3de2b960f0cb4a8574f4cbc115b743ec"
+      "bytes": 9179,
+      "sha256": "80eb7f26866b5537d071cee6f9c4b4ae7996c69e7ebe786f568e50888f5dcf42"
     },
     {
       "path": "web/input-channels.mjs",
@@ -14420,8 +14440,8 @@
     },
     {
       "path": "web/lobby-runtime-peers-browser-test.cjs",
-      "bytes": 74610,
-      "sha256": "c3bbf320ceb4698e7b6c67ad32d3f60aa1f405abe75868c9eb8bada4e920d574"
+      "bytes": 77944,
+      "sha256": "e71dd099a650f2b70bf6fceb5700b0cb232abe4ce948c536979ed84d7d53d2fe"
     },
     {
       "path": "web/lobby-state.mjs",

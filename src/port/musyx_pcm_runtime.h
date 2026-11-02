@@ -37,7 +37,7 @@ static inline int PartyboardMusyxPcmRuntimeAdvanceHostPeriod(DSPvoice *voice) {
  * only the requested bank from caller-owned coefficients. The production
  * default is an explicitly identified open-source replacement, not ROM data. */
 static inline int PartyboardMusyxPcmRuntimeStart(PartyboardMusyxPcmRuntime *destination,
-        const DSPvoice *voice,const PartyboardMusyxSampleMemory *memory,
+        DSPvoice *voice,const PartyboardMusyxSampleMemory *memory,
         uint32_t ratio,const int16_t *banks,size_t bank_words) {
     PartyboardMusyxPcmRuntime result={0};
     if(!destination || !voice || voice->srcTypeSelect>2
@@ -68,6 +68,12 @@ static inline int PartyboardMusyxPcmRuntimeStart(PartyboardMusyxPcmRuntime *dest
     *destination=result;
     /* Fix the callback address after moving the temporary startup state. */
     destination->resampler.context=&destination->sample;
+    /* Match standard-studio sample startup in hw_dspctrl.c. Hardware slots
+     * are reused by music and effects; a fresh decoder must also get a fresh
+     * host completion counter. ADPCM starts at zero; PCM16 uses its offset.
+     * Commit only after validation, so failed startup retains the old voice. */
+    voice->playInfo.posHi=voice->smp_info.compType==2 ? voice->smp_info.offset : 0;
+    voice->playInfo.posLo=0;
     return 1;
 }
 static inline void PartyboardMusyxPcmRuntimeStop(PartyboardMusyxPcmRuntime *runtime) {

@@ -121,7 +121,18 @@ int main(void) {
     PartyboardMusyxPcmRuntime runtime={0};
     unsigned phase_index;
     for(phase_index=0;phase_index<128;++phase_index) banks[512+phase_index*4+3]=32767;
+    /* A reused music/SFX slot must not carry the previous sample's host
+     * position into a fresh sound. Normal continuation must still advance. */
+    voice->playInfo.posHi=9000;voice->playInfo.posLo=456;
     assert(PartyboardMusyxPcmRuntimeStart(&runtime,voice,&memory,65536,banks,1536));
+    assert(voice->playInfo.posHi==voice->smp_info.offset && !voice->playInfo.posLo);
+    {
+      DSPvoice offset_voice=*voice;
+      PartyboardMusyxPcmRuntime offset_runtime={0};
+      offset_voice.smp_info.offset=3;offset_voice.playInfo.posHi=7000;offset_voice.playInfo.posLo=99;
+      assert(PartyboardMusyxPcmRuntimeStart(&offset_runtime,&offset_voice,&memory,65536,banks,1536));
+      assert(offset_voice.playInfo.posHi==3 && !offset_voice.playInfo.posLo);
+    }
     assert(runtime.resampler.context==&runtime.sample);
     assert(runtime.resampler.coefficients==banks+512);
     {

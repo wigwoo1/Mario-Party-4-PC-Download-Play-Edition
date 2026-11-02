@@ -3,6 +3,18 @@ const resolutionKey='partyboard-game-resolution';
 const aspectKey='partyboard-game-aspect';
 const aspects=new Set(['4:3','16:9','16:10','21:9']);
 
+// SDL's resize callback also updates the canvas backing dimensions. Refresh it
+// after revealing the prepared surface and before entering Wasm synchronously.
+export function exposeGameSurface(gameView){
+ gameView.hidden=false;
+ const canvas=gameView.querySelector('canvas');
+ const view=gameView.ownerDocument.defaultView;
+ // Preserve a valid selected backing resolution. Only repair a canvas which
+ // an earlier browser resize reduced to zero; SDL will then rebuild its size.
+ if(!(canvas.width>0&&canvas.height>0))view.dispatchEvent(new view.Event('resize'));
+ canvas.focus();
+}
+
 function readResolution(storage){
  try{const value=storage?.getItem(resolutionKey);return resolutions.has(value)?value:null;}catch{return null;}
 }
@@ -25,6 +37,8 @@ export function displayControls({container,select,gameView,document=globalThis.d
  const change=()=>{if(!validOptions.has(select.value))return;try{storage?.setItem(resolutionKey,select.value);}catch{/* Settings still work for this page when storage is unavailable. */}message.textContent='Saved '+select.selectedOptions?.[0]?.textContent+'. It will be used next time you prepare a game.';};
  const aspectChange=()=>{if(!aspects.has(aspect.value))return;try{storage?.setItem(aspectKey,aspect.value);}catch{/* Settings still work for this page when storage is unavailable. */}message.textContent='Saved '+aspect.value+' output aspect ratio; it applies the next time you prepare a game.';};
  const canvas=gameView.querySelector('canvas');let originalCanvasSize;
+ const syncAspect=()=>canvas?.style?.setProperty('--game-aspect',aspect.value.replace(':',' / '));
+ syncAspect();
  const gameFullscreen=()=>document.fullscreenElement===gameView||(document.fullscreenElement===document.documentElement&&!gameView.hidden);
  const fitCanvas=()=>{
   if(!canvas?.style||!gameFullscreen())return;
@@ -35,7 +49,7 @@ export function displayControls({container,select,gameView,document=globalThis.d
  const sync=()=>{button.textContent=document.fullscreenElement?'Exit full screen':'Full screen';fullscreenExit.hidden=!gameFullscreen();if(gameFullscreen())fitCanvas();else if(canvas?.style&&originalCanvasSize){canvas.style.setProperty('width',originalCanvasSize.width,originalCanvasSize.widthPriority);canvas.style.setProperty('height',originalCanvasSize.height,originalCanvasSize.heightPriority);originalCanvasSize=undefined;}};
  const style=document.createElement('style');style.textContent='#game-view:fullscreen,html:fullscreen #game-view:not([hidden]){position:relative;display:grid;place-items:center;align-content:center;gap:12px;box-sizing:border-box;width:100vw;height:100vh;background:#000;padding:0}#game-view:fullscreen canvas,html:fullscreen #game-view:not([hidden]) canvas{max-width:none!important;background:#000}';style.textContent+='#game-view:fullscreen>br,#game-view:fullscreen>#stop-game,html:fullscreen #game-view:not([hidden])>br,html:fullscreen #game-view:not([hidden])>#stop-game{display:none}';style.textContent+='html:fullscreen #game-view:not([hidden]){position:fixed;inset:0;z-index:100}';document.head?.append(style);
  select.addEventListener('change',change);
- aspect.addEventListener('change',aspectChange);
+ aspect.addEventListener('change',()=>{syncAspect();aspectChange();});
  document.addEventListener('fullscreenchange',sync);
  document.defaultView?.addEventListener('resize',fitCanvas);
  const VisibilityObserver=document.defaultView?.MutationObserver;

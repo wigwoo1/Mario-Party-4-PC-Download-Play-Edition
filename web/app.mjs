@@ -26,7 +26,7 @@ import {lobbyMusic} from './lobby-music.mjs';
 import {audioLayout} from './audio-layout.mjs';
 import {gameAudioControls} from './game-audio-controls.mjs';
 import {lobbyControlEditor} from './lobby-control-editor.mjs';
-import {displayControls} from './display-controls.mjs';
+import {displayControls,exposeGameSurface} from './display-controls.mjs';
 import {touchControls} from './touch-controls.mjs';
 import {controlBindingGlyphs} from './control-bindings.mjs';
 import {iceServerConfiguration} from './ice-servers.mjs';
@@ -448,7 +448,7 @@ function runCommittedLobbyGame(commit,prepared,peer){
   const runtime=lobbyRuntime,input=lobbyGameInput,plan=lobbyInputPlan();
   // Resume enters Wasm synchronously until its first yield. Expose the canvas
   // first so SDL can observe its actual visibility during that first frame.
-  $('game-view').hidden=false;$('canvas').focus();music.stop();
+  exposeGameSurface($('game-view'));music.stop();
   const run=resumeCommittedClientRuntime(commit,prepared,{peer,buildId:lobbyRuntime.buildId,
     snapshot:()=>currentLobbySnapshot,requireOnlineInput:true});
   let runtimeFailure;

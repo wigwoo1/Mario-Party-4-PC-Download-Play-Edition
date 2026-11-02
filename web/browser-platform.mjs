@@ -42,6 +42,9 @@ export function browserPlatformCallbacks({maxSteps=60,progress,resolution,audioC
         signal?.throwIfAborted();
       }
       if(selectedResolution){
+        // SDL measures CSS while creating its window. Keep the invisible lobby
+        // surface at the selected size rather than overriding it with 640px.
+        module.canvas?.style?.setProperty('--game-preparation-width',selectedResolution.width+'px');
         if(typeof module?._PartyBoardBrowserSetInitialResolution!=='function')throw Error('Browser runtime does not support selected resolution.');
         const result=await module.ccall('PartyBoardBrowserSetInitialResolution','number',['number','number'],
           [selectedResolution.width,selectedResolution.height],{async:true});
