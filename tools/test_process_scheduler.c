@@ -6,6 +6,27 @@
 #include <stdarg.h>
 static int heaps, destroyed, stage, child_done, ticks;
 static int sleeper_started, survivor_ran;
+static int high_child_frame, high_child_observed_frame, return_after_sleep_frame;
+static void high_priority_return_child(void) {
+    high_child_frame=ticks;
+    child_done=1;
+    HuPrcEnd();
+    abort();
+}
+static void results_return_parent(void) {
+    child_done=0;
+    /* Party results uses a priority-90 parent and creates a priority-100
+       no-save child, waits for its flag, then sleeps for 30 ticks. The child
+       is inserted before the currently executing parent in the process list. */
+    assert(HuPrcChildCreate(high_priority_return_child,100,32768,0,HuPrcCurrentGet()));
+    assert(high_child_frame==0);
+    do { HuPrcVSleep(); } while (!child_done);
+    high_child_observed_frame=ticks;
+    HuPrcSleep(30);
+    return_after_sleep_frame=ticks;
+    HuPrcEnd();
+    abort();
+}
 static void sleeper(void) {
     ++sleeper_started;
     HuPrcSleep(1000);
@@ -52,6 +73,15 @@ int main(void) {
     ticks=5; HuPrcCall(1); assert(child_done && stage==2);
     ticks=6; HuPrcCall(1); assert(stage==3);
     HuPrcCall(1); assert(heaps==0 && destroyed==2);
+    /* A newly created higher-priority child first runs on the next frame.
+       Its parent can observe completion later in that same frame. Preserve
+       the original scheduler's existing sleep semantics (wake next pass). */
+    assert(HuPrcCreate(results_return_parent,90,32768,0));
+    for(ticks=1;ticks<=35;++ticks) HuPrcCall(1);
+    assert(high_child_frame==2 && high_child_observed_frame==2);
+    assert(return_after_sleep_frame==33 && heaps==0 && destroyed==2);
+    printf("Higher-priority results-return helper: child=%d observed=%d return=%d\n",
+        high_child_frame,high_child_observed_frame,return_after_sleep_frame);
     /* Kill a sleeping, paused family; its suspended stacks must be discarded. */
     Process *root=HuPrcCreate(sleeper,30,32768,128);
     Process *kid=HuPrcChildCreate(sleeper,20,32768,128,root);
