@@ -2,7 +2,7 @@
   "version": 1,
   "repository": "https://github.com/wigwoo1/Mario-Party-4-PC-Download-Play-Edition",
   "buildId": "341728f4203c1625ec5b4ea19795664e8aac1976701963a6cc55bf4303f03dfc",
-  "sourceSnapshotSha256": "030b6e7e13377d6e746b61b58792e5a0b157fe11b08cb56779b42a2f92189623",
+  "sourceSnapshotSha256": "4379f2808a7b829e001de7a72ba11e120fd36ebfab4bc05de4a61153cd04b3c2",
   "upstream": {
     "url": "https://github.com/mariopartyrd/partyboard.git",
     "baseCommit": "f38304ebd13b09a15a80db7d7d015bf3fc387c5d"
@@ -12045,8 +12045,8 @@
     },
     {
       "path": "STATUS.md",
-      "bytes": 6001,
-      "sha256": "62f7a06d990b693526a53997a26c82ce10ec5e90fc2cfd319f19425aed3c47b4"
+      "bytes": 6106,
+      "sha256": "e21526c3336c1ff594cce5feaea5f94af6a5e04d0b6db9db4630ebfcffc32c90"
     },
     {
       "path": "tools/__init__.py",
@@ -12610,8 +12610,8 @@
     },
     {
       "path": "tools/native-rtc-probe/drive-automatic-full-match.cjs",
-      "bytes": 2475,
-      "sha256": "9e39fda973cfb8611eb727e1c0bcadb5a3bec890592d7bc72034840ff33667dd"
+      "bytes": 3347,
+      "sha256": "5a5b6281aa79db50fa8ef3b575c1d1febd444541d9bcea682584f84fa99dc7ea"
     },
     {
       "path": "tools/native-rtc-probe/drive-automatic-full-match.test.cjs",
@@ -12630,8 +12630,18 @@
     },
     {
       "path": "tools/native-rtc-probe/drive-mixed-full-match.cjs",
-      "bytes": 21918,
-      "sha256": "b17d35f2cf94a155736afc1ea9bec22397c1bb0b3cc12581e3f29741a1963b54"
+      "bytes": 23070,
+      "sha256": "d71030bd90d24697354d41b3ad403a00fcc612cd58510138ea44d89213d1cb95"
+    },
+    {
+      "path": "tools/native-rtc-probe/drive-mixed-post-ranking.cjs",
+      "bytes": 5757,
+      "sha256": "894a039e2bdaf116121c28708da08e09a284f53be414b1d4e0bdd19ab4cad159"
+    },
+    {
+      "path": "tools/native-rtc-probe/drive-mixed-post-ranking.test.cjs",
+      "bytes": 5108,
+      "sha256": "b2e8e720392f84559afb3577e339e8cd1d69033d9877e7ee341e3d74f13b8a2a"
     },
     {
       "path": "tools/native-rtc-probe/error-evidence.cjs",
@@ -12700,8 +12710,8 @@
     },
     {
       "path": "tools/native-rtc-probe/mixed-board-transition.test.cjs",
-      "bytes": 1268,
-      "sha256": "2aaa9237129129e62d003b27fc8ffe2703014e45530836bad5574c5c582d3563"
+      "bytes": 1929,
+      "sha256": "7c0e2b48a43962e5ecc7c71e8f9585b504272bd1e1b97ebc89cb058b849288f1"
     },
     {
       "path": "tools/native-rtc-probe/mixed-match-records.test.cjs",
@@ -12782,6 +12792,16 @@
       "path": "tools/native-rtc-probe/native-match-observer.test.cjs",
       "bytes": 1512,
       "sha256": "3437a44161844a9ec6af12c86aa8273849d7188268607758219f072efc0a273d"
+    },
+    {
+      "path": "tools/native-rtc-probe/native-png-capture.cjs",
+      "bytes": 1979,
+      "sha256": "db9f70f69092305cf808da86cac50672476c2bdde49c4d758921de68391b9ab3"
+    },
+    {
+      "path": "tools/native-rtc-probe/native-png-capture.test.cjs",
+      "bytes": 2529,
+      "sha256": "82be60aca712cc0916ede91db35855a339e0eb9dd8c2db07b31ac3d6d835b4c8"
     },
     {
       "path": "tools/native-rtc-probe/native-prepared-start-test.cpp",
@@ -12927,6 +12947,16 @@
       "path": "tools/native-rtc-probe/session-start-wire-test.mjs",
       "bytes": 2279,
       "sha256": "60d520dedf4f119c844251502290f7c0bc0bbe88522d0cd711677ab14cda0133"
+    },
+    {
+      "path": "tools/native-rtc-probe/state-snapshot-recorder.cjs",
+      "bytes": 5884,
+      "sha256": "e4c18f1743bdd05548be0b449404c50a86c2c74fb9628e6a50a5456e967dd418"
+    },
+    {
+      "path": "tools/native-rtc-probe/state-snapshot-recorder.test.cjs",
+      "bytes": 7024,
+      "sha256": "814d17c577eff7835f86ee039a314b3b6d037df41fa0e71ff8cc4821b9b5a341"
     },
     {
       "path": "tools/native-rtc-probe/thread-stacks.cpp",
@@ -14495,8 +14525,8 @@
     },
     {
       "path": "web/native-automatic-lobby-browser-test.cjs",
-      "bytes": 22107,
-      "sha256": "bb2becd8d9c773e63204e399187a7dbfc3b274495497df068f01d08861dd755b"
+      "bytes": 23346,
+      "sha256": "845d1261be6d909ecfe2259f3a1509943a118530ba9c838b6c42a7e745f5cc72"
     },
     {
       "path": "web/native-gameplay-recovery-test-support.mjs",

@@ -7,6 +7,7 @@ const {variedKeyboardStick}=require('../varied-keyboard-stick.cjs');
 const {turnSetupAction,setupActionObserved,retryObservedSetupAction,setupMenuOwnerIndex}=require('../party-turn-setup.cjs');
 const {m427AlternatingStrokeKey}=require('../drive-production-full-match.cjs');
 const {pressMixedMarioMedleyInput,pressMixedM432ObstacleInput}=require('./mixed-minigame-inputs.cjs');
+const {driveMixedPostRanking}=require('./drive-mixed-post-ranking.cjs');
 function matchingRecords(peers){
  const maps=peers.map(records=>new Map(records.map(record=>[String(record.frame),{...record,frame:String(record.frame)}])));
  const common=[...maps[0].keys()].filter(frame=>maps.every(map=>map.has(frame)));
@@ -22,11 +23,12 @@ function createExtendedObservationGate(interval=600000){
   nextCaptureAt=now+interval;return true;
  };
 }
-async function driveMixedFullMatch({peers,inventory,outputDirectory,board=0,maxTurn=20,onVerifiedTurn,onSetupVerified}){
+async function driveMixedFullMatch({peers,inventory,outputDirectory,board=0,maxTurn=20,onVerifiedTurn,onSetupVerified,verifyReturn=false}){
  assert(Number.isInteger(board)&&board>=0&&board<=5,'Main board index must be 0 through 5');
  assert(Number.isInteger(maxTurn)&&maxTurn>=5&&maxTurn<=50&&maxTurn%5===0,'Party length must be 5 through 50 turns in five-turn steps');
  assert.equal(peers.length,4);fs.mkdirSync(outputDirectory,{recursive:true});
  assert.deepEqual(peers.map(peer=>peer.slot).sort((a,b)=>a-b),[0,1,2,3],'One actual lobby owner per controller port required');
+ if(verifyReturn)assert.ok(peers.every(peer=>typeof peer.capture==='function'&&typeof peer.modeEntryCount==='function'),'Complete match/return requires rendered capture and fresh-menu receipts on every peer');
  const boardName='w'+String(board+1).padStart(2,'0')+'dll';
  const boardOverlay=inventory.overlays.find(item=>item.name.toLowerCase()===boardName)?.overlay;
  const awards=inventory.overlays.find(item=>item.name.toLowerCase()==='mstory3dll')?.overlay;
@@ -93,7 +95,7 @@ async function driveMixedFullMatch({peers,inventory,outputDirectory,board=0,maxT
   inputFrameSpans.push({peer:peers.indexOf(peer),startFrame:start,endFrame:observedFrame,requestedFrames:count,observedFrames:observedFrame-start});
   if(inputFrameSpans.length>256)inputFrameSpans.shift();
  };
- let states,partySetupTelemetrySeen=false,partyTurnsSelected=false;
+ let states,partySetupTelemetrySeen=false,partyTurnsSelected=false,postRankingReturn;
  const setupActions=[];
  const settleSetupInput=()=>Promise.all(peers.map(peer=>waitFrames(peer,30)));
  const observedSetupAction=async decision=>retryObservedSetupAction(decision,{
@@ -259,6 +261,13 @@ async function driveMixedFullMatch({peers,inventory,outputDirectory,board=0,maxT
     const common=matchingRecords(states.map(state=>state.observations));
     assert(common.length>=30,'Matching mixed final ranking polls required');
     fs.writeFileSync(path.join(outputDirectory,'mixed-full-match-ranking-inputs.json'),JSON.stringify({rankingFrames,settlePolls:600,peers:states,matchingPolls:common.length},null,2)+'\n');
+    if(verifyReturn){
+     const before=states.map(state=>({frame:state.frame,progress:state.progress}));
+     const captures=await Promise.all(peers.map((peer,index)=>peer.capture(path.join(outputDirectory,'mixed-final-ranking-peer'+index+'.png'))));
+     states=await snapshots();assert.ok(states.every(state=>state.progress.overlay===awards&&state.progress.event===1),'Ranking capture must retain normal final standings');
+     fs.writeFileSync(path.join(outputDirectory,'mixed-final-ranking-captures.json'),JSON.stringify({before,after:states.map(state=>({frame:state.frame,progress:state.progress})),captures,renderedRankingsReviewed:false},null,2)+'\n');
+     postRankingReturn=await driveMixedPostRanking({peers,inventory,outputDirectory,waitFrames,matchingRecords});
+    }
     break;
    }
    const same=states.every(state=>state.progress.overlay===states[0].progress.overlay);
@@ -305,7 +314,7 @@ async function driveMixedFullMatch({peers,inventory,outputDirectory,board=0,maxT
    }
    await sleep(1000);
   }
-  const evidence={scope:'actual-mixed-full-match-progress',peers:trackers.map(tracker=>tracker.snapshot()),verifiedTurns:[...verifiedTurns],renderedRankingsVerified:false};
+  const evidence={scope:'actual-mixed-full-match-progress',peers:trackers.map(tracker=>tracker.snapshot()),verifiedTurns:[...verifiedTurns],renderedRankingsVerified:false,postRankingReturn:postRankingReturn??null};
   fs.writeFileSync(path.join(outputDirectory,'mixed-full-match-progress.json'),JSON.stringify(evidence,null,2)+'\n');
   assert.equal(verifiedTurns.size,maxTurn,'Every configured turn requires matching mixed-platform records');
   return evidence;

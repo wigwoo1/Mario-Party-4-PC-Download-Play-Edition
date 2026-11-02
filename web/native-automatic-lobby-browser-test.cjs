@@ -17,6 +17,7 @@ assert.ok(shaderDefinitionCounts.graphics>0,'Seed must contain graphics pipeline
 const disc=process.env.PARTYBOARD_LOCAL_CISO||'D:/Desktop/Games/Mario Party 4/Mario Party 4 (USA) (Rev 1).ciso';
 const guestCount=Number(process.env.PARTYBOARD_AUTOMATIC_BROWSER_GUESTS||1);assert.ok([1,3].includes(guestCount));
 const testFullMatch=process.env.PARTYBOARD_TEST_AUTOMATIC_FULL_MATCH==='1';assert.ok(!testFullMatch||guestCount===3,'Full match requires four actual peers');
+const stateDiagnostics=process.env.PARTYBOARD_TEST_STATE_DIAGNOSTICS==='1';
 const testRejoin=process.env.PARTYBOARD_TEST_AUTOMATIC_REJOIN==='1';assert.ok(!testRejoin||(nativeHost&&guestCount===1));
 const testExtraRoom=process.env.PARTYBOARD_TEST_EXTRA_ROOM==='1';assert.ok(!testExtraRoom||(!nativeHost&&guestCount===1));
 const extraRoomOverlay=Number(process.env.PARTYBOARD_TEST_EXTRA_ROOM_OVERLAY||67);assert.ok([65,67].includes(extraRoomOverlay));
@@ -26,10 +27,11 @@ assert.equal(fs.existsSync(output),false,'Automatic lobby test requires a fresh 
 function normalized(row){return {frame:String(row.frame),checkpoint:row.checkpoint,frand:row.frand,rand8:row.rand8,pads:row.pads};}
 (async()=>{
  fs.mkdirSync(output,{recursive:true});const profile=path.join(output,'native-profile');fs.mkdirSync(profile,{recursive:true});
+ const snapshotRecorder=stateDiagnostics?require('../tools/native-rtc-probe/state-snapshot-recorder.cjs').createStateSnapshotRecorder({write:line=>fs.appendFileSync(path.join(output,'state-snapshots.jsonl'),line)}):null;
  const browserProfileRoot=path.resolve(process.env.PARTYBOARD_AUTOMATIC_PROFILE_ROOT||output);
  if(browserProfileRoot!==output){assert.equal(fs.existsSync(browserProfileRoot),false,'Separate browser profiles require a fresh disposable directory');fs.mkdirSync(browserProfileRoot,{recursive:true});}
  const sourceHashes=Object.fromEntries(['app.mjs','runtime-asset.mjs'].map(name=>[name,require('node:crypto').createHash('sha256').update(fs.readFileSync(path.join(__dirname,name))).digest('hex')]));
- fs.writeFileSync(path.join(output,'test-configuration.json'),JSON.stringify({browserProfile,browserProfileRoot,mode,guestCount,preparationTimeout,testExtraRoom,extraRoomBudget,extraRoomOverlay,sourceHashes,muted:true,at:new Date().toISOString()},null,2));
+ fs.writeFileSync(path.join(output,'test-configuration.json'),JSON.stringify({browserProfile,browserProfileRoot,mode,guestCount,preparationTimeout,testExtraRoom,extraRoomBudget,extraRoomOverlay,stateDiagnostics,sourceHashes,muted:true,at:new Date().toISOString()},null,2));
  fs.writeFileSync(path.join(profile,'config.json'),JSON.stringify({'audio.muted':true,'audio.masterVolume':0,'audio.mainMusicVolume':0,'audio.menuSounds':false}));
  const observationStarted=performance.now(),requestStarts=new WeakMap(),responseTasks=new Set();let testPhase='setup';
  const trace=(type,details={})=>fs.appendFileSync(path.join(output,'http-phase-observations.jsonl'),JSON.stringify({type,phase:testPhase,elapsedMs:performance.now()-observationStarted,...details})+'\n');
@@ -48,10 +50,11 @@ function normalized(row){return {frame:String(row.frame),checkpoint:row.checkpoi
   });
  };
  const port=Number(process.env.PARTYBOARD_TEST_PORT||8954);assert.ok(Number.isInteger(port)&&port>=1024&&port<=65535);
- const base='http://127.0.0.1:'+port+'/',events=[],errors=[],statuses=[],pages=[],contexts=[];let native,server,browser,page,exit,nativeText='',stopping=false;
+ const base='http://127.0.0.1:'+port+'/',events=[],errors=[],statuses=[],pages=[],contexts=[];let native,server,browser,page,exit,nativeText='',stopping=false,nativeModeEntries=0;
  const createContext=async()=>{const args=['--mute-audio','--disable-features=WebRtcHideLocalIpsWithMdns'];const context=browserProfile==='persistent'
   ?await chromium.launchPersistentContext(path.join(browserProfileRoot,'browser-profile-'+contexts.length),{channel:'msedge',headless:true,args})
-  :await browser.newContext();contexts.push(context);return context;};
+  :await browser.newContext();contexts.push(context);if(stateDiagnostics)await context.addInitScript(()=>{globalThis.testTraceState=true;});return context;};
+ const observeSnapshots=(target,index)=>{if(snapshotRecorder)target.on('console',message=>snapshotRecorder.receive('browser-'+index,message.text()));};
  const write=command=>native.stdin.write((typeof command==='string'?command:JSON.stringify(command))+'\n');
  const wait=async(check,limit=60000)=>{const until=Date.now()+limit;while(true){const result=await check();if(result)return result;if(exit!==undefined&&!stopping)throw Error('Native frontend exited '+exit);if(Date.now()>until)throw Error('Automatic native '+mode+' observation timed out');await pause(100);}};
  const waitEvent=async(predicate,limit)=>wait(()=>events.find(predicate),limit);
@@ -63,15 +66,16 @@ function normalized(row){return {frame:String(row.frame),checkpoint:row.checkpoi
   server=spawn(process.execPath,[path.join(__dirname,'serve.cjs')],{env,windowsHide:true,stdio:['ignore','pipe','pipe']});await new Promise((r,j)=>{server.stdout.once('data',r);server.once('error',j);server.once('exit',c=>j(Error('Service exited '+c)));});
   if(browserProfile==='private')browser=await chromium.launch({channel:'msedge',headless:true,args:['--mute-audio','--disable-features=WebRtcHideLocalIpsWithMdns']});
   const context=await createContext();await context.addInitScript(()=>{const Original=RTCPeerConnection;globalThis.testConnections=[];globalThis.RTCPeerConnection=class extends Original{constructor(...args){super(...args);testConnections.push(this);}};});
-  page=await context.newPage();pages.push(page);observeHttp(page,0);page.on('pageerror',e=>errors.push(e.message));page.on('console',m=>{if(['error','warning'].includes(m.type()))fs.appendFileSync(path.join(output,'browser.log'),m.type()+': '+m.text()+'\n');});
+  page=await context.newPage();pages.push(page);observeHttp(page,0);observeSnapshots(page,0);page.on('pageerror',e=>errors.push(e.message));page.on('console',m=>{if(['error','warning'].includes(m.type()))fs.appendFileSync(path.join(output,'browser.log'),m.type()+': '+m.text()+'\n');});
   await page.goto(base);await page.evaluate(async()=>{globalThis.app=await import('/app.mjs');});
   const nativeEnv={...process.env,PARTYBOARD_AUTOMATIC_LOBBY_TEST:'1',PARTYBOARD_LOBBY_URL:base,SDL_AUDIODRIVER:'dummy'};
-  const nativeCaptureRequest=path.join(output,'extra-room-native.request');if(testExtraRoom)nativeEnv.PARTYBOARD_FRAME_CAPTURE_REQUEST=nativeCaptureRequest;
+  if(stateDiagnostics)nativeEnv.PARTYBOARD_TRACE_STATE_DIAGNOSTICS='1';
+  const nativeCaptureRequest=path.join(output,'extra-room-native.request');if(testExtraRoom||testFullMatch)nativeEnv.PARTYBOARD_FRAME_CAPTURE_REQUEST=nativeCaptureRequest;
   for(const key of ['PARTYBOARD_NATIVE_HOST_RETURN_ACCEPTANCE','PARTYBOARD_NATIVE_JOIN_RETURN_ACCEPTANCE','PARTYBOARD_NATIVE_FULL_MATCH','PARTYBOARD_NATIVE_DIAGNOSTIC_FINISH_ACK','PARTYBOARD_PROBE_DESCRIPTOR_SEED'])delete nativeEnv[key];
   if(testFullMatch){nativeEnv.PARTYBOARD_NATIVE_FULL_MATCH='1';nativeEnv.PARTYBOARD_NATIVE_FULL_MATCH_TURNS='5';}
   native=spawn(path.join(runtime,'partyboard.exe'),['--user-dir',profile,'--keyboard','--disc',disc,'--native-session-package',descriptor,nativeHost?'--probe-host-gameplay':'--probe-join-menu'],{cwd:runtime,env:nativeEnv,windowsHide:true,stdio:['pipe','pipe','pipe']});
   native.stderr.on('data',b=>nativeLog.write(b));native.stdout.on('data',b=>{
-   if(!testFullMatch)nativeLog.write(b);nativeText+=b;let end;while((end=nativeText.indexOf('\n'))>=0){const line=nativeText.slice(0,end);nativeText=nativeText.slice(end+1);if(testFullMatch)nativeLog.write(require('../tools/native-rtc-probe/compact-native-diagnostic-log.cjs').compactNativeDiagnosticLine(line)+'\n');const receiptPrefix='Native owned lobby prepared receipt: ';if(line.includes(receiptPrefix)){try{events.push({type:'actual-native-prepared-receipt',receipt:JSON.parse(line.split(receiptPrefix)[1])});}catch{}}for(const prefix of ['Native frontend event: ','Native external Join event: ']){const index=line.indexOf(prefix);if(index>=0){try{events.push(JSON.parse(line.slice(index+prefix.length)));}catch{}}}}
+   if(!testFullMatch)nativeLog.write(b);nativeText+=b;let end;while((end=nativeText.indexOf('\n'))>=0){const line=nativeText.slice(0,end);snapshotRecorder?.receive('native',line);if(line.includes('Online Multiplayer entry: available'))nativeModeEntries++;nativeText=nativeText.slice(end+1);if(testFullMatch)nativeLog.write(require('../tools/native-rtc-probe/compact-native-diagnostic-log.cjs').compactNativeDiagnosticLine(line)+'\n');const receiptPrefix='Native owned lobby prepared receipt: ';if(line.includes(receiptPrefix)){try{events.push({type:'actual-native-prepared-receipt',receipt:JSON.parse(line.split(receiptPrefix)[1])});}catch{}}for(const prefix of ['Native frontend event: ','Native external Join event: ']){const index=line.indexOf(prefix);if(index>=0){try{events.push(JSON.parse(line.slice(index+prefix.length)));}catch{}}}}
   });native.on('exit',code=>{exit=code;trace('native-exited',{code});});native.on('error',e=>errors.push(e.message));
   const receiveNative=event=>nativeObserver.receive(event);
   // Native events are parsed above; forwarding also covers events added later.
@@ -80,7 +84,7 @@ function normalized(row){return {frame:String(row.frame),checkpoint:row.checkpoi
   if(nativeHost){const opened=await waitEvent(e=>e.type==='automatic-lobby-link',120000);assert.equal(opened.automatic,true);link=opened.link;await page.goto(link);await page.evaluate(async()=>{globalThis.app=await import('/app.mjs');});await page.locator('#join-game').click();}
   else {await waitEvent(e=>e.type==='automatic-join-waiting',60000);await page.locator('#file').setInputFiles(disc);await page.locator('#host-game').click();await page.waitForFunction(()=>document.querySelector('#lobby-link').value.includes('#room='));link=await page.locator('#lobby-link').inputValue();write({type:'join-link',link});}
   for(let index=1;index<guestCount;index++){
-   const extra=await createContext(),guest=await extra.newPage();pages.push(guest);observeHttp(guest,index);guest.on('pageerror',e=>errors.push(e.message));
+   const extra=await createContext(),guest=await extra.newPage();pages.push(guest);observeHttp(guest,index);observeSnapshots(guest,index);guest.on('pageerror',e=>errors.push(e.message));
    await guest.goto(link);await guest.evaluate(async()=>{globalThis.app=await import('/app.mjs');});await guest.locator('#join-game').click();
   }
   const waitReady=async()=>{const started=Date.now(),readyDeadline=started+preparationTimeout;let ready=false,last=0;
@@ -137,9 +141,9 @@ function normalized(row){return {frame:String(row.frame),checkpoint:row.checkpoi
    fs.writeFileSync(path.join(output,'recovered-observations.json'),JSON.stringify({...recovery.evidence,elapsedMs:recovery.elapsedMs,paused},null,2));
    phase('recovered');
   }
-  let fullMatch;if(testFullMatch){phase('full-match');fullMatch=await require('../tools/native-rtc-probe/drive-automatic-full-match.cjs').driveAutomaticFullMatch({pages,nativeHost,nativeObserver,send:packet=>new Promise((resolve,reject)=>native.stdin.write(JSON.stringify(packet)+'\n',error=>error?reject(error):resolve())),outputDirectory:path.join(output,'full-match'),maxTurn:5});fs.writeFileSync(path.join(output,'full-match-result.json'),JSON.stringify(fullMatch,null,2));}
+  let fullMatch;if(testFullMatch){phase('full-match');fullMatch=await require('../tools/native-rtc-probe/drive-automatic-full-match.cjs').driveAutomaticFullMatch({pages,nativeHost,nativeObserver,send:packet=>new Promise((resolve,reject)=>native.stdin.write(JSON.stringify(packet)+'\n',error=>error?reject(error):resolve())),outputDirectory:path.join(output,'full-match'),maxTurn:5,nativeCaptureRequest,python:process.env.PARTYBOARD_TEST_PYTHON,nativeModeEntryCount:()=>nativeModeEntries});fs.writeFileSync(path.join(output,'full-match-result.json'),JSON.stringify(fullMatch,null,2));}
   assert.deepEqual(errors,[]);const guestReports=await Promise.all(pages.map(p=>p.evaluate(()=>app.lobbyPreparedReports())));const final=await observe();stopping=true;phase('stopping-native');write('stop');await wait(()=>exit!==undefined,30000);assert.equal(exit,0,'Native frontend and stopped-input cleanup must succeed');
   fs.writeFileSync(path.join(output,'acceptance.json'),JSON.stringify({status:'passed',scope:'one real native '+mode+' frontend with '+guestCount+' actual muted Edge peer(s) on the same PC; automatic room signaling, verified assets/known shaders/readiness, Start UI action, synchronized input and signed recovery',runtimeDescriptor:descriptor,browserProfile,sourceHashes,preparation,extraRoom,muted:true,knownPipelineCount:shaderSeed.pipelineCount,browserGraphicsPipelineCount:shaderDefinitionCounts.graphics,uiPipelineDefinitionCount:shaderDefinitionCounts.ui,players:guestCount+1,reports,guestReports,browserPreparations,nativePreparedReceipt:actual.receipt,actualReceiptsCompared:compared,rejoin,initial:{count:initial.count,first:initial.first,last:initial.last},recovery:recovery?{count:recovery.count,first:recovery.first,last:recovery.last,elapsedMs:recovery.elapsedMs}:null,nativeAccepted:final.accepted,nativeExit:exit,errors,at:new Date().toISOString()},null,2));
  }catch(error){const preparationDiagnostics=await Promise.allSettled(pages.map(p=>p.evaluate(()=>globalThis.app?.lobbyPreparationDiagnostics?.()??null)));const storage=await Promise.allSettled(pages.map(p=>browserStorageObservation(p,{files:true})));fs.writeFileSync(path.join(output,'failure.json'),JSON.stringify({error:error.stack,errors,statuses,browserProfile,preparationDiagnostics,storage,nativeExit:exit,latestEvents:events.filter(e=>e.type!=='automatic-lobby-link').slice(-12)},null,2));throw error;}
- finally{clearTimeout(watchdog);phase('stopping-browsers');if(native&&exit===undefined){try{write('stop');await pause(500);}catch{}if(exit===undefined)native.kill();}for(const guest of pages)await guest.locator('#stop').click({timeout:3000}).catch(()=>{});phase('closing-contexts');await Promise.allSettled(contexts.map(context=>context.close()));await Promise.allSettled([...responseTasks]);await browser?.close();server?.kill();nativeLog.end();trace('finished');}
+ finally{clearTimeout(watchdog);phase('stopping-browsers');if(native&&exit===undefined){try{write('stop');await pause(500);}catch{}if(exit===undefined)native.kill();}for(const guest of pages)await guest.locator('#stop').click({timeout:3000}).catch(()=>{});if(snapshotRecorder){const drained=await require('../tools/native-rtc-probe/state-snapshot-recorder.cjs').waitForStopSnapshots(snapshotRecorder,['native',...pages.map((_,index)=>'browser-'+index)]);fs.writeFileSync(path.join(output,'state-snapshot-summary.json'),JSON.stringify(drained,null,2)+'\n');}phase('closing-contexts');await Promise.allSettled(contexts.map(context=>context.close()));await Promise.allSettled([...responseTasks]);await browser?.close();server?.kill();nativeLog.end();trace('finished');}
 })().catch(e=>{console.error(e);process.exitCode=1;});

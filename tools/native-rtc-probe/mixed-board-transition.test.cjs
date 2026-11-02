@@ -2,6 +2,12 @@
 const test=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),os=require('node:os'),path=require('node:path');
 const {driveMixedFullMatch}=require('./drive-mixed-full-match.cjs');
 const inventory={overlays:[{name:'w01dll',overlay:89},{name:'w02dll',overlay:90},{name:'mstory3dll',overlay:78},{name:'instdll',overlay:1},{name:'bootdll',overlay:2}]};
+test('complete mixed match fails before observing or pressing when native capture/readiness is unavailable',async()=>{
+ const outputDirectory=fs.mkdtempSync(path.join(os.tmpdir(),'partyboard-board-transition-'));
+ let observed=false;const peers=Array.from({length:4},(_,slot)=>({slot,observe:async()=>{observed=true;throw Error('must not start');}}));
+ try{await assert.rejects(driveMixedFullMatch({peers,inventory,outputDirectory,verifyReturn:true}),/requires rendered capture and fresh-menu receipts/);assert.equal(observed,false);}
+ finally{assert.equal(path.dirname(outputDirectory),os.tmpdir());fs.rmSync(outputDirectory,{recursive:true,force:true});}
+});
 for(const wrong of [false,true])test(wrong?'rejects an actual wrong board':'waits for staggered arrival on the requested board',async()=>{
  const outputDirectory=fs.mkdtempSync(path.join(os.tmpdir(),'partyboard-board-transition-'));
  let presses=0;
