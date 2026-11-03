@@ -1237,7 +1237,8 @@ extern "C" int port_main(int argc, char* argv[]) {
                 if(fullMatchProbe){
                     EmitNativeFullMatchProgress("Native external Join event",nextFullMatchProgressFrame);
                     if(std::chrono::steady_clock::now()>=menuDeadline)throw std::runtime_error("Native Join full match timed out");
-                    fullMatchComplete=fullMatchProgress.observe(PartyBoard_GameFrameCount(),PartyBoard_GameProgress(2),PartyBoard_GameProgress(0),PartyBoard_GameProgress(1),PartyBoard_GameProgress(4),PartyBoard_GameProgress(5));
+                    // Retain validated completion after the player leaves rankings.
+                    fullMatchComplete|=fullMatchProgress.observe(PartyBoard_GameFrameCount(),PartyBoard_GameProgress(2),PartyBoard_GameProgress(0),PartyBoard_GameProgress(1),PartyBoard_GameProgress(4),PartyBoard_GameProgress(5));
                 }
                 if(probeJoinMenu&&!automaticLobbyTest&&diagnosticInput&&!fullMatchProbe&&diagnosticInput->observations().acceptedCount()>=60){PartyBoard_GameRequestStop();return false;}
                 if(menuProbe&&diagnosticInput&&recoveryWindow&&!menuProbe->pumpGameplay(*diagnosticInput,*recoveryWindow,[&](const auto& packet){
@@ -1763,7 +1764,8 @@ extern "C" int port_main(int argc, char* argv[]) {
                         #endif
                         if(fullMatchProbe){
                             EmitNativeFullMatchProgress("Native frontend event",nextFullMatchProgressFrame);
-                            fullMatchComplete=fullMatchProgress.observe(PartyBoard_GameFrameCount(),PartyBoard_GameProgress(2),PartyBoard_GameProgress(0),PartyBoard_GameProgress(1),PartyBoard_GameProgress(4),PartyBoard_GameProgress(5));
+                            // Retain validated completion after the player leaves rankings.
+                    fullMatchComplete|=fullMatchProgress.observe(PartyBoard_GameFrameCount(),PartyBoard_GameProgress(2),PartyBoard_GameProgress(0),PartyBoard_GameProgress(1),PartyBoard_GameProgress(4),PartyBoard_GameProgress(5));
                         }
                         if(probeHostGameplay&&((!automaticLobbyTest&&!fullMatchProbe&&gameInput->observations().acceptedCount()>=60)||std::chrono::steady_clock::now()>=deadline)){
                             printf("Native frontend event: %s\n",nlohmann::ordered_json{{"type","diagnostic-stop-reason"},{"reason",std::chrono::steady_clock::now()>=deadline?"deadline":"short-probe-complete"}}.dump().c_str());fflush(stdout);

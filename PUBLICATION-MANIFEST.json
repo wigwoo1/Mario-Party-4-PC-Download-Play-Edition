@@ -1,8 +1,8 @@
 {
   "version": 1,
   "repository": "https://github.com/wigwoo1/Mario-Party-4-PC-Download-Play-Edition",
-  "buildId": "0de900e5abacea319441c8186c8552b520b42f4770118c022f1587252a39a3d3",
-  "sourceSnapshotSha256": "23e76074adbd180216407860461e6feb4c2d06fb2087a32c3a7ccb987bbd9e5a",
+  "buildId": "c8d9dba5a5a90335c1362e915400746195e14e8cec2017a49c8a2ea63198aa90",
+  "sourceSnapshotSha256": "133794655cddfdbe01b8b1b875d4c3d43512faa61c7a5d97d7f253a91b80e8ad",
   "upstream": {
     "url": "https://github.com/mariopartyrd/partyboard.git",
     "baseCommit": "f38304ebd13b09a15a80db7d7d015bf3fc387c5d"
@@ -10240,8 +10240,8 @@
     },
     {
       "path": "src/port/portmain.cpp",
-      "bytes": 143557,
-      "sha256": "b0345a03c979ba28b6abc736b766747965c4b31e81db059ba1c273d308b65c54"
+      "bytes": 143731,
+      "sha256": "0d765a804c14446d26a708d8c83886bb0a92b41d2e9bfc84ba7d00cd0161c184"
     },
     {
       "path": "src/port/settings.cpp",
@@ -12045,8 +12045,8 @@
     },
     {
       "path": "STATUS.md",
-      "bytes": 5676,
-      "sha256": "c2184b4a10fd50e4a7e18b8652e86ffcbdbec6fc9e8ddee59761fc981f6a6664"
+      "bytes": 3900,
+      "sha256": "eb3a4b9722516b1762d4c0166b38777f3d3482188ecb8980ddf39da4d11d4925"
     },
     {
       "path": "tools/__init__.py",
@@ -12765,8 +12765,8 @@
     },
     {
       "path": "tools/native-rtc-probe/native-full-match-progress-test.cpp",
-      "bytes": 1601,
-      "sha256": "3b9691517aba98b4436fdc993b7d22596717dcb8ff7dd776cf705c885a3af4e7"
+      "bytes": 2392,
+      "sha256": "30bde4482132d9da38d0c850f1abd37865d576e11a09f9f9afe847fa72da8aa5"
     },
     {
       "path": "tools/native-rtc-probe/native-input-poll-test.cpp",
@@ -12882,6 +12882,16 @@
       "path": "tools/native-rtc-probe/recovery-codec.cpp",
       "bytes": 2047,
       "sha256": "e64a7d950ce7fb75f6fec11696d8556b655a74ef20986c0763126fa7594a0e66"
+    },
+    {
+      "path": "tools/native-rtc-probe/recovery-negotiation-gate.cjs",
+      "bytes": 967,
+      "sha256": "8e658f7d50e9c43b316bb1a61ab22f88f8177873f0b6d08ecaef1e3a79283175"
+    },
+    {
+      "path": "tools/native-rtc-probe/recovery-negotiation-gate.test.cjs",
+      "bytes": 1814,
+      "sha256": "0265c2bfef89006a0b4a97b64fe8b257766ecb57d996b0456d94ce43c690cff7"
     },
     {
       "path": "tools/native-rtc-probe/recovery-plan.cjs",
@@ -14535,8 +14545,8 @@
     },
     {
       "path": "web/native-automatic-lobby-browser-test.cjs",
-      "bytes": 23346,
-      "sha256": "845d1261be6d909ecfe2259f3a1509943a118530ba9c838b6c42a7e745f5cc72"
+      "bytes": 27122,
+      "sha256": "b9215138f84fd0292d192c63b5dd844ecb8cc6e1f043785b7fad52130f60d6ef"
     },
     {
       "path": "web/native-gameplay-recovery-test-support.mjs",

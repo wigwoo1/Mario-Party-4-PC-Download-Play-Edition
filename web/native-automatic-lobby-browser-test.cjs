@@ -18,6 +18,7 @@ const disc=process.env.PARTYBOARD_LOCAL_CISO||'D:/Desktop/Games/Mario Party 4/Ma
 const guestCount=Number(process.env.PARTYBOARD_AUTOMATIC_BROWSER_GUESTS||1);assert.ok([1,3].includes(guestCount));
 const testFullMatch=process.env.PARTYBOARD_TEST_AUTOMATIC_FULL_MATCH==='1';assert.ok(!testFullMatch||guestCount===3,'Full match requires four actual peers');
 const stateDiagnostics=process.env.PARTYBOARD_TEST_STATE_DIAGNOSTICS==='1';
+const recoveryHoldMs=Number(process.env.PARTYBOARD_TEST_RECOVERY_HOLD_MS||0);assert.ok([0,50000,70000].includes(recoveryHoldMs));assert.ok(!recoveryHoldMs||(nativeHost&&guestCount===1&&!testFullMatch),'Delayed recovery requires the focused native Host plus one guest test');
 const testRejoin=process.env.PARTYBOARD_TEST_AUTOMATIC_REJOIN==='1';assert.ok(!testRejoin||(nativeHost&&guestCount===1));
 const testExtraRoom=process.env.PARTYBOARD_TEST_EXTRA_ROOM==='1';assert.ok(!testExtraRoom||(!nativeHost&&guestCount===1));
 const extraRoomOverlay=Number(process.env.PARTYBOARD_TEST_EXTRA_ROOM_OVERLAY||67);assert.ok([65,67].includes(extraRoomOverlay));
@@ -65,7 +66,7 @@ function normalized(row){return {frame:String(row.frame),checkpoint:row.checkpoi
   const env={...process.env,PARTYBOARD_PORT:String(port),PARTYBOARD_RUNTIME_PACKAGE:descriptor};for(const name of ['PARTYBOARD_RUNTIME_DIRECTORY','PARTYBOARD_TEST_RUNTIME_DIRECTORY','PARTYBOARD_TLS_CERTIFICATE','PARTYBOARD_TLS_KEY','PARTYBOARD_LISTEN_ADDRESS'])delete env[name];
   server=spawn(process.execPath,[path.join(__dirname,'serve.cjs')],{env,windowsHide:true,stdio:['ignore','pipe','pipe']});await new Promise((r,j)=>{server.stdout.once('data',r);server.once('error',j);server.once('exit',c=>j(Error('Service exited '+c)));});
   if(browserProfile==='private')browser=await chromium.launch({channel:'msedge',headless:true,args:['--mute-audio','--disable-features=WebRtcHideLocalIpsWithMdns']});
-  const context=await createContext();await context.addInitScript(()=>{const Original=RTCPeerConnection;globalThis.testConnections=[];globalThis.RTCPeerConnection=class extends Original{constructor(...args){super(...args);testConnections.push(this);}};});
+  const context=await createContext();if(recoveryHoldMs)await context.addInitScript(require('../tools/native-rtc-probe/recovery-negotiation-gate.cjs').installRecoveryNegotiationGate);await context.addInitScript(()=>{const Original=RTCPeerConnection;globalThis.testConnections=[];globalThis.RTCPeerConnection=class extends Original{constructor(...args){super(...args);testConnections.push(this);}};});
   page=await context.newPage();pages.push(page);observeHttp(page,0);observeSnapshots(page,0);page.on('pageerror',e=>errors.push(e.message));page.on('console',m=>{if(['error','warning'].includes(m.type()))fs.appendFileSync(path.join(output,'browser.log'),m.type()+': '+m.text()+'\n');});
   await page.goto(base);await page.evaluate(async()=>{globalThis.app=await import('/app.mjs');});
   const nativeEnv={...process.env,PARTYBOARD_AUTOMATIC_LOBBY_TEST:'1',PARTYBOARD_LOBBY_URL:base,SDL_AUDIODRIVER:'dummy'};
@@ -132,18 +133,43 @@ function normalized(row){return {frame:String(row.frame),checkpoint:row.checkpoi
   let recovery;
   if(process.env.PARTYBOARD_TEST_AUTOMATIC_RECOVERY!=='0'){
    phase('recovering');
+   if(recoveryHoldMs)await page.evaluate(ms=>testRecoveryNegotiation.holdFor(ms),recoveryHoldMs);
    const lossStarted=performance.now();
    if(nativeHost)await page.evaluate(()=>{const connection=testConnections.find(c=>c.connectionState==='connected');if(!connection)throw Error('Connected game transport required');connection.close();});else write('disconnect');
    await page.waitForFunction(()=>app.lobbyGameState()?.input.state==='Paused',null,{timeout:15000});const paused=await page.evaluate(()=>app.lobbyGameState());console.log('Actual mixed-runtime input connection closed; waiting for automatic recovery.');
+   let frozenSamples;
+   if(recoveryHoldMs){
+    const frozen=async()=>{const b=await page.evaluate(()=>{const s=app.lobbyGameState();return {frame:s.frame,input:s.input,pending:s.pending};});assert.equal(b.input.state,'Paused');const n=await observe();return {browser:b,nativeAccepted:n.accepted,nativeLast:n.records.at(-1)};};
+    await pause(1000);const baseline=await frozen();frozenSamples=[{elapsedMs:performance.now()-lossStarted,state:baseline}];
+    for(const targetMs of [10000,30000,45000]){await pause(Math.max(0,targetMs-(performance.now()-lossStarted)));const state=await frozen();assert.deepEqual(state,baseline,'Held negotiation must not advance simulation/input/checkpoint/RNG');frozenSamples.push({elapsedMs:performance.now()-lossStarted,state});}
+    fs.writeFileSync(path.join(output,'recovery-frozen-observations.json'),JSON.stringify({holdMs:recoveryHoldMs,samples:frozenSamples},null,2));
+   }
+   if(recoveryHoldMs===70000){
+    stopping=true;phase('waiting-expiry');
+    await wait(async()=>{const s=await page.evaluate(()=>app.lobbyGameState());return !s||s.input.state==='ReturnToMenu';},25000);
+    const browserExpiryMs=performance.now()-lossStarted;
+    assert.ok(browserExpiryMs>=58000&&browserExpiryMs<63000,'Browser expiry must retain original loss deadline');
+    await wait(()=>events.find(e=>e.type==='game-stopped'),15000);
+    const stoppedEvent=events.find(e=>e.type==='game-stopped');assert.equal(stoppedEvent.detached,true);
+    fs.writeFileSync(path.join(output,'expiry-observation.json'),JSON.stringify({browserExpiryMs,stoppedEvent,frozenSamples},null,2));
+    await pause(Math.max(0,72000-(performance.now()-lossStarted)));
+    assert.equal(await page.evaluate(()=>app.lobbyGameState()),null,'Expired session must not resume after delayed answer releases');
+    const gate=await page.evaluate(()=>testRecoveryNegotiation.snapshot());assert.ok(gate.blocked>0);assert.ok(gate.released>=2,'Delayed replacement must actually release after expiry');
+    const afterExpiry=events.filter(e=>e.type==='automatic-game-observation').at(-1);
+    if(afterExpiry)assert.ok(afterExpiry.accepted<=frozenSamples[0].state.nativeAccepted,'Native input cannot advance after expiry');
+    if(exit===undefined)write('stop');await wait(()=>exit!==undefined,30000);assert.equal(exit,0,'Native expiry cleanup must exit cleanly');assert.deepEqual(errors,[]);
+    fs.writeFileSync(path.join(output,'expiry-acceptance.json'),JSON.stringify({status:'passed',scope:'Same-PC nativeHost plus one Edge; actual recovery expires and late negotiation cannot resume; interactive menu rendering remains separate',browserExpiryMs,holdMs:recoveryHoldMs,lateObservationMs:performance.now()-lossStarted,gate,stoppedEvent,nativeExit:exit,errors},null,2));
+    return;
+   }
    for(const guest of pages)await guest.waitForFunction(frame=>{const s=app.lobbyGameState();return s?.input.state==='Running'&&BigInt(s.input.frame)>=BigInt(frame)+90n;},paused.input.frame,{timeout:55000});
    recovery=await compare(paused.input.frame);console.log('PASS automatic '+mode+' signed recovery; matching recovered polls: '+recovery.count);
-   recovery.elapsedMs=performance.now()-lossStarted;assert.ok(recovery.elapsedMs<60000,'Automatic recovery must finish within the original loss budget');
-   fs.writeFileSync(path.join(output,'recovered-observations.json'),JSON.stringify({...recovery.evidence,elapsedMs:recovery.elapsedMs,paused},null,2));
+   recovery.elapsedMs=performance.now()-lossStarted;if(recoveryHoldMs){assert.ok(recovery.elapsedMs>=recoveryHoldMs);recovery.holdMs=recoveryHoldMs;recovery.frozenSamples=frozenSamples;recovery.gate=await page.evaluate(()=>testRecoveryNegotiation.snapshot());assert.ok(recovery.gate.blocked>0);}assert.ok(recovery.elapsedMs<60000,'Automatic recovery must finish within the original loss budget');
+   fs.writeFileSync(path.join(output,'recovered-observations.json'),JSON.stringify({...recovery.evidence,elapsedMs:recovery.elapsedMs,holdMs:recovery.holdMs,gate:recovery.gate,paused},null,2));
    phase('recovered');
   }
   let fullMatch;if(testFullMatch){phase('full-match');fullMatch=await require('../tools/native-rtc-probe/drive-automatic-full-match.cjs').driveAutomaticFullMatch({pages,nativeHost,nativeObserver,send:packet=>new Promise((resolve,reject)=>native.stdin.write(JSON.stringify(packet)+'\n',error=>error?reject(error):resolve())),outputDirectory:path.join(output,'full-match'),maxTurn:5,nativeCaptureRequest,python:process.env.PARTYBOARD_TEST_PYTHON,nativeModeEntryCount:()=>nativeModeEntries});fs.writeFileSync(path.join(output,'full-match-result.json'),JSON.stringify(fullMatch,null,2));}
   assert.deepEqual(errors,[]);const guestReports=await Promise.all(pages.map(p=>p.evaluate(()=>app.lobbyPreparedReports())));const final=await observe();stopping=true;phase('stopping-native');write('stop');await wait(()=>exit!==undefined,30000);assert.equal(exit,0,'Native frontend and stopped-input cleanup must succeed');
-  fs.writeFileSync(path.join(output,'acceptance.json'),JSON.stringify({status:'passed',scope:'one real native '+mode+' frontend with '+guestCount+' actual muted Edge peer(s) on the same PC; automatic room signaling, verified assets/known shaders/readiness, Start UI action, synchronized input and signed recovery',runtimeDescriptor:descriptor,browserProfile,sourceHashes,preparation,extraRoom,muted:true,knownPipelineCount:shaderSeed.pipelineCount,browserGraphicsPipelineCount:shaderDefinitionCounts.graphics,uiPipelineDefinitionCount:shaderDefinitionCounts.ui,players:guestCount+1,reports,guestReports,browserPreparations,nativePreparedReceipt:actual.receipt,actualReceiptsCompared:compared,rejoin,initial:{count:initial.count,first:initial.first,last:initial.last},recovery:recovery?{count:recovery.count,first:recovery.first,last:recovery.last,elapsedMs:recovery.elapsedMs}:null,nativeAccepted:final.accepted,nativeExit:exit,errors,at:new Date().toISOString()},null,2));
+  fs.writeFileSync(path.join(output,'acceptance.json'),JSON.stringify({status:'passed',scope:'one real native '+mode+' frontend with '+guestCount+' actual muted Edge peer(s) on the same PC; automatic room signaling, verified assets/known shaders/readiness, Start UI action, synchronized input and signed recovery',runtimeDescriptor:descriptor,browserProfile,sourceHashes,preparation,extraRoom,muted:true,knownPipelineCount:shaderSeed.pipelineCount,browserGraphicsPipelineCount:shaderDefinitionCounts.graphics,uiPipelineDefinitionCount:shaderDefinitionCounts.ui,players:guestCount+1,reports,guestReports,browserPreparations,nativePreparedReceipt:actual.receipt,actualReceiptsCompared:compared,rejoin,initial:{count:initial.count,first:initial.first,last:initial.last},recovery:recovery?{count:recovery.count,first:recovery.first,last:recovery.last,elapsedMs:recovery.elapsedMs,holdMs:recovery.holdMs}:null,nativeAccepted:final.accepted,nativeExit:exit,errors,at:new Date().toISOString()},null,2));
  }catch(error){const preparationDiagnostics=await Promise.allSettled(pages.map(p=>p.evaluate(()=>globalThis.app?.lobbyPreparationDiagnostics?.()??null)));const storage=await Promise.allSettled(pages.map(p=>browserStorageObservation(p,{files:true})));fs.writeFileSync(path.join(output,'failure.json'),JSON.stringify({error:error.stack,errors,statuses,browserProfile,preparationDiagnostics,storage,nativeExit:exit,latestEvents:events.filter(e=>e.type!=='automatic-lobby-link').slice(-12)},null,2));throw error;}
  finally{clearTimeout(watchdog);phase('stopping-browsers');if(native&&exit===undefined){try{write('stop');await pause(500);}catch{}if(exit===undefined)native.kill();}for(const guest of pages)await guest.locator('#stop').click({timeout:3000}).catch(()=>{});if(snapshotRecorder){const drained=await require('../tools/native-rtc-probe/state-snapshot-recorder.cjs').waitForStopSnapshots(snapshotRecorder,['native',...pages.map((_,index)=>'browser-'+index)]);fs.writeFileSync(path.join(output,'state-snapshot-summary.json'),JSON.stringify(drained,null,2)+'\n');}phase('closing-contexts');await Promise.allSettled(contexts.map(context=>context.close()));await Promise.allSettled([...responseTasks]);await browser?.close();server?.kill();nativeLog.end();trace('finished');}
 })().catch(e=>{console.error(e);process.exitCode=1;});
