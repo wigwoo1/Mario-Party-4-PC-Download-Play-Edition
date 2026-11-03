@@ -417,6 +417,14 @@ if(PARTYBOARD_NOD_WASM_LIBRARY)
           set_property(DIRECTORY APPEND PROPERTY CMAKE_CONFIGURE_DEPENDS
             "${PARTYBOARD_OVERLAY_PATH}" "${PARTYBOARD_ROOT}/tools/audit-results-menu.cjs")
         endif()
+        if(PARTYBOARD_OVERLAY_NAME STREQUAL "m418Dll.wasm")
+          # Execute compiled label routing; source presence alone missed stale Wasm.
+          execute_process(COMMAND "${PARTYBOARD_NODE_EXECUTABLE}"
+            "${PARTYBOARD_ROOT}/tools/audit-model-glyph-module.cjs" "${PARTYBOARD_OVERLAY_PATH}"
+            OUTPUT_VARIABLE PARTYBOARD_MODEL_GLYPH_AUDIT COMMAND_ERROR_IS_FATAL ANY)
+          set_property(DIRECTORY APPEND PROPERTY CMAKE_CONFIGURE_DEPENDS
+            "${PARTYBOARD_OVERLAY_PATH}" "${PARTYBOARD_ROOT}/tools/audit-model-glyph-module.cjs")
+        endif()
         if(NOT PARTYBOARD_OVERLAY_NAME STREQUAL "bootDll.wasm")
           execute_process(COMMAND "${PARTYBOARD_NODE_EXECUTABLE}" "${PARTYBOARD_ROOT}/tools/wasm_overlay_exports.cjs" "${PARTYBOARD_OVERLAY_PATH}" OUTPUT_VARIABLE PARTYBOARD_OVERLAY_EXPORT_FLAGS COMMAND_ERROR_IS_FATAL ANY)
           list(APPEND PARTYBOARD_SETUP_EXPORT_FLAGS ${PARTYBOARD_OVERLAY_EXPORT_FLAGS})
