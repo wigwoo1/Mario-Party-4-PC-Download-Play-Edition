@@ -113,3 +113,48 @@ test('successful WebGPU preflight proceeds to native platform initialization',as
   assert.deepEqual(calls,[{powerPreference:'high-performance'}]);
   assert.deepEqual(f.events,['PartyBoardBrowserPreparePlatform']);
 });
+
+test('suspended initial and draining renderer frames retry without spending the shader step budget',async()=>{
+  const f=fixture(),results=[1,1,0,1,0],updates=[];let completed=0;
+  f.module.ccall=async()=>{const value=results.shift();if(value===0)completed++;return value;};
+  f.module._PartyBoardBrowserPipelineCount=created=>created?completed:completed<2?1:0;
+  const api=browserPlatformCallbacks({maxSteps:1,progress:update=>updates.push(update)});
+  const receipt=await api.prepareRenderer(f.module,{engine:f.engine});
+  assert.equal(results.length,0);assert.equal(completed,2);
+  assert.equal(receipt.steps,1);assert.equal(receipt.checkpoint,42);
+  assert.equal(updates.filter(update=>update.waitingForWindow).length,2);
+  assert.equal(f.engine.phase,'Idle');
+});
+
+test('actual renderer failures and unknown positive codes still fail immediately',async()=>{
+  for(const code of [-2,2]){
+    const f=fixture();let calls=0;
+    f.module.ccall=async()=>{calls++;return code;};
+    await assert.rejects(browserPlatformCallbacks().prepareRenderer(f.module,{engine:f.engine}),/operation failed/);
+    assert.equal(calls,1);
+  }
+});
+
+test('persistent window suspension is bounded and gives a visibility instruction',async()=>{
+  const f=fixture();f.module.ccall=async()=>1;
+  await assert.rejects(browserPlatformCallbacks({rendererPauseTimeoutMs:1}).prepareRenderer(f.module,{engine:f.engine}),
+    /timed out.*Restore this game tab/);
+  assert.equal(f.engine.preparedCheckpoint(),42);
+});
+
+test('cancellation while suspended prevents another renderer invocation',async()=>{
+  const f=fixture(),abort=new AbortController();let calls=0;
+  f.module.ccall=async()=>{calls++;return 1;};
+  await assert.rejects(browserPlatformCallbacks({progress:()=>abort.abort()})
+    .prepareRenderer(f.module,{engine:f.engine,signal:abort.signal}),{name:'AbortError'});
+  assert.equal(calls,1);
+});
+
+test('prepared-state changes during suspension are rejected before another invocation',async()=>{
+  const f=fixture();let calls=0;
+  f.module.ccall=async()=>{calls++;return 1;};
+  await assert.rejects(browserPlatformCallbacks({progress:()=>{f.engine.preparedCheckpoint=()=>43;}})
+    .prepareRenderer(f.module,{engine:f.engine}),/changed prepared simulation/);
+  assert.equal(calls,1);
+  assert.throws(()=>browserPlatformCallbacks({rendererPauseTimeoutMs:0}),/pause bound/);
+});

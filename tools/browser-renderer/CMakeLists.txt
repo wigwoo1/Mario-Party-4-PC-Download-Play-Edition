@@ -408,6 +408,15 @@ if(PARTYBOARD_NOD_WASM_LIBRARY)
       endif()
       foreach(PARTYBOARD_OVERLAY_PATH IN LISTS PARTYBOARD_OVERLAY_PACKAGE_FILES)
         get_filename_component(PARTYBOARD_OVERLAY_NAME "${PARTYBOARD_OVERLAY_PATH}" NAME)
+        if(PARTYBOARD_OVERLAY_NAME STREQUAL "mstory3Dll.wasm")
+          # Correct C source does not prove a retained side module was rebuilt.
+          # Reject the older results-menu binary before embedding it again.
+          execute_process(COMMAND "${PARTYBOARD_NODE_EXECUTABLE}"
+            "${PARTYBOARD_ROOT}/tools/audit-results-menu.cjs" "${PARTYBOARD_OVERLAY_PATH}"
+            OUTPUT_VARIABLE PARTYBOARD_RESULTS_MENU_AUDIT COMMAND_ERROR_IS_FATAL ANY)
+          set_property(DIRECTORY APPEND PROPERTY CMAKE_CONFIGURE_DEPENDS
+            "${PARTYBOARD_OVERLAY_PATH}" "${PARTYBOARD_ROOT}/tools/audit-results-menu.cjs")
+        endif()
         if(NOT PARTYBOARD_OVERLAY_NAME STREQUAL "bootDll.wasm")
           execute_process(COMMAND "${PARTYBOARD_NODE_EXECUTABLE}" "${PARTYBOARD_ROOT}/tools/wasm_overlay_exports.cjs" "${PARTYBOARD_OVERLAY_PATH}" OUTPUT_VARIABLE PARTYBOARD_OVERLAY_EXPORT_FLAGS COMMAND_ERROR_IS_FATAL ANY)
           list(APPEND PARTYBOARD_SETUP_EXPORT_FLAGS ${PARTYBOARD_OVERLAY_EXPORT_FLAGS})

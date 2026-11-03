@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {preparationFailureMessage} from './preparation-error.mjs';
+import {preparationFailureMessage,retainPreparationLog} from './preparation-error.mjs';
 
 test('browser quota failure gives actionable storage guidance through cleanup wrappers',()=>{
   const quota=new DOMException('Browser-specific quota wording','QuotaExceededError');
@@ -41,4 +41,20 @@ test('captured platform error logs are included without leaking resource URLs',(
   const message=preparationFailureMessage(failure,{automatic:true});
   assert.match(message,/Graphics log: aurora: Error creating window: adapter unavailable/);
   assert.doesNotMatch(message,/example\.invalid|https:\/\//);
+});
+
+test('late renderer failure survives verbose shader preparation in the bounded log',()=>{
+  const logs=[];
+  for(let i=0;i<300;i++)retainPreparationLog(logs,'Pipeline compiled '+i);
+  retainPreparationLog(logs,'aurora: Cannot begin frame: renderer frame resources are unavailable');
+  retainPreparationLog(logs,'   ');
+  assert.equal(logs.length,128);
+  const error=new Error('Browser platform operation failed: PartyBoardBrowserAdvancePreparedRenderer (-2)');
+  error.partyBoardRuntimeLogs=logs.slice(-32);
+  assert.match(preparationFailureMessage(error,{automatic:true}),
+    /Graphics log: aurora: Cannot begin frame: renderer frame resources are unavailable/);
+  assert.ok(logs.every(line=>line.length<=500));
+  retainPreparationLog(logs,'warning: '+'x'.repeat(2000));
+  assert.equal(logs.length,128);
+  assert.equal(logs.at(-1).length,500);
 });

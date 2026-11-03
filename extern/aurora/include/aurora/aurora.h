@@ -129,7 +129,12 @@ typedef struct {
 AuroraInfo aurora_initialize(int argc, char* argv[], const AuroraConfig* config);
 void aurora_shutdown();
 const AuroraEvent* aurora_update();
+// Preparation must be cancellable while a window is hidden.
+const AuroraEvent* aurora_update_nonblocking();
 bool aurora_begin_frame();
+// After begin_frame returns false, distinguish a suspended window from a
+// renderer failure. Device loss is always a failure, even while hidden.
+bool aurora_is_frame_suspended();
 void aurora_end_frame();
 
 void aurora_set_log_level(AuroraLogLevel level);

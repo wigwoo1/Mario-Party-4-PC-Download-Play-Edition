@@ -227,6 +227,7 @@ int main(int argc,char **argv) {
     surfaceGateWindow=windows[0];SDL_free(windows);
     assert(SDL_HideWindow(surfaceGateWindow));
     assert(!aurora_begin_frame());
+    assert(aurora_is_frame_suspended());
     // SDL's paused event pump may wait for an external window event. Restore
     // independently, like the user returning to the tab, rather than waiting
     // for the render gate's next retry before sending that event.
@@ -235,6 +236,7 @@ int main(int argc,char **argv) {
     },nullptr,60);
     assert(PartyBoardWaitForRenderFrame(surface_gate_running,surface_gate_pump,surface_gate_begin,surface_gate_wait));
     assert(surfaceGateRestored);
+    assert(!aurora_is_frame_suspended());
     draw_gx_quad();
     aurora_end_frame();
     emscripten_sleep(20);

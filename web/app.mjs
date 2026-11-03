@@ -1,6 +1,6 @@
 import {automaticRoom} from './automatic-room.mjs';
 import {automaticPreparation} from './automatic-preparation.mjs';
-import {preparationFailureMessage} from './preparation-error.mjs';
+import {preparationFailureMessage,retainPreparationLog} from './preparation-error.mjs';
 import {loadBundledPipelineSeed} from './bundled-pipeline-seed.mjs';
 import {sendPipelineSeed,receivePipelineSeed} from './pipeline-seed-channel.mjs';
 import {captureClosedPipelineSeed} from './pipeline-seed.mjs';
@@ -549,14 +549,15 @@ async function prepareLobbyGame(){
     const glyphs=await prepareRuntimeGlyphs({signal,bindings:controlBindingGlyphs(controlProfile)});
     attempt.stage='preparing-session-runtime';
     const retainRuntimeLog=(level,line)=>{
-      const text=String(line).trim();
-      if(text&&attempt.runtimeLogs.length<128)attempt.runtimeLogs.push(text.slice(0,500));
+      retainPreparationLog(attempt.runtimeLogs,line);
       (level==='error'?console.warn:console.info)(line);
     };
     const prepared=await prepareFingerprintedSessionRuntime(source,configuration.assetId,files,{
       runtimeBuild:{expectedBuildId:configuration.buildId},
       sessionSeed:configuration.seed,pipelineSeed:lobbyPipelineSeed,signal,...capturingPlatformCallbacks(browserPlatformCallbacks,{resolution,maxSteps:lobbyPipelineSeed?10000:60,
-        progress:({queued,created})=>{if(current===generation)status('Preparing recorded shader pipelines: '+created+' compiled, '+queued+' queued.');}},true),
+        progress:({queued,created,waitingForWindow})=>{if(current===generation)status(waitingForWindow
+          ?'Shader preparation is waiting for the game window. Restore this game tab to continue automatically.'
+          :'Preparing recorded shader pipelines: '+created+' compiled, '+queued+' queued.');}},true),
       runtimeOptions:{canvas:$('canvas'),partyBoardGlyphTextures:glyphs.initial,
         print:line=>retainRuntimeLog('info',line),printErr:line=>retainRuntimeLog('error',line)},
       progress:(bytes,total)=>{if(current===generation)status('Checking lobby game assets: '+Math.floor(bytes/total*100)+'%');},

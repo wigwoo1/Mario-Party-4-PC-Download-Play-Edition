@@ -320,7 +320,7 @@ extern "C" EMSCRIPTEN_KEEPALIVE unsigned int PartyBoardBrowserPipelineCount(int 
 }
 extern "C" EMSCRIPTEN_KEEPALIVE int PartyBoardBrowserAdvancePreparedRenderer(void) {
     if(platformPhase!=2||PartyBoard_GameLifecyclePhase()!=2||GlobalCounter!=0)return -1;
-    aurora_update();if(!aurora_begin_frame())return -2;
+    aurora_update_nonblocking();if(!aurora_begin_frame())return aurora_is_frame_suspended()?1:-2;
     aurora_end_frame();emscripten_sleep(20);
     return PartyBoard_GameLifecyclePhase()==2&&GlobalCounter==0?0:-1;
 }

@@ -1,5 +1,14 @@
 // Cleanup can wrap the original browser exception. Keep storage guidance even
 // when that exception is nested, without mistaking unrelated text for quota.
+export function retainPreparationLog(logs,line){
+  const text=String(line).trim();
+  if(!text)return;
+  // Keep recent failures after verbose pipeline compilation, not just the
+  // first 128 initialization messages. Remain bounded for long preparations.
+  logs.push(text.slice(0,500));
+  if(logs.length>128)logs.splice(0,logs.length-128);
+}
+
 export function preparationFailureMessage(error,{automatic=false}={}){
   const prefix=automatic?'Automatic game preparation failed: ':'Lobby game preparation failed: ';
   const pending=[error],seen=new Set();
@@ -11,7 +20,7 @@ export function preparationFailureMessage(error,{automatic=false}={}){
     if(cause.name==='QuotaExceededError')return prefix+
       'This browser could not reserve enough game storage. Stop this session, then free space for this site or open the lobby in a regular browser window and rejoin. Verified downloads are not removed automatically.';
     if(Array.isArray(cause.partyBoardRuntimeLogs))for(const line of cause.partyBoardRuntimeLogs){
-      if(typeof line!=='string'||!/(?:error|failed|fatal|abort|warning|warn)/i.test(line))continue;
+      if(typeof line!=='string'||!/(?:error|failed|fatal|abort|warning|warn|cannot begin frame|device (?:was )?lost)/i.test(line))continue;
       const safe=line.replace(/(?:https?|blob):\/\/\S+/gi,'[resource]').replace(/[A-Za-z]:\\[^\s]+/g,'[path]').slice(0,180);
       if(!startupLogs.includes(safe))startupLogs.push(safe);
     }

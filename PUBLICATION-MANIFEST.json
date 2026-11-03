@@ -1,8 +1,8 @@
 {
   "version": 1,
   "repository": "https://github.com/wigwoo1/Mario-Party-4-PC-Download-Play-Edition",
-  "buildId": "341728f4203c1625ec5b4ea19795664e8aac1976701963a6cc55bf4303f03dfc",
-  "sourceSnapshotSha256": "f9866362ce317295bcbc8253d759919974a2c955e42c45dbe9b3dab5903f9342",
+  "buildId": "0de900e5abacea319441c8186c8552b520b42f4770118c022f1587252a39a3d3",
+  "sourceSnapshotSha256": "36dc27603c974e7332362ddab8d34c6037f448f765a36c5aac7779d2ec4fc1e3",
   "upstream": {
     "url": "https://github.com/mariopartyrd/partyboard.git",
     "baseCommit": "f38304ebd13b09a15a80db7d7d015bf3fc387c5d"
@@ -3130,8 +3130,8 @@
     },
     {
       "path": "extern/aurora/include/aurora/aurora.h",
-      "bytes": 3543,
-      "sha256": "1ffbde60c095381c3eeb9f53771531303fdc133a63c5f6f33b2caf18e2297a4d"
+      "bytes": 3838,
+      "sha256": "9f7c47b8040c9ba32867a06a7c22ad56f94280981a94cf218b4de153a1b3a59a"
     },
     {
       "path": "extern/aurora/include/aurora/dvd.h",
@@ -3650,8 +3650,8 @@
     },
     {
       "path": "extern/aurora/lib/aurora.cpp",
-      "bytes": 17630,
-      "sha256": "58ada6455d0e53103229f878bfe9cbc21347b887fc799dfe2a882ac5a9bb5cf5"
+      "bytes": 17916,
+      "sha256": "5cd165a7a8ff77eb7e1072b7dfe24a63a461fc1896c68a9d30d272c11725fae4"
     },
     {
       "path": "extern/aurora/lib/card/BlockAllocationTable.cpp",
@@ -4430,13 +4430,13 @@
     },
     {
       "path": "extern/aurora/lib/window.cpp",
-      "bytes": 18447,
-      "sha256": "fad61edbed58a1d0edbd1825c49f66c32f024db96ea633af93e9f92e75ba56f9"
+      "bytes": 18484,
+      "sha256": "79ff592c1b5a6a3109576372e2740a795d23cb951f945ba5af2c3e9702206b63"
     },
     {
       "path": "extern/aurora/lib/window.hpp",
-      "bytes": 1604,
-      "sha256": "dc4e38c42f7a7a080aa90e4002a7c6977ffefe86930f1aa147a03ab85b8bed80"
+      "bytes": 1630,
+      "sha256": "655364d810d3700770a9f3f2984bd009988de6a29d31ce9aec8d67848c62e8a5"
     },
     {
       "path": "extern/aurora/LICENSE",
@@ -5930,8 +5930,8 @@
     },
     {
       "path": "include/port/wasm_platform.h",
-      "bytes": 666,
-      "sha256": "bfffd1d8b0ac32d284d3e1575d9bce25bc61f6d5338037b528381acce7b4b577"
+      "bytes": 794,
+      "sha256": "48e33ff754e36c25a96daebe05560a35957e033d021eb61d6f61e6e9a96ddb1d"
     },
     {
       "path": "include/PowerPC_EABI_Support/MetroTRK/trk.h",
@@ -10580,8 +10580,8 @@
     },
     {
       "path": "src/port/wasm_platform.cpp",
-      "bytes": 17375,
-      "sha256": "77708c109fdbcaaf7c747093332e9675cd21c3191e734cae36eb4906511290a9"
+      "bytes": 17417,
+      "sha256": "a1ad4eac13f0a8a3854d7db527f439421a2c4ffde86583d0e17a7f132cfd92a9"
     },
     {
       "path": "src/port/wasm_retrace.c",
@@ -12045,8 +12045,8 @@
     },
     {
       "path": "STATUS.md",
-      "bytes": 7796,
-      "sha256": "d4f6220917367a9017d7efd770b4c09cb31c615a01410691433a45f8ba2cbe04"
+      "bytes": 5458,
+      "sha256": "961bcde62b4ca288d659732a0b877c5ee4a63eff1509e1b30d6a4a58fa4cf404"
     },
     {
       "path": "tools/__init__.py",
@@ -12087,6 +12087,11 @@
       "path": "tools/audit-menu-callbacks.cjs",
       "bytes": 2191,
       "sha256": "8a3ebf08bc39587d4ac08c7c7802824d4a0b91aa6a3356277754ff133e694f41"
+    },
+    {
+      "path": "tools/audit-results-menu.cjs",
+      "bytes": 3826,
+      "sha256": "027a389d47c27393324d7fc97bd8508b3aced929abadb5a69815fbce379f0abc"
     },
     {
       "path": "tools/automatic-hosting.cjs",
@@ -12135,8 +12140,8 @@
     },
     {
       "path": "tools/browser-renderer/CMakeLists.txt",
-      "bytes": 52507,
-      "sha256": "e935bace8936fd6c54ab1a3bdba509d5805bd31a2d8b2d1c4ea2fdd883f2dd94"
+      "bytes": 53159,
+      "sha256": "f436a1f871fc3c0c09d367c2e830fd2298bdef04664d3868ff1d8e67236cba43"
     },
     {
       "path": "tools/browser-renderer/README.md",
@@ -13680,8 +13685,8 @@
     },
     {
       "path": "tools/test_wasm_aurora.cpp",
-      "bytes": 14071,
-      "sha256": "89f08f9466c98d664cf5bcd6dd973c0d44c6806ff71b5b8996971f79c7070131"
+      "bytes": 14154,
+      "sha256": "c52c6633e8024bdf2e8e47590c5532af96c29ad74be551530c4cb6e9a9f4143a"
     },
     {
       "path": "tools/test_wasm_bind_group_lifetime.cpp",
@@ -13884,6 +13889,11 @@
       "sha256": "427830e36340ca6e654c1dcb22e3e138166f13e75dead58502360286dde7c358"
     },
     {
+      "path": "tools/test-prepared-window-visibility.cjs",
+      "bytes": 9483,
+      "sha256": "ef9a894287bde010cc8ba337e8261c5023848048612e6ce91ff2dd3273e6259e"
+    },
+    {
       "path": "tools/test-recovery-wall-clock.mjs",
       "bytes": 1958,
       "sha256": "92f5f796cea79efcf2254dccde7a4444fc0cff07bff374a808b7f7e2e5674f07"
@@ -14065,8 +14075,8 @@
     },
     {
       "path": "web/app.mjs",
-      "bytes": 89262,
-      "sha256": "8f5d2015599dc3f83cbc737420a5fe73ad1ded252a86feea0e9e6004142dba06"
+      "bytes": 89366,
+      "sha256": "0ef0b8de1cd26e593126823ec9f6f1e384ca098079d1b7be84132d4fb2263318"
     },
     {
       "path": "web/async-blob-fs.mjs",
@@ -14165,13 +14175,13 @@
     },
     {
       "path": "web/browser-platform.mjs",
-      "bytes": 5727,
-      "sha256": "5d3e2e3729467556fe5442454b781c0a8f27f61495fe6035cc525fa6b384256d"
+      "bytes": 7137,
+      "sha256": "52c80446405a1ce72582554724e2de4f738f497236fe620f11e405101c6ce533"
     },
     {
       "path": "web/browser-platform.test.mjs",
-      "bytes": 7716,
-      "sha256": "62a9bacf15e8c3b827fb7a58f4d435f751e35253fb92e4d1ca8b408f1bde985b"
+      "bytes": 10076,
+      "sha256": "f2b911b2b046dc42ae3a61b68c74b3058d2c710906b27822a517e7dc26b34c1e"
     },
     {
       "path": "web/browser-runtime-package.mjs",
@@ -14630,13 +14640,13 @@
     },
     {
       "path": "web/preparation-error.mjs",
-      "bytes": 1965,
-      "sha256": "edd662a0e4ce032ee0577c79b1e8d03f3178385ad1e6682e205e9cbb189cf70c"
+      "bytes": 2348,
+      "sha256": "8b423cf8ad1954c046b91da86cf36c2a4011e90e9a0d3e39eee797963cdce472"
     },
     {
       "path": "web/preparation-error.test.mjs",
-      "bytes": 2584,
-      "sha256": "d870c2aaf2746c3647532e23c1b3cecfc7246f1de9f002dd04a622b79bdf4009"
+      "bytes": 3456,
+      "sha256": "64b4738c11db66eb1f99c9710b332e529021cb8580a9cbafbf68717910f5ab23"
     },
     {
       "path": "web/prepared-runtime-report.mjs",

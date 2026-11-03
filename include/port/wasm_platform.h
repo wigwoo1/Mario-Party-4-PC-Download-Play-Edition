@@ -7,6 +7,8 @@ extern "C" {
 // -3 on disc open failure. Does not initialize or advance the game engine.
 int PartyBoardBrowserPreparePlatform(void);
 // Renderer work only, before the first game frame; no shader coverage promise.
+// Returns 1 when the window is temporarily suspended: retry without advancing
+// simulation. Negative results remain failures.
 int PartyBoardBrowserAdvancePreparedRenderer(void);
 unsigned int PartyBoardBrowserPipelineCount(int created);
 // Caller must first stop/await engine execution. Idempotent after release.

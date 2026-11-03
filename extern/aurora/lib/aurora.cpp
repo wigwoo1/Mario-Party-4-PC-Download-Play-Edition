@@ -194,7 +194,7 @@ void shutdown() noexcept {
   window::shutdown();
 }
 
-const AuroraEvent* update() noexcept {
+const AuroraEvent* update(bool waitWhenPaused = true) noexcept {
   ZoneScoped;
 #if defined(__EMSCRIPTEN__) && defined(AURORA_ENABLE_GX)
   if (webgpu::device_lost()) {
@@ -206,7 +206,7 @@ const AuroraEvent* update() noexcept {
     g_initialFrame = false;
     input::initialize();
   }
-  return window::poll_events();
+  return window::poll_events(waitWhenPaused);
 }
 
 bool begin_frame() noexcept {
@@ -493,7 +493,14 @@ AuroraInfo aurora_initialize(int argc, char* argv[], const AuroraConfig* config)
 }
 void aurora_shutdown() { aurora::shutdown(); }
 const AuroraEvent* aurora_update() { return aurora::update(); }
+const AuroraEvent* aurora_update_nonblocking() { return aurora::update(false); }
 bool aurora_begin_frame() { return aurora::begin_frame(); }
+bool aurora_is_frame_suspended() {
+#ifdef AURORA_ENABLE_GX
+  if (aurora::webgpu::device_lost()) return false;
+#endif
+  return aurora::window::is_paused();
+}
 void aurora_end_frame() { aurora::end_frame(); }
 AuroraBackend aurora_get_backend() { return aurora::g_config.desiredBackend; }
 const AuroraBackend* aurora_get_available_backends(size_t* count) {
