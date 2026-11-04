@@ -35,10 +35,20 @@ async function inspectFreePlayMenu(pages,directory){
   const command=JSON.parse(fs.readFileSync(file,'utf8'));
   assert.match(command.id,/^[a-zA-Z0-9_-]{1,60}$/);
   if(seen.has(command.id)){await new Promise(resolve=>setTimeout(resolve,200));continue;}
-  assert.ok(['key','wait','capture','finish'].includes(command.action));
+  assert.ok(['key','gamepad','wait','capture','finish'].includes(command.action));
   if(command.action==='key'){
    assert.ok(keys.has(command.key));assert.ok(Number.isInteger(command.peer)&&command.peer>=0&&command.peer<pages.length);
    await pressPostRankingAction([pages[command.peer]],command.key);await wait(90);
+  }else if(command.action==='gamepad'){
+   assert.equal(process.env.PARTYBOARD_TEST_VIRTUAL_GAMEPAD,'1','Virtual controller must be explicitly enabled');
+   assert.ok(Number.isInteger(command.peer)&&command.peer>=0&&command.peer<pages.length);
+   assert.ok(Number.isInteger(command.button)&&command.button>=0&&command.button<17);
+   const page=pages[command.peer];await page.locator('#canvas').focus();
+   const frame=await page.evaluate(()=>partyBoardApp.lobbyGameState().frame);
+   await page.evaluate(button=>testVirtualStandardGamepad.setButton(button,true),command.button);
+   try{await page.waitForFunction(before=>partyBoardApp.lobbyGameState().frame>=before+6,frame,{timeout:30000});}
+   finally{await page.evaluate(button=>testVirtualStandardGamepad.setButton(button,false),command.button);}
+   await wait(90);
   }else if(command.action==='wait'){
    assert.ok(Number.isInteger(command.frames)&&command.frames>0&&command.frames<=600);await wait(command.frames);
   }

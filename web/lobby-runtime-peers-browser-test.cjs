@@ -66,6 +66,7 @@ async function observe(page,evaluate){
  const errors=[],lifecycleEvents=[];const recordLifecycle=(event)=>{lifecycleEvents.push({...event,at:Date.now()});if(lifecycleEvents.length>500)lifecycleEvents.shift();fs.writeFileSync(path.join(outputDirectory,'browser-production-peer-lifecycle-events.json'),JSON.stringify(lifecycleEvents,null,2)+'\n');};
  browser.on('disconnected',()=>recordLifecycle({scope:'browser',type:'disconnected'}));
  for(let i=0;i<count;i++){const context=await browser.newContext();gameMarkers[i]=[];runtimeWarnings[i]=[];
+    if(process.env.PARTYBOARD_TEST_VIRTUAL_GAMEPAD==='1')await context.addInitScript({content:'('+require('../tools/virtual-standard-gamepad.cjs').installVirtualStandardGamepad.toString()+')()'});
     if(process.env.PARTYBOARD_TEST_GAME_AUDIO_METERS==='1'){
       const meter=fs.readFileSync(path.resolve(__dirname,'../tools/web-audio-channel-meter.mjs'),'utf8').replace('export function attachAudioChannelMeter','function attachAudioChannelMeter');
       await context.addInitScript({content:meter+`\n(() => {

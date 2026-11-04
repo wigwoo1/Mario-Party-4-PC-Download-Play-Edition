@@ -2,7 +2,7 @@
   "version": 1,
   "repository": "https://github.com/wigwoo1/Mario-Party-4-PC-Download-Play-Edition",
   "buildId": "3851289043d82c5832a29fceb8b2aec89be9cccb7cf69a6b397928bf5b9b6319",
-  "sourceSnapshotSha256": "87a15221b00d693819b9d75d31f6517fa766a9ed8289aa801c895fa05003d8f0",
+  "sourceSnapshotSha256": "2dd7ea56b1dce9fbd1a5588b40b75ce1fd0c09087009516e7d15d8b02c7c110c",
   "upstream": {
     "url": "https://github.com/mariopartyrd/partyboard.git",
     "baseCommit": "f38304ebd13b09a15a80db7d7d015bf3fc387c5d"
@@ -12045,8 +12045,8 @@
     },
     {
       "path": "STATUS.md",
-      "bytes": 2308,
-      "sha256": "4008825da2699e012f1f45dd238822fa9a30007c2ae5340fddf4b399c7546027"
+      "bytes": 2913,
+      "sha256": "8e8ee2280398a753536ddc2c373015b8122150ab53060299bc96cab4d6279cf7"
     },
     {
       "path": "tools/__init__.py",
@@ -12470,8 +12470,8 @@
     },
     {
       "path": "tools/inspect-free-play-menu.cjs",
-      "bytes": 3577,
-      "sha256": "b6230cf3dc1a138ecf4972648b4a87a64aa0e5138ddb43310b9bc688055bef79"
+      "bytes": 4407,
+      "sha256": "9f933afcf9c8744c5fe405ae83559bfebf4569a22f20763008a994fcf0d6d50c"
     },
     {
       "path": "tools/install-native-runtime.cjs",
@@ -14044,6 +14044,16 @@
       "sha256": "0388fe4d57693f319c40fad710cfd8463ee6d0e719feb5638604a7b4fdcf44d5"
     },
     {
+      "path": "tools/virtual-standard-gamepad.cjs",
+      "bytes": 1112,
+      "sha256": "9d32b4a191f8f9eb6773a90869e2c84567f3582a8c3d4ef366cbb32544a3f301"
+    },
+    {
+      "path": "tools/virtual-standard-gamepad.test.cjs",
+      "bytes": 1145,
+      "sha256": "0b05e617b2098b0b68817b6ec115b3b88027744ac306d4f0c312f961c5a8d415"
+    },
+    {
       "path": "tools/wasm_overlay_exports.cjs",
       "bytes": 602,
       "sha256": "ff1d83a600911104b0179b35454190aadf07f3cee22c2cfd7aa0cacd0ce2e54a"
@@ -14495,8 +14505,8 @@
     },
     {
       "path": "web/lobby-runtime-peers-browser-test.cjs",
-      "bytes": 77944,
-      "sha256": "e71dd099a650f2b70bf6fceb5700b0cb232abe4ce948c536979ed84d7d53d2fe"
+      "bytes": 78141,
+      "sha256": "f38261e0d18d473cddb7abd73cd94b146d5376ad2e613f85c98e0df01478be31"
     },
     {
       "path": "web/lobby-state.mjs",
