@@ -1,6 +1,6 @@
 # Development status
 
-Updated 2026-11-05 UTC. Daily status review: no new gameplay tests or binary builds since the previous publication. This development project is incomplete. Gameplay work is paused at the user's request.
+Updated 2026-11-06 UTC. Daily status review: no new gameplay tests or binary builds since the previous publication. This development project is incomplete. Gameplay work is paused at the user's request.
 
 The downloadable build remains c8d9dba5a5a90335c1362e915400746195e14e8cec2017a49c8a2ea63198aa90: [development release](https://github.com/wigwoo1/Mario-Party-4-PC-Download-Play-Edition/releases/tag/dev-2026-11-02-c8d9dba5-match-recovery). Existing downloads are preserved. Its same-PC native host plus three Edge five-turn match, rankings, interactive return and clean shutdown passed. Separate 50-second negotiation recovery and 60-second expiry/late-answer rejection passed. Ordinary native Host/Join expiry produced fresh visible menu state; screenshot pixel review of those expiry menus remains open.
 
